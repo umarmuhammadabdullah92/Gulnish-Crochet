@@ -32,9 +32,18 @@
       var h = document.documentElement.scrollHeight - window.innerHeight;
       progressBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
     }
+    var backToTop = document.getElementById("backToTop");
+    if (backToTop) backToTop.classList.toggle("show", window.scrollY > 560);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  var backToTop = document.getElementById("backToTop");
+  if (backToTop) {
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 
   var editingId = null;
   var imageData = "";
