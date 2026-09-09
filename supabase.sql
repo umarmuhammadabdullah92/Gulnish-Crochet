@@ -180,6 +180,14 @@ insert into public.products (id, name, price, category, image, keywords, colors)
   ('seed_gr2_5', 'Handmade Crochet Gajray 5', 400, 'gr2', 'images/gajrays/gajray-5.webp', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
   ('seed_gr2_6', 'Handmade Crochet Gajray 6', 450, 'gr2', 'images/gajrays/gajray-6.jpg', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
   ('seed_gr2_8', 'Handmade Crochet Gajray 8', 500, 'gr2', 'images/gajrays/gajray-8.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr2_10', 'Handmade Crochet Gajray 10', 450, 'gr2', 'images/gajrays/gajray-10.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr2_11', 'Handmade Crochet Gajray 11', 500, 'gr2', 'images/gajrays/gajray-11.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr2_12', 'Handmade Crochet Gajray 12', 550, 'gr2', 'images/gajrays/gajray-12.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr2_13', 'Handmade Crochet Gajray 13', 600, 'gr2', 'images/gajrays/gajray-13.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr2_14', 'Handmade Crochet Gajray 14', 500, 'gr2', 'images/gajrays/gajray-14.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr2_15', 'Handmade Crochet Gajray 15', 550, 'gr2', 'images/gajrays/gajray-15.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr2_16', 'Handmade Crochet Gajray 16', 450, 'gr2', 'images/gajrays/gajray-16.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr2_17', 'Handmade Crochet Gajray 17', 500, 'gr2', 'images/gajrays/gajray-17.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
   ('seed_gr3_1', 'Handmade Crochet Keychain 1', 350, 'gr3', 'images/keychains/keychain-1.webp', '["keyring","small gift","cute","handmade","gift","wholesale"]'::jsonb, '[]'::jsonb),
   ('seed_gr3_2', 'Handmade Crochet Keychain 2', 400, 'gr3', 'images/keychains/keychain-10.png', '["keyring","small gift","cute","handmade","gift","wholesale"]'::jsonb, '[]'::jsonb),
   ('seed_gr3_3', 'Handmade Crochet Keychain 3', 450, 'gr3', 'images/keychains/keychain-11.png', '["keyring","small gift","cute","handmade","gift","wholesale"]'::jsonb, '[]'::jsonb),
@@ -216,4 +224,4 @@ insert into public.products (id, name, price, category, image, keywords, colors)
   ('seed_gr6_3', 'Handmade Crochet Headband 3', 550, 'gr6', 'images/headbands/headband-3.webp', '["hairband","hair accessory","girl","handmade","gift"]'::jsonb, '[]'::jsonb)
 on conflict (id) do nothing;
 
--- 73 products
+-- 81 products
