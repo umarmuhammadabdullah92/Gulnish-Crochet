@@ -1632,13 +1632,14 @@ h1, h2, h3, .logo {
 .reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
   will-change: opacity, transform;
+  transform: translate3d(0, 22px, 0);
 }
 
 .reveal.revealed {
   opacity: 1;
-  transform: none;
+  transform: translate3d(0, 0, 0);
 }
 
 .reveal[data-delay="1"] { transition-delay: 0.08s; }
