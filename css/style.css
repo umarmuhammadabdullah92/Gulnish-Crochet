@@ -1948,7 +1948,7 @@ h1, h2, h3, .logo {
 .hero-media__frame {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 1 / 1;
   background: var(--bg-soft);
   border: 1px solid var(--line-strong);
 }
