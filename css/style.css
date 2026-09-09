@@ -798,7 +798,7 @@ h1, h2, h3, .logo {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--accent-dark);
   margin-right: 0.6rem;
   vertical-align: middle;
 }
@@ -1982,7 +1982,7 @@ h1, h2, h3, .logo {
   z-index: 2;
 }
 
-.hero-media__badge svg { color: var(--gold); flex-shrink: 0; }
+.hero-media__badge svg { color: var(--accent-dark); flex-shrink: 0; }
 
 .hero-media__badge--top { top: 1.4rem; left: -1.4rem; }
 .hero-media__badge--bottom { bottom: 1.6rem; right: -1rem; }
@@ -2073,7 +2073,7 @@ h1, h2, h3, .logo {
 }
 
 .promo__list svg {
-  color: var(--gold);
+  color: var(--accent-dark);
   flex-shrink: 0;
 }
 
