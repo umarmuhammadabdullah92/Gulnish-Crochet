@@ -222,7 +222,7 @@ h1, h2, h3, .logo {
   background: #fff;
   border: 1px solid var(--line-strong);
   padding: 0.35rem 1.1rem;
-  border-radius: 40px;
+  border-radius: 0;
   margin-bottom: 1.4rem;
   box-shadow: none;
 }
@@ -292,7 +292,7 @@ h1, h2, h3, .logo {
   background: var(--gold);
   color: #2a2418;
   padding: 0.75rem 2rem;
-  border-radius: 40px;
+  border-radius: 0;
   font-weight: 500;
   cursor: pointer;
   border: none;
@@ -405,12 +405,12 @@ h1, h2, h3, .logo {
   text-align: left;
   color: inherit;
   font-family: var(--font-body);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .category-card:hover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
   transform: translateY(-6px);
 }
 
@@ -499,14 +499,14 @@ h1, h2, h3, .logo {
   border-radius: var(--radius);
   overflow: hidden;
   text-align: center;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   display: flex;
   flex-direction: column;
 }
 
 .work-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
   transform: translateY(-4px);
   border-color: var(--line-strong);
 }
@@ -605,7 +605,7 @@ h1, h2, h3, .logo {
   color: #2a2418;
   background: var(--gold);
   padding: 0.65rem 1rem;
-  border-radius: 40px;
+  border-radius: 0;
   margin-top: auto;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -631,8 +631,8 @@ h1, h2, h3, .logo {
 .search-box {
   position: relative;
   width: min(480px, 100%);
-  box-shadow: var(--shadow-sm);
-  border-radius: 40px;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .search-box svg {
@@ -648,7 +648,7 @@ h1, h2, h3, .logo {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.7rem;
   border: 1px solid var(--line);
-  border-radius: 40px;
+  border-radius: 0;
   font-family: var(--font-body);
   font-size: 0.95rem;
   background: var(--bg);
@@ -699,7 +699,7 @@ h1, h2, h3, .logo {
   border-radius: var(--radius);
   overflow: hidden;
   cursor: zoom-in;
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .product-page__media .image-slot {
@@ -809,7 +809,7 @@ h1, h2, h3, .logo {
   background: var(--bg);
   color: var(--ink);
   padding: 0.45rem 1.3rem;
-  border-radius: 40px;
+  border-radius: 0;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 0.9rem;
@@ -841,7 +841,7 @@ h1, h2, h3, .logo {
   max-width: 720px;
   margin: 0 auto;
   text-align: center;
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .contact-list {
@@ -1027,7 +1027,7 @@ h1, h2, h3, .logo {
 .socials a {
   color: #dfe4e2;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 40px;
+  border-radius: 0;
   padding: 0.5rem 1.3rem;
   font-size: 0.88rem;
   background: rgba(255, 255, 255, 0.04);
@@ -1100,7 +1100,7 @@ h1, h2, h3, .logo {
   min-width: 18px;
   height: 18px;
   padding: 0 5px;
-  border-radius: 18px;
+  border-radius: 0;
   background: var(--gold);
   color: #2a2418;
   font-size: 0.7rem;
@@ -1412,7 +1412,7 @@ h1, h2, h3, .logo {
   background: #2a2a2a;
   color: #fff;
   padding: 0.65rem 1.4rem;
-  border-radius: 40px;
+  border-radius: 0;
   font-size: 0.9rem;
   opacity: 0;
   visibility: hidden;
@@ -1530,7 +1530,7 @@ h1, h2, h3, .logo {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.8rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 
 .checkout-card h3 {
@@ -1590,7 +1590,7 @@ h1, h2, h3, .logo {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.6rem;
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .checkout-summary h3 {
@@ -1691,7 +1691,7 @@ h1, h2, h3, .logo {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .checkout-success .section-title {
@@ -1722,12 +1722,12 @@ h1, h2, h3, .logo {
   border-radius: var(--radius);
   padding: 1.5rem;
   text-align: left;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   transition: box-shadow 0.3s ease;
 }
 
 .order-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .order-card__head {
@@ -1754,7 +1754,7 @@ h1, h2, h3, .logo {
   letter-spacing: 0.08em;
   font-weight: 600;
   padding: 0.3rem 0.7rem;
-  border-radius: 40px;
+  border-radius: 0;
   background: var(--bg-soft);
   color: var(--muted);
   white-space: nowrap;
@@ -2053,11 +2053,11 @@ h1, h2, h3, .logo {
 
 .hero-media__frame {
   position: relative;
-  border-radius: 26px;
+  border-radius: 0;
   overflow: hidden;
   aspect-ratio: 5 / 6;
   background: var(--bg-soft);
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
   border: 6px solid #fff;
 }
 
@@ -2087,11 +2087,11 @@ h1, h2, h3, .logo {
   background: #fff;
   color: var(--ink);
   border: 1px solid var(--line);
-  border-radius: 40px;
+  border-radius: 0;
   padding: 0.55rem 1rem;
   font-size: 0.8rem;
   font-weight: 600;
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
   z-index: 2;
 }
 
@@ -2138,10 +2138,10 @@ h1, h2, h3, .logo {
 
 .promo__media {
   position: relative;
-  border-radius: 24px;
+  border-radius: 0;
   overflow: hidden;
   aspect-ratio: 1 / 1;
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
   border: 6px solid #fff;
 }
 
@@ -2208,7 +2208,7 @@ h1, h2, h3, .logo {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.6rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
@@ -2295,7 +2295,7 @@ h1, h2, h3, .logo {
   -webkit-appearance: none;
   background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231f6b47' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 0.9rem center;
   border: 1px solid var(--line-strong);
-  border-radius: 40px;
+  border-radius: 0;
   padding: 0.5rem 2.2rem 0.5rem 1.1rem;
   font-size: 0.88rem;
   color: var(--ink);
@@ -2359,7 +2359,7 @@ h1, h2, h3, .logo {
   padding: 0.35rem 0.4rem 0.35rem 1.1rem;
   margin-top: 2rem;
   max-width: 460px;
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
