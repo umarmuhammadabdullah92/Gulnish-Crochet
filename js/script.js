@@ -91,7 +91,7 @@
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.1, rootMargin: "100px 0px 10% 0px" }
     );
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
