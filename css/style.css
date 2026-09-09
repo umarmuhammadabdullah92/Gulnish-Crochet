@@ -573,6 +573,7 @@ h1, h2, h3, .logo {
 
 .slideshow {
   position: relative;
+  contain: layout style paint;
 }
 
 .slideshow-layer {
@@ -582,6 +583,7 @@ h1, h2, h3, .logo {
   height: 100%;
   object-fit: cover;
   transition: opacity 1s ease-in-out;
+  will-change: opacity;
 }
 
 .category-card__body {
