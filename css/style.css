@@ -436,13 +436,11 @@ h1, h2, h3, .logo {
   content: "\2726";
   position: absolute;
   left: 50%;
-  bottom: -0.62rem;
+  bottom: 0.2rem;
   transform: translateX(-50%);
   color: var(--gold);
   font-size: 0.62rem;
   line-height: 1;
-  background: var(--bg);
-  padding: 0 0.55rem;
   z-index: 1;
 }
 
