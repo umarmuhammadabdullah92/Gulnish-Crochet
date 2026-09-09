@@ -41,7 +41,7 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--ink);
-  background: var(--bg);
+  background: linear-gradient(180deg, #fffdf8, #ffffff 42%);
   line-height: 1.7;
   letter-spacing: 0.005em;
   -webkit-font-smoothing: antialiased;
@@ -120,7 +120,11 @@ h1, h2, h3, .logo {
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.site-header.header-hide {
+  transform: translateY(-100%);
 }
 
 .site-header.scrolled {
