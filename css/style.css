@@ -2722,6 +2722,11 @@ h1, h2, h3, .logo {
 
   .hero__trust-item { font-size: 0.8rem; }
   .testimonial { padding: 1.3rem; }
+
+  .cart-delivery-progress { padding: 0.7rem 1rem 0.3rem; }
+  .cart-delivery-msg { font-size: 0.75rem; }
+
+  .fly-clone { display: none !important; }
 }
 
 @media (max-width: 420px) {
