@@ -2318,31 +2318,8 @@ h1, h2, h3, .logo {
 
   .promo__media { max-width: 460px; }
 
-  .usp-strip__inner {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-  }
-
   .testimonial-grid {
     grid-template-columns: 1fr;
-  }
-
-  .banner-tiles {
-    grid-template-columns: 1fr;
-  }
-
-  .faq-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .newsletter__grid {
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-  }
-
-  .trust-bar__inner {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
   }
 }
 
@@ -2350,9 +2327,6 @@ h1, h2, h3, .logo {
   .hero--split .hero h1 { font-size: 2.1rem; }
   .hero--split .hero-media__badge--top { left: 0.8rem; }
   .hero--split .hero-media__badge--bottom { right: 0.8rem; }
-  .usp-strip__inner { grid-template-columns: 1fr; }
-  .newsletter__form { flex-direction: column; border-radius: 24px; }
-  .newsletter__form .btn { width: 100%; }
 }
 
 /* ---------- Hero copy + rating ---------- */
