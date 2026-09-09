@@ -2080,15 +2080,16 @@ h1, h2, h3, .logo {
   place-items: center;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(12px);
+  transform: translate3d(0, 12px, 0);
   box-shadow: var(--glow-accent);
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  will-change: transform, opacity;
 }
 
 .back-to-top.show {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .back-to-top:hover {
