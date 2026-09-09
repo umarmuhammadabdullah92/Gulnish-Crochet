@@ -507,6 +507,7 @@
         image: bigImg && bigImg.src ? bigImg.currentSrc || bigImg.src : "",
         qty: currentQty
       });
+      flyToCart(ppAdd);
     });
   }
 
