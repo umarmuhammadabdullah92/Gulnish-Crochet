@@ -141,8 +141,8 @@ create policy "shop-images: admin delete"
 -- Safe to re-run: it skips ids that already exist.
 -- =============================================================
 insert into public.products (id, name, price, category, image, keywords, colors) values
-  ('seed_gr1_1', 'Premium hand made Rose Purse 1', 5799, 'gr1', 'images/purses/purse-1.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
-  ('seed_gr1_2', 'Premium hand made Rose Purse 2', 5799, 'gr1', 'images/purses/purse-10.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
+  ('seed_gr1_1', 'Premium hand made Rose Purse 1 (price per single bag)', 5799, 'gr1', 'images/purses/purse-1.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
+  ('seed_gr1_2', 'Premium hand made Rose Purse 2 (price per single bag)', 5799, 'gr1', 'images/purses/purse-10.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_3', 'Premium hand made Rose Purse 3', 5799, 'gr1', 'images/purses/purse-11.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_4', 'Handmade Crochet Purse 4', 1000, 'gr1', 'images/purses/purse-12.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_5', 'Handmade Crochet Purse 5', 850, 'gr1', 'images/purses/purse-13.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),

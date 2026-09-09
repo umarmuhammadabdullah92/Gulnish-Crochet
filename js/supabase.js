@@ -17,7 +17,7 @@
 
   /* Bump LOCAL_PRODUCTS version whenever the seed catalog changes so
      returning visitors' browsers re-sync products (offline/localStorage mode). */
-  var LOCAL_PRODUCTS = "gulnish-products-v7";
+  var LOCAL_PRODUCTS = "gulnish-products-v8";
   var LOCAL_SETTINGS = "gulnish-settings";
   var LOCAL_ORDERS = "gulnish-orders";
   var LOCAL_ADMIN_SESSION = "gulnish-admin-session";
@@ -84,8 +84,8 @@
      Keyed by the seed id they get in defaultProducts(). */
   var REAL_PRODUCTS = {
     "seed_gr4_1": { name: "Earbuds Bag", price: 1599 },
-    "seed_gr1_1": { name: "Premium hand made Rose Purse 1", price: 5799 },
-    "seed_gr1_2": { name: "Premium hand made Rose Purse 2", price: 5799 },
+    "seed_gr1_1": { name: "Premium hand made Rose Purse 1 (price per single bag)", price: 5799 },
+    "seed_gr1_2": { name: "Premium hand made Rose Purse 2 (price per single bag)", price: 5799 },
     "seed_gr1_3": { name: "Premium hand made Rose Purse 3", price: 5799 },
     "seed_gr1_10": { name: "Premium hand made Rose Purse 4", price: 5799 },
     "seed_gr1_11": { name: "Premium hand made Rose Purse 5", price: 5799 },
