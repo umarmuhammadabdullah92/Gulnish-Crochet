@@ -1927,6 +1927,11 @@ h1, h2, h3, .logo {
     margin-right: auto;
   }
 
+  .footer-col h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   .footer-links {
     align-items: center;
   }
