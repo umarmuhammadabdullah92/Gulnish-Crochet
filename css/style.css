@@ -245,7 +245,7 @@ h1, h2, h3, .logo {
 
 .hero h1 em {
   font-style: italic;
-  background: linear-gradient(120deg, var(--accent-dark), var(--accent));
+  background: linear-gradient(120deg, var(--accent-dark), var(--accent) 55%, var(--gold));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
