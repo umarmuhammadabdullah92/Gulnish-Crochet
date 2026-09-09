@@ -382,6 +382,23 @@ h1, h2, h3, .logo {
   box-shadow: 0 12px 26px rgba(185, 143, 62, 0.38);
 }
 
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -70%;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewX(-22deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+
+.btn:hover::after {
+  left: 130%;
+}
+
 .btn:active {
   transform: translateY(0);
 }
@@ -737,6 +754,23 @@ h1, h2, h3, .logo {
 .add-btn svg {
   width: 15px;
   height: 15px;
+}
+
+.add-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -70%;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-22deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+
+.add-btn:hover::after {
+  left: 130%;
 }
 
 /* ============ SEARCH ============ */
