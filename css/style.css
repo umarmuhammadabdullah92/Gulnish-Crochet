@@ -112,7 +112,7 @@ h1, h2, h3, .logo {
 
 /* ============ HEADER ============ */
 .site-header {
-  background: rgba(255, 253, 251, 0.92);
+  background: rgba(255, 249, 250, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
@@ -470,7 +470,7 @@ h1, h2, h3, .logo {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(42, 35, 32, 0.18), transparent 40%);
+  background: linear-gradient(to top, rgba(112, 26, 59, 0.24), transparent 45%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
