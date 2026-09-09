@@ -2395,14 +2395,7 @@ h1, h2, h3, .logo {
 
 /* ---------- Scroll progress bar ---------- */
 .scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 0;
-  z-index: 1000;
-  background: linear-gradient(90deg, var(--accent-light), var(--accent-dark));
-  transition: width 0.08s linear;
+  display: none;
 }
 
 /* ---------- Floating WhatsApp ---------- */
