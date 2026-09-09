@@ -100,10 +100,12 @@
       var label = cats[catIdx] || ITEM_NAME[key] || "Item";
       var name = ITEM_NAME[key] || label;
       RAW_IMAGES[key].forEach(function (img, i) {
+        var id = "seed_" + key + "_" + (i + 1);
+        var real = REAL_PRODUCTS[id];
         out.push({
-          id: "seed_" + key + "_" + (i + 1),
-          name: "Handmade Crochet " + name + " " + (i + 1),
-          price: (BASE_PRICE[key] || 500) + (i % 4) * 50,
+          id: id,
+          name: real ? real.name : "Handmade Crochet " + name + " " + (i + 1),
+          price: real ? real.price : (BASE_PRICE[key] || 500) + (i % 4) * 50,
           category: key,
           image: img,
           keywords: (CATEGORY_KEYWORDS[key] || [label.toLowerCase()]).slice(),
