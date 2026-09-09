@@ -1451,10 +1451,12 @@ h1, h2, h3, .logo {
   bottom: 1.6rem;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: #2a2a2a;
+  background: #23291f;
   color: #fff;
-  padding: 0.65rem 1.4rem;
-  border-radius: 0;
+  padding: 0.65rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  box-shadow: var(--shadow-md);
   font-size: 0.9rem;
   opacity: 0;
   visibility: hidden;
@@ -1469,11 +1471,16 @@ h1, h2, h3, .logo {
 }
 
 /* ============ SCROLL REVEAL ============ */
-.reveal,
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+
 .reveal.revealed {
   opacity: 1;
   transform: none;
-  transition: none;
 }
 
 .reveal[data-delay="1"] { transition-delay: 0.08s; }
