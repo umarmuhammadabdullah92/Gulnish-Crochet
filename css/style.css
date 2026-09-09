@@ -2727,7 +2727,72 @@ h1, h2, h3, .logo {
 
 @keyframes shimmer { 100% { transform: translateX(100%); } }
 
+/* =========================================================
+   Touch devices — cut hover-only effects (mobile/touch stay clean)
+   ========================================================= */
+@media (hover: none) {
+  .work-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .work-card:hover .work-card__media img {
+    transform: none;
+  }
+
+  .work-card__media::after {
+    content: none;
+  }
+
+  .category-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .category-card:hover .category-card__img::after {
+    opacity: 0;
+  }
+
+  .category-card:hover .category-card__img .image-slot img {
+    transform: none;
+  }
+
+  .btn:hover,
+  .add-btn:hover,
+  .btn--ghost:hover,
+  .back-to-top:hover {
+    transform: none;
+    box-shadow: var(--glow-accent);
+  }
+
+  .footer-links a:hover {
+    transform: none;
+  }
+
+  .logo:hover {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-media__badge {
+    font-size: 0.72rem;
+    padding: 0.45rem 0.8rem;
+  }
+
+  .hero-media__badge--top { left: 0.7rem; }
+  .hero-media__badge--bottom { right: 0.7rem; }
+
+  .cart-drawer { width: 100vw; }
+  .promo__grid { gap: 1.6rem; }
+
+  .footer-inner { padding-top: 0.5rem; }
+  .footer-col h4 { margin-bottom: 0.8rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .skeleton::after { animation: none; }
+  .navIn,
+  .main-nav.open { animation: none; }
 }
 
