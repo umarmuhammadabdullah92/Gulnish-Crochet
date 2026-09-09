@@ -85,13 +85,15 @@
   var REAL_PRODUCTS = {
     "seed_gr4_1": { name: "Earbuds Bag", price: 1599 },
     "seed_gr1_20": { name: "Premium hand made Rose Bag", price: 5799 },
-    "seed_gr1_16": { name: "Premium hand made Rose Bag", price: 5799 }
+    "seed_gr1_16": { name: "Premium hand made Rose Bag", price: 5799 },
+    "seed_gr1_1": { name: "Premium hand made Rose Bag", price: 5799 },
+    "seed_gr1_2": { name: "Premium hand made Rose Bag", price: 5799 },
     "seed_gr1_3": { name: "Premium hand made Rose Bag", price: 5799 },
     "seed_gr1_10": { name: "Premium hand made Rose Bag", price: 5799 },
     "seed_gr1_11": { name: "Premium hand made Rose Bag", price: 5799 },
     "seed_gr1_12": { name: "Premium hand made Rose Bag", price: 5799 },
     "seed_gr1_15": { name: "Premium hand made Rose Bag", price: 5799 },
-    "seed_gr1_19": { name: "Premium hand made Rose Bag", price: 5799 },
+    "seed_gr1_19": { name: "Premium hand made Rose Bag", price: 5799 }
   };
   var CATEGORY_KEYWORDS = {
     gr1: ["handbag", "purse", "crochet bag", "handmade", "gift", "woolen"],
