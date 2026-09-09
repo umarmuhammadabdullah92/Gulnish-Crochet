@@ -1,0 +1,151 @@
+/* =========================================================
+   Gulnish Crochet — customer orders page logic
+   ========================================================= */
+
+(function () {
+  "use strict";
+
+  var GC = window.GC;
+
+  function money(value) {
+    return "Rs. " + (parseFloat(value) || 0).toFixed(2);
+  }
+
+  function escapeHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function dateLabel(iso) {
+    try {
+      return new Date(iso).toLocaleString();
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function normalizePhone(p) {
+    return String(p || "").replace(/[^\d]/g, "").replace(/^0+/, "");
+  }
+
+  var listEl = document.getElementById("orderList");
+  var emptyEl = document.getElementById("orderEmpty");
+  var lookupWrap = document.getElementById("orderLookupWrap");
+  var phoneInput = document.getElementById("orderPhone");
+  var lookupBtn = document.getElementById("orderLookup");
+  var emptyMsg = document.getElementById("orderEmptyMsg");
+
+  function render(orders) {
+    var list = orders || [];
+    if (!listEl) return;
+    if (!list.length) {
+      if (emptyEl) emptyEl.hidden = false;
+      listEl.innerHTML = "";
+      return;
+    }
+    if (emptyEl) emptyEl.hidden = true;
+    listEl.innerHTML = list
+      .map(function (o) {
+        var cust = o.customer || {};
+        var items = (o.items || [])
+          .map(function (i) {
+            return "- " + escapeHtml(i.name) +
+              (i.color ? " (" + escapeHtml(i.color) + ")" : "") +
+              " x" + i.qty + " = " + money((i.price || 0) * i.qty);
+          })
+          .join("\n");
+        return (
+          '<article class="order-card reveal">' +
+          '<div class="order-card__head">' +
+          "<div>" +
+          '<h3 class="order-card__id">Order ' + escapeHtml(o.id) + "</h3>" +
+          '<span class="order-card__date">' + escapeHtml(dateLabel(o.placedAt)) + "</span>" +
+          "</div>" +
+          '<span class="order-status order-status--' + (o.status || "pending").toLowerCase().replace(/[^a-z0-9]+/g, "-") + '">' +
+          escapeHtml(o.status || "Pending") + "</span>" +
+          "</div>" +
+          '<div class="order-card__body">' +
+          '<div class="order-card__col">' +
+          '<span class="order-card__label">Items</span>' +
+          '<pre class="order-card__items">' + (items || "\u2014") + "</pre>" +
+          "</div>" +
+          '<div class="order-card__col">' +
+          '<span class="order-card__label">Customer</span>' +
+          '<p class="order-card__cust">' +
+          escapeHtml(cust.name) + " \u2014" + "<br>" +
+          (escapeHtml(cust.phone) ? "Ph: +" + escapeHtml(cust.phone) : "") +
+          (cust.city ? ", " + escapeHtml(cust.city) : "") +
+          "</p>" +
+          "</div>" +
+          "</div>" +
+          '<div class="order-card__foot">' +
+          "<span>" + escapeHtml(o.payment || "") + "</span>" +
+          '<span class="order-card__total">' + money(o.total) + "</span>" +
+          "</div>" +
+          "</article>"
+        );
+      })
+      .join("");
+
+    var revealEls = listEl.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add("revealed"); });
+    }
+  }
+
+  function lookup() {
+    var phone = phoneInput ? phoneInput.value.trim() : "";
+    var norm = normalizePhone(phone);
+    if (!norm) {
+      if (lookupWrap) lookupWrap.classList.add("has-error");
+      if (emptyMsg) emptyMsg.textContent = "Please enter the phone number you used at checkout.";
+      render([]);
+      return;
+    }
+    if (lookupWrap) lookupWrap.classList.remove("has-error");
+
+    var orders = GC && GC.getOrdersByPhone ? GC.getOrdersByPhone(phone) : [];
+    if (emptyMsg) {
+      emptyMsg.textContent = orders.length
+        ? ""
+        : "No orders found for that number.";
+    }
+    render(orders);
+  }
+
+  if (lookupBtn) {
+    lookupBtn.addEventListener("click", lookup);
+  }
+  if (phoneInput) {
+    phoneInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") lookup();
+    });
+  }
+
+  function init() {
+    // Start empty; user looks up by phone to see their shared orders.
+    render([]);
+  }
+
+  if (GC && GC.init) {
+    GC.init().then(init);
+  } else {
+    init();
+  }
+})();

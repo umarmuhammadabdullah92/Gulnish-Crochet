@@ -1,0 +1,669 @@
+/* =========================================================
+   Product Manager (admin.html) logic
+   ========================================================= */
+(function () {
+  "use strict";
+
+  var GC = window.GC;
+
+  /* ---------- UI chrome: theme, progress, mobile nav ---------- */
+  var header = document.querySelector(".site-header");
+  var progressBar = document.getElementById("scrollProgress");
+  var themeToggle = document.getElementById("themeToggle");
+  var navToggle = document.getElementById("navToggle");
+  var mainNav = document.getElementById("mainNav");
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var LIGHT_THEME = "#faf4f0";
+  var DARK_THEME = "#1c1413";
+
+  function applyTheme(theme, save) {
+    document.documentElement.setAttribute("data-theme", theme);
+    if (themeMeta) themeMeta.setAttribute("content", theme === "dark" ? DARK_THEME : LIGHT_THEME);
+    if (themeToggle) themeToggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+    if (save) {
+      try {
+        localStorage.setItem("gulnish-theme", theme);
+      } catch (e) {}
+    }
+  }
+
+  applyTheme(document.documentElement.getAttribute("data-theme") || "light", false);
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next, true);
+    });
+  }
+
+  if (navToggle && mainNav) {
+    navToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      mainNav.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", mainNav.classList.contains("open") ? "true" : "false");
+      if (mainNav.classList.contains("open")) {
+        var link = mainNav.querySelector("a");
+        if (link) link.focus();
+      }
+    });
+    mainNav.addEventListener("click", function (e) { e.stopPropagation(); });
+    document.addEventListener("click", function () { mainNav.classList.remove("open"); });
+  }
+
+  var onScroll = function () {
+    if (header) header.classList.toggle("scrolled", window.scrollY > 30);
+    if (progressBar) {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  var editingId = null;
+  var imageData = "";
+  var pendingImageFile = null;
+
+  function money(value) {
+    var n = parseFloat(value) || 0;
+    return "Rs. " + n.toFixed(2);
+  }
+
+  function escapeHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function getProducts() {
+    return (GC && GC.products) || [];
+  }
+  function getSettings() {
+    return (GC && GC.settings) || {};
+  }
+
+  /* ---------- auth refs ---------- */
+  var loginOverlay = document.getElementById("adminLoginOverlay");
+  var loginEmail = document.getElementById("adminLoginEmail");
+  var loginPassword = document.getElementById("adminLoginPassword");
+  var loginBtn = document.getElementById("adminLoginBtn");
+  var loginErr = document.getElementById("adminLoginErr");
+  var adminWrap = document.getElementById("adminWrap");
+  var adminSignOut = document.getElementById("adminSignOut");
+  var adminDemoNote = document.getElementById("adminDemoNote");
+
+  /* ---------- category select ---------- */
+  var pCategory = document.getElementById("pCategory");
+  function fillCategorySelect(settings, selected) {
+    pCategory.innerHTML = "";
+    (settings.categories || []).forEach(function (label, i) {
+      var opt = document.createElement("option");
+      opt.value = "gr" + (i + 1);
+      opt.textContent = label || "Category " + (i + 1);
+      pCategory.appendChild(opt);
+    });
+    if (selected) pCategory.value = selected;
+  }
+
+  /* ---------- color rows ---------- */
+  var colorRows = document.getElementById("colorRows");
+  var addColorBtn = document.getElementById("addColor");
+  function addColorRow(name, hex) {
+    var row = document.createElement("div");
+    row.className = "color-row";
+
+    var nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.placeholder = "Color name";
+    nameInput.value = name || "";
+    nameInput.className = "color-name";
+
+    var hexInput = document.createElement("input");
+    hexInput.type = "color";
+    hexInput.value = hex || "#d9a5b0";
+    hexInput.className = "color-hex";
+
+    var removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "color-remove";
+    removeBtn.textContent = "\u00d7";
+    removeBtn.setAttribute("aria-label", "Remove color");
+    removeBtn.addEventListener("click", function () { row.remove(); });
+
+    row.appendChild(nameInput);
+    row.appendChild(hexInput);
+    row.appendChild(removeBtn);
+    colorRows.appendChild(row);
+  }
+
+  function collectColors() {
+    return Array.from(colorRows.querySelectorAll(".color-row")).map(function (row) {
+      return {
+        name: row.querySelector(".color-name").value.trim(),
+        hex: row.querySelector(".color-hex").value
+      };
+    });
+  }
+
+  function clearColorRows() {
+    colorRows.innerHTML = "";
+  }
+
+  /* ---------- form refs ---------- */
+  var pName = document.getElementById("pName");
+  var pPrice = document.getElementById("pPrice");
+  var pKeywords = document.getElementById("pKeywords");
+  var pImage = document.getElementById("pImage");
+  var pImagePreview = document.getElementById("pImagePreview");
+  var pImageClear = document.getElementById("pImageClear");
+  var saveProductBtn = document.getElementById("saveProduct");
+  var cancelEditBtn = document.getElementById("cancelEdit");
+  var deleteProductBtn = document.getElementById("deleteProduct");
+  var formTitle = document.getElementById("formTitle");
+
+  function resetForm() {
+    editingId = null;
+    imageData = "";
+    pendingImageFile = null;
+    pName.value = "";
+    pPrice.value = "";
+    if (pKeywords) pKeywords.value = "";
+    pImage.value = "";
+    pImagePreview.hidden = true;
+    pImagePreview.removeAttribute("src");
+    pImageClear.hidden = true;
+    clearColorRows();
+    addColorRow("", "#d9a5b0");
+    formTitle.textContent = "Add product";
+    saveProductBtn.textContent = "Save Product";
+    cancelEditBtn.hidden = true;
+    deleteProductBtn.hidden = true;
+  }
+
+  /* ---------- image handling ---------- */
+  pImage.addEventListener("change", function (e) {
+    var file = e.target.files && e.target.files[0];
+    if (!file) return;
+    pendingImageFile = file;
+    var reader = new FileReader();
+    reader.onload = function () {
+      imageData = reader.result;
+      pImagePreview.src = imageData;
+      pImagePreview.hidden = false;
+      pImageClear.hidden = false;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  pImageClear.addEventListener("click", function () {
+    imageData = "";
+    pendingImageFile = null;
+    pImage.value = "";
+    pImagePreview.hidden = true;
+    pImagePreview.removeAttribute("src");
+    pImageClear.hidden = true;
+  });
+
+  /* ---------- save / update ---------- */
+  async function saveProduct() {
+    var name = pName.value.trim();
+    if (!name) {
+      pName.focus();
+      return;
+    }
+
+    var img = imageData;
+    if (pendingImageFile) {
+      var up = await GC.uploadImage(pendingImageFile);
+      if (up && up.url) img = up.url;
+      pendingImageFile = null;
+    }
+
+    var product = {
+      id: editingId || "p" + Date.now().toString(36),
+      name: name,
+      price: parseFloat(pPrice.value) || 0,
+      category: pCategory.value,
+      image: img,
+      keywords: pKeywords
+        ? (pKeywords.value || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean)
+        : [],
+      colors: collectColors().filter(function (c) { return c.name; })
+    };
+
+    if (GC.saveProduct) await GC.saveProduct(product);
+    resetForm();
+    renderList();
+  }
+
+  saveProductBtn.addEventListener("click", saveProduct);
+  cancelEditBtn.addEventListener("click", resetForm);
+
+  deleteProductBtn.addEventListener("click", async function () {
+    if (editingId && confirm("Delete this product?")) {
+      if (GC.deleteProduct) await GC.deleteProduct(editingId);
+      resetForm();
+      renderList();
+    }
+  });
+
+  addColorBtn.addEventListener("click", function () { addColorRow(); });
+
+  /* ---------- edit ---------- */
+  function editProduct(product) {
+    editingId = product.id;
+    imageData = product.image || "";
+    pendingImageFile = null;
+    pName.value = product.name || "";
+    pPrice.value = product.price || "";
+    if (pKeywords) pKeywords.value = (product.keywords || []).join(", ");
+    pImage.value = "";
+    clearColorRows();
+    (product.colors && product.colors.length
+      ? product.colors
+      : [{ name: "", hex: "#d9a5b0" }]
+    ).forEach(function (c) { addColorRow(c.name, c.hex); });
+    formTitle.textContent = "Edit product";
+    saveProductBtn.textContent = "Update Product";
+    cancelEditBtn.hidden = false;
+    deleteProductBtn.hidden = false;
+    fillCategorySelect(getSettings(), product.category);
+    if (imageData) {
+      pImagePreview.src = imageData;
+      pImagePreview.hidden = false;
+      pImageClear.hidden = false;
+    } else {
+      pImagePreview.hidden = true;
+      pImageClear.hidden = true;
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ---------- list ---------- */
+  var productList = document.getElementById("productList");
+  var productCount = document.getElementById("productCount");
+
+  function renderList() {
+    var products = getProducts();
+    var settings = getSettings();
+
+    productCount.textContent = products.length ? "(" + products.length + ")" : "";
+
+    if (!products.length) {
+      productList.innerHTML =
+        '<p class="admin-empty">No products yet &mdash; add your first one above.</p>';
+      return;
+    }
+
+    var catLabel = function (val) {
+      var idx = parseInt(val.replace("gr", ""), 10) - 1;
+      if (idx >= 0 && settings.categories[idx]) return settings.categories[idx];
+      return val;
+    };
+
+    productList.innerHTML = products
+      .map(function (p) {
+        return (
+          '<div class="admin-item">' +
+          '<div class="admin-item__img">' + (p.image ? '<img src="' + p.image + '" alt="">' : "") + "</div>" +
+          '<div class="admin-item__info">' +
+          '<div class="admin-item__name">' + escapeHtml(p.name) + "</div>" +
+          '<div class="admin-item__meta">' +
+          (money(p.price) || "No price") + " &middot; " + escapeHtml(catLabel(p.category)) +
+          " &middot; " + (p.colors || []).length + " color(s)" +
+          "</div></div>" +
+          '<div class="admin-item__actions">' +
+          '<button type="button" data-edit="' + p.id + '">Edit</button>' +
+          '<button type="button" class="delete" data-del="' + p.id + '">Delete</button>' +
+          "</div></div>"
+        );
+      })
+      .join("");
+  }
+
+  productList.addEventListener("click", async function (e) {
+    var editBtn = e.target.closest("[data-edit]");
+    if (editBtn) {
+      var p = getProducts().find(function (x) { return x.id === editBtn.dataset.edit; });
+      if (p) editProduct(p);
+      return;
+    }
+    var delBtn = e.target.closest("[data-del]");
+    if (delBtn) {
+      if (confirm("Delete this product?")) {
+        if (GC.deleteProduct) await GC.deleteProduct(delBtn.dataset.del);
+        if (editingId === delBtn.dataset.del) resetForm();
+        renderList();
+      }
+    }
+  });
+
+  /* ---------- categories ---------- */
+  var catRows = document.getElementById("catRows");
+  var addCategoryBtn = document.getElementById("addCategory");
+
+  function categoryRowHTML(label, index) {
+    return '<div class="cat-row">' +
+      '<input type="text" class="cat-name" value="' + escapeHtml(label) + '" placeholder="Category ' + (index + 1) + '">' +
+      '<button type="button" class="cat-remove" aria-label="Remove category" hidden>&times;</button>' +
+      "</div>";
+  }
+
+  function updateRemoveButtons() {
+    var rows = catRows.querySelectorAll(".cat-row");
+    if (rows.length <= 1) {
+      rows.forEach(function (row) { row.querySelector(".cat-remove").hidden = true; });
+      return;
+    }
+    rows.forEach(function (row) { row.querySelector(".cat-remove").hidden = false; });
+  }
+
+  function renderCategoryInputs() {
+    var cats = getSettings().categories || [];
+    catRows.innerHTML = cats.map(categoryRowHTML).join("");
+    updateRemoveButtons();
+  }
+
+  addCategoryBtn.addEventListener("click", function () {
+    var row = document.createElement("div");
+    row.className = "cat-row";
+    row.innerHTML = categoryRowHTML("", catRows.querySelectorAll(".cat-row").length);
+    catRows.appendChild(row);
+    updateRemoveButtons();
+    row.querySelector(".cat-name").focus();
+  });
+
+  catRows.addEventListener("click", function (e) {
+    var removeBtn = e.target.closest(".cat-remove");
+    if (!removeBtn) return;
+    var rows = catRows.querySelectorAll(".cat-row");
+    if (rows.length <= 1) return;
+    removeBtn.closest(".cat-row").remove();
+    updateRemoveButtons();
+  });
+
+  var saveCategoriesBtn = document.getElementById("saveCategories");
+  saveCategoriesBtn.addEventListener("click", async function () {
+    var names = Array.from(catRows.querySelectorAll(".cat-name")).map(function (i) {
+      return i.value.trim();
+    });
+    var settings = getSettings();
+    settings.categories = names.length ? names : defaultCategoryNames();
+    if (GC.saveSettings) await GC.saveSettings(settings);
+    fillCategorySelect(getSettings(), pCategory.value);
+    renderCategoryInputs();
+    renderCategoryImageEditor();
+    renderList();
+    alert("Categories saved.");
+  });
+
+  function defaultCategoryNames() {
+    return ["Purses", "Gajrays", "Keychains", "Bags", "Jewellery", "Headband"];
+  }
+
+  /* ---------- category images ---------- */
+  var catImageRows = document.getElementById("catImageRows");
+
+  function renderCategoryImageEditor() {
+    if (!catImageRows) return;
+    var settings = getSettings();
+    var cats = settings.categories || [];
+    var imgs = settings.categoryImages || {};
+    catImageRows.innerHTML = cats
+      .map(function (label, i) {
+        var key = "gr" + (i + 1);
+        var list = Array.isArray(imgs[key]) ? imgs[key] : [];
+        var thumbs = list
+          .map(function (src, idx) {
+            return (
+              '<span class="cat-img">' +
+              '<img src="' + src + '" alt="" data-key="' + key + '" data-idx="' + idx + '">' +
+              '<button type="button" class="cat-img__remove" data-key="' + key + '" data-idx="' + idx + '" aria-label="Remove image">&times;</button>' +
+              "</span>"
+            );
+          })
+          .join("");
+        return (
+          '<div class="cat-img-row">' +
+          '<span class="cat-img-row__name">' + escapeHtml(label || "Category " + (i + 1)) + "</span>" +
+          '<div class="cat-img-row__thumbs">' +
+          (thumbs || '<span class="cat-img-row__empty">No images yet</span>') +
+          "</div>" +
+          (list.length < 5
+            ? '<label class="btn btn--small btn--ghost cat-img-upload">Add photo<input type="file" accept="image/*" data-key="' + key + '" hidden></label>'
+            : "") +
+          "</div>"
+        );
+      })
+      .join("");
+  }
+
+  catImageRows.addEventListener("change", async function (e) {
+    var input = e.target.closest('input[type="file"][data-key]');
+    if (!input) return;
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var key = input.dataset.key;
+
+    var settings = getSettings();
+    settings.categoryImages = settings.categoryImages || {};
+    var list = Array.isArray(settings.categoryImages[key]) ? settings.categoryImages[key].slice() : [];
+    if (list.length >= 5) {
+      alert("Maximum 5 images per category.");
+      input.value = "";
+      return;
+    }
+
+    var up = await GC.uploadImage(file);
+    var imgUrl = (up && up.url) || null;
+    if (!imgUrl) {
+      // Fallback to data URL if storage unavailable
+      imgUrl = await readAsDataURL(file);
+    }
+    if (!imgUrl) return;
+    list.push(imgUrl);
+    settings.categoryImages[key] = list;
+    if (GC.saveSettings) await GC.saveSettings(settings);
+    renderCategoryImageEditor();
+    input.value = "";
+  });
+
+  function readAsDataURL(file) {
+    return new Promise(function (resolve) {
+      var reader = new FileReader();
+      reader.onload = function () { resolve(reader.result); };
+      reader.onerror = function () { resolve(null); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  catImageRows.addEventListener("click", async function (e) {
+    var removeBtn = e.target.closest(".cat-img__remove");
+    if (!removeBtn) return;
+    var settings = getSettings();
+    var key = removeBtn.dataset.key;
+    var idx = parseInt(removeBtn.dataset.idx, 10);
+    var list = (settings.categoryImages && settings.categoryImages[key]) || [];
+    if (idx >= 0 && idx < list.length) list.splice(idx, 1);
+    settings.categoryImages[key] = list;
+    if (GC.saveSettings) await GC.saveSettings(settings);
+    renderCategoryImageEditor();
+  });
+
+  /* ---------- shop settings ---------- */
+  var shopWhatsAppInput = document.getElementById("shopWhatsApp");
+  var saveShopSettingsBtn = document.getElementById("saveShopSettings");
+
+  function renderShopSettings() {
+    if (shopWhatsAppInput) {
+      shopWhatsAppInput.value = getSettings().whatsapp || "03075729901";
+    }
+  }
+
+  if (saveShopSettingsBtn) {
+    saveShopSettingsBtn.addEventListener("click", async function () {
+      var settings = getSettings();
+      settings.whatsapp = (shopWhatsAppInput.value || "").trim();
+      if (GC.saveSettings) await GC.saveSettings(settings);
+      alert("Shop settings saved.");
+    });
+  }
+
+  /* ---------- orders ---------- */
+  var ORDER_STATUSES = [
+    "Pending",
+    "Confirmed",
+    "Processing",
+    "Shipped",
+    "Delivered",
+    "Cancelled"
+  ];
+
+  function getOrders() {
+    return (GC && GC.orders) || [];
+  }
+
+  function orderDateLabel(iso) {
+    try {
+      return new Date(iso).toLocaleString();
+    } catch (e) {
+      return "";
+    }
+  }
+
+  var adminOrders = document.getElementById("adminOrders");
+  var orderCount = document.getElementById("orderCount");
+
+  function renderOrders() {
+    var orders = getOrders();
+    if (orderCount) {
+      orderCount.textContent = orders.length ? "(" + orders.length + ")" : "";
+    }
+    if (!adminOrders) return;
+    if (!orders.length) {
+      adminOrders.innerHTML = '<p class="admin-empty">No orders yet.</p>';
+      return;
+    }
+    adminOrders.innerHTML = orders
+      .map(function (o) {
+        var cust = o.customer || {};
+        var items = (o.items || [])
+          .map(function (i) {
+            return escapeHtml(i.name) + (i.color ? " (" + escapeHtml(i.color) + ")" : "") + " x" + i.qty;
+          })
+          .join(", ");
+        var statusOpts = ORDER_STATUSES.map(function (s) {
+          return '<option value="' + s + '"' + (s === (o.status || "Pending") ? " selected" : "") + ">" + s + "</option>";
+        }).join("");
+        return (
+          '<div class="admin-item admin-order">' +
+          '<div class="admin-item__info">' +
+          '<div class="admin-item__name">' + escapeHtml(o.id) + " &mdash; " + escapeHtml(cust.name || "Customer") + "</div>" +
+          '<div class="admin-item__meta">' +
+          escapeHtml(orderDateLabel(o.placedAt)) + " &middot; " + money(o.total) + "<br>" +
+          (items || "No items") +
+          (cust.phone ? "<br>Ph: +" + escapeHtml(cust.phone) : "") +
+          (cust.city ? " &middot; " + escapeHtml(cust.city) : "") +
+          (o.payment ? " &middot; " + escapeHtml(o.payment) : "") +
+          (cust.notes ? "<br>Notes: " + escapeHtml(cust.notes) : "") +
+          "</div></div>" +
+          '<div class="admin-item__actions">' +
+          '<select class="order-status-select" data-order="' + escapeHtml(o.id) + '" aria-label="Order status">' +
+          statusOpts + "</select>" +
+          '<button type="button" class="delete" data-delorder="' + escapeHtml(o.id) + '">Delete</button>' +
+          "</div></div>"
+        );
+      })
+      .join("");
+  }
+
+  if (adminOrders) {
+    adminOrders.addEventListener("change", async function (e) {
+      var sel = e.target.closest(".order-status-select");
+      if (!sel) return;
+      if (GC.updateOrderStatus) await GC.updateOrderStatus(sel.dataset.order, sel.value);
+      renderOrders();
+    });
+
+    adminOrders.addEventListener("click", async function (e) {
+      var del = e.target.closest("[data-delorder]");
+      if (!del) return;
+      if (!confirm("Delete this order?")) return;
+      if (GC.deleteOrder) await GC.deleteOrder(del.dataset.delorder);
+      renderOrders();
+    });
+  }
+
+  /* ---------- auth -------- */
+  function enterAdmin() {
+    adminWrap.hidden = false;
+    if (loginOverlay) loginOverlay.hidden = true;
+    if (GC && !GC.configured && adminDemoNote) adminDemoNote.hidden = false;
+    renderShopSettings();
+    renderCategoryInputs();
+    fillCategorySelect(getSettings(), pCategory.value || "gr1");
+    renderCategoryImageEditor();
+    addColorRow("", "#d9a5b0");
+    renderList();
+    renderOrders();
+  }
+
+  if (loginBtn) {
+    loginBtn.addEventListener("click", async function () {
+      if (loginErr) loginErr.hidden = true;
+      var email = loginEmail ? loginEmail.value.trim() : "";
+      var password = loginPassword ? loginPassword.value : "";
+      if (!email || !password) {
+        if (loginErr) { loginErr.textContent = "Enter your email and password."; loginErr.hidden = false; }
+        return;
+      }
+      loginBtn.disabled = true;
+      var ok = await GC.signInAdmin(email, password);
+      loginBtn.disabled = false;
+      if (ok) {
+        if (loginPassword) loginPassword.value = "";
+        enterAdmin();
+      } else if (loginErr) {
+        loginErr.textContent = "Sign in failed. Check your email and password.";
+        loginErr.hidden = false;
+      }
+    });
+
+    loginPassword.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") loginBtn.click();
+    });
+    loginEmail.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") loginBtn.click();
+    });
+  }
+
+  if (adminSignOut) {
+    adminSignOut.addEventListener("click", async function () {
+      await GC.signOutAdmin();
+      adminWrap.hidden = true;
+      if (loginOverlay) loginOverlay.hidden = false;
+      if (loginErr) loginErr.hidden = true;
+    });
+  }
+
+  /* ---------- init ---------- */
+  function init() {
+    GC.checkAdminSession().then(function (isAdmin) {
+      if (isAdmin) {
+        enterAdmin();
+      } else {
+        adminWrap.hidden = true;
+        if (loginOverlay) loginOverlay.hidden = false;
+        if (GC && !GC.configured && adminDemoNote) adminDemoNote.hidden = false;
+      }
+    });
+  }
+
+  if (GC && GC.init) {
+    GC.init().then(init);
+  } else {
+    init();
+  }
+})();

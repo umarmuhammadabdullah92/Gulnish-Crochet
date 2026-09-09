@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders | Gulnish Crochet</title>
+  <meta name="description" content="View your Gulnish Crochet orders and their status.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#faf4f0">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("gulnish-theme");
+        if (t !== "dark" && t !== "light") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="apple-touch-icon" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+
+  <!-- Announcement bar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span class="topbar__item">&#10084; Handmade with love</span>
+      <span class="topbar__item">&#10003; Cash on delivery anywhere in Pakistan</span>
+      <span class="topbar__item">Made to order &ndash; tell us your idea</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="images/logo.png" alt="Gulnish Crochet" class="logo-img"><span class="logo-name">Gulnish Crochet</span></a>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="orders.html" class="active">Orders</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+          <svg class="theme-toggle__icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="theme-toggle__icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <button class="cart-btn" id="cartToggle" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-btn__badge" id="cartCount">0</span>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">Your orders</span>
+          <h1 class="section-title">My <em>Orders</em></h1>
+          <p class="section-lead">Enter the phone number you used at checkout to see your orders and track their status.</p>
+        </div>
+
+        <div class="order-lookup reveal" id="orderLookupWrap" style="max-width:440px;margin:0 auto 2rem;display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;">
+          <input type="tel" id="orderPhone" placeholder="03xx xxxxxxx" style="flex:1;min-width:220px;padding:0.7rem 0.85rem;border:1px solid #e2cfc5;border-radius:10px;font-family:inherit;font-size:0.95rem;">
+          <button class="btn" type="button" id="orderLookup">Find orders</button>
+        </div>
+
+        <div id="orderEmpty" class="checkout-empty" hidden>
+          <div class="cart-empty__ph">&#128722;</div>
+          <p id="orderEmptyMsg">No orders found for that number.</p>
+          <a class="btn" href="products.html">Start shopping</a>
+        </div>
+
+        <div id="orderList" class="order-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="images/logo.png" alt="Gulnish Crochet" class="logo-img"><span class="logo-name">Gulnish Crochet</span></a>
+        <p class="footer-brand-tag">Handmade crochet purses, bags, jewellery and gifts — made to order with love.</p>
+        <div class="socials" aria-label="Social links">
+          <a href="https://wa.me/923075729901" title="WhatsApp" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://instagram.com/" title="Instagram" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <nav class="footer-links" aria-label="Shop links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="orders.html">My Orders</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <nav class="footer-links" aria-label="Help links">
+          <a href="checkout.html">Checkout</a>
+          <a href="orders.html">Track an order</a>
+          <a href="contact.html">Custom designs</a>
+          <a href="admin.html">Shop manager</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">Gulnish Crochet &copy; <span id="year"></span></p>
+        <p class="footer-note">Made with &hearts; in Pakistan</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile cart bar -->
+  <div class="cart-bar" id="cartBar">
+    <button type="button" class="cart-bar__btn" id="cartBarBtn" aria-label="View cart">
+      <span class="cart-bar__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      </span>
+      <span class="cart-bar__info"><span id="cartBarCount">0</span> items &middot; <span id="cartBarTotal">Rs. 0.00</span></span>
+      <span class="cart-bar__cta">View Cart &rarr;</span>
+    </button>
+  </div>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- WhatsApp -->
+  <a class="wa-float" href="https://wa.me/923075729901?text=Hi%20Gulnish%20Crochet%2C%20I%27d%20like%20to%20ask%20about%20your%20handmade%20products." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12.001 0C5.384 0 0 5.384 0 12.001c0 2.117.554 4.19 1.606 6.009L0 24l6.146-1.612c1.79.977 3.806 1.492 5.855 1.492 6.617 0 12.001-5.384 12.001-12.001C24 5.384 18.616 0 12.001 0z"/></svg>
+  </a>
+<!-- Cart drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-drawer__head">
+      <h3>Your Cart</h3>
+      <button class="cart-drawer__close" id="cartClose" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="cart-drawer__items" id="cartItems"></div>
+    <div class="cart-drawer__foot">
+      <div class="cart-total">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">Rs. 0.00</span>
+      </div>
+      <button class="btn cart-checkout" id="cartCheckout">Checkout</button>
+      <p class="cart-note">Delivery arranged after checkout</p>
+    </div>
+  </aside>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/orders.js"></script>
+</body>
+</html>

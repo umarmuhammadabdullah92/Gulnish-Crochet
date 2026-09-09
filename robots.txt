@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Private / transactional pages — keep out of search results
+Disallow: /admin.html
+Disallow: /checkout.html
+Disallow: /orders.html
+
+Sitemap: https://YOUR-DOMAIN.com/sitemap.xml

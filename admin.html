@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Manager | Gulnish Crochet</title>
+  <meta name="description" content="Manage products, settings and orders for Gulnish Crochet.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("gulnish-theme");
+        if (t !== "dark" && t !== "light") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="apple-touch-icon" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body class="admin-page">
+
+  <!-- Announcement bar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span class="topbar__item">&#10084; Handmade with love</span>
+      <span class="topbar__item">&#10003; Cash on delivery anywhere in Pakistan</span>
+      <span class="topbar__item">Made to order &ndash; tell us your idea</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="images/logo.png" alt="Gulnish Crochet" class="logo-img"><span class="logo-name">Gulnish Crochet</span></a>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="orders.html">Orders</a></li>
+          <li><a href="admin.html" class="active">Product Manager</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+          <svg class="theme-toggle__icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="theme-toggle__icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="container">
+
+      <!-- Admin login (shown until you sign in) -->
+      <div class="admin-login-overlay" id="adminLoginOverlay">
+        <div class="admin-login-card">
+          <h2>Admin access</h2>
+          <p>Sign in to manage the shop. Use the admin user you created in your Supabase dashboard (Authentication &rarr; Users &rarr; Add user).</p>
+          <input type="email" id="adminLoginEmail" placeholder="Admin email" autocomplete="username">
+          <input type="password" id="adminLoginPassword" placeholder="Password" autocomplete="current-password">
+          <p class="admin-login-err" id="adminLoginErr" hidden>Sign in failed. Check your email and password.</p>
+          <div class="admin-login-actions">
+            <button class="btn" type="button" id="adminLoginBtn">Sign in</button>
+          </div>
+          <p class="admin-login-demo" id="adminDemoNote" hidden>No Supabase configured &mdash; running in local demo mode.</p>
+        </div>
+      </div>
+
+      <div id="adminWrap" hidden>
+      <div class="admin-head">
+        <h1>Product Manager</h1>
+        <p>Add, edit and delete products. Changes appear on the shop for every visitor.</p>
+        <button class="btn btn--ghost btn--small" type="button" id="adminSignOut">Sign out</button>
+      </div>
+
+      <!-- ============ SHOP SETTINGS ============ -->
+      <section class="admin-card">
+        <h2>Shop settings</h2>
+        <p class="admin-hint">These are used at checkout. Prices are shown in Rs. (PKR).</p>
+        <div class="admin-grid">
+          <label>
+            <span>WhatsApp number (with country code)</span>
+            <input type="tel" id="shopWhatsApp" placeholder="e.g. 923001234567">
+          </label>
+        </div>
+        <div class="admin-actions">
+          <button class="btn" type="button" id="saveShopSettings">Save settings</button>
+        </div>
+      </section>
+
+      <!-- ============ CATEGORIES ============ -->
+      <section class="admin-card">
+        <h2>Categories</h2>
+        <p class="admin-hint">These become the category cards on the home page. Add as many as you like and name them later.</p>
+        <div id="catRows" class="cat-rows"></div>
+        <div class="admin-actions">
+          <button class="btn btn--ghost" type="button" id="addCategory">+ Add category</button>
+          <button class="btn" type="button" id="saveCategories">Save Categories</button>
+        </div>
+      </section>
+
+      <!-- ============ CATEGORY IMAGES ============ -->
+      <section class="admin-card">
+        <h2>Category images</h2>
+        <p class="admin-hint">Upload one or more photos per category. These rotate on the home page cards &mdash; the first photo is the main one. Changes save automatically.</p>
+        <div id="catImageRows" class="cat-img-rows"></div>
+      </section>
+
+      <!-- ============ PRODUCT FORM ============ -->
+      <section class="admin-card" id="formCard">
+        <h2 id="formTitle">Add product</h2>
+
+        <div class="admin-grid">
+          <label>
+            <span>Product name</span>
+            <input type="text" id="pName" placeholder="Product name">
+          </label>
+          <label>
+            <span>Price (cur. like 25.00)</span>
+            <input type="number" id="pPrice" step="0.01" min="0" placeholder="0.00">
+          </label>
+          <label>
+            <span>Category</span>
+            <select id="pCategory"></select>
+          </label>
+          <label>
+            <span>Search keywords <small>(comma separated, helps people find this)</small></span>
+            <input type="text" id="pKeywords" placeholder="e.g. pink bag, wedding gift, custom, blue keychain">
+          </label>
+        </div>
+
+        <div class="admin-field">
+          <span>Photo</span>
+          <input type="file" id="pImage" accept="image/*">
+          <div class="admin-img-pre">
+            <img id="pImagePreview" alt="" hidden>
+            <button class="btn btn--small" type="button" id="pImageClear" hidden>Remove photo</button>
+          </div>
+        </div>
+
+        <div class="admin-field">
+          <span>Colors <small>(as many as you like)</small></span>
+          <div id="colorRows"></div>
+          <button class="btn btn--small btn--ghost" type="button" id="addColor">+ Add color</button>
+        </div>
+
+        <div class="admin-actions">
+          <button class="btn" type="button" id="saveProduct">Save Product</button>
+          <button class="btn btn--ghost" type="button" id="cancelEdit" hidden>Cancel</button>
+          <button class="btn btn--danger" type="button" id="deleteProduct" hidden>Delete</button>
+        </div>
+      </section>
+
+      <!-- ============ ORDERS ============ -->
+      <section class="admin-card">
+        <h2>Orders <span id="orderCount" class="admin-count"></span></h2>
+        <p class="admin-hint">All orders placed by every visitor appear here. Update a status and it shows on that customer's My Orders page.</p>
+        <div id="adminOrders"></div>
+      </section>
+
+      <!-- ============ PRODUCTS LIST ============ -->
+      <section class="admin-card">
+        <h2>Products <span id="productCount" class="admin-count"></span></h2>
+        <div id="productList"></div>
+      </section>
+
+      </div><!-- /adminWrap -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="images/logo.png" alt="Gulnish Crochet" class="logo-img"><span class="logo-name">Gulnish Crochet</span></a>
+        <p class="footer-brand-tag">Handmade crochet purses, bags, jewellery and gifts — made to order with love.</p>
+        <div class="socials" aria-label="Social links">
+          <a href="https://wa.me/923075729901" title="WhatsApp" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://instagram.com/" title="Instagram" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <nav class="footer-links" aria-label="Shop links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="orders.html">My Orders</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <nav class="footer-links" aria-label="Help links">
+          <a href="checkout.html">Checkout</a>
+          <a href="orders.html">Track an order</a>
+          <a href="contact.html">Custom designs</a>
+          <a href="admin.html">Shop manager</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">Gulnish Crochet &copy; <span id="year"></span></p>
+        <p class="footer-note">Made with &hearts; in Pakistan</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "Gulnish Crochet — Handmade Crochet Bags, Jewellery & Gifts",
+  "short_name": "Gulnish Crochet",
+  "description": "Handmade crochet bags, jewellery, keychains and unique gifts made to order with love.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fffdfc",
+  "theme_color": "#9c5461",
+  "icons": [
+    {
+      "src": "images/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

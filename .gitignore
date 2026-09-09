@@ -1,0 +1,16 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Node / tooling
+node_modules/
+.npm/
+
+# Vercel / Netlify local settings
+.vercel/
+.netlify/
+
+# Supabase env / secrets
+.env
+.env.*
+*.local
