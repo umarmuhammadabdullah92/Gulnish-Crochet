@@ -5,23 +5,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap");
 
 :root {
-  --accent: #2f8f63;
-  --accent-light: #d4eadf;
-  --accent-dark: #1f6b47;
-  --accent-darkest: #143f2b;
+  --accent: #eceff1;
+  --accent-light: #f6f8f9;
+  --accent-dark: #3c4641;
+  --accent-darkest: #232b27;
   --gold: #b98f3e;
   --gold-light: #e5d3a1;
   --bg: #ffffff;
-  --bg-soft: #f7faf8;
-  --bg-warm: #f2f7f4;
-  --line: #e6ece8;
-  --line-strong: #d3dfd8;
-  --ink: #18211c;
-  --muted: #66756c;
-  --shadow-sm: 0 2px 8px rgba(31, 107, 71, 0.06);
-  --shadow-md: 0 8px 24px rgba(31, 107, 71, 0.10);
-  --shadow-lg: 0 18px 44px rgba(31, 107, 71, 0.13);
-  --glow-accent: 0 6px 22px rgba(47, 143, 99, 0.30);
+  --bg-soft: #f7f8f8;
+  --bg-warm: #f1f4f2;
+  --line: #e7eae8;
+  --line-strong: #d6dcd7;
+  --ink: #1b211d;
+  --muted: #68706b;
+  --shadow-sm: 0 2px 8px rgba(35, 43, 39, 0.06);
+  --shadow-md: 0 8px 24px rgba(35, 43, 39, 0.10);
+  --shadow-lg: 0 18px 44px rgba(35, 43, 39, 0.13);
+  --glow-accent: 0 6px 22px rgba(35, 43, 39, 0.25);
   --radius: 14px;
   --radius-sm: 10px;
   --font-head: "Playfair Display", Georgia, "Times New Roman", serif;
