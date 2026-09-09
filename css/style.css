@@ -2162,6 +2162,8 @@ h1, h2, h3, .logo {
   background: var(--bg-soft);
   box-shadow: var(--shadow-lg);
   border: 6px solid #fff;
+  outline: 1px dashed rgba(185, 143, 62, 0.5);
+  outline-offset: 9px;
 }
 
 .hero-media__frame img {
@@ -2176,6 +2178,7 @@ h1, h2, h3, .logo {
   height: 14px;
   border-radius: 50%;
   background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(185, 143, 62, 0.18);
   z-index: 1;
 }
 
