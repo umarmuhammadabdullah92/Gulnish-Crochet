@@ -107,7 +107,7 @@ h1, h2, h3, .logo {
   border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
+  background: var(--accent-dark);
 }
 
 /* ============ HEADER ============ */
@@ -711,7 +711,7 @@ h1, h2, h3, .logo {
 
 .search-box input:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(185, 143, 62, 0.18);
 }
 
@@ -867,14 +867,14 @@ h1, h2, h3, .logo {
 }
 
 .filter-btn:hover {
-  border-color: var(--accent);
+  border-color: var(--gold);
   color: var(--accent-dark);
 }
 
 .filter-btn.active {
   background: var(--accent);
   color: #fff;
-  border-color: var(--accent);
+  border-color: var(--gold);
 }
 
 .work-card.is-hidden {
@@ -1101,7 +1101,7 @@ h1, h2, h3, .logo {
 
 .socials a:hover {
   background: var(--accent);
-  border-color: var(--accent);
+  border-color: var(--gold);
   color: #fff;
   box-shadow: 0 6px 16px rgba(185, 143, 62, 0.4);
 }
@@ -1154,7 +1154,7 @@ h1, h2, h3, .logo {
 .cart-btn:hover {
   background: var(--bg-warm);
   color: var(--accent-dark);
-  border-color: var(--accent);
+  border-color: var(--gold);
   box-shadow: 0 4px 12px rgba(35, 43, 39, 0.16);
 }
 
@@ -1639,7 +1639,7 @@ h1, h2, h3, .logo {
 .checkout-card textarea:focus,
 .co-payment select:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(185, 143, 62, 0.15);
 }
 
@@ -2391,7 +2391,7 @@ h1, h2, h3, .logo {
 }
 
 .select:focus {
-  border-color: var(--accent);
+  border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(185, 143, 62, 0.18);
 }
 
@@ -2449,7 +2449,7 @@ h1, h2, h3, .logo {
 }
 
 .hero-search:focus-within {
-  border-color: var(--accent);
+  border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(185, 143, 62, 0.16), var(--shadow-md);
 }
 
