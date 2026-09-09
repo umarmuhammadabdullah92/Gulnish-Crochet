@@ -123,21 +123,6 @@ h1, h2, h3, .logo {
   color: var(--accent-darkest);
 }
 
-/* ============ CUSTOM SCROLLBAR ============ */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-warm);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--line-strong);
-  border-radius: 20px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-dark);
-}
-
 /* ============ HEADER ============ */
 .site-header {
   background: rgba(255, 255, 255, 0.92);
