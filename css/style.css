@@ -367,6 +367,8 @@ h1, h2, h3, .logo {
   overflow: hidden;
   box-shadow: var(--glow-accent);
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .btn:hover {
