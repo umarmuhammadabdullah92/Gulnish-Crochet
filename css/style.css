@@ -432,31 +432,6 @@ h1, h2, h3, .logo {
 .section-title {
   font-size: 2.2rem;
   color: var(--ink);
-  position: relative;
-  padding-bottom: 0.95rem;
-}
-
-.section-title::before {
-  content: "\2726";
-  position: absolute;
-  left: 50%;
-  bottom: 0.2rem;
-  transform: translateX(-50%);
-  color: var(--gold);
-  font-size: 0.62rem;
-  line-height: 1;
-  z-index: 1;
-}
-
-.section-title::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(185, 143, 62, 0.75), transparent);
 }
 
 .section-title em {
