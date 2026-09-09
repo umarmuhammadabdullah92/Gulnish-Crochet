@@ -2274,13 +2274,14 @@ h1, h2, h3, .logo {
 .testimonial__avatar {
   width: 42px;
   height: 42px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: #2a2418;
   font-weight: 700;
   font-size: 1rem;
-  background: var(--ink);
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
   flex-shrink: 0;
 }
 
