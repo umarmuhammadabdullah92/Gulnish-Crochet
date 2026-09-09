@@ -626,8 +626,8 @@ h1, h2, h3, .logo {
 .search-box {
   position: relative;
   width: min(480px, 100%);
-  box-shadow: none;
-  border-radius: 0;
+  box-shadow: var(--shadow-sm);
+  border-radius: 999px;
 }
 
 .search-box svg {
@@ -643,7 +643,7 @@ h1, h2, h3, .logo {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.7rem;
   border: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: 999px;
   font-family: var(--font-body);
   font-size: 0.95rem;
   background: var(--bg);
@@ -658,7 +658,7 @@ h1, h2, h3, .logo {
 .search-box input:focus {
   outline: none;
   border-color: var(--gold);
-  box-shadow: none;
+  box-shadow: 0 0 0 3px rgba(185, 143, 62, 0.16);
 }
 
 .no-results {
