@@ -1623,7 +1623,7 @@ h1, h2, h3, .logo {
 .co-payment select:focus {
   outline: none;
   border-color: var(--gold);
-  box-shadow: none;
+  box-shadow: 0 0 0 3px rgba(185, 143, 62, 0.16);
 }
 
 .checkout-row {
