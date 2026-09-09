@@ -2101,7 +2101,7 @@ h1, h2, h3, .logo {
 .rating-stars {
   display: inline-flex;
   gap: 0.12rem;
-  color: #f0a33c;
+  color: var(--gold);
   letter-spacing: 0.05em;
   font-size: 1rem;
 }
