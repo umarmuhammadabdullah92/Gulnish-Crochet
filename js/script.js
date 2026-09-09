@@ -81,6 +81,44 @@
     showToast._t = setTimeout(function () { toast.classList.remove("show"); }, 2400);
   }
 
+  function flyToCart(btnEl) {
+    try {
+      var card = btnEl.closest('.work-card');
+      var img = card ? card.querySelector('.work-card__media img') : null;
+      var cartIcon = document.getElementById('cartToggle');
+      if (!img || !cartIcon || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var r = img.getBoundingClientRect();
+      var c = cartIcon.getBoundingClientRect();
+      var clone = img.cloneNode(true);
+      Object.assign(clone.style, {
+        position: 'fixed',
+        left: r.left + 'px',
+        top: r.top + 'px',
+        width: r.width + 'px',
+        height: r.height + 'px',
+        transition: 'all 0.65s cubic-bezier(.5,-.3,.5,1)',
+        zIndex: '9999',
+        pointerEvents: 'none',
+        opacity: '0.9',
+        borderRadius: '50%',
+        objectFit: 'cover'
+      });
+      document.body.appendChild(clone);
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          Object.assign(clone.style, {
+            left: (c.left + c.width / 2 - 20) + 'px',
+            top: (c.top + c.height / 2 - 20) + 'px',
+            width: '40px',
+            height: '40px',
+            opacity: '0.3'
+          });
+        });
+      });
+      setTimeout(function () { clone.remove(); }, 700);
+    } catch (err) { /* silent */ }
+  }
+
   function escapeHtml(str) {
     return String(str || "")
       .replace(/&/g, "&amp;")
@@ -676,6 +714,32 @@
       .join("");
 
     if (cartSubtotalEl) cartSubtotalEl.textContent = money(cartTotalPrice());
+
+    var progWrap = cartDrawer ? cartDrawer.querySelector('.cart-delivery-progress') : null;
+    if (progWrap) progWrap.hidden = false;
+    if (!progWrap && cartDrawer) {
+      progWrap = document.createElement('div');
+      progWrap.className = 'cart-delivery-progress';
+      progWrap.innerHTML = '<div class="cart-delivery-bar"><div class="cart-delivery-fill"></div></div><p class="cart-delivery-msg"></p>';
+      var cartFoot = cartDrawer.querySelector('.cart-drawer__foot');
+      if (cartFoot) cartFoot.parentNode.insertBefore(progWrap, cartFoot);
+    }
+    if (progWrap) {
+      var FREE_THRESHOLD = 2500;
+      var progFill = progWrap.querySelector('.cart-delivery-fill');
+      var progMsg = progWrap.querySelector('.cart-delivery-msg');
+      var sub = cartTotalPrice();
+      var pct = Math.min(100, (sub / FREE_THRESHOLD) * 100);
+      if (progFill) progFill.style.width = pct + '%';
+      if (progMsg) {
+        if (pct >= 100) {
+          progMsg.innerHTML = '&#10003; Free delivery unlocked!';
+        } else {
+          progMsg.textContent = 'Add ' + money(FREE_THRESHOLD - sub) + ' more for free delivery';
+        }
+      }
+      if (progWrap) progWrap.classList.toggle('done', pct >= 100);
+    }
   }
 
   function openCart() {
@@ -725,6 +789,7 @@
         color: swatchEl ? swatchEl.dataset.color : "",
         image: img && img.src ? img.currentSrc || img.src : ""
       });
+      flyToCart(addBtn);
       return;
     }
 
