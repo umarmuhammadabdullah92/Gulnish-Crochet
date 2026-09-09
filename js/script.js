@@ -842,34 +842,6 @@
     });
   }
 
-  /* ---------- Stats count-up ---------- */
-  var statNums = document.querySelectorAll(".stat__num[data-count]");
-  if (statNums.length && "IntersectionObserver" in window) {
-    var statIO = new IntersectionObserver(
-      function (entries, obs) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var el = entry.target;
-          var target = parseFloat(el.dataset.count) || 0;
-          var suffix = el.dataset.suffix || "";
-          var duration = 1200;
-          var startTime = null;
-          function frame(ts) {
-            if (!startTime) startTime = ts;
-            var p = Math.min((ts - startTime) / duration, 1);
-            var eased = 1 - Math.pow(1 - p, 3);
-            el.textContent = Math.round(target * eased) + suffix;
-            if (p < 1) requestAnimationFrame(frame);
-          }
-          requestAnimationFrame(frame);
-          obs.unobserve(el);
-        });
-      },
-      { threshold: 0.4 }
-    );
-    statNums.forEach(function (el) { statIO.observe(el); });
-  }
-
   /* ---------- Skeleton placeholders ---------- */
   var skeletonGrids = ["productGrid", "featuredGrid", "categoryGrid"];
   skeletonGrids.forEach(function (id) {
