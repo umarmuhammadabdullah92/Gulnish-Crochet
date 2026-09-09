@@ -849,23 +849,24 @@ h1, h2, h3, .logo {
   background: var(--bg);
   color: var(--ink);
   padding: 0.45rem 1.3rem;
-  border-radius: 0;
+  border-radius: 999px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .filter-btn:hover {
-  border-color: var(--accent-dark);
-  color: var(--accent-dark);
+  border-color: var(--gold);
+  color: var(--gold-deep);
 }
 
 .filter-btn.active {
-  background: var(--ink);
-  color: #fff;
-  border-color: var(--ink);
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  color: #2a2418;
+  border-color: var(--gold);
+  box-shadow: var(--glow-accent);
 }
 
 .work-card.is-hidden {
