@@ -2399,9 +2399,6 @@ h1, h2, h3, .logo {
   .main-nav.open { box-shadow: 0 12px 24px rgba(106, 60, 52, 0.10); }
   .main-nav ul { padding: 0.2rem 0 0.5rem; }
   .main-nav a { width: 100%; padding: 0.7rem 0; font-size: 1.02rem; }
-
-  .topbar-inner { gap: 0.35rem 1.1rem; padding: 0.45rem 0; font-size: 0.78rem; }
-  .topbar__item:nth-child(2) { display: none; }
 }
 
 @media (max-width: 640px) {
