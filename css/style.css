@@ -38,6 +38,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section {
+  scroll-margin-top: 88px;
+}
+
 body {
   font-family: var(--font-body);
   color: var(--ink);
