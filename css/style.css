@@ -907,10 +907,7 @@ h1, h2, h3, .logo {
 
 /* ============ FOOTER ============ */
 .site-footer {
-  background:
-    radial-gradient(ellipse 70% 80% at 120% -20%, rgba(185, 143, 62, 0.3), transparent 55%),
-    radial-gradient(ellipse 50% 60% at -10% 120%, rgba(216, 161, 60, 0.16), transparent 55%),
-    linear-gradient(180deg, #262e29, #141a17);
+  background: linear-gradient(180deg, #262e29, #141a17);
   color: #c7cecb;
   padding: 3.6rem 0 1.8rem;
   margin-top: 4rem;
@@ -918,15 +915,7 @@ h1, h2, h3, .logo {
 }
 
 .site-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(560px, 72%);
-  height: 3px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  content: none;
 }
 
 .footer-inner {
@@ -940,11 +929,6 @@ h1, h2, h3, .logo {
 .footer-brand .logo {
   color: #fff;
   gap: 0.9rem;
-  background: linear-gradient(120deg, #ffffff, #e5d3a1);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: #fff;
 }
 
 .footer-brand .logo-img {
@@ -993,7 +977,7 @@ h1, h2, h3, .logo {
   width: 36px;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--gold), rgba(185, 143, 62, 0));
+  background: var(--gold);
 }
 
 .footer-links {
@@ -2159,10 +2143,7 @@ h1, h2, h3, .logo {
 
 /* ---------- Promo banner (story) ---------- */
 .promo {
-  background:
-    radial-gradient(ellipse 60% 70% at 90% -10%, rgba(228, 232, 230, 0.40), transparent 60%),
-    radial-gradient(ellipse 40% 50% at 0% 100%, rgba(216, 161, 60, 0.1), transparent 55%),
-    var(--bg-soft);
+  background: var(--bg-soft);
 }
 
 .promo__grid {
