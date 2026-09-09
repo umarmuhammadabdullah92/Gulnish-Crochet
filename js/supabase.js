@@ -17,7 +17,7 @@
 
   /* Bump LOCAL_PRODUCTS version whenever the seed catalog changes so
      returning visitors' browsers re-sync products (offline/localStorage mode). */
-  var LOCAL_PRODUCTS = "gulnish-products-v6";
+  var LOCAL_PRODUCTS = "gulnish-products-v7";
   var LOCAL_SETTINGS = "gulnish-settings";
   var LOCAL_ORDERS = "gulnish-orders";
   var LOCAL_ADMIN_SESSION = "gulnish-admin-session";
@@ -84,16 +84,16 @@
      Keyed by the seed id they get in defaultProducts(). */
   var REAL_PRODUCTS = {
     "seed_gr4_1": { name: "Earbuds Bag", price: 1599 },
-    "seed_gr1_1": { name: "Premium hand made Rose Bag 1", price: 5799 },
-    "seed_gr1_2": { name: "Premium hand made Rose Bag 2", price: 5799 },
-    "seed_gr1_3": { name: "Premium hand made Rose Bag 3", price: 5799 },
-    "seed_gr1_10": { name: "Premium hand made Rose Bag 4", price: 5799 },
-    "seed_gr1_11": { name: "Premium hand made Rose Bag 5", price: 5799 },
-    "seed_gr1_12": { name: "Premium hand made Rose Bag 6", price: 5799 },
-    "seed_gr1_15": { name: "Premium hand made Rose Bag 7", price: 5799 },
-    "seed_gr1_16": { name: "Premium hand made Rose Bag 8", price: 5799 },
-    "seed_gr1_19": { name: "Premium hand made Rose Bag 9", price: 5799 },
-    "seed_gr1_20": { name: "Premium hand made Rose Bag 10", price: 5799 },
+    "seed_gr1_1": { name: "Premium hand made Rose Purse 1", price: 5799 },
+    "seed_gr1_2": { name: "Premium hand made Rose Purse 2", price: 5799 },
+    "seed_gr1_3": { name: "Premium hand made Rose Purse 3", price: 5799 },
+    "seed_gr1_10": { name: "Premium hand made Rose Purse 4", price: 5799 },
+    "seed_gr1_11": { name: "Premium hand made Rose Purse 5", price: 5799 },
+    "seed_gr1_12": { name: "Premium hand made Rose Purse 6", price: 5799 },
+    "seed_gr1_15": { name: "Premium hand made Rose Purse 7", price: 5799 },
+    "seed_gr1_16": { name: "Premium hand made Rose Purse 8", price: 5799 },
+    "seed_gr1_19": { name: "Premium hand made Rose Purse 9", price: 5799 },
+    "seed_gr1_20": { name: "Premium hand made Rose Purse 10", price: 5799 },
   };
   var CATEGORY_KEYWORDS = {
     gr1: ["handbag", "purse", "crochet bag", "handmade", "gift", "woolen"],
