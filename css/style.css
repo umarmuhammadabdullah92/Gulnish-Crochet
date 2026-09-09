@@ -659,16 +659,14 @@ h1, h2, h3, .logo {
   border: none;
   cursor: pointer;
   font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.92rem;
-  letter-spacing: 0.02em;
   color: #2a2418;
   background: linear-gradient(135deg, #cda654, #a87e2c);
   padding: 0.65rem 1rem;
   border-radius: 40px;
   margin-top: auto;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .add-btn svg {
