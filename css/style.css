@@ -2183,10 +2183,6 @@ h1, h2, h3, .logo {
 
 .promo__title em {
   font-style: italic;
-  background: linear-gradient(120deg, var(--accent-darkest), var(--gold));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   color: var(--accent-dark);
 }
 
