@@ -17,7 +17,7 @@
 
   /* Bump LOCAL_PRODUCTS version whenever the seed catalog changes so
      returning visitors' browsers re-sync products (offline/localStorage mode). */
-  var LOCAL_PRODUCTS = "gulnish-products-v3";
+  var LOCAL_PRODUCTS = "gulnish-products-v4";
   var LOCAL_SETTINGS = "gulnish-settings";
   var LOCAL_ORDERS = "gulnish-orders";
   var LOCAL_ADMIN_SESSION = "gulnish-admin-session";
