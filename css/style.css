@@ -361,23 +361,37 @@ h1, h2, h3, .logo {
 }
 
 .section-eyebrow {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
   font-weight: 600;
-  color: var(--accent-dark);
+  color: var(--gold-deep);
+}
+
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: "";
+  height: 1px;
+  width: 34px;
+  background: var(--gold);
+  opacity: 0.55;
 }
 
 .section-title {
-  font-size: 2.2rem;
+  font-family: var(--font-head);
+  font-size: 2.3rem;
+  font-weight: 600;
   color: var(--ink);
 }
 
 .section-title em {
   font-style: italic;
-  color: var(--accent-dark);
+  color: var(--gold-deep);
 }
 
 .section-lead {
