@@ -2666,12 +2666,14 @@ h1, h2, h3, .logo {
     place-items: center;
   }
 
-  .main-nav.open { box-shadow: var(--shadow-md); }
+  .main-nav.open { box-shadow: none; }
   .main-nav ul { padding: 0.2rem 0 0.5rem; }
-  .main-nav a { width: 100%; padding: 0.7rem 0.5rem; font-size: 1.02rem; }
+  .main-nav a { width: 100%; padding: 0.7rem 0; font-size: 1.02rem; }
 
   .hero::before { animation: none; }
   .scroll-progress { height: 2px; }
+
+  .fly-clone { display: none !important; }
 }
 
 @media (max-width: 640px) {
