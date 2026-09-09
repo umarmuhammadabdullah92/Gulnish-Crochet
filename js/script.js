@@ -526,7 +526,7 @@
 
     if (ppImage) {
       ppImage.innerHTML = p.image
-        ? '<img src="' + p.image + '" alt="' + escapeHtml(p.name) + '">'
+        ? '<img src="' + displayImage(p.image) + '" alt="' + escapeHtml(p.name) + '">'
         : "";
     }
     if (ppName) ppName.textContent = p.name || "";
