@@ -1896,9 +1896,10 @@ h1, h2, h3, .logo {
   z-index: 180;
   width: 44px;
   height: 44px;
+  border-radius: 50%;
   border: none;
-  background: var(--ink);
-  color: #fff;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  color: #2a2418;
   font-size: 1.2rem;
   cursor: pointer;
   display: grid;
@@ -1906,7 +1907,8 @@ h1, h2, h3, .logo {
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px);
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  box-shadow: var(--glow-accent);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .back-to-top.show {
@@ -1916,7 +1918,7 @@ h1, h2, h3, .logo {
 }
 
 .back-to-top:hover {
-  background: #000;
+  box-shadow: 0 12px 26px rgba(185, 143, 62, 0.42);
 }
 
 /* ============ RESPONSIVE ============ */
