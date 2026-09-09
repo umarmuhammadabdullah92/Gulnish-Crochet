@@ -27,21 +27,6 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Newsletter ---------- */
-  var newsletterForm = document.querySelector(".newsletter__form");
-  if (newsletterForm) {
-    newsletterForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var input = newsletterForm.querySelector("input");
-      var success = document.querySelector(".newsletter__success");
-      if (success) {
-        success.classList.add("show");
-        if (input) input.value = "";
-        window.setTimeout(function () { success.classList.remove("show"); }, 5000);
-      }
-    });
-  }
-
   /* ---------- Header shadow + scroll progress ---------- */
   var header = document.querySelector(".site-header");
   var progressBar = document.getElementById("scrollProgress");
@@ -148,7 +133,6 @@
         : "";
     var media = p.image
       ? '<div class="work-card__media js-product-view" data-view="' + p.id + '">' +
-        '<span class="product-tag">Made to order</span>' +
         image +
         "</div>"
       : '<div class="work-card__media js-product-view" data-view="' + p.id + '"></div>';
