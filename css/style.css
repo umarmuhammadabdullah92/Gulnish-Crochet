@@ -96,7 +96,7 @@ h1, h2, h3, .logo {
 }
 
 ::selection {
-  background: rgba(185, 143, 62, 0.30);
+  background: var(--accent-light);
   color: var(--accent-darkest);
 }
 
@@ -108,11 +108,11 @@ h1, h2, h3, .logo {
   background: var(--bg-warm);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #cda654, #a87e2c);
+  background: var(--line-strong);
   border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #b98f3e, #8f6d24);
+  background: var(--accent-dark);
 }
 
 /* ============ HEADER ============ */
