@@ -228,15 +228,15 @@ h1, h2, h3, .logo {
 }
 
 .hero::before {
-  content: "\2022\2022\2022";
+  content: "\2726\2726\2726";
   position: absolute;
   top: 1.6rem;
   left: 50%;
   transform: translateX(-50%);
-  letter-spacing: 1rem;
-  color: var(--accent-light);
-  font-size: 1rem;
-  opacity: 0.6;
+  letter-spacing: 0.9rem;
+  color: rgba(185, 143, 62, 0.7);
+  font-size: 0.6rem;
+  opacity: 1;
 }
 
 .hero__badge {
@@ -248,11 +248,11 @@ h1, h2, h3, .logo {
   letter-spacing: 0.14em;
   color: var(--accent-dark);
   background: #fff;
-  border: 1px solid var(--line-strong);
+  border: 1px solid rgba(185, 143, 62, 0.4);
   padding: 0.35rem 1.1rem;
   border-radius: 40px;
   margin-bottom: 1.4rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 6px 18px rgba(185, 143, 62, 0.18);
 }
 
 .hero h1 {
@@ -263,6 +263,7 @@ h1, h2, h3, .logo {
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+  letter-spacing: 0.01em;
 }
 
 .hero h1 em {
