@@ -580,7 +580,7 @@ h1, h2, h3, .logo {
 }
 
 .work-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(185, 143, 62, 0.35);
   transform: translateY(-4px);
   border-color: var(--line-strong);
 }
@@ -608,6 +608,8 @@ h1, h2, h3, .logo {
   font-weight: 500;
   letter-spacing: 0.06em;
   opacity: 0;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   transition: opacity 0.3s ease;
 }
 
@@ -657,12 +659,16 @@ h1, h2, h3, .logo {
 }
 
 .work-card__price {
-  color: var(--accent-dark);
   font-family: var(--font-head);
   font-weight: 600;
   font-size: 1.05rem;
   min-height: 1.4em;
   margin: 0.15rem 0 0.3rem;
+  background: linear-gradient(120deg, #b98f3e, #8f6d24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #b98f3e;
 }
 
 .add-btn {
