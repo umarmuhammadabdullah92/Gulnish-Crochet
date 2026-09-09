@@ -1197,7 +1197,7 @@ h1, h2, h3, .logo {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 1.5px dashed #e0c5ba;
+  border: 1.5px dashed #e0b0c0;
   font-size: 1.4rem;
   color: var(--accent-dark);
 }
