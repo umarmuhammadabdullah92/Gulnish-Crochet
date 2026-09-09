@@ -1615,7 +1615,7 @@ h1, h2, h3, .logo {
   position: fixed;
   bottom: 1.6rem;
   left: 50%;
-  transform: translateX(-50%) translateY(20px);
+  transform: translate3d(-50%, 20px, 0);
   background: #23291f;
   color: #fff;
   padding: 0.65rem 1.5rem;
@@ -1625,14 +1625,15 @@ h1, h2, h3, .logo {
   font-size: 0.9rem;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   z-index: 300;
+  will-change: transform, opacity;
 }
 
 .toast.show {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translate3d(-50%, 0, 0);
 }
 
 /* ============ SCROLL REVEAL ============ */
