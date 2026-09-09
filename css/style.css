@@ -228,11 +228,11 @@ h1, h2, h3, .logo {
   letter-spacing: 0.14em;
   color: var(--accent-dark);
   background: #fff;
-  border: 1px solid rgba(185, 143, 62, 0.4);
+  border: 1px solid var(--line-strong);
   padding: 0.35rem 1.1rem;
   border-radius: 40px;
   margin-bottom: 1.4rem;
-  box-shadow: 0 6px 18px rgba(185, 143, 62, 0.18);
+  box-shadow: none;
 }
 
 .hero h1 {
