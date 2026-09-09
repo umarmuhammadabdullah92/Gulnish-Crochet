@@ -1368,6 +1368,8 @@ h1, h2, h3, .logo {
 .cart-drawer__items {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   padding: 0.8rem 1.3rem;
 }
 
@@ -1828,6 +1830,8 @@ h1, h2, h3, .logo {
   gap: 0.9rem;
   max-height: 320px;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   margin-bottom: 1rem;
 }
 
