@@ -175,7 +175,7 @@ h1, h2, h3, .logo {
 .main-nav a:hover,
 .main-nav a.active {
   color: var(--accent-dark);
-  border-bottom-color: var(--accent);
+  border-bottom-color: var(--gold);
 }
 
 .header-actions {
