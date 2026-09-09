@@ -45,15 +45,23 @@
   /* ---------- Header shadow + scroll progress ---------- */
   var header = document.querySelector(".site-header");
   var progressBar = document.getElementById("scrollProgress");
+  var backToTop = document.getElementById("backToTop");
   var onScroll = function () {
     if (header) header.classList.toggle("scrolled", window.scrollY > 30);
     if (progressBar) {
       var h = document.documentElement.scrollHeight - window.innerHeight;
       progressBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
     }
+    if (backToTop) backToTop.classList.toggle("show", window.scrollY > 560);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  if (backToTop) {
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 
   /* ---------- Reveal on scroll ---------- */
   var revealEls = document.querySelectorAll(".reveal");
