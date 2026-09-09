@@ -216,15 +216,7 @@ h1, h2, h3, .logo {
 }
 
 .hero::before {
-  content: "\2726\2726\2726";
-  position: absolute;
-  top: 1.6rem;
-  left: 50%;
-  transform: translateX(-50%);
-  letter-spacing: 0.9rem;
-  color: rgba(185, 143, 62, 0.7);
-  font-size: 0.6rem;
-  opacity: 1;
+  content: none;
 }
 
 .hero__badge {
