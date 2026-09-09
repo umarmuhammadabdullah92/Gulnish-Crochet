@@ -374,13 +374,34 @@
         box.appendChild(secondLayer);
 
         var showingFirst = true;
-        window.setInterval(function () {
+        var timer = null;
+        var tick = function () {
           var show = showingFirst ? secondLayer : firstLayer;
           var hide = showingFirst ? firstLayer : secondLayer;
           showingFirst = !showingFirst;
           show.style.opacity = "1";
           hide.style.opacity = "0";
-        }, 2400);
+        };
+        var startSlideshow = function () {
+          if (timer) return;
+          timer = window.setInterval(tick, 2400);
+        };
+        var stopSlideshow = function () {
+          if (timer) {
+            window.clearInterval(timer);
+            timer = null;
+          }
+        };
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) startSlideshow();
+              else stopSlideshow();
+            });
+          }, { threshold: 0.1 }).observe(box);
+        } else {
+          startSlideshow();
+        }
       });
   }
 
