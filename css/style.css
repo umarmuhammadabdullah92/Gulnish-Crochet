@@ -117,18 +117,14 @@ h1, h2, h3, .logo {
 
 /* ============ HEADER ============ */
 .site-header {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #fff;
   border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .site-header.scrolled {
-  box-shadow: none;
   border-bottom-color: var(--line-strong);
 }
 
@@ -145,11 +141,6 @@ h1, h2, h3, .logo {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  transition: transform 0.2s ease;
-}
-
-.logo:hover {
-  transform: scale(1.02);
 }
 
 .logo-img {
