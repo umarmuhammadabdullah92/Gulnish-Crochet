@@ -666,7 +666,7 @@ h1, h2, h3, .logo {
 
 .add-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(35, 43, 39, 0.3);
+  box-shadow: 0 6px 16px rgba(185, 143, 62, 0.35);
 }
 
 /* ============ SEARCH ============ */
@@ -2671,7 +2671,7 @@ h1, h2, h3, .logo {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(42, 36, 24, 0.12);
 }
 
 .cart-bar__icon svg { width: 18px; height: 18px; }
