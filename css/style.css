@@ -593,27 +593,26 @@ h1, h2, h3, .logo {
   border: none;
   cursor: pointer;
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.92rem;
-  color: #fff;
-  background: var(--ink);
+  color: #2a2418;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
   padding: 0.65rem 1rem;
+  border-radius: 999px;
   margin-top: auto;
-  transition: background 0.2s ease;
+  box-shadow: var(--glow-accent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .add-btn:hover {
-  background: #000;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold-deep));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(185, 143, 62, 0.34);
 }
 
 .add-btn svg {
   width: 15px;
   height: 15px;
-}
-
-.add-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: none;
 }
 
 /* ============ SEARCH ============ */
