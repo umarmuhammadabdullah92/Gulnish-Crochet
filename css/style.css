@@ -1008,7 +1008,7 @@ h1, h2, h3, .logo {
 .footer-brand .logo {
   color: #fff;
   gap: 0.9rem;
-  background: linear-gradient(120deg, #eef2f0, #e5d3a1);
+  background: linear-gradient(120deg, #ffffff, #e5d3a1);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1027,7 +1027,8 @@ h1, h2, h3, .logo {
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow:
     0 8px 20px rgba(0, 0, 0, 0.28),
-    inset 0 0 0 3px rgba(185, 143, 62, 0.12);
+    0 0 0 6px rgba(185, 143, 62, 0.10),
+    inset 0 0 0 3px rgba(185, 143, 62, 0.16);
 }
 
 .logo-name {
@@ -1081,12 +1082,13 @@ h1, h2, h3, .logo {
 
 .footer-links a::before {
   content: "";
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent-light);
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  border-radius: 1px;
+  background: linear-gradient(135deg, #cda654, #a87e2c);
   opacity: 0.75;
-  transition: opacity 0.2s ease, background 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .footer-links a:hover {
@@ -1095,7 +1097,8 @@ h1, h2, h3, .logo {
 }
 
 .footer-links a:hover::before {
-  background: var(--gold);
+  background: linear-gradient(135deg, #e5d3a1, #b98f3e);
+  transform: rotate(45deg) scale(1.25);
   opacity: 1;
 }
 
