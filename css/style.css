@@ -2425,8 +2425,7 @@ h1, h2, h3, .logo {
   bottom: 0;
   z-index: 190;
   padding: 0.55rem 0.8rem calc(0.55rem + env(safe-area-inset-bottom));
-  background: var(--gold);
-  box-shadow: none;
+  background: var(--ink);
   display: none;
 }
 
@@ -2442,7 +2441,7 @@ h1, h2, h3, .logo {
   gap: 0.7rem;
   background: none;
   border: none;
-  color: #2a2418;
+  color: #fff;
   cursor: pointer;
   font-family: var(--font-body);
   text-align: left;
@@ -2452,10 +2451,9 @@ h1, h2, h3, .logo {
   width: 34px;
   height: 34px;
   flex-shrink: 0;
-  border-radius: 50%;
   display: grid;
   place-items: center;
-  background: rgba(42, 36, 24, 0.12);
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .cart-bar__icon svg { width: 18px; height: 18px; }
