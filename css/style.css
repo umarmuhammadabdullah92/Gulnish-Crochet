@@ -2201,7 +2201,7 @@ h1, h2, h3, .logo {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--accent-dark);
+  color: var(--gold-deep);
   font-weight: 600;
   margin-bottom: 0.6rem;
 }
