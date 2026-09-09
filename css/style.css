@@ -882,7 +882,7 @@ h1, h2, h3, .logo {
   max-width: 720px;
   margin: 0 auto;
   text-align: center;
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
 }
 
 .contact-list {
@@ -902,7 +902,7 @@ h1, h2, h3, .logo {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--accent-dark);
+  background: var(--gold);
   margin-right: 0.6rem;
   vertical-align: middle;
 }
