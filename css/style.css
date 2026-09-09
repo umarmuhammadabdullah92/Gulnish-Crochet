@@ -361,13 +361,32 @@ h1, h2, h3, .logo {
 }
 
 .section-eyebrow {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--accent-dark);
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.22em;
+  margin-bottom: 0.6rem;
   font-weight: 600;
+  background: linear-gradient(120deg, var(--accent-dark), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent-dark);
+}
+
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: "";
+  width: 26px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.section-eyebrow::after {
+  background: linear-gradient(90deg, var(--gold), transparent);
 }
 
 .section-title {
@@ -377,7 +396,7 @@ h1, h2, h3, .logo {
 
 .section-title em {
   font-style: italic;
-  background: linear-gradient(120deg, var(--accent-dark), var(--accent));
+  background: linear-gradient(120deg, var(--accent-dark), var(--accent) 55%, var(--gold));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
