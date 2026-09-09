@@ -246,7 +246,9 @@ h1, h2, h3, .logo {
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 3.1rem;
   line-height: 1.15;
   margin-bottom: 0.5rem;
   color: var(--ink);
