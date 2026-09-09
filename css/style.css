@@ -2776,6 +2776,32 @@ h1, h2, h3, .logo {
   .cart-delivery-msg { font-size: 0.75rem; }
 
   .fly-clone { display: none !important; }
+
+  /* ---------- Mobile scroll-performance overrides ----------
+     Disable per-card blur / forced GPU layers and content-visibility
+     pop-in so scrolling through image grids stays at 60fps. ---------- */
+  .site-header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.97);
+  }
+  .work-card,
+  .category-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    will-change: auto;
+  }
+  .work-card__media img {
+    will-change: auto;
+    transform: none;
+  }
+  .reveal {
+    will-change: auto;
+  }
+  .section {
+    content-visibility: visible;
+    contain: none;
+  }
 }
 
 @media (max-width: 420px) {
