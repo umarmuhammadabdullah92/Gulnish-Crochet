@@ -2095,24 +2095,9 @@ h1, h2, h3, .logo {
   font-size: 1rem;
 }
 
-.rating-stars--sm { font-size: 0.8rem; }
-
 .rating-note {
   color: var(--muted);
   font-size: 0.85rem;
-}
-
-/* ---------- Buttons ---------- */
-.btn--light {
-  background: #fff;
-  color: var(--accent-dark);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-}
-
-.btn--light:hover {
-  background: var(--bg-warm);
-  color: var(--accent-darkest);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
 }
 
 /* ---------- USP strip ---------- */
