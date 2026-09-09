@@ -1515,7 +1515,6 @@ h1, h2, h3, .logo {
   .reveal {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
   }
 }
