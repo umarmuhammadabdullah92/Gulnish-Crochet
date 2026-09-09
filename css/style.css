@@ -1058,15 +1058,27 @@ h1, h2, h3, .logo {
 
 /* ============ FOOTER ============ */
 .site-footer {
-  background: linear-gradient(180deg, #232b27, #141a17);
+  background: linear-gradient(180deg, #2e2a21, #1e1a13);
   color: #c7cecb;
   padding: 3.6rem 0 1.8rem;
   margin-top: 4rem;
   position: relative;
+  border-top: 3px solid var(--gold);
 }
 
 .site-footer::before {
   content: none;
+}
+
+.site-footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(180deg, rgba(185, 143, 62, 0.06), transparent);
+  pointer-events: none;
 }
 
 .footer-inner {
