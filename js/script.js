@@ -200,9 +200,10 @@
   var featuredGrid = document.getElementById("featuredGrid");
 
   function cardHTML(p, index) {
+    var imgSrc = displayImage(p.image);
     var isFirst = typeof index === "number" && index === 0;
-    var image = p.image
-      ? '<img src="' + p.image + '" alt="' + escapeHtml(p.name) + '"' +
+    var image = imgSrc
+      ? '<img src="' + imgSrc + '" alt="' + escapeHtml(p.name) + '"' +
         (isFirst ? ' fetchpriority="high" decoding="async"' : ' loading="lazy" decoding="async"') + ">"
       : "";
     var colors =
