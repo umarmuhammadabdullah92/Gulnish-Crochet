@@ -176,7 +176,6 @@ insert into public.products (id, name, price, category, image, keywords, colors)
   ('seed_gr1_33', 'Handmade Crochet Purse 33', 850, 'gr1', 'images/purses/purse-9.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr2_1', 'Handmade Crochet Gajray 1', 400, 'gr2', 'images/gajrays/gajray-1.webp', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
   ('seed_gr2_2', 'Handmade Crochet Gajray 2', 450, 'gr2', 'images/gajrays/gajray-9.png', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
-  ('seed_gr2_3', 'Handmade Crochet Gajray 3', 500, 'gr2', 'images/gajrays/gajray-3.webp', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
   ('seed_gr2_4', 'Handmade Crochet Gajray 4', 550, 'gr2', 'images/gajrays/gajray-4.webp', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
   ('seed_gr2_5', 'Handmade Crochet Gajray 5', 400, 'gr2', 'images/gajrays/gajray-5.webp', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
   ('seed_gr2_6', 'Handmade Crochet Gajray 6', 450, 'gr2', 'images/gajrays/gajray-6.jpg', '["wedding","eid","hair","flowers","party","gift"]'::jsonb, '[]'::jsonb),
