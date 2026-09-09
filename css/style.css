@@ -1632,7 +1632,7 @@ h1, h2, h3, .logo {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.6rem;
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
 }
 
 .checkout-summary h3 {
@@ -2137,7 +2137,7 @@ h1, h2, h3, .logo {
   z-index: 2;
 }
 
-.hero-media__badge svg { color: var(--accent-dark); flex-shrink: 0; }
+.hero-media__badge svg { color: var(--gold); flex-shrink: 0; }
 
 .hero-media__badge--top { top: 1.4rem; left: -1.4rem; }
 .hero-media__badge--bottom { bottom: 1.6rem; right: -1rem; }
