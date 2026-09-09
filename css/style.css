@@ -88,10 +88,11 @@ h1, h2, h3, .logo {
   font-family: var(--font-head);
   font-weight: 600;
   line-height: 1.25;
+  text-wrap: balance;
 }
 
 ::selection {
-  background: var(--accent-light);
+  background: rgba(185, 143, 62, 0.30);
   color: var(--accent-darkest);
 }
 
