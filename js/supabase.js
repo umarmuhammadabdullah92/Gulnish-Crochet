@@ -55,8 +55,8 @@
   var EXTRA_CATEGORY_NAMES = { 4: "Bags", 5: "Jewellery", 6: "Headband" };
 
   var CATEGORY_IMAGE_SETS = {
-    gr1: ["images/purses/purse-1.webp", "images/purses/purse-2.webp", "images/purses/purse-23.png", "images/purses/purse-24.png"],
-    gr2: ["images/gajrays/gajray-1.webp", "images/gajrays/gajray-9.png", "images/gajrays/gajray-4.webp", "images/gajrays/gajray-5.webp", "images/gajrays/gajray-6.jpg", "images/gajrays/gajray-8.png", "images/gajrays/gajray-10.png", "images/gajrays/gajray-11.png", "images/gajrays/gajray-12.png", "images/gajrays/gajray-13.png", "images/gajrays/gajray-14.png", "images/gajrays/gajray-15.png", "images/gajrays/gajray-16.png", "images/gajrays/gajray-17.png"],
+    gr1: ["images/purses/purse-1.webp", "images/purses/purse-2.webp", "images/purses/purse-23.webp", "images/purses/purse-24.webp"],
+    gr2: ["images/gajrays/gajray-1.webp", "images/gajrays/gajray-9.webp", "images/gajrays/gajray-4.webp", "images/gajrays/gajray-5.webp", "images/gajrays/gajray-6.webp", "images/gajrays/gajray-8.webp", "images/gajrays/gajray-10.webp", "images/gajrays/gajray-11.webp", "images/gajrays/gajray-12.webp", "images/gajrays/gajray-13.webp", "images/gajrays/gajray-14.webp", "images/gajrays/gajray-15.webp", "images/gajrays/gajray-16.webp", "images/gajrays/gajray-17.webp"],
     gr3: ["images/keychains/keychain-1.webp", "images/keychains/keychain-2.webp"],
     gr4: ["images/bags/bag-1.webp", "images/bags/bag-2.webp"],
     gr5: ["images/jewellery/jewellery-1.webp", "images/jewellery/jewellery-2.webp", "images/jewellery/jewellery-3.webp", "images/jewellery/jewellery-4.webp", "images/jewellery/jewellery-5.webp", "images/jewellery/jewellery-6.webp", "images/jewellery/jewellery-7.webp", "images/jewellery/jewellery-8.webp", "images/jewellery/jewellery-9.webp"],
