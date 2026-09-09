@@ -339,6 +339,8 @@ h1, h2, h3, .logo {
   border: none;
   font-family: var(--font-body);
   font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  font-weight: 600;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 6px 22px rgba(185, 143, 62, 0.32);
   position: relative;
   overflow: hidden;
@@ -715,8 +717,9 @@ h1, h2, h3, .logo {
   border: none;
   cursor: pointer;
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.92rem;
+  letter-spacing: 0.02em;
   color: #2a2418;
   background: linear-gradient(135deg, #cda654, #a87e2c);
   padding: 0.65rem 1rem;
