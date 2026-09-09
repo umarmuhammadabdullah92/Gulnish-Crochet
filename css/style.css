@@ -2454,10 +2454,6 @@ h1, h2, h3, .logo {
 
   .promo__title { font-size: 1.6rem; }
   .promo__media { max-width: 420px; }
-  .banner-tile { min-height: 185px; }
-
-  .newsletter h2 { font-size: 1.7rem; }
-  .newsletter__form input { font-size: 1rem; }
 
   .shop-bar { flex-direction: column; align-items: stretch; gap: 0.6rem; }
   .select { width: 100%; }
@@ -2486,12 +2482,7 @@ h1, h2, h3, .logo {
   .cart-item__remove { min-width: 40px; min-height: 40px; }
 
   .hero__trust-item { font-size: 0.8rem; }
-  .usp__title { font-size: 0.9rem; }
-  .usp-strip__inner { padding: 1.5rem 0; gap: 1rem; }
   .testimonial { padding: 1.3rem; }
-  .faq-item summary { padding: 0.95rem 1rem; }
-  .newsletter__grid { gap: 1.2rem; }
-  .trust-bar__item div { font-size: 0.85rem; }
 }
 
 @media (max-width: 420px) {
