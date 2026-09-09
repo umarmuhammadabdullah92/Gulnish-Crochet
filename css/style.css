@@ -872,9 +872,9 @@ h1, h2, h3, .logo {
 }
 
 .filter-btn.active {
-  background: var(--accent);
+  background: var(--accent-darkest);
   color: #fff;
-  border-color: var(--gold);
+  border-color: var(--accent-darkest);
 }
 
 .work-card.is-hidden {
@@ -1028,7 +1028,7 @@ h1, h2, h3, .logo {
   width: 36px;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--gold));
+  background: linear-gradient(90deg, var(--gold), rgba(185, 143, 62, 0));
 }
 
 .footer-links {
@@ -1100,7 +1100,7 @@ h1, h2, h3, .logo {
 }
 
 .socials a:hover {
-  background: var(--accent);
+  background: var(--gold);
   border-color: var(--gold);
   color: #fff;
   box-shadow: 0 6px 16px rgba(185, 143, 62, 0.4);
@@ -1462,7 +1462,7 @@ h1, h2, h3, .logo {
 }
 
 .lightbox__nav:hover {
-  background: var(--accent);
+  background: var(--accent-darkest);
 }
 
 .lightbox__nav--prev { left: 1.2rem; }
