@@ -2119,14 +2119,13 @@ h1, h2, h3, .logo {
 .testimonial__avatar {
   width: 42px;
   height: 42px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2a2418;
+  color: #fff;
   font-weight: 700;
   font-size: 1rem;
-  background: var(--gold);
+  background: var(--ink);
   flex-shrink: 0;
 }
 
