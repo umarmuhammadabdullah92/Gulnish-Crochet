@@ -661,7 +661,7 @@ h1, h2, h3, .logo {
 
 .add-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(156, 84, 97, 0.3);
+  box-shadow: 0 6px 16px rgba(155, 39, 81, 0.3);
 }
 
 /* ============ SEARCH ============ */
@@ -707,7 +707,7 @@ h1, h2, h3, .logo {
 .search-box input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(192, 122, 133, 0.18);
+  box-shadow: 0 0 0 3px rgba(194, 58, 102, 0.18);
 }
 
 .no-results {
@@ -1081,7 +1081,7 @@ h1, h2, h3, .logo {
   background: var(--bg-warm);
   color: var(--accent-dark);
   border-color: var(--accent);
-  box-shadow: 0 4px 12px rgba(156, 84, 97, 0.16);
+  box-shadow: 0 4px 12px rgba(155, 39, 81, 0.16);
 }
 
 .cart-btn__badge {
@@ -1566,7 +1566,7 @@ h1, h2, h3, .logo {
 .co-payment select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(192, 122, 133, 0.15);
+  box-shadow: 0 0 0 3px rgba(194, 58, 102, 0.15);
 }
 
 .checkout-row {
@@ -1857,7 +1857,7 @@ h1, h2, h3, .logo {
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px);
-  box-shadow: 0 6px 20px rgba(156, 84, 97, 0.35);
+  box-shadow: 0 6px 20px rgba(155, 39, 81, 0.35);
   transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
 }
 
@@ -2313,7 +2313,7 @@ h1, h2, h3, .logo {
 
 .select:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(192, 122, 133, 0.18);
+  box-shadow: 0 0 0 3px rgba(194, 58, 102, 0.18);
 }
 
 /* ---------- Responsive for new sections ---------- */
@@ -2371,7 +2371,7 @@ h1, h2, h3, .logo {
 
 .hero-search:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(192, 122, 133, 0.16), var(--shadow-md);
+  box-shadow: 0 0 0 3px rgba(194, 58, 102, 0.16), var(--shadow-md);
 }
 
 .hero-search svg {
