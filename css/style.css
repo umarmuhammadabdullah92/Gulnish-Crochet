@@ -2080,11 +2080,9 @@ h1, h2, h3, .logo {
 
 .promo__media {
   position: relative;
-  border-radius: 0;
   overflow: hidden;
   aspect-ratio: 1 / 1;
-  box-shadow: none;
-  border: 6px solid #fff;
+  border: 1px solid var(--line-strong);
 }
 
 .promo__media img { width: 100%; height: 100%; object-fit: cover; }
