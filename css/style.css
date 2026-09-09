@@ -123,7 +123,7 @@ h1, h2, h3, .logo {
 }
 
 .site-header.scrolled {
-  box-shadow: 0 4px 20px rgba(106, 60, 52, 0.10);
+  box-shadow: 0 4px 20px rgba(112, 33, 63, 0.10);
   border-bottom-color: var(--line-strong);
 }
 
