@@ -2550,7 +2550,14 @@ h1, h2, h3, .logo {
 
 /* ---------- Scroll progress bar ---------- */
 .scroll-progress {
-  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  z-index: 1000;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold-deep));
+  transition: width 0.08s linear;
 }
 
 /* ---------- Floating WhatsApp ---------- */
@@ -2561,10 +2568,12 @@ h1, h2, h3, .logo {
   z-index: 185;
   width: 54px;
   height: 54px;
-  background: #25d366;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #2fdc74, #1faa52);
   color: #fff;
   display: grid;
   place-items: center;
+  box-shadow: 0 10px 26px rgba(31, 170, 82, 0.42);
 }
 
 .wa-float svg {
