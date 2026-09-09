@@ -83,7 +83,8 @@
      Exact names/price for specific products set by the owner.
      Keyed by the seed id they get in defaultProducts(). */
   var REAL_PRODUCTS = {
-    "seed_gr4_1": { name: "Earbuds Bag", price: 1599 }
+    "seed_gr4_1": { name: "Earbuds Bag", price: 1599 },
+    "seed_gr1_20": { name: "Premium hand made Rose Bag", price: 5799 }
   };
   var CATEGORY_KEYWORDS = {
     gr1: ["handbag", "purse", "crochet bag", "handmade", "gift", "woolen"],
