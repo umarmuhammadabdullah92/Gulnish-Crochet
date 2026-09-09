@@ -14,6 +14,7 @@
   if (navToggle && mainNav) {
     navToggle.addEventListener("click", function () {
       mainNav.classList.toggle("open");
+      if (header) header.classList.remove("header-hide");
     });
 
     mainNav.querySelectorAll("a").forEach(function (link) {
