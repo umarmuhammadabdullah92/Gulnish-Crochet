@@ -1048,13 +1048,12 @@ h1, h2, h3, .logo {
 
 .footer-links a::before {
   content: "";
-  width: 6px;
-  height: 6px;
-  transform: rotate(45deg);
-  border-radius: 1px;
-  background: linear-gradient(135deg, #cda654, #a87e2c);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-light);
   opacity: 0.75;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .footer-links a:hover {
@@ -1063,8 +1062,7 @@ h1, h2, h3, .logo {
 }
 
 .footer-links a:hover::before {
-  background: linear-gradient(135deg, #e5d3a1, #b98f3e);
-  transform: rotate(45deg) scale(1.25);
+  background: var(--gold);
   opacity: 1;
 }
 
