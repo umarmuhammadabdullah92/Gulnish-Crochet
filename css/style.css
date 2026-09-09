@@ -1973,12 +1973,10 @@ h1, h2, h3, .logo {
   gap: 0.45rem;
   background: #fff;
   color: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: 0;
+  border: 1px solid var(--line-strong);
   padding: 0.55rem 1rem;
   font-size: 0.8rem;
   font-weight: 600;
-  box-shadow: none;
   z-index: 2;
 }
 
