@@ -301,8 +301,8 @@ h1, h2, h3, .logo {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #303a35, #181f1b);
-  color: #fff;
+  background: linear-gradient(135deg, #cda654, #a87e2c);
+  color: #2a2418;
   padding: 0.75rem 2rem;
   border-radius: 40px;
   font-weight: 500;
