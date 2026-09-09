@@ -291,7 +291,7 @@ h1, h2, h3, .logo {
 }
 
 .hero__trust-item svg {
-  color: var(--accent);
+  color: var(--gold);
   flex-shrink: 0;
 }
 
@@ -910,7 +910,7 @@ h1, h2, h3, .logo {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--gold);
   margin-right: 0.6rem;
   vertical-align: middle;
 }
@@ -2150,7 +2150,7 @@ h1, h2, h3, .logo {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--gold);
   z-index: 1;
 }
 
@@ -2173,7 +2173,7 @@ h1, h2, h3, .logo {
   z-index: 2;
 }
 
-.hero-media__badge svg { color: var(--accent); flex-shrink: 0; }
+.hero-media__badge svg { color: var(--gold); flex-shrink: 0; }
 
 .hero-media__badge--top { top: 1.4rem; left: -1.4rem; }
 .hero-media__badge--bottom { bottom: 1.6rem; right: -1rem; }
@@ -2273,7 +2273,7 @@ h1, h2, h3, .logo {
 }
 
 .promo__list svg {
-  color: var(--accent);
+  color: var(--gold);
   flex-shrink: 0;
 }
 
