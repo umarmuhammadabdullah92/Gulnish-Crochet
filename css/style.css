@@ -1128,6 +1128,8 @@ h1, h2, h3, .logo {
 .cart-btn:hover {
   background: var(--bg-warm);
   color: var(--accent-dark);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-sm);
 }
 
 .cart-btn__badge {
@@ -1137,12 +1139,14 @@ h1, h2, h3, .logo {
   min-width: 18px;
   height: 18px;
   padding: 0 5px;
-  background: var(--ink);
-  color: #fff;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  color: #2a2418;
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 700;
   display: none;
   place-items: center;
+  box-shadow: 0 2px 6px rgba(185, 143, 62, 0.4);
 }
 
 .cart-btn__badge.show {
