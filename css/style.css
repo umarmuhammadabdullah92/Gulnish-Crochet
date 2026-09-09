@@ -277,7 +277,7 @@ h1, h2, h3, .logo {
 }
 
 .hero__trust-item svg {
-  color: var(--gold);
+  color: var(--muted);
   width: 18px;
   height: 18px;
   flex-shrink: 0;
