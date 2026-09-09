@@ -943,60 +943,127 @@ h1, h2, h3, .logo {
 /* ============ FOOTER ============ */
 .site-footer {
   background:
-    radial-gradient(ellipse 70% 80% at 120% -20%, rgba(194, 58, 102, 0.28), transparent 55%),
-    linear-gradient(180deg, #43162b, #2b0f1e);
+    radial-gradient(ellipse 70% 80% at 120% -20%, rgba(194, 58, 102, 0.3), transparent 55%),
+    radial-gradient(ellipse 50% 60% at -10% 120%, rgba(216, 161, 60, 0.16), transparent 55%),
+    linear-gradient(180deg, #4a1a31, #2e0f21);
   color: #d8b8c1;
-  padding: 3rem 0 1.6rem;
+  padding: 3.6rem 0 1.8rem;
   margin-top: 4rem;
+  position: relative;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 72%);
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
 .footer-inner {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 2.4rem;
   align-items: start;
   text-align: left;
 }
 
 .footer-brand .logo {
   color: #fff;
+  gap: 0.9rem;
+  background: linear-gradient(120deg, #fbd4dd, #f5cf9a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #fff;
+}
+
+.footer-brand .logo-img {
+  width: 58px;
+  height: 58px;
+  padding: 9px;
+  object-fit: contain;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff8f9, #f4dbe1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 3px rgba(194, 58, 102, 0.12);
 }
 
 .logo-name {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.01em;
 }
 
 .footer-brand-tag {
-  color: #c99da9;
-  font-size: 0.88rem;
-  margin-top: 0.6rem;
-  max-width: 260px;
-  line-height: 1.6;
+  color: #d3aab6;
+  font-size: 0.9rem;
+  margin-top: 0.85rem;
+  max-width: 280px;
+  line-height: 1.7;
 }
 
 .footer-col h4 {
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.9rem;
+  letter-spacing: 0.16em;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.6rem;
+  position: relative;
+}
+
+.footer-col h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 36px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
 }
 
 .footer-links {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.65rem;
 }
 
 .footer-links a {
-  color: #c99da9;
+  color: #d3aab6;
   font-size: 0.9rem;
-  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-links a::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  opacity: 0.75;
+  transition: opacity 0.2s ease, background 0.2s ease;
 }
 
 .footer-links a:hover {
   color: #fff;
-  padding-left: 0.3rem;
+  transform: translateX(3px);
+}
+
+.footer-links a:hover::before {
+  background: var(--gold);
+  opacity: 1;
 }
 
 .footer-contact-list {
@@ -1019,22 +1086,24 @@ h1, h2, h3, .logo {
 .socials {
   display: flex;
   gap: 0.7rem;
-  margin-top: 1rem;
+  margin-top: 1.1rem;
 }
 
 .socials a {
-  color: #e3cdd4;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #f0d6de;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 40px;
-  padding: 0.45rem 1.2rem;
+  padding: 0.5rem 1.3rem;
   font-size: 0.88rem;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .socials a:hover {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
+  box-shadow: 0 6px 16px rgba(194, 58, 102, 0.4);
 }
 
 .footer-bottom {
@@ -1044,19 +1113,19 @@ h1, h2, h3, .logo {
   justify-content: space-between;
   gap: 0.8rem;
   flex-wrap: wrap;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  margin-top: 1.6rem;
-  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  margin-top: 2.2rem;
+  padding-top: 1.3rem;
 }
 
 .footer-copy {
   font-size: 0.82rem;
-  color: #a97c8c;
+  color: #b28c99;
 }
 
 .footer-note {
   font-size: 0.82rem;
-  color: #a97c8c;
+  color: #b28c99;
 }
 
 .footer-note a {
