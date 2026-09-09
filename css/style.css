@@ -2325,7 +2325,16 @@ h1, h2, h3, .logo {
   box-shadow: var(--shadow-md);
 }
 
-.promo__media img { width: 100%; height: 100%; object-fit: cover; }
+.promo__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.promo__grid:hover .promo__media img {
+  transform: scale(1.04);
+}
 
 .promo__eyebrow {
   display: inline-block;
