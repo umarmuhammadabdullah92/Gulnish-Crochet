@@ -934,10 +934,11 @@ h1, h2, h3, .logo {
 
 /* ============ FOOTER ============ */
 .site-footer {
-  background: var(--ink);
+  background: linear-gradient(180deg, #232b27, #141a17);
   color: #c7cecb;
   padding: 3.6rem 0 1.8rem;
   margin-top: 4rem;
+  position: relative;
 }
 
 .site-footer::before {
@@ -965,8 +966,9 @@ h1, h2, h3, .logo {
   box-sizing: border-box;
   display: block;
   border-radius: 50%;
-  background: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
 }
 
 .logo-name {
@@ -988,6 +990,19 @@ h1, h2, h3, .logo {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   margin-bottom: 1.1rem;
+  padding-bottom: 0.55rem;
+  position: relative;
+}
+
+.footer-col h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 34px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold);
 }
 
 .footer-links {
@@ -1002,19 +1017,28 @@ h1, h2, h3, .logo {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .footer-links a::before {
-  content: none;
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.7;
+  transition: opacity 0.2s ease, background 0.2s ease;
 }
 
 .footer-links a:hover {
   color: #fff;
+  transform: translateX(3px);
 }
 
 .footer-links a:hover::before {
-  content: none;
+  content: "";
+  background: var(--gold-light);
+  opacity: 1;
 }
 
 .footer-contact-list {
