@@ -830,11 +830,10 @@ h1, h2, h3, .logo {
 
 /* ============ FOOTER ============ */
 .site-footer {
-  background: linear-gradient(180deg, #262e29, #141a17);
+  background: var(--ink);
   color: #c7cecb;
   padding: 3.6rem 0 1.8rem;
   margin-top: 4rem;
-  position: relative;
 }
 
 .site-footer::before {
