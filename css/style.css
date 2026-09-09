@@ -2136,28 +2136,14 @@ h1, h2, h3, .logo {
   position: relative;
 }
 
-.hero-media::before {
-  content: "";
-  position: absolute;
-  inset: -1.4rem -1.4rem auto auto;
-  width: 9rem;
-  height: 9rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(216, 161, 60, 0.30), transparent 70%);
-  opacity: 0.7;
-  z-index: 0;
-}
-
 .hero-media__frame {
   position: relative;
   border-radius: 26px;
   overflow: hidden;
   aspect-ratio: 5 / 6;
   background: var(--bg-soft);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   border: 6px solid #fff;
-  outline: 1px dashed rgba(185, 143, 62, 0.5);
-  outline-offset: 9px;
 }
 
 .hero-media__frame img {
@@ -2172,7 +2158,6 @@ h1, h2, h3, .logo {
   height: 14px;
   border-radius: 50%;
   background: var(--gold);
-  box-shadow: 0 0 0 4px rgba(185, 143, 62, 0.18);
   z-index: 1;
 }
 
