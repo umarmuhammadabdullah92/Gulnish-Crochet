@@ -413,6 +413,9 @@ h1, h2, h3, .logo {
 /* ============ SECTIONS ============ */
 .section {
   padding: 4rem 0;
+  contain: layout style;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 .section-head {
