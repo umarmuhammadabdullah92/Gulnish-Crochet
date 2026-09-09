@@ -76,6 +76,13 @@
 
   var ITEM_NAME = { gr1: "Purse", gr2: "Gajray", gr3: "Keychain", gr4: "Bag", gr5: "Jewellery Set", gr6: "Headband" };
   var BASE_PRICE = { gr1: 850, gr2: 400, gr3: 350, gr4: 1400, gr5: 550, gr6: 450 };
+
+  /* ---------- real product overrides ----------
+     Exact names/price for specific products set by the owner.
+     Keyed by the seed id they get in defaultProducts(). */
+  var REAL_PRODUCTS = {
+    "seed_gr4_1": { name: "Earbuds Bag", price: 1599 }
+  };
   var CATEGORY_KEYWORDS = {
     gr1: ["handbag", "purse", "crochet bag", "handmade", "gift", "woolen"],
     gr2: ["wedding", "eid", "hair", "flowers", "party", "gift"],
