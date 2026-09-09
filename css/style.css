@@ -755,14 +755,14 @@ h1, h2, h3, .logo {
 }
 
 .filter-btn:hover {
-  border-color: var(--gold);
+  border-color: var(--accent-dark);
   color: var(--accent-dark);
 }
 
 .filter-btn.active {
-  background: var(--gold);
-  color: #2a2418;
-  border-color: #b98f3e;
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
 }
 
 .work-card.is-hidden {
