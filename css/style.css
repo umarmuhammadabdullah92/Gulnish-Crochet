@@ -2912,5 +2912,13 @@ h1, h2, h3, .logo {
   .skeleton::after { animation: none; }
   .navIn,
   .main-nav.open { animation: none; }
+  .hero::before { animation: none; }
+  .btn::after,
+  .add-btn::after { content: none; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
