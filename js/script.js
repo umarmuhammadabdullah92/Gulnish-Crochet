@@ -38,7 +38,7 @@
         if (header) header.classList.toggle("scrolled", window.scrollY > 30);
         if (progressBar) {
           var h = document.documentElement.scrollHeight - window.innerHeight;
-          progressBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+          progressBar.style.transform = "scaleX(" + (h > 0 ? window.scrollY / h : 0) + ")";
         }
         if (backToTop) backToTop.classList.toggle("show", window.scrollY > 560);
         scrollTicking = false;
