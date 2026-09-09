@@ -1487,7 +1487,7 @@ h1, h2, h3, .logo {
 .checkout-summary {
   position: sticky;
   top: 90px;
-  background: linear-gradient(180deg, var(--bg), var(--bg-warm));
+  background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.6rem;
