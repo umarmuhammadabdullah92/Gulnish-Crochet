@@ -1188,6 +1188,7 @@ h1, h2, h3, .logo {
   width: min(380px, 94vw);
   background: var(--bg);
   border-left: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
   transform: translateX(105%);
