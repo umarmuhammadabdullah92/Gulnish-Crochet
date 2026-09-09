@@ -291,25 +291,32 @@ h1, h2, h3, .logo {
 
 .hero__trust {
   display: flex;
-  gap: 1.6rem;
+  gap: 0.9rem;
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 1px dashed var(--line-strong);
+  border-top: 1px dashed rgba(185, 143, 62, 0.4);
 }
 
 .hero__trust-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
   color: var(--muted);
   font-size: 0.85rem;
   font-weight: 500;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 40px;
+  padding: 0.4rem 1rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .hero__trust-item svg {
   color: var(--gold);
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
 }
 
