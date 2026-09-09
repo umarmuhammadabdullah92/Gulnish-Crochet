@@ -423,7 +423,7 @@ h1, h2, h3, .logo {
   padding: 4rem 0;
   contain: layout style;
   content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
+  contain-intrinsic-size: auto 700px;
 }
 
 .section-head {
