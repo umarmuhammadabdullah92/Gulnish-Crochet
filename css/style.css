@@ -339,14 +339,14 @@ h1, h2, h3, .logo {
   background: #fff;
   border: 1.5px solid var(--accent);
   color: var(--accent-dark);
-  box-shadow: 0 2px 8px rgba(156, 84, 97, 0.10);
+  box-shadow: 0 2px 8px rgba(155, 39, 81, 0.10);
 }
 
 .btn--ghost:hover {
   background: var(--bg-warm);
   color: var(--accent-darkest);
   border-color: var(--accent-dark);
-  box-shadow: 0 6px 20px rgba(156, 84, 97, 0.14);
+  box-shadow: 0 6px 20px rgba(155, 39, 81, 0.16);
 }
 
 /* ============ SECTIONS ============ */
@@ -2217,7 +2217,7 @@ h1, h2, h3, .logo {
   gap: 0.9rem;
 }
 
-.testimonial__stars { color: #f0a33c; letter-spacing: 0.08em; font-size: 0.95rem; }
+.testimonial__stars { color: var(--gold); letter-spacing: 0.08em; font-size: 0.95rem; }
 
 .testimonial__quote {
   color: var(--ink);
