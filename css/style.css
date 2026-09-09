@@ -1579,7 +1579,7 @@ h1, h2, h3, .logo {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.8rem;
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
 }
 
 .checkout-card h3 {
