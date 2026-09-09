@@ -884,19 +884,6 @@ h1, h2, h3, .logo {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   margin-bottom: 1.1rem;
-  padding-bottom: 0.6rem;
-  position: relative;
-}
-
-.footer-col h4::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 36px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--gold);
 }
 
 .footer-links {
@@ -911,27 +898,19 @@ h1, h2, h3, .logo {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .footer-links a::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent-light);
-  opacity: 0.75;
-  transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  content: none;
 }
 
 .footer-links a:hover {
   color: #fff;
-  transform: translateX(3px);
 }
 
 .footer-links a:hover::before {
-  background: var(--gold);
-  opacity: 1;
+  content: none;
 }
 
 .footer-contact-list {
@@ -959,19 +938,12 @@ h1, h2, h3, .logo {
 
 .socials a {
   color: #dfe4e2;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 0;
-  padding: 0.5rem 1.3rem;
   font-size: 0.88rem;
-  background: rgba(255, 255, 255, 0.04);
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: color 0.2s ease;
 }
 
 .socials a:hover {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: #fff;
-  box-shadow: none;
+  color: var(--gold);
 }
 
 .footer-bottom {
