@@ -7,14 +7,15 @@
 
   var GC = window.GC;
 
-  /* ---------- Weak-network image tier ---------- */
-  var SLOW_CONNECTION = false;
-  if (navigator.connection && typeof navigator.connection.effectiveType === "string") {
-    var eff = navigator.connection.effectiveType;
-    SLOW_CONNECTION = eff === "slow-2g" || eff === "2g" || eff === "3g";
-  }
+  /* ---------- Weak-network / mobile image tier ---------- */
+  var LOW_RES =
+    (navigator.connection && typeof navigator.connection.effectiveType === "string" &&
+      (navigator.connection.effectiveType === "slow-2g" ||
+        navigator.connection.effectiveType === "2g" ||
+        navigator.connection.effectiveType === "3g")) ||
+    window.matchMedia("(max-width: 767px)").matches;
   function displayImage(src) {
-    if (!src || !SLOW_CONNECTION) return src;
+    if (!src || !LOW_RES) return src;
     var parts = src.split("/");
     if (parts.length >= 2 && parts[parts.length - 2] !== "sm") {
       parts.splice(parts.length - 1, 0, "sm");
