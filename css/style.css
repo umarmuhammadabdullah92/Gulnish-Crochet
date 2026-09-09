@@ -159,14 +159,11 @@ h1, h2, h3, .logo {
   font-weight: 500;
   color: var(--ink);
   padding: 0.3rem 0;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .main-nav a:hover,
 .main-nav a.active {
   color: var(--accent-dark);
-  border-bottom-color: var(--gold);
 }
 
 .header-actions {
