@@ -104,11 +104,11 @@ h1, h2, h3, .logo {
   background: var(--bg-warm);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--line-strong);
+  background: linear-gradient(180deg, #cda654, #a87e2c);
   border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-dark);
+  background: linear-gradient(180deg, #b98f3e, #8f6d24);
 }
 
 /* ============ HEADER ============ */
