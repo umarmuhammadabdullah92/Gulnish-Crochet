@@ -3,7 +3,7 @@
    ========================================================= */
 
 .admin-page {
-  background: #fbfafa;
+  background: #ffffff;
 }
 
 .admin-main {
@@ -231,7 +231,7 @@
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 0.8rem;
-  background: #fdfcfc;
+  background: #ffffff;
 }
 
 .cat-img-row__name {
@@ -309,7 +309,7 @@
   height: 56px;
   border-radius: 8px;
   overflow: hidden;
-  background: linear-gradient(135deg, #f3e2e2, #f0e8dd);
+  background: linear-gradient(135deg, #eef2ef, #f2efe8);
   display: grid;
   place-items: center;
   color: var(--muted);
