@@ -184,9 +184,11 @@
   var productCountLabel = document.getElementById("productCountLabel");
   var featuredGrid = document.getElementById("featuredGrid");
 
-  function cardHTML(p) {
+  function cardHTML(p, index) {
+    var isFirst = typeof index === "number" && index === 0;
     var image = p.image
-      ? '<img src="' + p.image + '" alt="' + escapeHtml(p.name) + '" loading="lazy" decoding="async">'
+      ? '<img src="' + p.image + '" alt="' + escapeHtml(p.name) + '"' +
+        (isFirst ? ' fetchpriority="high" decoding="async"' : ' loading="lazy" decoding="async"') + ">"
       : "";
     var colors =
       p.colors && p.colors.length
