@@ -219,4 +219,4 @@ insert into public.products (id, name, price, category, image, keywords, colors)
   ('seed_gr6_3', 'Handmade Crochet Headband 3', 550, 'gr6', 'images/headbands/headband-3.webp', '["hairband","hair accessory","girl","handmade","gift"]'::jsonb, '[]'::jsonb)
 on conflict (id) do nothing;
 
--- 74 products
+-- 76 products
