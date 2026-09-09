@@ -937,8 +937,10 @@ h1, h2, h3, .logo {
 
 /* ============ FOOTER ============ */
 .site-footer {
-  background: linear-gradient(180deg, #3a2c28, #2a211e);
-  color: #b8a29a;
+  background:
+    radial-gradient(ellipse 70% 80% at 120% -20%, rgba(194, 58, 102, 0.28), transparent 55%),
+    linear-gradient(180deg, #43162b, #2b0f1e);
+  color: #d8b8c1;
   padding: 3rem 0 1.6rem;
   margin-top: 4rem;
 }
