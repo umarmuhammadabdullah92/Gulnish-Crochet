@@ -582,7 +582,10 @@ h1, h2, h3, .logo {
 }
 
 .work-card {
-  background: var(--bg);
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.75));
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
@@ -593,10 +596,21 @@ h1, h2, h3, .logo {
   transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
+.work-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
+  z-index: 3;
+}
+
 .work-card:hover {
-  border-color: var(--line-strong);
+  border-color: rgba(185, 143, 62, 0.5);
   box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
+  transform: translateY(-5px);
 }
 
 .work-card__media {
