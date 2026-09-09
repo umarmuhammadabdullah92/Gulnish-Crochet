@@ -1954,34 +1954,6 @@ h1, h2, h3, .logo {
    Professional storefront upgrade
    ========================================================= */
 
-/* ---------- Top announcement bar ---------- */
-.topbar {
-  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
-  color: #fff;
-  font-size: 0.85rem;
-  letter-spacing: 0.02em;
-}
-
-.topbar-inner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.6rem 2.6rem;
-  flex-wrap: wrap;
-  padding: 0.5rem 0;
-  text-align: center;
-}
-
-.topbar__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.topbar__item strong {
-  font-weight: 600;
-}
-
 /* ---------- Split hero ---------- */
 .hero--split {
   padding: 3rem 0 0;
