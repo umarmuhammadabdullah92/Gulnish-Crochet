@@ -324,7 +324,7 @@ h1, h2, h3, .logo {
   letter-spacing: 0.22em;
   margin-bottom: 0.6rem;
   font-weight: 600;
-  color: var(--gold);
+  color: var(--accent-dark);
 }
 
 .section-title {
