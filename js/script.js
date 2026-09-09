@@ -27,17 +27,24 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Header shadow + scroll progress ---------- */
+  /* ---------- Header shadow + scroll progress + auto-hide ---------- */
   var header = document.querySelector(".site-header");
   var progressBar = document.getElementById("scrollProgress");
   var backToTop = document.getElementById("backToTop");
+  var lastScrollY = window.scrollY;
   var onScroll = function () {
-    if (header) header.classList.toggle("scrolled", window.scrollY > 30);
+    var y = window.scrollY;
+    if (header) {
+      header.classList.toggle("scrolled", y > 30);
+      if (y > 140 && y > lastScrollY + 2) header.classList.add("header-hide");
+      else if (y < lastScrollY - 2 || y <= 140) header.classList.remove("header-hide");
+    }
     if (progressBar) {
       var h = document.documentElement.scrollHeight - window.innerHeight;
-      progressBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+      progressBar.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
     }
-    if (backToTop) backToTop.classList.toggle("show", window.scrollY > 560);
+    if (backToTop) backToTop.classList.toggle("show", y > 560);
+    lastScrollY = y;
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
