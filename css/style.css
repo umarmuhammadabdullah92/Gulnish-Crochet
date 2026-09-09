@@ -1494,16 +1494,13 @@ h1, h2, h3, .logo {
 /* ============ SCROLL REVEAL ============ */
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  filter: blur(4px);
-  transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.8s ease;
-  will-change: opacity, transform, filter;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
 .reveal.revealed {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
 
 .reveal[data-delay="1"] { transition-delay: 0.08s; }
