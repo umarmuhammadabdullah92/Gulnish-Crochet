@@ -1771,12 +1771,12 @@ h1, h2, h3, .logo {
   border-radius: var(--radius);
   padding: 1.5rem;
   text-align: left;
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
   transition: box-shadow 0.3s ease;
 }
 
 .order-card:hover {
-  box-shadow: none;
+  box-shadow: var(--shadow-md);
 }
 
 .order-card__head {
@@ -2404,11 +2404,11 @@ h1, h2, h3, .logo {
   gap: 0.5rem;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: 999px;
   padding: 0.35rem 0.4rem 0.35rem 1.1rem;
   margin-top: 2rem;
   max-width: 460px;
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
