@@ -201,7 +201,7 @@ insert into public.products (id, name, price, category, image, keywords, colors)
   ('seed_gr3_18', 'Handmade Crochet Keychain 18', 400, 'gr3', 'images/keychains/keychain-7.png', '["keyring","small gift","cute","handmade","gift","wholesale"]'::jsonb, '[]'::jsonb),
   ('seed_gr3_19', 'Handmade Crochet Keychain 19', 450, 'gr3', 'images/keychains/keychain-8.png', '["keyring","small gift","cute","handmade","gift","wholesale"]'::jsonb, '[]'::jsonb),
   ('seed_gr3_20', 'Handmade Crochet Keychain 20', 500, 'gr3', 'images/keychains/keychain-9.png', '["keyring","small gift","cute","handmade","gift","wholesale"]'::jsonb, '[]'::jsonb),
-  ('seed_gr4_1', 'Handmade Crochet Bag 1', 1400, 'gr4', 'images/bags/bag-1.webp', '["handbag","tote","shopper bag","handmade","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr4_1', 'Earbuds Bag', 1599, 'gr4', 'images/bags/bag-1.webp', '["handbag","tote","shopper bag","handmade","gift"]'::jsonb, '[]'::jsonb),
   ('seed_gr4_2', 'Handmade Crochet Bag 2', 1450, 'gr4', 'images/bags/bag-2.webp', '["handbag","tote","shopper bag","handmade","gift"]'::jsonb, '[]'::jsonb),
   ('seed_gr5_1', 'Handmade Crochet Jewellery Set 1', 550, 'gr5', 'images/jewellery/jewellery-1.webp', '["necklace","earrings","bridal","wedding","gift","accessory"]'::jsonb, '[]'::jsonb),
   ('seed_gr5_2', 'Handmade Crochet Jewellery Set 2', 600, 'gr5', 'images/jewellery/jewellery-2.webp', '["necklace","earrings","bridal","wedding","gift","accessory"]'::jsonb, '[]'::jsonb),
