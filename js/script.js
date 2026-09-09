@@ -13,7 +13,7 @@
       (navigator.connection.effectiveType === "slow-2g" ||
         navigator.connection.effectiveType === "2g" ||
         navigator.connection.effectiveType === "3g")) ||
-    window.matchMedia("(max-width: 767px)").matches;
+    window.matchMedia("(max-width: 760px)").matches;
   function displayImage(src) {
     if (!src || !LOW_RES) return src;
     var parts = src.split("/");
