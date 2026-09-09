@@ -2589,7 +2589,9 @@ h1, h2, h3, .logo {
   bottom: 0;
   z-index: 190;
   padding: 0.55rem 0.8rem calc(0.55rem + env(safe-area-inset-bottom));
-  background: var(--ink);
+  background: linear-gradient(90deg, var(--gold-light), var(--gold-deep));
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 -6px 20px rgba(20, 26, 23, 0.12);
   display: none;
 }
 
@@ -2605,7 +2607,7 @@ h1, h2, h3, .logo {
   gap: 0.7rem;
   background: none;
   border: none;
-  color: #fff;
+  color: #2a2418;
   cursor: pointer;
   font-family: var(--font-body);
   text-align: left;
@@ -2615,9 +2617,10 @@ h1, h2, h3, .logo {
   width: 34px;
   height: 34px;
   flex-shrink: 0;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(42, 36, 24, 0.14);
 }
 
 .cart-bar__icon svg { width: 18px; height: 18px; }
