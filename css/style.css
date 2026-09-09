@@ -946,7 +946,7 @@ h1, h2, h3, .logo {
     radial-gradient(ellipse 70% 80% at 120% -20%, rgba(78, 139, 107, 0.3), transparent 55%),
     radial-gradient(ellipse 50% 60% at -10% 120%, rgba(216, 161, 60, 0.16), transparent 55%),
     linear-gradient(180deg, #1e3d2e, #12281d);
-  color: #d8b8c1;
+  color: #c2d3c8;
   padding: 3.6rem 0 1.8rem;
   margin-top: 4rem;
   position: relative;
@@ -1003,7 +1003,7 @@ h1, h2, h3, .logo {
 }
 
 .footer-brand-tag {
-  color: #d3aab6;
+  color: #aec8b8;
   font-size: 0.9rem;
   margin-top: 0.85rem;
   max-width: 280px;
@@ -1038,7 +1038,7 @@ h1, h2, h3, .logo {
 }
 
 .footer-links a {
-  color: #d3aab6;
+  color: #aec8b8;
   font-size: 0.9rem;
   display: inline-flex;
   align-items: center;
@@ -1070,12 +1070,12 @@ h1, h2, h3, .logo {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  color: #c99da9;
+  color: #9dc0ae;
   font-size: 0.88rem;
 }
 
 .footer-contact-list a {
-  color: #c99da9;
+  color: #9dc0ae;
   transition: color 0.2s ease;
 }
 
@@ -1090,7 +1090,7 @@ h1, h2, h3, .logo {
 }
 
 .socials a {
-  color: #f0d6de;
+  color: #d8e9dd;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 40px;
   padding: 0.5rem 1.3rem;
@@ -1120,12 +1120,12 @@ h1, h2, h3, .logo {
 
 .footer-copy {
   font-size: 0.82rem;
-  color: #b28c99;
+  color: #8fae9c;
 }
 
 .footer-note {
   font-size: 0.82rem;
-  color: #b28c99;
+  color: #8fae9c;
 }
 
 .footer-note a {
