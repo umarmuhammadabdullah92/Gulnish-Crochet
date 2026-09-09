@@ -384,7 +384,7 @@
   var productsView = document.getElementById("productsView");
 
   function categoryCardHTML(label, count, images, catKey) {
-    var slides = (images || []).filter(Boolean);
+    var slides = (images || []).filter(Boolean).map(function (s) { return displayImage(s); });
     var img = slides.length
       ? '<img src="' + slides[0] + '" alt="' + escapeHtml(label) + '" loading="lazy" decoding="async" data-slides="' +
         slides.join("|").replace(/"/g, "&quot;") + '">'
