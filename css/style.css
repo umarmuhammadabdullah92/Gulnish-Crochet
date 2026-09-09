@@ -1005,9 +1005,8 @@ h1, h2, h3, .logo {
   min-width: 18px;
   height: 18px;
   padding: 0 5px;
-  border-radius: 0;
-  background: var(--gold);
-  color: #2a2418;
+  background: var(--ink);
+  color: #fff;
   font-size: 0.7rem;
   font-weight: 600;
   display: none;
