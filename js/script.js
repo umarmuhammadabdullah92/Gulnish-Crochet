@@ -55,29 +55,6 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---------- Theme (dark / light) ---------- */
-  var themeToggle = document.getElementById("themeToggle");
-  var themeMeta = document.querySelector('meta[name="theme-color"]');
-  var LIGHT_THEME = "#faf4f0";
-  var DARK_THEME = "#1c1413";
-
-  function applyTheme(theme, save) {
-    document.documentElement.setAttribute("data-theme", theme);
-    if (themeMeta) themeMeta.setAttribute("content", theme === "dark" ? DARK_THEME : LIGHT_THEME);
-    if (themeToggle) themeToggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
-    if (save) {
-      try { localStorage.setItem("gulnish-theme", theme); } catch (e) {}
-    }
-  }
-
-  applyTheme(document.documentElement.getAttribute("data-theme") || "light", false);
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
-      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(next, true);
-    });
-  }
-
   /* ---------- Reveal on scroll ---------- */
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {

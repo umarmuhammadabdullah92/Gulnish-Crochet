@@ -6,35 +6,11 @@
 
   var GC = window.GC;
 
-  /* ---------- UI chrome: theme, progress, mobile nav ---------- */
+  /* ---------- UI chrome: progress, mobile nav ---------- */
   var header = document.querySelector(".site-header");
   var progressBar = document.getElementById("scrollProgress");
-  var themeToggle = document.getElementById("themeToggle");
   var navToggle = document.getElementById("navToggle");
   var mainNav = document.getElementById("mainNav");
-  var themeMeta = document.querySelector('meta[name="theme-color"]');
-  var LIGHT_THEME = "#faf4f0";
-  var DARK_THEME = "#1c1413";
-
-  function applyTheme(theme, save) {
-    document.documentElement.setAttribute("data-theme", theme);
-    if (themeMeta) themeMeta.setAttribute("content", theme === "dark" ? DARK_THEME : LIGHT_THEME);
-    if (themeToggle) themeToggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
-    if (save) {
-      try {
-        localStorage.setItem("gulnish-theme", theme);
-      } catch (e) {}
-    }
-  }
-
-  applyTheme(document.documentElement.getAttribute("data-theme") || "light", false);
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
-      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(next, true);
-    });
-  }
 
   if (navToggle && mainNav) {
     navToggle.addEventListener("click", function (e) {
