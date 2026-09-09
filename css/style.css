@@ -335,7 +335,7 @@ h1, h2, h3, .logo {
   border: none;
   font-family: var(--font-body);
   font-size: 0.98rem;
-  box-shadow: var(--glow-accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 6px 22px rgba(185, 143, 62, 0.32);
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
