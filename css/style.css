@@ -252,6 +252,7 @@ h1, h2, h3, .logo {
   background: var(--bg-soft);
   position: relative;
   overflow: hidden;
+  contain: layout style;
 }
 
 .hero::before {
