@@ -509,6 +509,8 @@ h1, h2, h3, .logo {
   font-family: var(--font-body);
   box-shadow: var(--shadow-sm);
   transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  contain: layout style paint;
+  will-change: transform;
 }
 
 .category-card::before {
