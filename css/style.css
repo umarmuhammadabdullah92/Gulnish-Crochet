@@ -146,11 +146,6 @@ h1, h2, h3, .logo {
   align-items: center;
   gap: 0.55rem;
   transition: transform 0.2s ease;
-  background: linear-gradient(120deg, var(--accent-darkest), var(--gold));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: var(--accent-dark);
 }
 
 .logo:hover {
