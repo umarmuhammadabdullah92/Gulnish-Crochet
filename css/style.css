@@ -35,6 +35,8 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  overscroll-behavior-y: contain;
 }
 
 section {
@@ -51,6 +53,8 @@ body {
   line-height: 1.7;
   letter-spacing: 0.005em;
   overflow-x: hidden;
+  overscroll-behavior-x: none;
+  overflow-anchor: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
