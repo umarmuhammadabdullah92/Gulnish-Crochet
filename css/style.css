@@ -204,16 +204,31 @@ h1, h2, h3, .logo {
 
 .nav-toggle {
   display: none;
-  background: none;
-  border: none;
-  font-size: 1.6rem;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 0;
   cursor: pointer;
   color: var(--ink);
-  transition: color 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.nav-toggle::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  box-shadow: 0 7px 0 currentColor, 0 14px 0 currentColor;
 }
 
 .nav-toggle:hover {
-  color: var(--accent-dark);
+  border-color: var(--gold);
+  background: var(--bg-warm);
+}
 }
 
 /* ============ HERO ============ */
