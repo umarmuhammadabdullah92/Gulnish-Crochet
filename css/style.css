@@ -118,15 +118,19 @@ h1, h2, h3, .logo {
 
 /* ============ HEADER ============ */
 .site-header {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .site-header.scrolled {
-  border-bottom-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
+  border-bottom-color: rgba(214, 220, 215, 0.9);
 }
 
 .header-inner {
