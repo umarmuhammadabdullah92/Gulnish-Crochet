@@ -42,7 +42,10 @@
 
   function money(value) {
     var n = parseFloat(value) || 0;
-    return "Rs. " + n.toFixed(2);
+    var str = String(Math.round(n * 100) / 100);
+    var parts = str.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return "Rs. " + parts.join(".");
   }
 
   function escapeHtml(str) {
