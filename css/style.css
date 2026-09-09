@@ -233,11 +233,16 @@ h1, h2, h3, .logo {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--accent-dark);
+  color: var(--gold-deep);
+  background: var(--bg-warm);
+  border: 1px solid var(--line);
+  padding: 0.42rem 1.1rem;
+  border-radius: 999px;
   margin-bottom: 1.4rem;
+  font-weight: 600;
 }
 
 .hero h1 {
@@ -253,7 +258,11 @@ h1, h2, h3, .logo {
 
 .hero h1 em {
   font-style: italic;
-  color: var(--accent-dark);
+  background: linear-gradient(120deg, var(--gold-deep), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--gold-deep);
 }
 
 .hero__sub {
