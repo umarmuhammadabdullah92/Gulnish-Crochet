@@ -981,21 +981,18 @@ h1, h2, h3, .logo {
   position: relative;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
   display: grid;
   place-items: center;
   background: transparent;
   border: 1px solid var(--line);
   color: var(--ink);
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .cart-btn:hover {
   background: var(--bg-warm);
   color: var(--accent-dark);
-  border-color: var(--gold);
-  box-shadow: none;
 }
 
 .cart-btn__badge {
