@@ -45,7 +45,7 @@ section {
 body {
   font-family: var(--font-body);
   color: var(--ink);
-  background: linear-gradient(180deg, #fffdf8, #ffffff 42%);
+  background: var(--bg);
   line-height: 1.7;
   letter-spacing: 0.005em;
   -webkit-font-smoothing: antialiased;
