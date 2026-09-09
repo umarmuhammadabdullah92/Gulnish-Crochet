@@ -14,7 +14,6 @@
   if (navToggle && mainNav) {
     navToggle.addEventListener("click", function () {
       mainNav.classList.toggle("open");
-      if (header) header.classList.remove("header-hide");
     });
 
     mainNav.querySelectorAll("a").forEach(function (link) {
@@ -28,24 +27,17 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Header shadow + scroll progress + auto-hide ---------- */
+  /* ---------- Header shadow + scroll progress ---------- */
   var header = document.querySelector(".site-header");
   var progressBar = document.getElementById("scrollProgress");
   var backToTop = document.getElementById("backToTop");
-  var lastScrollY = window.scrollY;
   var onScroll = function () {
-    var y = window.scrollY;
-    if (header) {
-      header.classList.toggle("scrolled", y > 30);
-      if (y > 140 && y > lastScrollY + 2) header.classList.add("header-hide");
-      else if (y < lastScrollY - 2 || y <= 140) header.classList.remove("header-hide");
-    }
+    if (header) header.classList.toggle("scrolled", window.scrollY > 30);
     if (progressBar) {
       var h = document.documentElement.scrollHeight - window.innerHeight;
-      progressBar.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+      progressBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
     }
-    if (backToTop) backToTop.classList.toggle("show", y > 560);
-    lastScrollY = y;
+    if (backToTop) backToTop.classList.toggle("show", window.scrollY > 560);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
