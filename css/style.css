@@ -872,9 +872,9 @@ h1, h2, h3, .logo {
 }
 
 .filter-btn.active {
-  background: var(--accent-darkest);
-  color: #fff;
-  border-color: var(--accent-darkest);
+  background: linear-gradient(135deg, #cda654, #a87e2c);
+  color: #2a2418;
+  border-color: #b98f3e;
 }
 
 .work-card.is-hidden {
