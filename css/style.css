@@ -998,12 +998,12 @@ h1, h2, h3, .logo {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  color: #a08b82;
+  color: #c99da9;
   font-size: 0.88rem;
 }
 
 .footer-contact-list a {
-  color: #a08b82;
+  color: #c99da9;
   transition: color 0.2s ease;
 }
 
@@ -1046,12 +1046,12 @@ h1, h2, h3, .logo {
 
 .footer-copy {
   font-size: 0.82rem;
-  color: #87746c;
+  color: #a97c8c;
 }
 
 .footer-note {
   font-size: 0.82rem;
-  color: #87746c;
+  color: #a97c8c;
 }
 
 .footer-note a {
