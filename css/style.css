@@ -141,7 +141,7 @@ h1, h2, h3, .logo {
   align-items: center;
   gap: 0.55rem;
   transition: transform 0.2s ease;
-  background: linear-gradient(120deg, var(--accent-darkest), var(--accent) 55%, var(--gold));
+  background: linear-gradient(120deg, var(--accent-darkest), var(--gold));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -250,7 +250,7 @@ h1, h2, h3, .logo {
 
 .hero h1 em {
   font-style: italic;
-  background: linear-gradient(120deg, var(--accent-dark), var(--accent) 55%, var(--gold));
+  background: linear-gradient(120deg, var(--accent-darkest), var(--gold));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -374,7 +374,7 @@ h1, h2, h3, .logo {
   letter-spacing: 0.22em;
   margin-bottom: 0.6rem;
   font-weight: 600;
-  background: linear-gradient(120deg, var(--accent-dark), var(--accent));
+  background: linear-gradient(120deg, var(--ink) 30%, var(--gold));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -401,7 +401,7 @@ h1, h2, h3, .logo {
 
 .section-title em {
   font-style: italic;
-  background: linear-gradient(120deg, var(--accent-dark), var(--accent) 55%, var(--gold));
+  background: linear-gradient(120deg, var(--accent-darkest), var(--gold));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2247,7 +2247,7 @@ h1, h2, h3, .logo {
 
 .promo__title em {
   font-style: italic;
-  background: linear-gradient(120deg, var(--accent-dark), var(--accent) 55%, var(--gold));
+  background: linear-gradient(120deg, var(--accent-darkest), var(--gold));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
