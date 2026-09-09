@@ -160,7 +160,7 @@ insert into public.products (id, name, price, category, image, keywords, colors)
   ('seed_gr1_17', 'Handmade Crochet Purse 17', 850, 'gr1', 'images/purses/purse-24.png', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_18', 'Handmade Crochet Purse 18', 900, 'gr1', 'images/purses/purse-25.png', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_19', 'Handmade Crochet Purse 19', 950, 'gr1', 'images/purses/purse-26.png', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
-  ('seed_gr1_20', 'Handmade Crochet Purse 20', 1000, 'gr1', 'images/purses/purse-27.png', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
+  ('seed_gr1_20', 'Premium hand made Rose Bag', 5799, 'gr1', 'images/purses/purse-27.png', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_21', 'Handmade Crochet Purse 21', 850, 'gr1', 'images/purses/purse-28.png', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_22', 'Handmade Crochet Purse 22', 900, 'gr1', 'images/purses/purse-29.png', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_23', 'Handmade Crochet Purse 23', 950, 'gr1', 'images/purses/purse-3.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
