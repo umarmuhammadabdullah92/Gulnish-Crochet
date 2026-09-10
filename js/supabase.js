@@ -422,7 +422,8 @@
         delivered: delivered,
         cancelled: cancelled,
         revenue: revenue,
-        todayOrders: todayOrders
+        todayOrders: todayOrders,
+        paidCount: paidCount
       };
     },
 
