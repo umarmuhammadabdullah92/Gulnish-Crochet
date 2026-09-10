@@ -434,25 +434,10 @@
     }
   }
 
-  /* ---------- step 1 -> step 2 ---------- */
-  if (nextToReviewBtn) {
-    nextToReviewBtn.addEventListener("click", function () {
-      if (!validate()) return;
-      setStep(2);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
-  /* ---------- step 2 -> step 1 (back) ---------- */
-  if (backToDetailsBtn) {
-    backToDetailsBtn.addEventListener("click", function () {
-      setStep(1);
-    });
-  }
-
-  /* ---------- place order (from review step) ---------- */
+  /* ---------- place order ---------- */
   if (placeBtn) {
-    placeBtn.addEventListener("click", function (e) {
+    placeBtn.addEventListener("click", function () {
+      if (!validate()) return;
       placeOrder();
     });
   }
@@ -460,45 +445,40 @@
   /* ---------- mobile sticky action bar ---------- */
   if (coBarBtn) {
     coBarBtn.addEventListener("click", function () {
-      if (currentStep === 1) {
-        if (!validate()) return;
-        setStep(2);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (currentStep === 2) {
-        placeOrder();
-      }
-    });
-  }
-  if (coBarBack) {
-    coBarBack.addEventListener("click", function () {
-      setStep(1);
+      if (!validate()) return;
+      placeOrder();
     });
   }
 
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (currentStep === 1) {
-        if (!validate()) return;
-        setStep(2);
-      } else if (currentStep === 2) {
-        placeOrder();
-      }
+      if (!validate()) return;
+      placeOrder();
     });
   }
 
-  /* ---------- enter key advances steps ---------- */
+  /* ---------- enter key places order ---------- */
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" && currentStep === 2 && !placeBtn.disabled) {
+    if (e.key === "Enter" && currentStep === 1 && !placeBtn.disabled) {
       e.preventDefault();
-      placeOrder();
+      if (validate()) {
+        placeOrder();
+      }
     }
+  });
+
+  /* ---------- live mini-summary ---------- */
+  ["coName", "coPhone", "coAddress", "coCity"].forEach(function (fieldId) {
+    var el = document.getElementById(fieldId);
+    if (el) el.addEventListener("input", updateStrip);
   });
 
   function init() {
     renderSummary(loadCart());
     autoFillProfile();
     renderPaymentInfo();
+    updateStrip();
     setStep(1);
   }
 
