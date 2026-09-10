@@ -206,13 +206,20 @@
         <!-- Confirmation -->
         <div class="checkout-success" id="coSuccess" hidden>
           <div class="cart-empty__ph">&#10003;</div>
-          <h2 class="section-title">Order placed!</h2>
-          <p>Your order number is <strong id="coSuccessNo"></strong>. We'll review it and get back to you to arrange payment and delivery.</p>
+          <h2 class="section-title">Order confirmed!</h2>
+          <div class="checkout-success__no">
+            <span class="checkout-success__no-label">Order number</span>
+            <strong id="coSuccessNo"></strong>
+          </div>
+          <p class="checkout-success__copy" id="coSuccessCopy">We've received your order and will confirm it with you on WhatsApp shortly.</p>
+          <p class="checkout-success__eta" id="coSuccessEta" hidden>
+            Estimated delivery by <strong id="coSuccessEtaDate"></strong>
+          </p>
           <div class="checkout-success__actions">
             <a class="btn" id="coWaLink" href="#" target="_blank" rel="noopener" hidden>Send order on WhatsApp</a>
             <p class="cart-note" id="coWaMissing" hidden>The owner hasn't set a WhatsApp number yet. Your order is saved in the shop — view it anytime on the Orders page.</p>
             <a class="btn btn--ghost" id="coCallLink" href="tel:+923075729901">Call us</a>
-            <a class="btn btn--ghost" href="orders.html">View my orders</a>
+            <a class="btn btn--ghost" id="coTrackLink" href="orders.html">Track my order</a>
           </div>
         </div>
 
