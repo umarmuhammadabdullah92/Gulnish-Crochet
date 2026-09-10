@@ -49,20 +49,20 @@
     <section class="section">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">Your orders</span>
+          <span class="section-eyebrow">Order tracking</span>
           <h1 class="section-title">My <em>Orders</em></h1>
-          <p class="section-lead">Enter the phone number you used at checkout to see your orders and track their status.</p>
+          <p class="section-lead">Enter your order number or the phone number you used at checkout to track your order.</p>
         </div>
 
         <div class="order-lookup reveal" id="orderLookupWrap" style="max-width:440px;margin:0 auto 2rem;display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;align-items:center;">
-          <input type="tel" id="orderPhone" placeholder="03xx xxxxxxx" style="flex:1;min-width:220px;padding:0.7rem 0.85rem;border:1px solid #e2cfc5;border-radius:10px;font-family:inherit;font-size:0.95rem;">
-          <button class="btn" type="button" id="orderLookup">Find orders</button>
+          <input type="text" id="orderPhone" placeholder="Order number or 03xx xxxxxxx" style="flex:1;min-width:220px;padding:0.7rem 0.85rem;border:1px solid #e2cfc5;border-radius:10px;font-family:inherit;font-size:0.95rem;">
+          <button class="btn" type="button" id="orderLookup">Track order</button>
           <span class="refresh-indicator" id="refreshIndicator" title="Auto-refreshes every 30s">&#8635;</span>
         </div>
 
         <div id="orderEmpty" class="checkout-empty" hidden>
           <div class="cart-empty__ph">&#128722;</div>
-          <p id="orderEmptyMsg">No orders found for that number.</p>
+          <p id="orderEmptyMsg">No orders found. Check your order number or phone number and try again.</p>
           <a class="btn" href="products.html">Start shopping</a>
         </div>
 
