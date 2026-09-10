@@ -481,18 +481,38 @@
 
   /* ---------- shop settings ---------- */
   var shopWhatsAppInput = document.getElementById("shopWhatsApp");
+  var shopCraftDaysInput = document.getElementById("shopCraftDays");
+  var shopDeliveryDaysInput = document.getElementById("shopDeliveryDays");
+  var shopBankTitleInput = document.getElementById("shopBankTitle");
+  var shopBankAccountInput = document.getElementById("shopBankAccount");
+  var shopBankIBANInput = document.getElementById("shopBankIBAN");
+  var shopJazzcashInput = document.getElementById("shopJazzcash");
+  var shopEasypaisaInput = document.getElementById("shopEasypaisa");
   var saveShopSettingsBtn = document.getElementById("saveShopSettings");
 
   function renderShopSettings() {
-    if (shopWhatsAppInput) {
-      shopWhatsAppInput.value = getSettings().whatsapp || "03075729901";
-    }
+    var s = getSettings();
+    if (shopWhatsAppInput) shopWhatsAppInput.value = s.whatsapp || "03075729901";
+    if (shopCraftDaysInput) shopCraftDaysInput.value = s.craftDays || "";
+    if (shopDeliveryDaysInput) shopDeliveryDaysInput.value = s.deliveryDays || "";
+    if (shopBankTitleInput) shopBankTitleInput.value = s.bankAccountTitle || "";
+    if (shopBankAccountInput) shopBankAccountInput.value = s.bankAccountNo || "";
+    if (shopBankIBANInput) shopBankIBANInput.value = s.bankIBAN || "";
+    if (shopJazzcashInput) shopJazzcashInput.value = s.jazzcashNumber || "";
+    if (shopEasypaisaInput) shopEasypaisaInput.value = s.easypaisaNumber || "";
   }
 
   if (saveShopSettingsBtn) {
     saveShopSettingsBtn.addEventListener("click", async function () {
       var settings = getSettings();
       settings.whatsapp = (shopWhatsAppInput.value || "").trim();
+      settings.craftDays = parseInt(shopCraftDaysInput.value || "0", 10) || 0;
+      settings.deliveryDays = parseInt(shopDeliveryDaysInput.value || "0", 10) || 0;
+      settings.bankAccountTitle = (shopBankTitleInput.value || "").trim();
+      settings.bankAccountNo = (shopBankAccountInput.value || "").trim();
+      settings.bankIBAN = (shopBankIBANInput.value || "").trim();
+      settings.jazzcashNumber = (shopJazzcashInput.value || "").trim();
+      settings.easypaisaNumber = (shopEasypaisaInput.value || "").trim();
       if (GC.saveSettings) await GC.saveSettings(settings);
       alert("Shop settings saved.");
     });
