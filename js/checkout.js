@@ -176,6 +176,7 @@
       })
       .join("");
     if (subtotalEl) subtotalEl.textContent = money(cartTotalPrice(items));
+    updateBar();
   }
 
   function renderReview() {
@@ -219,6 +220,9 @@
     placeBtn.disabled = loading;
     if (btnText) btnText.hidden = loading;
     if (btnLoading) btnLoading.hidden = !loading;
+    if (coBarBtn) coBarBtn.disabled = loading;
+    if (coBarBtnText) coBarBtnText.hidden = loading;
+    if (coBarBtnLoading) coBarBtnLoading.hidden = !loading;
   }
 
   function showMsg(message) {
