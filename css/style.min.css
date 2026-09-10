@@ -1752,12 +1752,17 @@ h1, h2, h3, .logo {
 }
 
 .checkout-grid {
+  display: block;
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+#step1,
+#step2 {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 2rem;
   align-items: start;
-  max-width: 940px;
-  margin: 0 auto;
 }
 
 .checkout-form {
@@ -2256,6 +2261,12 @@ h1, h2, h3, .logo {
   .checkout-grid,
   .order-card__body {
     grid-template-columns: 1fr;
+  }
+
+  #step1,
+  #step2 {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
 
   .checkout-summary {
