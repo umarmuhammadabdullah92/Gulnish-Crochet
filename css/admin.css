@@ -688,3 +688,18 @@
   .admin-item__actions .order-status-select { width: 100%; }
   .admin-item__actions { align-items: stretch; }
 }
+
+/* ---- Mobile-only admin polish ---- */
+@media (max-width: 768px) {
+  .admin-main { padding: 1rem 0 5rem; }
+  .admin-page .container { width: 100%; padding: 0 14px; }
+  .admin-head h1 { font-size: 1.5rem; }
+  .admin-card { padding: 1rem; border-radius: 12px; }
+  .admin-order-search input { font-size: 16px; min-height: 44px; }
+  .admin-bulk-actions { padding: 0.7rem 0.8rem; }
+  .order-status-select { min-height: 40px; font-size: 16px; }
+  .admin-item { gap: 0.7rem; padding: 0.7rem; }
+  .admin-item__actions .btn-wa-notify,
+  .admin-item__actions .delete { min-height: 40px; font-size: 1rem; }
+  .bulk-apply, .bulk-delete { min-height: 44px; }
+}

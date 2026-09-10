@@ -3730,3 +3730,10 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   .work-card__name { font-size: 0.92rem; }
   .work-card__price { font-size: 0.95rem; }
 }
+
+@media (max-width: 768px) {
+  .product-page { grid-template-columns: 1fr; gap: 1.4rem; }
+  .product-page__btn-row { flex-direction: column; }
+  .products-topbar { gap: 0.5rem; }
+  .products-topbar .btn--small { min-height: 42px; }
+}
