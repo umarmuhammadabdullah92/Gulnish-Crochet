@@ -1,12 +1,11 @@
 /* =========================================================
-   Gulnish Crochet — checkout page logic
+   Gulnish Crochet — checkout page logic (advanced)
    ========================================================= */
 
 (function () {
   "use strict";
 
   var GC = window.GC;
-
   var CART_KEY = "gulnish-cart";
 
   function money(value) {
@@ -58,6 +57,59 @@
   var btnText = document.getElementById("coBtnText");
   var btnLoading = document.getElementById("coBtnLoading");
 
+  /* ---------- step elements ---------- */
+  var step1 = document.getElementById("step1");
+  var step2 = document.getElementById("step2");
+  var step3 = document.getElementById("step3");
+  var progressFill = document.getElementById("checkoutProgressFill");
+  var stepDots = document.querySelectorAll(".checkout-step-dot");
+  var nextToReviewBtn = document.getElementById("coNextToReview");
+  var backToDetailsBtn = document.getElementById("coBackToDetails");
+
+  var currentStep = 1;
+
+  function setStep(step) {
+    currentStep = step;
+
+    if (step1) step1.hidden = step !== 1;
+    if (step2) step2.hidden = step !== 2;
+    if (step3) step3.hidden = step !== 3;
+
+    var pct = step === 1 ? 33 : step === 2 ? 66 : 100;
+    if (progressFill) progressFill.style.width = pct + "%";
+
+    stepDots.forEach(function (dot, i) {
+      var s = i + 1;
+      dot.classList.toggle("active", s <= step);
+      dot.classList.toggle("completed", s < step);
+    });
+
+    if (step === 2) renderReview();
+  }
+
+  /* ---------- auto-fill from saved profile ---------- */
+  function autoFillProfile() {
+    var profile = GC && GC.getCustomerProfile ? GC.getCustomerProfile() : null;
+    if (!profile) return;
+    var fields = { coName: "name", coPhone: "phone", coEmail: "email", coAddress: "address", coCity: "city" };
+    Object.keys(fields).forEach(function (fieldId) {
+      var el = document.getElementById(fieldId);
+      if (el && profile[fields[fieldId]]) el.value = profile[fields[fieldId]];
+    });
+  }
+
+  /* ---------- save profile after order ---------- */
+  function saveProfile() {
+    var profile = {
+      name: (document.getElementById("coName") || {}).value || "",
+      phone: (document.getElementById("coPhone") || {}).value || "",
+      email: (document.getElementById("coEmail") || {}).value || "",
+      address: (document.getElementById("coAddress") || {}).value || "",
+      city: (document.getElementById("coCity") || {}).value || ""
+    };
+    if (GC && GC.saveCustomerProfile) GC.saveCustomerProfile(profile);
+  }
+
   function renderSummary(items) {
     if (!itemsEl) return;
     if (!items.length) {
@@ -91,34 +143,47 @@
     if (subtotalEl) subtotalEl.textContent = money(cartTotalPrice(items));
   }
 
+  function renderReview() {
+    var reviewItems = document.getElementById("coReviewItems");
+    var reviewTotal = document.getElementById("coReviewTotal");
+    var reviewCustomer = document.getElementById("coReviewCustomer");
+    var reviewPayment = document.getElementById("coReviewPayment");
+    var items = loadCart();
+
+    if (reviewItems) {
+      reviewItems.innerHTML = items.map(function (item) {
+        return '<div class="co-review-item">' +
+          '<span class="co-review-item__name">' + escapeHtml(item.name) + (item.color ? " (" + escapeHtml(item.color) + ")" : "") + '</span>' +
+          '<span class="co-review-item__qty">x' + item.qty + '</span>' +
+          '<span class="co-review-item__price">' + money(item.price * item.qty) + '</span>' +
+        '</div>';
+      }).join("");
+    }
+
+    if (reviewTotal) reviewTotal.textContent = money(cartTotalPrice(items));
+
+    if (reviewCustomer) {
+      var name = (document.getElementById("coName") || {}).value || "";
+      var phone = (document.getElementById("coPhone") || {}).value || "";
+      var address = (document.getElementById("coAddress") || {}).value || "";
+      var city = (document.getElementById("coCity") || {}).value || "";
+      reviewCustomer.innerHTML =
+        '<p><strong>' + escapeHtml(name) + '</strong></p>' +
+        '<p>' + escapeHtml(phone) + '</p>' +
+        '<p>' + escapeHtml(address) + (city ? ", " + escapeHtml(city) : "") + '</p>';
+    }
+
+    if (reviewPayment) {
+      var payment = (document.getElementById("coPayment") || {}).value || "Cash on delivery";
+      reviewPayment.textContent = payment;
+    }
+  }
+
   function setLoading(loading) {
     if (!placeBtn) return;
     placeBtn.disabled = loading;
     if (btnText) btnText.hidden = loading;
     if (btnLoading) btnLoading.hidden = !loading;
-  }
-
-  function validate() {
-    var name = (document.getElementById("coName") || {}).value || "";
-    var phone = (document.getElementById("coPhone") || {}).value || "";
-    var address = (document.getElementById("coAddress") || {}).value || "";
-    var city = (document.getElementById("coCity") || {}).value || "";
-
-    if (!name.trim()) {
-      (document.getElementById("coName") || {}).focus && document.getElementById("coName").focus();
-      showMsg("Please enter your name.");
-      return false;
-    }
-    if (!phone.trim()) {
-      (document.getElementById("coPhone") || {}).focus && document.getElementById("coPhone").focus();
-      showMsg("Please enter your phone number.");
-      return false;
-    }
-    if (!address.trim() || !city.trim()) {
-      showMsg("Please enter your delivery address and city.");
-      return false;
-    }
-    return true;
   }
 
   function showMsg(message) {
@@ -134,6 +199,31 @@
     showMsg._t = setTimeout(function () { toast.classList.remove("show"); }, 2400);
   }
 
+  function validate() {
+    var name = (document.getElementById("coName") || {}).value || "";
+    var phone = (document.getElementById("coPhone") || {}).value || "";
+    var address = (document.getElementById("coAddress") || {}).value || "";
+    var city = (document.getElementById("coCity") || {}).value || "";
+
+    if (!name.trim()) {
+      var el = document.getElementById("coName");
+      if (el) el.focus();
+      showMsg("Please enter your name.");
+      return false;
+    }
+    if (!phone.trim()) {
+      var el = document.getElementById("coPhone");
+      if (el) el.focus();
+      showMsg("Please enter your phone number.");
+      return false;
+    }
+    if (!address.trim() || !city.trim()) {
+      showMsg("Please enter your delivery address and city.");
+      return false;
+    }
+    return true;
+  }
+
   function placeOrder() {
     setLoading(true);
     var items = loadCart();
@@ -142,8 +232,7 @@
     var email = (document.getElementById("coEmail") || {}).value || "";
     var address = (document.getElementById("coAddress") || {}).value || "";
     var city = (document.getElementById("coCity") || {}).value || "";
-    var payment =
-      (document.getElementById("coPayment") || {}).value || "";
+    var payment = (document.getElementById("coPayment") || {}).value || "";
     var notes = (document.getElementById("coNotes") || {}).value || "";
 
     var phone = String(phoneV).replace(/[^\d]/g, "").replace(/^0+/, "");
@@ -177,6 +266,9 @@
 
     var done = function () {
       saveCart([]);
+      saveProfile();
+
+      setStep(3);
 
       if (success) {
         if (successNo) successNo.textContent = order.id;
@@ -217,9 +309,6 @@
 
     if (GC && GC.saveOrder) {
       GC.saveOrder(order).then(function (res) {
-        if (res && !res.ok && res.error && res.error.code === "permission_denied") {
-          // RLS blocked the write (shouldn't happen — inserts are public)
-        }
         done();
       }).catch(function () {
         done();
@@ -229,9 +318,25 @@
     }
   }
 
+  /* ---------- step 1 -> step 2 ---------- */
+  if (nextToReviewBtn) {
+    nextToReviewBtn.addEventListener("click", function () {
+      if (!validate()) return;
+      setStep(2);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* ---------- step 2 -> step 1 (back) ---------- */
+  if (backToDetailsBtn) {
+    backToDetailsBtn.addEventListener("click", function () {
+      setStep(1);
+    });
+  }
+
+  /* ---------- place order (from review step) ---------- */
   if (placeBtn) {
     placeBtn.addEventListener("click", function (e) {
-      if (!validate()) return;
       placeOrder();
     });
   }
@@ -239,13 +344,27 @@
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (!validate()) return;
-      placeOrder();
+      if (currentStep === 1) {
+        if (!validate()) return;
+        setStep(2);
+      } else if (currentStep === 2) {
+        placeOrder();
+      }
     });
   }
 
+  /* ---------- enter key advances steps ---------- */
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && currentStep === 2 && !placeBtn.disabled) {
+      e.preventDefault();
+      placeOrder();
+    }
+  });
+
   function init() {
     renderSummary(loadCart());
+    autoFillProfile();
+    setStep(1);
   }
 
   if (GC && GC.init) {
