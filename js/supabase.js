@@ -693,6 +693,8 @@
   /* ---------- row mappers ---------- */
   function orderToRow(o) {
     var c = o.customer || {};
+    var pay = o.payment || {};
+    var method = typeof o.payment === "string" ? o.payment : (pay.method || "Cash on delivery");
     return {
       id: o.id,
       phone: String(c.phone || "").replace(/[^\d]/g, "").replace(/^0+/, ""),
@@ -703,16 +705,28 @@
       notes: c.notes || "",
       items: o.items || [],
       total: o.total || 0,
-      payment: o.payment || "",
+      payment_method: method,
+      payment_status: (typeof o.payment === "string" ? "Pending" : (pay.status || "Pending")),
+      payment: method,
       status: o.status || "Pending",
-      placed_at: o.placedAt || new Date().toISOString()
+      status_history: o.statusHistory || [],
+      est_delivery: o.estDelivery || null,
+      craft_days: o.craftDays || null,
+      delivery_days: o.deliveryDays || null,
+      placed_at: o.placedAt || new Date().toISOString(),
+      updated_at: o.updatedAt || o.placedAt || new Date().toISOString()
     };
   }
 
   function orderFromRow(r) {
+    var method = r.payment_method || r.payment || "Cash on delivery";
+    var history = Array.isArray(r.status_history) && r.status_history.length
+      ? r.status_history
+      : [{ status: r.status || "Pending", at: r.placed_at || r.created_at || new Date().toISOString(), note: "" }];
     return {
       id: r.id,
       placedAt: r.placed_at || r.created_at,
+      updatedAt: r.updated_at || r.placed_at || r.created_at,
       customer: {
         name: r.customer_name || "",
         phone: r.phone || "",
@@ -723,8 +737,15 @@
       },
       items: r.items || [],
       total: r.total || 0,
-      payment: r.payment || "",
-      status: r.status || "Pending"
+      payment: {
+        method: method,
+        status: r.payment_status || "Pending"
+      },
+      status: r.status || "Pending",
+      statusHistory: history,
+      estDelivery: r.est_delivery || null,
+      craftDays: r.craft_days || null,
+      deliveryDays: r.delivery_days || null
     };
   }
 
