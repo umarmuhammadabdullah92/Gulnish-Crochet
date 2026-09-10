@@ -59,30 +59,42 @@
           <a class="btn" href="products.html">Browse products</a>
         </div>
 
+        <!-- Checkout progress stepper -->
+        <div class="checkout-stepper" id="checkoutStepper">
+          <div class="checkout-progress-bar"><div class="checkout-progress-fill" id="checkoutProgressFill"></div></div>
+          <div class="checkout-steps">
+            <span class="checkout-step-dot active"><span class="checkout-step-num">1</span><span class="checkout-step-text">Details</span></span>
+            <span class="checkout-step-dot"><span class="checkout-step-num">2</span><span class="checkout-step-text">Review</span></span>
+            <span class="checkout-step-dot"><span class="checkout-step-num">3</span><span class="checkout-step-text">Done</span></span>
+          </div>
+        </div>
+
         <div class="checkout-grid" id="coForm">
+          <!-- Step 1: Details -->
+          <div id="step1">
           <form class="checkout-form" id="coFormEl" novalidate>
             <div class="checkout-card reveal">
               <h3>Your details</h3>
               <label>
                 <span>Full name *</span>
-                <input type="text" id="coName" required placeholder="Your name">
+                <input type="text" id="coName" required placeholder="Your name" autocomplete="name">
               </label>
               <label>
                 <span>Phone / WhatsApp *</span>
-                <input type="tel" id="coPhone" required placeholder="03xx xxxxxxx">
+                <input type="tel" id="coPhone" required placeholder="03xx xxxxxxx" autocomplete="tel">
               </label>
               <label>
                 <span>Email (optional)</span>
-                <input type="email" id="coEmail" placeholder="you@example.com">
+                <input type="email" id="coEmail" placeholder="you@example.com" autocomplete="email">
               </label>
               <div class="checkout-row">
                 <label>
                   <span>Address *</span>
-                  <input type="text" id="coAddress" required placeholder="House, street, area">
+                  <input type="text" id="coAddress" required placeholder="House, street, area" autocomplete="street-address">
                 </label>
                 <label>
                   <span>City *</span>
-                  <input type="text" id="coCity" required placeholder="City">
+                  <input type="text" id="coCity" required placeholder="City" autocomplete="address-level2">
                 </label>
               </div>
             </div>
@@ -114,12 +126,50 @@
               </select>
             </label>
 
+            <button class="btn co-place" type="button" id="coNextToReview">
+              <span>Review Order &rarr;</span>
+            </button>
+            <p class="cart-note">You can track your order anytime on the Orders page.</p>
+          </div>
+          </div>
+
+          <!-- Step 2: Review -->
+          <div id="step2" hidden>
+          <div class="checkout-review">
+            <div class="checkout-card reveal">
+              <h3>Order summary</h3>
+              <div id="coReviewItems" class="co-review-items"></div>
+              <div class="co-review-total">
+                <span>Total</span>
+                <span id="coReviewTotal">Rs. 0.00</span>
+              </div>
+              <div class="co-review-detail">
+                <span class="co-review-label">Delivery to</span>
+                <div id="coReviewCustomer"></div>
+              </div>
+              <div class="co-review-detail">
+                <span class="co-review-label">Payment</span>
+                <span id="coReviewPayment"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="checkout-summary reveal" data-delay="1">
+            <h3>Confirm order</h3>
+            <p class="cart-note">Please review your details before placing the order.</p>
             <button class="btn co-place" type="button" id="coPlace">
               <span id="coBtnText">Place order</span>
               <span id="coBtnLoading" hidden>Placing order...</span>
             </button>
-            <p class="cart-note">Your order is saved to our shop and sent to us on WhatsApp for confirmation. You can track it anytime on the Orders page with your phone number.</p>
+            <button class="btn btn--ghost co-place" type="button" id="coBackToDetails" style="margin-top:0.5rem">
+              <span>&larr; Back to details</span>
+            </button>
+            <p class="cart-note">Your order is saved and sent to us on WhatsApp for confirmation.</p>
           </div>
+          </div>
+
+          <!-- Step 3 (hidden, handled by JS) -->
+          <div id="step3" hidden></div>
         </div>
 
         <!-- Confirmation -->
