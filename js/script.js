@@ -581,6 +581,7 @@
       );
     }
     buildColorSwatches();
+    updatePpWa();
 
     if (categoryView) categoryView.hidden = true;
     if (productsView) productsView.hidden = true;
