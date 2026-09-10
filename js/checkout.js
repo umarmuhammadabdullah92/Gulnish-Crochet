@@ -244,46 +244,28 @@
     updateBar();
   }
 
-  function renderReview() {
-    var reviewItems = document.getElementById("coReviewItems");
-    var reviewTotal = document.getElementById("coReviewTotal");
-    var reviewCustomer = document.getElementById("coReviewCustomer");
-    var reviewPayment = document.getElementById("coReviewPayment");
-    var reviewEta = document.getElementById("coReviewEta");
-    var items = loadCart();
+  function updateStrip() {
+    var stripDelivery = document.getElementById("coStripDelivery");
+    var stripPayment = document.getElementById("coStripPayment");
+    var stripEta = document.getElementById("coStripEta");
 
-    if (reviewItems) {
-      reviewItems.innerHTML = items.map(function (item) {
-        return '<div class="co-review-item">' +
-          '<span class="co-review-item__name">' + escapeHtml(item.name) + (item.color ? " (" + escapeHtml(item.color) + ")" : "") + '</span>' +
-          '<span class="co-review-item__qty">x' + item.qty + '</span>' +
-          '<span class="co-review-item__price">' + money(item.price * item.qty) + '</span>' +
-        '</div>';
-      }).join("");
-    }
-
-    if (reviewTotal) reviewTotal.textContent = money(cartTotalPrice(items));
-
-    if (reviewCustomer) {
+    if (stripDelivery) {
       var name = (document.getElementById("coName") || {}).value || "";
-      var phone = (document.getElementById("coPhone") || {}).value || "";
       var address = (document.getElementById("coAddress") || {}).value || "";
       var city = (document.getElementById("coCity") || {}).value || "";
-      reviewCustomer.innerHTML =
-        '<p><strong>' + escapeHtml(name) + '</strong></p>' +
-        '<p>' + escapeHtml(phone) + '</p>' +
-        '<p>' + escapeHtml(address) + (city ? ", " + escapeHtml(city) : "") + '</p>';
+      stripDelivery.textContent = name
+        ? name + (address ? " · " + address : "") + (city ? ", " + city : "")
+        : "Add your details above";
     }
 
-    if (reviewPayment) {
+    if (stripPayment) {
       var method = currentPayment();
-      var payStatus = method === "Cash on delivery" ? "Pay on delivery" : "Awaiting payment";
-      reviewPayment.textContent = method + " &mdash; " + payStatus;
+      stripPayment.textContent = method === "Cash on delivery" ? "Cash on delivery" : method;
     }
 
-    if (reviewEta) {
+    if (stripEta) {
       var eta = GC && GC.deliveryEstimate ? GC.deliveryEstimate(new Date().toISOString(), false) : "";
-      reviewEta.textContent = eta ? friendlyDate(eta) : "";
+      stripEta.textContent = eta ? friendlyDate(eta) : "";
     }
   }
 
