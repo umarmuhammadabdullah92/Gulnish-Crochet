@@ -168,6 +168,13 @@
     }
     if (base.whatsapp) s.whatsapp = base.whatsapp;
     if (base.adminPasswordHash) s.adminPasswordHash = base.adminPasswordHash;
+    if (base.craftDays) s.craftDays = parseInt(base.craftDays, 10) || 5;
+    if (base.deliveryDays) s.deliveryDays = parseInt(base.deliveryDays, 10) || 3;
+    if (base.bankAccountTitle) s.bankAccountTitle = base.bankAccountTitle;
+    if (base.bankAccountNo) s.bankAccountNo = base.bankAccountNo;
+    if (base.bankIBAN) s.bankIBAN = base.bankIBAN;
+    if (base.jazzcashNumber) s.jazzcashNumber = base.jazzcashNumber;
+    if (base.easypaisaNumber) s.easypaisaNumber = base.easypaisaNumber;
     return s;
   }
 
