@@ -54,9 +54,10 @@
           <p class="section-lead">Enter the phone number you used at checkout to see your orders and track their status.</p>
         </div>
 
-        <div class="order-lookup reveal" id="orderLookupWrap" style="max-width:440px;margin:0 auto 2rem;display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;">
+        <div class="order-lookup reveal" id="orderLookupWrap" style="max-width:440px;margin:0 auto 2rem;display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;align-items:center;">
           <input type="tel" id="orderPhone" placeholder="03xx xxxxxxx" style="flex:1;min-width:220px;padding:0.7rem 0.85rem;border:1px solid #e2cfc5;border-radius:10px;font-family:inherit;font-size:0.95rem;">
           <button class="btn" type="button" id="orderLookup">Find orders</button>
+          <span class="refresh-indicator" id="refreshIndicator" title="Auto-refreshes every 30s">&#8635;</span>
         </div>
 
         <div id="orderEmpty" class="checkout-empty" hidden>
