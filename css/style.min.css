@@ -3378,3 +3378,95 @@ h1, h2, h3, .logo {
   }
 }
 
+
+/* ---------- WhatsApp quick-order (mobile-fast) ---------- */
+.btn--wa {
+  background: linear-gradient(180deg, #2fdc74, #1faa52);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(31, 170, 82, 0.32);
+}
+.btn--wa:hover {
+  background: linear-gradient(180deg, #35e87c, #1faa52);
+  color: #fff;
+  box-shadow: 0 12px 26px rgba(31, 170, 82, 0.4);
+}
+.btn--wa::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+}
+.cart-wa {
+  width: 100%;
+  margin-top: 0.45rem;
+}
+.product-page__btn-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: stretch;
+  margin-top: 1.1rem;
+}
+.product-page__wa {
+  width: 100%;
+  padding: 0.75rem 1.2rem;
+  font-weight: 700;
+}
+
+/* WhatsApp quick button overlaid on product card image */
+.work-card__wa {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #2fdc74, #1faa52);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 14px rgba(20, 26, 23, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.work-card__wa:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 20px rgba(31, 170, 82, 0.4);
+}
+.work-card__media {
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .wa-float {
+    width: 58px;
+    height: 58px;
+    right: 1rem;
+    bottom: 1.5rem;
+  }
+  .wa-float svg {
+    width: 30px;
+    height: 30px;
+  }
+  .wa-float::after {
+    content: "Chat & Order";
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    background: #fff;
+    color: #149a46;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(20, 26, 23, 0.16);
+    border: 1px solid rgba(31, 170, 82, 0.28);
+  }
+  #cartBar.show ~ .wa-float {
+    bottom: calc(4.4rem + env(safe-area-inset-bottom));
+  }
+  .work-card__wa {
+    width: 44px;
+    height: 44px;
+  }
+}
