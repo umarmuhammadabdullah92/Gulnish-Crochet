@@ -367,6 +367,7 @@
         if (sf && (o.status || "Pending") !== sf) return false;
         if (!q) return true;
         var cust = o.customer || {};
+        var pay = o.payment || {};
         var haystack = [
           o.id || "",
           cust.name || "",
@@ -374,7 +375,10 @@
           cust.email || "",
           cust.city || "",
           cust.address || "",
-          cust.notes || ""
+          cust.notes || "",
+          o.status || "",
+          pay.method || "",
+          pay.status || ""
         ].join(" ").toLowerCase();
         return haystack.indexOf(q) !== -1;
       });
