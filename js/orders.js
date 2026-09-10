@@ -1,5 +1,5 @@
 /* =========================================================
-   Gulnish Crochet — customer orders page logic
+   Gulnish Crochet — customer orders page logic (advanced)
    ========================================================= */
 
 (function () {
@@ -35,12 +35,66 @@
     return String(p || "").replace(/[^\d]/g, "").replace(/^0+/, "");
   }
 
+  var STATUS_STEPS = ["Pending", "Confirmed", "Processing", "Shipped", "Delivered"];
+  var STATUS_CANCELLED = "Cancelled";
+
+  function getStepIndex(status) {
+    var s = (status || "Pending").toLowerCase();
+    if (s === "cancelled") return -1;
+    for (var i = 0; i < STATUS_STEPS.length; i++) {
+      if (STATUS_STEPS[i].toLowerCase() === s) return i;
+    }
+    return 0;
+  }
+
+  function statusIcon(status) {
+    var s = (status || "").toLowerCase();
+    if (s === "pending") return "&#128276;";
+    if (s === "confirmed") return "&#10003;";
+    if (s === "processing") return "&#9881;";
+    if (s === "shipped") return "&#128666;";
+    if (s === "delivered") return "&#127873;";
+    if (s === "cancelled") return "&#10007;";
+    return "&#8226;";
+  }
+
   var listEl = document.getElementById("orderList");
   var emptyEl = document.getElementById("orderEmpty");
   var lookupWrap = document.getElementById("orderLookupWrap");
   var phoneInput = document.getElementById("orderPhone");
   var lookupBtn = document.getElementById("orderLookup");
   var emptyMsg = document.getElementById("orderEmptyMsg");
+  var refreshIndicator = document.getElementById("refreshIndicator");
+
+  var _lastPhone = "";
+  var _autoRefreshTimer = null;
+
+  function renderTimeline(status) {
+    var idx = getStepIndex(status);
+    var isCancelled = (status || "").toLowerCase() === "cancelled";
+
+    var html = '<div class="order-timeline' + (isCancelled ? " order-timeline--cancelled" : "") + '">';
+    STATUS_STEPS.forEach(function (step, i) {
+      var state = "";
+      if (isCancelled) state = "order-timeline__step--cancelled";
+      else if (i < idx) state = "order-timeline__step--done";
+      else if (i === idx) state = "order-timeline__step--current";
+      else state = "order-timeline__step--upcoming";
+
+      html += '<div class="order-timeline__step ' + state + '">' +
+        '<span class="order-timeline__dot">' + statusIcon(step) + '</span>' +
+        '<span class="order-timeline__label">' + step + '</span>' +
+      '</div>';
+    });
+    if (isCancelled) {
+      html += '<div class="order-timeline__step order-timeline__step--cancelled">' +
+        '<span class="order-timeline__dot">' + statusIcon(STATUS_CANCELLED) + '</span>' +
+        '<span class="order-timeline__label">Cancelled</span>' +
+      '</div>';
+    }
+    html += '</div>';
+    return html;
+  }
 
   function render(orders) {
     var list = orders || [];
@@ -56,11 +110,18 @@
         var cust = o.customer || {};
         var items = (o.items || [])
           .map(function (i) {
-            return "- " + escapeHtml(i.name) +
-              (i.color ? " (" + escapeHtml(i.color) + ")" : "") +
-              " x" + i.qty + " = " + money((i.price || 0) * i.qty);
+            return '<div class="order-item-row">' +
+              '<span class="order-item-row__name">' + escapeHtml(i.name) +
+                (i.color ? " <span class='order-item-row__color'>(" + escapeHtml(i.color) + ")</span>" : "") +
+              '</span>' +
+              '<span class="order-item-row__qty">x' + i.qty + '</span>' +
+              '<span class="order-item-row__price">' + money((i.price || 0) * i.qty) + '</span>' +
+            '</div>';
           })
-          .join("\n");
+          .join("");
+
+        var timeline = renderTimeline(o.status);
+
         return (
           '<article class="order-card reveal">' +
           '<div class="order-card__head">' +
@@ -71,17 +132,20 @@
           '<span class="order-status order-status--' + (o.status || "pending").toLowerCase().replace(/[^a-z0-9]+/g, "-") + '">' +
           escapeHtml(o.status || "Pending") + "</span>" +
           "</div>" +
+          timeline +
           '<div class="order-card__body">' +
           '<div class="order-card__col">' +
           '<span class="order-card__label">Items</span>' +
-          '<pre class="order-card__items">' + (items || "\u2014") + "</pre>" +
+          '<div class="order-card__items">' + (items || "<span class='muted'>&mdash;</span>") + "</div>" +
           "</div>" +
           '<div class="order-card__col">' +
-          '<span class="order-card__label">Customer</span>' +
+          '<span class="order-card__label">Delivery</span>' +
           '<p class="order-card__cust">' +
-          escapeHtml(cust.name) + " \u2014" + "<br>" +
+          escapeHtml(cust.name) + "<br>" +
           (escapeHtml(cust.phone) ? "Ph: +" + escapeHtml(cust.phone) : "") +
-          (cust.city ? ", " + escapeHtml(cust.city) : "") +
+          (cust.city ? "<br>" + escapeHtml(cust.city) : "") +
+          (cust.address ? '<br><span class="muted">' + escapeHtml(cust.address) + '</span>' : "") +
+          (cust.notes ? '<br><em class="muted">' + escapeHtml(cust.notes) + '</em>' : "") +
           "</p>" +
           "</div>" +
           "</div>" +
@@ -124,6 +188,7 @@
     }
     if (lookupWrap) lookupWrap.classList.remove("has-error");
 
+    _lastPhone = norm;
     var orders = GC && GC.getOrdersByPhone ? GC.getOrdersByPhone(phone) : [];
     if (emptyMsg) {
       emptyMsg.textContent = orders.length
@@ -131,6 +196,22 @@
         : "No orders found for that number.";
     }
     render(orders);
+
+    if (!_autoRefreshTimer) {
+      _autoRefreshTimer = setInterval(function () {
+        if (_lastPhone) {
+          var freshOrders = GC && GC.getOrdersByPhone ? GC.getOrdersByPhone(_lastPhone) : [];
+          render(freshOrders);
+          showRefreshPulse();
+        }
+      }, 30000);
+    }
+  }
+
+  function showRefreshPulse() {
+    if (!refreshIndicator) return;
+    refreshIndicator.classList.add("pulse");
+    setTimeout(function () { refreshIndicator.classList.remove("pulse"); }, 1000);
   }
 
   if (lookupBtn) {
@@ -140,10 +221,15 @@
     phoneInput.addEventListener("keydown", function (e) {
       if (e.key === "Enter") lookup();
     });
+    /* auto-lookup if URL has phone param */
+    var urlPhone = new URLSearchParams(location.search).get("phone");
+    if (urlPhone) {
+      phoneInput.value = urlPhone;
+      setTimeout(lookup, 300);
+    }
   }
 
   function init() {
-    // Start empty; user looks up by phone to see their shared orders.
     render([]);
   }
 
