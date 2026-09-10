@@ -151,6 +151,7 @@
       if (subtotalEl) subtotalEl.textContent = money(0);
       if (emptyWrap) emptyWrap.hidden = false;
       if (formWrap) formWrap.hidden = true;
+      updateBar();
       return;
     }
     if (emptyWrap) emptyWrap.hidden = true;
