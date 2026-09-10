@@ -2263,6 +2263,12 @@ h1, h2, h3, .logo {
     grid-template-columns: 1fr;
   }
 
+  #step1,
+  #step2 {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
   .checkout-summary {
     position: static;
   }
