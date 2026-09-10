@@ -380,6 +380,24 @@
     });
   }
 
+  /* ---------- mobile sticky action bar ---------- */
+  if (coBarBtn) {
+    coBarBtn.addEventListener("click", function () {
+      if (currentStep === 1) {
+        if (!validate()) return;
+        setStep(2);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (currentStep === 2) {
+        placeOrder();
+      }
+    });
+  }
+  if (coBarBack) {
+    coBarBack.addEventListener("click", function () {
+      setStep(1);
+    });
+  }
+
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
