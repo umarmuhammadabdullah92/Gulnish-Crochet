@@ -1,5 +1,5 @@
 /* =========================================================
-   Product Manager (admin.html) logic
+   Product Manager (admin.html) logic — advanced order system
    ========================================================= */
 (function () {
   "use strict";
@@ -447,7 +447,6 @@
     var up = await GC.uploadImage(file);
     var imgUrl = (up && up.url) || null;
     if (!imgUrl) {
-      // Fallback to data URL if storage unavailable
       imgUrl = await readAsDataURL(file);
     }
     if (!imgUrl) return;
@@ -499,7 +498,10 @@
     });
   }
 
-  /* ---------- orders ---------- */
+  /* =========================================================
+     ADVANCED ORDER MANAGEMENT
+     ========================================================= */
+
   var ORDER_STATUSES = [
     "Pending",
     "Confirmed",
@@ -523,17 +525,74 @@
 
   var adminOrders = document.getElementById("adminOrders");
   var orderCount = document.getElementById("orderCount");
+  var orderSearch = document.getElementById("orderSearchInput");
+  var orderStatusFilter = document.getElementById("orderStatusFilter");
+  var orderStatsEl = document.getElementById("orderStats");
+  var bulkActionsEl = document.getElementById("bulkActions");
+  var bulkStatusSelect = document.getElementById("bulkStatusSelect");
+  var bulkApplyBtn = document.getElementById("bulkApplyBtn");
+  var bulkDeleteBtn = document.getElementById("bulkDeleteBtn");
+  var selectAllOrders = document.getElementById("selectAllOrders");
+
+  var _selectedOrders = new Set();
+  var _orderSearchDebounce = null;
+
+  function renderOrderStats() {
+    if (!orderStatsEl) return;
+    var stats = GC && GC.getOrderStats ? GC.getOrderStats() : { total: 0, pending: 0, confirmed: 0, processing: 0, shipped: 0, delivered: 0, cancelled: 0, revenue: 0, todayOrders: 0 };
+
+    orderStatsEl.innerHTML =
+      '<div class="stat-card stat-card--total">' +
+        '<span class="stat-card__value">' + stats.total + '</span>' +
+        '<span class="stat-card__label">Total Orders</span>' +
+      '</div>' +
+      '<div class="stat-card stat-card--pending">' +
+        '<span class="stat-card__value">' + stats.pending + '</span>' +
+        '<span class="stat-card__label">Pending</span>' +
+      '</div>' +
+      '<div class="stat-card stat-card--progress">' +
+        '<span class="stat-card__value">' + (stats.confirmed + stats.processing + stats.shipped) + '</span>' +
+        '<span class="stat-card__label">In Progress</span>' +
+      '</div>' +
+      '<div class="stat-card stat-card--delivered">' +
+        '<span class="stat-card__value">' + stats.delivered + '</span>' +
+        '<span class="stat-card__label">Delivered</span>' +
+      '</div>' +
+      '<div class="stat-card stat-card--revenue">' +
+        '<span class="stat-card__value">' + money(stats.revenue) + '</span>' +
+        '<span class="stat-card__label">Revenue</span>' +
+      '</div>' +
+      '<div class="stat-card stat-card--today">' +
+        '<span class="stat-card__value">' + stats.todayOrders + '</span>' +
+        '<span class="stat-card__label">Today</span>' +
+      '</div>';
+  }
+
+  function getFilteredOrders() {
+    var query = orderSearch ? orderSearch.value.trim() : "";
+    var status = orderStatusFilter ? orderStatusFilter.value : "";
+    if (GC && GC.searchOrders) return GC.searchOrders(query, status);
+    return getOrders();
+  }
 
   function renderOrders() {
-    var orders = getOrders();
+    var orders = getFilteredOrders();
+    var allOrders = getOrders();
+
     if (orderCount) {
-      orderCount.textContent = orders.length ? "(" + orders.length + ")" : "";
+      orderCount.textContent = allOrders.length ? "(" + allOrders.length + ")" : "";
     }
+
+    renderOrderStats();
+
     if (!adminOrders) return;
     if (!orders.length) {
-      adminOrders.innerHTML = '<p class="admin-empty">No orders yet.</p>';
+      adminOrders.innerHTML = '<p class="admin-empty">No orders found.</p>';
+      _selectedOrders.clear();
+      updateBulkUI();
       return;
     }
+
     adminOrders.innerHTML = orders
       .map(function (o) {
         var cust = o.customer || {};
@@ -545,8 +604,12 @@
         var statusOpts = ORDER_STATUSES.map(function (s) {
           return '<option value="' + s + '"' + (s === (o.status || "Pending") ? " selected" : "") + ">" + s + "</option>";
         }).join("");
+        var isSelected = _selectedOrders.has(o.id);
         return (
-          '<div class="admin-item admin-order">' +
+          '<div class="admin-item admin-order' + (isSelected ? " admin-order--selected" : "") + '">' +
+          '<label class="admin-order__check">' +
+          '<input type="checkbox" data-ordercheck="' + escapeHtml(o.id) + '"' + (isSelected ? " checked" : "") + '>' +
+          '</label>' +
           '<div class="admin-item__info">' +
           '<div class="admin-item__name">' + escapeHtml(o.id) + " &mdash; " + escapeHtml(cust.name || "Customer") + "</div>" +
           '<div class="admin-item__meta">' +
@@ -555,11 +618,12 @@
           (cust.phone ? "<br>Ph: +" + escapeHtml(cust.phone) : "") +
           (cust.city ? " &middot; " + escapeHtml(cust.city) : "") +
           (o.payment ? " &middot; " + escapeHtml(o.payment) : "") +
-          (cust.notes ? "<br>Notes: " + escapeHtml(cust.notes) : "") +
+          (cust.notes ? '<br><em class="muted">Notes: ' + escapeHtml(cust.notes) + '</em>' : "") +
           "</div></div>" +
           '<div class="admin-item__actions">' +
           '<select class="order-status-select" data-order="' + escapeHtml(o.id) + '" aria-label="Order status">' +
           statusOpts + "</select>" +
+          '<button type="button" class="btn-wa-notify" data-waorder="' + escapeHtml(o.id) + '" title="Send WhatsApp update">&#128172;</button>' +
           '<button type="button" class="delete" data-delorder="' + escapeHtml(o.id) + '">Delete</button>' +
           "</div></div>"
         );
@@ -567,7 +631,31 @@
       .join("");
   }
 
+  function updateBulkUI() {
+    if (bulkActionsEl) {
+      bulkActionsEl.classList.toggle("show", _selectedOrders.size > 0);
+    }
+    if (bulkActionsEl) {
+      var countEl = bulkActionsEl.querySelector(".bulk-count");
+      if (countEl) countEl.textContent = _selectedOrders.size + " selected";
+    }
+  }
+
   if (adminOrders) {
+    /* checkbox selection */
+    adminOrders.addEventListener("change", function (e) {
+      var cb = e.target.closest("[data-ordercheck]");
+      if (cb) {
+        if (cb.checked) _selectedOrders.add(cb.dataset.ordercheck);
+        else _selectedOrders.delete(cb.dataset.ordercheck);
+        var row = cb.closest(".admin-order");
+        if (row) row.classList.toggle("admin-order--selected", cb.checked);
+        updateBulkUI();
+        return;
+      }
+    });
+
+    /* status change */
     adminOrders.addEventListener("change", async function (e) {
       var sel = e.target.closest(".order-status-select");
       if (!sel) return;
@@ -575,11 +663,92 @@
       renderOrders();
     });
 
+    /* WhatsApp notify */
+    adminOrders.addEventListener("click", function (e) {
+      var waBtn = e.target.closest("[data-waorder]");
+      if (!waBtn) return;
+      var orderId = waBtn.dataset.waorder;
+      var order = getOrders().find(function (o) { return o.id === orderId; });
+      if (!order) return;
+      var cust = order.customer || {};
+      var phone = String(cust.phone || "").replace(/[^\d]/g, "").replace(/^0+/, "");
+      if (!phone) { alert("No phone number for this order."); return; }
+      var status = order.status || "Pending";
+      var msg = "Hi " + (cust.name || "Customer") + ",\n\nYour order *" + order.id + "* has been updated to: *" + status + "*.\n\nItems: " +
+        (order.items || []).map(function (i) { return i.name + " x" + i.qty; }).join(", ") +
+        "\nTotal: " + money(order.total) +
+        (status.toLowerCase() === "shipped" ? "\n\nYour order is on the way!" : "") +
+        (status.toLowerCase() === "delivered" ? "\n\nThank you for shopping with Gulnish Crochet!" : "");
+      window.open("https://wa.me/92" + phone + "?text=" + encodeURIComponent(msg), "_blank");
+    });
+
+    /* delete */
     adminOrders.addEventListener("click", async function (e) {
       var del = e.target.closest("[data-delorder]");
       if (!del) return;
       if (!confirm("Delete this order?")) return;
       if (GC.deleteOrder) await GC.deleteOrder(del.dataset.delorder);
+      _selectedOrders.delete(del.dataset.delorder);
+      renderOrders();
+    });
+  }
+
+  /* ---------- search / filter ---------- */
+  if (orderSearch) {
+    orderSearch.addEventListener("input", function () {
+      clearTimeout(_orderSearchDebounce);
+      _orderSearchDebounce = setTimeout(renderOrders, 200);
+    });
+  }
+  if (orderStatusFilter) {
+    orderStatusFilter.addEventListener("change", renderOrders);
+  }
+
+  /* ---------- select all ---------- */
+  if (selectAllOrders) {
+    selectAllOrders.addEventListener("change", function () {
+      var checked = selectAllOrders.checked;
+      var checkboxes = adminOrders ? adminOrders.querySelectorAll("[data-ordercheck]") : [];
+      checkboxes.forEach(function (cb) {
+        cb.checked = checked;
+        if (checked) _selectedOrders.add(cb.dataset.ordercheck);
+        else _selectedOrders.delete(cb.dataset.ordercheck);
+        var row = cb.closest(".admin-order");
+        if (row) row.classList.toggle("admin-order--selected", checked);
+      });
+      updateBulkUI();
+    });
+  }
+
+  /* ---------- bulk actions ---------- */
+  if (bulkApplyBtn) {
+    bulkApplyBtn.addEventListener("click", async function () {
+      var status = bulkStatusSelect ? bulkStatusSelect.value : "";
+      if (!status || !_selectedOrders.size) return;
+      if (!confirm("Change " + _selectedOrders.size + " order(s) to " + status + "?")) return;
+      var ids = Array.from(_selectedOrders);
+      if (GC.bulkUpdateStatus) await GC.bulkUpdateStatus(ids, status);
+      _selectedOrders.clear();
+      if (selectAllOrders) selectAllOrders.checked = false;
+      renderOrders();
+    });
+  }
+
+  if (bulkDeleteBtn) {
+    bulkDeleteBtn.addEventListener("click", async function () {
+      if (!_selectedOrders.size) return;
+      if (!confirm("Delete " + _selectedOrders.size + " order(s)? This cannot be undone.")) return;
+      var ids = Array.from(_selectedOrders);
+      if (GC.bulkDeleteOrders) await GC.bulkDeleteOrders(ids);
+      _selectedOrders.clear();
+      if (selectAllOrders) selectAllOrders.checked = false;
+      renderOrders();
+    });
+  }
+
+  /* ---------- real-time order updates ---------- */
+  if (GC && GC.onOrdersChanged) {
+    GC.onOrdersChanged(function () {
       renderOrders();
     });
   }
