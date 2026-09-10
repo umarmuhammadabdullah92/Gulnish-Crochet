@@ -3564,3 +3564,40 @@ h1, h2, h3, .logo {
 @media (min-width: 761px) {
   .co-bar { display: none !important; }
 }
+
+/* ---------- Mobile fit hardening (all screens) ---------- */
+img, video, canvas, iframe { max-width: 100%; height: auto; }
+.checkout-grid > *,
+.product-page > *,
+.image-grid > *,
+.category-grid > *,
+.order-card__body > *,
+.order-list > *,
+.hero-inner > *,
+.testimonial-grid > *,
+.promo__grid > *,
+.footer-inner > * { min-width: 0; }
+
+.checkout-card,
+.checkout-summary,
+.checkout-review,
+.product-page__info,
+.hero-copy,
+.promo__content,
+.order-card,
+.order-item,
+.co-review-item,
+.co-item,
+.cart-item,
+.co-review-item__name,
+.co-review-item__price,
+.co-item__name,
+.co-item__price,
+.order-item__name {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 760px) {
+  .hero h1, .section-title { overflow-wrap: break-word; }
+}
