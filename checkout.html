@@ -224,6 +224,19 @@
     </div>
   </footer>
 
+  <!-- Mobile sticky checkout action bar -->
+  <div class="co-bar" id="coBar" hidden>
+    <button class="co-bar__back" id="coBarBack" type="button" aria-label="Back to details" hidden>&#8592;</button>
+    <div class="co-bar__total">
+      <span class="co-bar__label">Total</span>
+      <span class="co-bar__value" id="coBarTotal">Rs. 0.00</span>
+    </div>
+    <button class="btn co-bar__btn" type="button" id="coBarBtn">
+      <span id="coBarBtnText">Review Order</span>
+      <span id="coBarBtnLoading" hidden>Placing order...</span>
+    </button>
+  </div>
+
   <!-- Mobile cart bar -->
   <div class="cart-bar" id="cartBar">
     <button type="button" class="cart-bar__btn" id="cartBarBtn" aria-label="View cart">
