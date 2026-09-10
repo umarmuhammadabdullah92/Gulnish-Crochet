@@ -143,6 +143,43 @@
       <section class="admin-card">
         <h2>Orders <span id="orderCount" class="admin-count"></span></h2>
         <p class="admin-hint">All orders placed by every visitor appear here. Update a status and it shows on that customer's My Orders page.</p>
+
+        <!-- Dashboard stats -->
+        <div class="admin-order-stats" id="orderStats"></div>
+
+        <!-- Search and filter -->
+        <div class="admin-order-toolbar">
+          <div class="admin-order-search">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="orderSearchInput" placeholder="Search by ID, name, phone, city...">
+          </div>
+          <select id="orderStatusFilter" class="select">
+            <option value="">All statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Processing">Processing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <!-- Bulk actions -->
+        <div class="admin-bulk-actions" id="bulkActions">
+          <label class="admin-select-all"><input type="checkbox" id="selectAllOrders"> Select all</label>
+          <span class="bulk-count">0 selected</span>
+          <select id="bulkStatusSelect" class="select">
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Processing">Processing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <button class="btn btn--small" type="button" id="bulkApplyBtn">Apply status</button>
+          <button class="btn btn--small btn--danger" type="button" id="bulkDeleteBtn">Delete selected</button>
+        </div>
+
         <div id="adminOrders"></div>
       </section>
 
