@@ -56,6 +56,12 @@
   var waMissing = document.getElementById("coWaMissing");
   var btnText = document.getElementById("coBtnText");
   var btnLoading = document.getElementById("coBtnLoading");
+  var coBar = document.getElementById("coBar");
+  var coBarBtn = document.getElementById("coBarBtn");
+  var coBarBtnText = document.getElementById("coBarBtnText");
+  var coBarBtnLoading = document.getElementById("coBarBtnLoading");
+  var coBarTotal = document.getElementById("coBarTotal");
+  var coBarBack = document.getElementById("coBarBack");
 
   /* ---------- step elements ---------- */
   var step1 = document.getElementById("step1");
