@@ -3801,3 +3801,235 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
 
 /* Hidden attribute must always win over display utilities */
 [hidden] { display: none !important; }
+
+/* =========================================================
+   Professional order system — checkout payment cards
+   ========================================================= */
+.co-pay-group {
+  border: none;
+  padding: 0;
+  margin: 0.6rem 0 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.co-pay-group legend {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+.co-pay-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  cursor: pointer;
+  background: var(--bg);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.co-pay-card:hover { border-color: var(--gold-light); }
+.co-pay-card input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gold);
+  flex-shrink: 0;
+  margin: 0;
+}
+.co-pay-card:has(input:checked) {
+  border-color: var(--gold);
+  background: #fdf9f0;
+  box-shadow: 0 0 0 1px var(--gold) inset;
+}
+.co-pay-card__icon {
+  font-size: 1.1rem;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-soft);
+  border-radius: 9px;
+  flex-shrink: 0;
+}
+.co-pay-card__body { display: flex; flex-direction: column; min-width: 0; line-height: 1.35; }
+.co-pay-card__title { font-weight: 600; font-size: 0.92rem; color: var(--ink); }
+.co-pay-card__sub { font-size: 0.78rem; color: var(--muted); }
+.co-payment-info { margin-top: 0.5rem; }
+.co-payment-info__inner {
+  font-size: 0.85rem;
+  background: var(--bg-soft);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  display: grid;
+  gap: 0.25rem;
+}
+.co-payment-info__title { font-weight: 700; margin-bottom: 0.15rem; }
+.co-payment-info__inner p {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0.1rem 0;
+}
+.co-payment-info__inner span { color: var(--muted); }
+
+/* ---------- checkout confirmation ---------- */
+.checkout-success__no {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0.8rem 0 0.4rem;
+}
+.checkout-success__no-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.checkout-success__no strong {
+  font-family: var(--font-head);
+  font-size: clamp(1.4rem, 6vw, 2.2rem);
+  letter-spacing: 0.03em;
+  color: var(--accent-darkest);
+  overflow-wrap: anywhere;
+  user-select: text;
+  line-height: 1.2;
+}
+.checkout-success__copy { max-width: 520px; margin: 0 auto 0.6rem; }
+.checkout-success__eta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  background: #e7f2e7;
+  color: #2f7d4f;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  margin: 0 auto 0.6rem;
+}
+.checkout-success__eta strong { font-weight: 700; }
+
+/* =========================================================
+   Professional order system — tracking cards
+   ========================================================= */
+.order-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+.order-card__kicker {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 600;
+  display: block;
+}
+.order-card__id {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  color: var(--accent-darkest);
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+.order-card__date { display: block; color: var(--muted); font-size: 0.8rem; }
+.order-card__hmeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+.order-card__eta {
+  font-size: 0.74rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.order-card__eta b { color: var(--gold-deep); font-weight: 600; }
+.order-timeline__date {
+  display: block;
+  font-size: 0.66rem;
+  color: var(--muted);
+  white-space: nowrap;
+  margin-top: 0.1rem;
+}
+.pay-badge {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  display: inline-block;
+}
+.pay-badge--paid { background: #e7f2e7; color: #2f7d4f; }
+.pay-badge--pending { background: #fdf0dc; color: #9a6b1f; }
+.order-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  white-space: normal;
+}
+.order-item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+}
+.order-item-row__img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-soft);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.order-item-row__img img { width: 100%; height: 100%; object-fit: cover; }
+.order-item-row__name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.order-item-row__color { color: var(--muted); }
+.order-item-row__qty { color: var(--muted); white-space: nowrap; }
+.order-item-row__price { font-weight: 600; white-space: nowrap; }
+.order-card__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0 0;
+}
+.order-card__pay-method { display: block; font-weight: 600; }
+.order-card__section { margin-top: 1rem; }
+.order-card__total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--line);
+  padding-top: 0.8rem;
+  margin-top: 1rem;
+}
+.order-card__total { font-size: 1.25rem; }
+.order-card__foot {
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  justify-content: flex-start;
+}
+.order-card__help { flex: 1; justify-content: center; white-space: nowrap; }
+
+@media (max-width: 560px) {
+  .order-card__cols { grid-template-columns: 1fr; }
+  .order-card__hmeta { align-items: flex-start; }
+  .order-card__id { font-size: 1.1rem; }
+}
