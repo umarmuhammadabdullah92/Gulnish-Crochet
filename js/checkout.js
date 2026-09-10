@@ -1,5 +1,5 @@
 /* =========================================================
-   Gulnish Crochet — checkout page logic (advanced)
+   Gulnish Crochet — checkout page logic (professional build)
    ========================================================= */
 
 (function () {
@@ -7,6 +7,13 @@
 
   var GC = window.GC;
   var CART_KEY = "gulnish-cart";
+
+  var PAYMENT_METHODS = [
+    "Cash on delivery",
+    "Bank transfer",
+    "JazzCash / EasyPaisa",
+    "WhatsApp to arrange"
+  ];
 
   function money(value) {
     var n = parseFloat(value) || 0;
@@ -22,6 +29,19 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
+  }
+
+  function friendlyDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString(undefined, {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+      });
+    } catch (e) {
+      return "";
+    }
   }
 
   function loadCart() {
@@ -43,6 +63,11 @@
     );
   }
 
+  function currentPayment() {
+    var checked = document.querySelector('input[name="coPayment"]:checked');
+    return checked ? checked.value : PAYMENT_METHODS[0];
+  }
+
   /* ---------- elements ---------- */
   var itemsEl = document.getElementById("coItems");
   var subtotalEl = document.getElementById("coSubtotal");
@@ -52,8 +77,12 @@
   var placeBtn = document.getElementById("coPlace");
   var success = document.getElementById("coSuccess");
   var successNo = document.getElementById("coSuccessNo");
-  var waLink = document.getElementById("coWaLink");
-  var waMissing = document.getElementById("coWaMissing");
+  var successEta = document.getElementById("coSuccessEta");
+  var successEtaDate = document.getElementById("coSuccessEtaDate");
+  var successCopy = document.getElementById("coSuccessCopy");
+  var trackLink = document.getElementById("coTrackLink");
+  var waLinkEl = document.getElementById("coWaLink");
+  var waMissingEl = document.getElementById("coWaMissing");
   var btnText = document.getElementById("coBtnText");
   var btnLoading = document.getElementById("coBtnLoading");
   var coBar = document.getElementById("coBar");
@@ -62,6 +91,8 @@
   var coBarBtnLoading = document.getElementById("coBarBtnLoading");
   var coBarTotal = document.getElementById("coBarTotal");
   var coBarBack = document.getElementById("coBarBack");
+  var payGroup = document.getElementById("coPaymentGroup");
+  var payInfo = document.getElementById("coPaymentInfo");
 
   /* ---------- step elements ---------- */
   var step1 = document.getElementById("step1");
@@ -144,6 +175,45 @@
     if (GC && GC.saveCustomerProfile) GC.saveCustomerProfile(profile);
   }
 
+  /* ---------- payment method details ---------- */
+  function renderPaymentInfo() {
+    if (!payInfo) return;
+    var method = currentPayment();
+    var s = (GC && GC.settings) || {};
+    var html = "";
+
+    if (method === "Bank transfer") {
+      if (s.bankAccountTitle || s.bankAccountNo || s.bankIBAN) {
+        html = '<div class="co-payment-info__inner">' +
+          '<p class="co-payment-info__title">Bank transfer details</p>' +
+          (s.bankAccountTitle ? '<p><span>Account title</span><strong>' + escapeHtml(s.bankAccountTitle) + '</strong></p>' : "") +
+          (s.bankAccountNo ? '<p><span>Account number</span><strong>' + escapeHtml(s.bankAccountNo) + '</strong></p>' : "") +
+          (s.bankIBAN ? '<p><span>IBAN</span><strong>' + escapeHtml(s.bankIBAN) + '</strong></p>' : "") +
+          '</div>';
+      } else {
+        html = '<p class="co-payment-info__inner">Your order will confirm our bank details on WhatsApp so you can complete the transfer.</p>';
+      }
+    } else if (method === "JazzCash / EasyPaisa") {
+      if (s.jazzcashNumber || s.easypaisaNumber) {
+        html = '<div class="co-payment-info__inner">' +
+          '<p class="co-payment-info__title">Mobile wallet details</p>' +
+          (s.jazzcashNumber ? '<p><span>JazzCash</span><strong>' + escapeHtml(s.jazzcashNumber) + '</strong></p>' : "") +
+          (s.easypaisaNumber ? '<p><span>EasyPaisa</span><strong>' + escapeHtml(s.easypaisaNumber) + '</strong></p>' : "") +
+          '</div>';
+      } else {
+        html = '<p class="co-payment-info__inner">We will confirm our wallet numbers on WhatsApp after you place the order.</p>';
+      }
+    }
+
+    payInfo.innerHTML = html;
+    payInfo.hidden = !html;
+  }
+
+  if (payGroup) {
+    payGroup.addEventListener("change", renderPaymentInfo);
+  }
+
+  /* ---------- order summary ---------- */
   function renderSummary(items) {
     if (!itemsEl) return;
     if (!items.length) {
@@ -184,6 +254,7 @@
     var reviewTotal = document.getElementById("coReviewTotal");
     var reviewCustomer = document.getElementById("coReviewCustomer");
     var reviewPayment = document.getElementById("coReviewPayment");
+    var reviewEta = document.getElementById("coReviewEta");
     var items = loadCart();
 
     if (reviewItems) {
@@ -210,8 +281,14 @@
     }
 
     if (reviewPayment) {
-      var payment = (document.getElementById("coPayment") || {}).value || "Cash on delivery";
-      reviewPayment.textContent = payment;
+      var method = currentPayment();
+      var payStatus = method === "Cash on delivery" ? "Pay on delivery" : "Awaiting payment";
+      reviewPayment.textContent = method + " &mdash; " + payStatus;
+    }
+
+    if (reviewEta) {
+      var eta = GC && GC.deliveryEstimate ? GC.deliveryEstimate(new Date().toISOString(), false) : "";
+      reviewEta.textContent = eta ? friendlyDate(eta) : "";
     }
   }
 
@@ -271,15 +348,17 @@
     var email = (document.getElementById("coEmail") || {}).value || "";
     var address = (document.getElementById("coAddress") || {}).value || "";
     var city = (document.getElementById("coCity") || {}).value || "";
-    var payment = (document.getElementById("coPayment") || {}).value || "";
     var notes = (document.getElementById("coNotes") || {}).value || "";
 
     var phone = String(phoneV).replace(/[^\d]/g, "").replace(/^0+/, "");
     var total = cartTotalPrice(items);
+    var placedAt = new Date().toISOString();
+    var paymentMethod = currentPayment();
 
     var order = {
-      id: "GC" + Date.now().toString(36).toUpperCase(),
-      placedAt: new Date().toISOString(),
+      id: GC && GC.makeOrderId ? GC.makeOrderId() : "GC" + Date.now().toString(36).toUpperCase(),
+      placedAt: placedAt,
+      updatedAt: placedAt,
       customer: {
         name: name,
         phone: phone,
@@ -299,8 +378,15 @@
         };
       }),
       total: total,
-      payment: payment,
-      status: "Pending"
+      payment: {
+        method: paymentMethod,
+        status: "Pending"
+      },
+      status: "Pending",
+      statusHistory: [{ status: "Pending", at: placedAt, note: "Order placed" }],
+      estDelivery: GC && GC.deliveryEstimate ? GC.deliveryEstimate(placedAt, false) : null,
+      craftDays: (GC && GC.settings && GC.settings.craftDays) || null,
+      deliveryDays: (GC && GC.settings && GC.settings.deliveryDays) || null
     };
 
     var done = function () {
@@ -311,6 +397,18 @@
 
       if (success) {
         if (successNo) successNo.textContent = order.id;
+        if (successCopy) successCopy.textContent = order.payment.method === "Cash on delivery"
+          ? "We've received your order and will confirm it with you on WhatsApp shortly. Please keep " + money(order.total) + " ready to pay on delivery."
+          : "We've received your order and will contact you to confirm your payment and delivery.";
+        if (successEta) {
+          successEta.hidden = !order.estDelivery;
+          if (successEtaDate && order.estDelivery) successEtaDate.textContent = friendlyDate(order.estDelivery);
+        }
+        if (trackLink && order.id) trackLink.href = "orders.html?id=" + encodeURIComponent(order.id);
+        if (waLinkEl) {
+          waLinkEl.href = "";
+          waLinkEl.hidden = true;
+        }
         success.hidden = false;
       }
       if (formWrap) formWrap.hidden = true;
@@ -318,8 +416,6 @@
       if (subtotalEl) subtotalEl.textContent = money(0);
 
       var wa = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
-      var waMissingEl = document.getElementById("coWaMissing");
-      var waLinkEl = document.getElementById("coWaLink");
       if (wa && waLinkEl) {
         var msg =
           "New order *" + order.id + "* from " + order.customer.name + "\n\n" +
@@ -330,7 +426,8 @@
             })
             .join("\n") +
           "\n\nTotal: " + money(order.total) +
-          "\nPayment: " + order.payment +
+          "\nPayment: " + order.payment.method +
+          (order.estDelivery ? "\nEst. delivery: " + friendlyDate(order.estDelivery) : "") +
           (phone ? "\nPhone: +" + phone : "") +
           (email ? "\nEmail: " + email : "") +
           (address ? "\nAddress: " + address + (city ? ", " + city : "") : "") +
@@ -347,7 +444,7 @@
     };
 
     if (GC && GC.saveOrder) {
-      GC.saveOrder(order).then(function (res) {
+      GC.saveOrder(order).then(function () {
         done();
       }).catch(function () {
         done();
@@ -421,6 +518,7 @@
   function init() {
     renderSummary(loadCart());
     autoFillProfile();
+    renderPaymentInfo();
     setStep(1);
   }
 
