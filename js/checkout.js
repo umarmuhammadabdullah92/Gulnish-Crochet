@@ -91,6 +91,34 @@
     });
 
     if (step === 2) renderReview();
+    updateBar();
+  }
+
+  function setBarVisible(on) {
+    if (!coBar) return;
+    if (on) {
+      coBar.hidden = false;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { coBar.classList.add("show"); });
+      });
+    } else {
+      coBar.classList.remove("show");
+      setTimeout(function () { coBar.hidden = true; }, 260);
+    }
+  }
+
+  function updateBar() {
+    if (!coBar) return;
+    var items = loadCart();
+    if (!items.length || currentStep === 3) {
+      setBarVisible(false);
+      return;
+    }
+    if (coBarTotal) coBarTotal.textContent = money(cartTotalPrice(items));
+    if (coBarBtnText) coBarBtnText.textContent = currentStep === 1 ? "Review Order" : "Place Order";
+    if (coBarBtnLoading) coBarBtnLoading.hidden = true;
+    if (coBarBack) coBarBack.hidden = currentStep !== 2;
+    setBarVisible(true);
   }
 
   /* ---------- auto-fill from saved profile ---------- */
