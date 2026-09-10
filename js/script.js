@@ -1059,9 +1059,25 @@
     }
   });
 
+  /* ---------- Contact buttons: WhatsApp + Call (from settings) ---------- */
+  function updateContactButtons() {
+    var waNum = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
+    var telHref = waNum ? "tel:+" + waNum : "tel:+923075729901";
+    var waHref = waNum
+      ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent("Hi Gulnish Crochet, I'd like to place an order.")
+      : "";
+    document.querySelectorAll(".fb-wa").forEach(function (a) {
+      if (waHref) a.href = waHref;
+    });
+    document.querySelectorAll(".fb-call").forEach(function (a) {
+      a.href = telHref;
+    });
+  }
+
   /* ---------- Render shop once shared data is loaded ---------- */
   function renderShop() {
     var settings = getSettings();
+    updateContactButtons();
     buildFilters(settings);
     renderCategoryCards();
     renderFeatured();
