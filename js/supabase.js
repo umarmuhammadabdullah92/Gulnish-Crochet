@@ -516,6 +516,20 @@
 
     /* ---- orders ---- */
     saveOrder: async function (order) {
+      // Normalize a full order model so callers can pass partial data.
+      order.statusHistory = Array.isArray(order.statusHistory)
+        ? order.statusHistory
+        : [{ status: order.status || "Pending", at: order.placedAt || new Date().toISOString() }];
+      if (typeof order.payment === "string" || !order.payment) {
+        order.payment = {
+          method: typeof order.payment === "string" ? order.payment : "Cash on delivery",
+          status: "Pending"
+        };
+      }
+      if (!order.payment.method) order.payment.method = "Cash on delivery";
+      if (!order.payment.status) order.payment.status = "Pending";
+      order.estDelivery = order.estDelivery || GC.deliveryEstimate(order.placedAt);
+      order.updatedAt = order.placedAt || new Date().toISOString();
       orders.unshift(order);
 
       if (!configured) {
@@ -527,15 +541,39 @@
       return { ok: !res.error, error: res.error };
     },
 
-    updateOrderStatus: async function (id, status) {
+    updateOrderStatus: async function (id, status, note) {
       var o = orders.find(function (x) { return x.id === id; });
-      if (o) o.status = status;
+      GC.applyStatus(o, status, note);
 
       if (!configured) {
         lsSet(LOCAL_ORDERS, orders);
         return { ok: true };
       }
-      var res = await sb.from("orders").update({ status: status }).eq("id", id);
+      var patch = {
+        status: status,
+        status_history: o ? o.statusHistory : [],
+        est_delivery: o ? o.estDelivery : null,
+        updated_at: new Date().toISOString()
+      };
+      var res = await sb.from("orders").update(patch).eq("id", id);
+      return { ok: !res.error, error: res.error };
+    },
+
+    markOrderPaid: async function (id) {
+      var o = orders.find(function (x) { return x.id === id; });
+      if (!o) return { ok: true };
+      if (!o.payment) o.payment = { method: "Cash on delivery", status: "Pending" };
+      o.payment.status = "Paid";
+      o.updatedAt = new Date().toISOString();
+
+      if (!configured) {
+        lsSet(LOCAL_ORDERS, orders);
+        return { ok: true };
+      }
+      var res = await sb.from("orders").update({
+        payment_status: "Paid",
+        updated_at: o.updatedAt
+      }).eq("id", id);
       return { ok: !res.error, error: res.error };
     },
 
