@@ -141,9 +141,9 @@
       return;
     }
     if (coBarTotal) coBarTotal.textContent = money(cartTotalPrice(items));
-    if (coBarBtnText) coBarBtnText.textContent = currentStep === 1 ? "Review Order" : "Place Order";
+    if (coBarBtnText) coBarBtnText.textContent = "Place Order";
     if (coBarBtnLoading) coBarBtnLoading.hidden = true;
-    if (coBarBack) coBarBack.hidden = currentStep !== 2;
+    if (coBarBack) coBarBack.hidden = true;
     setBarVisible(true);
   }
 
