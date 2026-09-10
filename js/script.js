@@ -805,6 +805,7 @@
   function renderCart() {
     var n = cartTotalQty();
     var total = cartTotalPrice();
+    updateCartWa();
     if (cartCountEl) {
       cartCountEl.textContent = n;
       cartCountEl.classList.toggle("show", n > 0);
