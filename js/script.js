@@ -522,8 +522,28 @@
   var ppColors = document.getElementById("ppColors");
   var ppQtyVal = document.getElementById("ppQtyVal");
   var ppAdd = document.getElementById("ppAdd");
+  var ppWa = document.getElementById("ppWa");
   var currentProduct = null;
   var currentQty = 1;
+
+  function updatePpWa() {
+    if (!ppWa || !currentProduct) return;
+    var waNum = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
+    var swatch = ppColors ? ppColors.querySelector(".color-swatch.selected") : null;
+    var color = swatch ? swatch.dataset.color : "";
+    var lines = ["Hi Gulnish Crochet, I'd like to order:"];
+    lines.push("*" + (currentProduct.name || "this item") + "*");
+    var extra = [];
+    if (parseFloat(currentProduct.price) > 0) extra.push("Rs. " + money(currentProduct.price));
+    if (color) extra.push("Colour: " + color);
+    if (currentQty > 1) extra.push("Qty: " + currentQty);
+    if (extra.length) lines.push(extra.join(" \u2022 "));
+    lines.push("");
+    lines.push("Is it available?");
+    ppWa.href = waNum
+      ? "https://wa.me/" + encodeURIComponent(waNum) + "?text=" + encodeURIComponent(lines.join("\n"))
+      : "#";
+  }
 
   function categoryLabelOf(val, settings) {
     var idx = parseInt(String(val || "").replace("gr", ""), 10) - 1;
