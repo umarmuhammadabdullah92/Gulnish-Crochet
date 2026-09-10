@@ -134,7 +134,14 @@
       categories: cats,
       categoryImages: CATEGORY_IMAGE_SETS,
       whatsapp: "03075729901",
-      version: 2
+      craftDays: 5,
+      deliveryDays: 3,
+      bankAccountTitle: "",
+      bankAccountNo: "",
+      bankIBAN: "",
+      jazzcashNumber: "",
+      easypaisaNumber: "",
+      version: 3
     };
   }
 
