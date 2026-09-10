@@ -96,12 +96,9 @@
 
   /* ---------- step elements ---------- */
   var step1 = document.getElementById("step1");
-  var step2 = document.getElementById("step2");
   var step3 = document.getElementById("step3");
   var progressFill = document.getElementById("checkoutProgressFill");
   var stepDots = document.querySelectorAll(".checkout-step-dot");
-  var nextToReviewBtn = document.getElementById("coNextToReview");
-  var backToDetailsBtn = document.getElementById("coBackToDetails");
 
   var currentStep = 1;
 
@@ -109,10 +106,9 @@
     currentStep = step;
 
     if (step1) step1.hidden = step !== 1;
-    if (step2) step2.hidden = step !== 2;
     if (step3) step3.hidden = step !== 3;
 
-    var pct = step === 1 ? 33 : step === 2 ? 66 : 100;
+    var pct = step === 3 ? 100 : 50;
     if (progressFill) progressFill.style.width = pct + "%";
 
     stepDots.forEach(function (dot, i) {
@@ -121,7 +117,6 @@
       dot.classList.toggle("completed", s < step);
     });
 
-    if (step === 2) renderReview();
     updateBar();
   }
 
