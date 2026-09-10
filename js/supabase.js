@@ -423,12 +423,15 @@
     },
 
     /* ---- bulk operations ---- */
-    bulkUpdateStatus: async function (ids, status) {
+    bulkUpdateStatus: async function (ids, status, note) {
       if (!ids.length) return { ok: true };
 
+      var updated = [];
       ids.forEach(function (id) {
         var o = orders.find(function (x) { return x.id === id; });
-        if (o) o.status = status;
+        var before = (o && o.updatedAt) || (o && o.placedAt) || "";
+        GC.applyStatus(o, status, note);
+        if (o && (o.updatedAt || "") !== before) updated.push(o);
       });
 
       if (!configured) {
@@ -437,8 +440,13 @@
       }
 
       var results = await Promise.all(
-        ids.map(function (id) {
-          return sb.from("orders").update({ status: status }).eq("id", id);
+        updated.map(function (o) {
+          return sb.from("orders").update({
+            status: o.status,
+            status_history: o.statusHistory,
+            est_delivery: o.estDelivery,
+            updated_at: o.updatedAt
+          }).eq("id", o.id);
         })
       );
 
