@@ -126,6 +126,43 @@
               </select>
             </label>
 
+            <fieldset class="co-pay-group" id="coPaymentGroup">
+              <legend>How would you like to pay?</legend>
+              <label class="co-pay-card">
+                <input type="radio" name="coPayment" value="Cash on delivery" checked>
+                <span class="co-pay-card__icon">&#128179;</span>
+                <span class="co-pay-card__body">
+                  <span class="co-pay-card__title">Cash on delivery</span>
+                  <span class="co-pay-card__sub">Pay when you receive your order</span>
+                </span>
+              </label>
+              <label class="co-pay-card">
+                <input type="radio" name="coPayment" value="Bank transfer">
+                <span class="co-pay-card__icon">&#127974;</span>
+                <span class="co-pay-card__body">
+                  <span class="co-pay-card__title">Bank transfer</span>
+                  <span class="co-pay-card__sub">Pay directly to our account</span>
+                </span>
+              </label>
+              <label class="co-pay-card">
+                <input type="radio" name="coPayment" value="JazzCash / EasyPaisa">
+                <span class="co-pay-card__icon">&#128241;</span>
+                <span class="co-pay-card__body">
+                  <span class="co-pay-card__title">JazzCash / EasyPaisa</span>
+                  <span class="co-pay-card__sub">Pay from a mobile wallet</span>
+                </span>
+              </label>
+              <label class="co-pay-card">
+                <input type="radio" name="coPayment" value="WhatsApp to arrange">
+                <span class="co-pay-card__icon">&#128172;</span>
+                <span class="co-pay-card__body">
+                  <span class="co-pay-card__title">Arrange on WhatsApp</span>
+                  <span class="co-pay-card__sub">We'll text you with options</span>
+                </span>
+              </label>
+            </fieldset>
+            <div id="coPaymentInfo" class="co-payment-info" hidden></div>
+
             <button class="btn co-place" type="button" id="coNextToReview">
               <span>Review Order &rarr;</span>
             </button>
