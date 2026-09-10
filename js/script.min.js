@@ -651,7 +651,7 @@
       return;
     }
     var viewBtn = e.target.closest(".js-product-view");
-    if (viewBtn) {
+    if (viewBtn && !e.target.closest(".work-card__wa")) {
       if (productView) {
         showProduct(viewBtn.dataset.view);
       } else {
