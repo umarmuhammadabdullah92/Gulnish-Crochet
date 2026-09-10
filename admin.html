@@ -64,11 +64,39 @@
       <!-- ============ SHOP SETTINGS ============ -->
       <section class="admin-card">
         <h2>Shop settings</h2>
-        <p class="admin-hint">These are used at checkout. Prices are shown in Rs. (PKR).</p>
+        <p class="admin-hint">Contact details, delivery estimates and payment details shown to customers at checkout.</p>
         <div class="admin-grid">
           <label>
             <span>WhatsApp number (with country code)</span>
             <input type="tel" id="shopWhatsApp" placeholder="e.g. 923001234567">
+          </label>
+          <label>
+            <span>Crafting time (days)</span>
+            <input type="number" id="shopCraftDays" min="0" step="1" placeholder="e.g. 5">
+          </label>
+          <label>
+            <span>Delivery time (days)</span>
+            <input type="number" id="shopDeliveryDays" min="0" step="1" placeholder="e.g. 3">
+          </label>
+          <label>
+            <span>Bank account title</span>
+            <input type="text" id="shopBankTitle" placeholder="e.g. Gulnish Crochet">
+          </label>
+          <label>
+            <span>Bank account number</span>
+            <input type="text" id="shopBankAccount" placeholder="Account number">
+          </label>
+          <label>
+            <span>Bank IBAN</span>
+            <input type="text" id="shopBankIBAN" placeholder="PK00XXXX0000000000000000">
+          </label>
+          <label>
+            <span>JazzCash number</span>
+            <input type="tel" id="shopJazzcash" placeholder="e.g. 03xx xxxxxxx">
+          </label>
+          <label>
+            <span>EasyPaisa number</span>
+            <input type="tel" id="shopEasypaisa" placeholder="e.g. 03xx xxxxxxx">
           </label>
         </div>
         <div class="admin-actions">
