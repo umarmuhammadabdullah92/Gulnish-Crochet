@@ -390,6 +390,8 @@
       var delivered = 0;
       var cancelled = 0;
       var revenue = 0;
+      var cancelled = 0;
+      var paidCount = 0;
       var todayOrders = 0;
       var today = new Date().toDateString();
 
@@ -401,6 +403,8 @@
         else if (s === "shipped") shipped++;
         else if (s === "delivered") delivered++;
         else if (s === "cancelled") cancelled++;
+
+        if ((o.payment && o.payment.status || "Pending").toLowerCase() === "paid") paidCount++;
 
         if (s !== "cancelled") revenue += parseFloat(o.total) || 0;
 
