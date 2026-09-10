@@ -703,3 +703,5 @@
   .admin-item__actions .delete { min-height: 40px; font-size: 1rem; }
   .bulk-apply, .bulk-delete { min-height: 44px; }
 }
+
+[hidden] { display: none !important; }
