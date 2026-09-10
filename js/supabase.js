@@ -21,6 +21,7 @@
   var LOCAL_SETTINGS = "gulnish-settings-v2";
   var LOCAL_ORDERS = "gulnish-orders";
   var LOCAL_ADMIN_SESSION = "gulnish-admin-session";
+  var LOCAL_CUSTOMER = "gulnish-customer";
   var SETTINGS_ID = "app";
 
   var cfg = window.GC_CONFIG || {};
@@ -48,6 +49,8 @@
   var products = [];
   var settings = null;
   var orders = [];
+  var _orderSubscriptions = [];
+  var _onOrdersChanged = null;
 
   /* ---------- default settings (mirrors original) ---------- */
   var DEFAULT_COUNT = 6;
@@ -63,10 +66,7 @@
     gr6: ["images/headbands/headband-1.webp", "images/headbands/headband-2.webp"]
   };
 
-  /* ---------- placeholder product catalog ----------
-     Starter products generated from the photos in the repo so the
-     shop is populated before you enter real data. Names, prices and
-     keywords are placeholders — edit them in the Product Manager. */
+  /* ---------- placeholder product catalog ---------- */
   var RAW_IMAGES = {
     gr1: ["images/purses/purse-1.webp", "images/purses/purse-2.webp", "images/purses/purse-3.webp", "images/purses/purse-4.webp", "images/purses/purse-5.webp", "images/purses/purse-6.webp", "images/purses/purse-7.webp", "images/purses/purse-8.webp", "images/purses/purse-9.webp", "images/purses/purse-10.webp", "images/purses/purse-11.webp", "images/purses/purse-12.webp", "images/purses/purse-13.webp", "images/purses/purse-14.webp", "images/purses/purse-15.webp", "images/purses/purse-16.webp", "images/purses/purse-17.webp", "images/purses/purse-18.webp", "images/purses/purse-19.webp", "images/purses/purse-20.webp", "images/purses/purse-21.webp", "images/purses/purse-22.webp", "images/purses/purse-23.webp", "images/purses/purse-24.webp", "images/purses/purse-25.webp", "images/purses/purse-26.webp", "images/purses/purse-27.webp", "images/purses/purse-28.webp", "images/purses/purse-29.webp", "images/purses/purse-30.webp", "images/purses/purse-31.webp", "images/purses/purse-32.webp", "images/purses/purse-33.webp"],
     gr2: ["images/gajrays/gajray-1.webp", "images/gajrays/gajray-9.webp", "images/gajrays/gajray-4.webp", "images/gajrays/gajray-5.webp", "images/gajrays/gajray-6.webp", "images/gajrays/gajray-8.webp", "images/gajrays/gajray-10.webp", "images/gajrays/gajray-11.webp", "images/gajrays/gajray-12.webp", "images/gajrays/gajray-13.webp", "images/gajrays/gajray-14.webp", "images/gajrays/gajray-15.webp", "images/gajrays/gajray-16.webp", "images/gajrays/gajray-17.webp"],
@@ -79,9 +79,6 @@
   var ITEM_NAME = { gr1: "Purse", gr2: "Gajray", gr3: "Keychain", gr4: "Bag", gr5: "Jewellery Set", gr6: "Headband" };
   var BASE_PRICE = { gr1: 850, gr2: 400, gr3: 350, gr4: 1400, gr5: 550, gr6: 450 };
 
-  /* ---------- real product overrides ----------
-     Exact names/price for specific products set by the owner.
-     Keyed by the seed id they get in defaultProducts(). */
   var REAL_PRODUCTS = {
     "seed_gr4_1": { name: "Earbuds Bag", price: 1599 },
     "seed_gr1_1": { name: "Premium hand made Rose Purse 1 (price per single purse)", price: 5799 },
@@ -182,19 +179,6 @@
     } catch (e) { /* ignore */ }
   }
 
-  /* ---------- tiny password hashing (SHA-256) ---------- */
-  function sha256(text) {
-    return window.crypto && window.crypto.subtle
-      ? crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)).then(
-          function (buf) {
-            return Array.from(new Uint8Array(buf))
-              .map(function (b) { return b.toString(16).padStart(2, "0"); })
-              .join("");
-          }
-        )
-      : Promise.resolve(text);
-  }
-
   /* =============================================================
      PUBLIC API
      ============================================================= */
@@ -225,6 +209,8 @@
           (ordRes.data || []).forEach(function (o) {
             orders.push(orderFromRow(o));
           });
+
+          _setupRealtimeSubscriptions();
         }).catch(function (e) {
           console.warn("Could not load shared data:", e);
         });
@@ -247,6 +233,51 @@
     }
   }
 
+  /* ---------- Realtime subscriptions ---------- */
+  function _setupRealtimeSubscriptions() {
+    if (!configured || !sb) return;
+
+    try {
+      var channel = sb
+        .channel("orders-realtime")
+        .on("postgres_changes", { event: "*", schema: "public", table: "orders" }, function (payload) {
+          _handleOrderChange(payload);
+        })
+        .subscribe();
+      _orderSubscriptions.push(channel);
+    } catch (e) {
+      console.warn("Realtime subscription failed:", e);
+    }
+  }
+
+  function _handleOrderChange(payload) {
+    var eventType = payload.eventType;
+    var row = payload.new || payload.old;
+
+    if (eventType === "INSERT" && row) {
+      var existing = orders.find(function (o) { return o.id === row.id; });
+      if (!existing) {
+        orders.unshift(orderFromRow(row));
+      }
+    } else if (eventType === "UPDATE" && row) {
+      var idx = orders.findIndex(function (o) { return o.id === row.id; });
+      var updated = orderFromRow(row);
+      if (idx !== -1) {
+        orders[idx] = updated;
+      } else {
+        orders.unshift(updated);
+      }
+    } else if (eventType === "DELETE" && row) {
+      orders = orders.filter(function (o) { return o.id !== row.id; });
+    }
+
+    if (_onOrdersChanged) {
+      try { _onOrdersChanged(orders); } catch (e) { /* ignore */ }
+    }
+  }
+
+  /* ============================================================= */
+
   var GC = {
     configured: configured,
     isAdmin: false,
@@ -267,7 +298,6 @@
         GC.isAdmin = true;
         return true;
       }
-      // localStorage demo mode: we don't keep a real password; treat as unlocked
       GC.isAdmin = true;
       try { localStorage.setItem(LOCAL_ADMIN_SESSION, "1"); } catch (e) { /* ignore */ }
       return true;
@@ -292,6 +322,20 @@
       return GC.isAdmin;
     },
 
+    /* ---- realtime callback ---- */
+    onOrdersChanged: function (callback) {
+      _onOrdersChanged = callback;
+    },
+
+    /* ---- customer profile (auto-fill) ---- */
+    saveCustomerProfile: function (profile) {
+      try { lsSet(LOCAL_CUSTOMER, profile); } catch (e) { /* ignore */ }
+    },
+
+    getCustomerProfile: function () {
+      return lsGet(LOCAL_CUSTOMER, null);
+    },
+
     /* ---- orders lookup by phone ---- */
     getOrdersByPhone: function (phone) {
       var norm = String(phone || "").replace(/[^\d]/g, "").replace(/^0+/, "");
@@ -299,6 +343,113 @@
       return orders.filter(function (o) {
         return String(o.customer && o.customer.phone || "").replace(/[^\d]/g, "").replace(/^0+/, "") === norm;
       });
+    },
+
+    /* ---- order search (admin) ---- */
+    searchOrders: function (query, statusFilter) {
+      var q = String(query || "").toLowerCase().trim();
+      var sf = String(statusFilter || "").trim();
+      return orders.filter(function (o) {
+        if (sf && (o.status || "Pending") !== sf) return false;
+        if (!q) return true;
+        var cust = o.customer || {};
+        var haystack = [
+          o.id || "",
+          cust.name || "",
+          cust.phone || "",
+          cust.email || "",
+          cust.city || "",
+          cust.address || "",
+          cust.notes || ""
+        ].join(" ").toLowerCase();
+        return haystack.indexOf(q) !== -1;
+      });
+    },
+
+    /* ---- order stats (admin dashboard) ---- */
+    getOrderStats: function () {
+      var total = orders.length;
+      var pending = 0;
+      var confirmed = 0;
+      var processing = 0;
+      var shipped = 0;
+      var delivered = 0;
+      var cancelled = 0;
+      var revenue = 0;
+      var todayOrders = 0;
+      var today = new Date().toDateString();
+
+      orders.forEach(function (o) {
+        var s = (o.status || "Pending").toLowerCase();
+        if (s === "pending") pending++;
+        else if (s === "confirmed") confirmed++;
+        else if (s === "processing") processing++;
+        else if (s === "shipped") shipped++;
+        else if (s === "delivered") delivered++;
+        else if (s === "cancelled") cancelled++;
+
+        if (s !== "cancelled") revenue += parseFloat(o.total) || 0;
+
+        try {
+          if (new Date(o.placedAt).toDateString() === today) todayOrders++;
+        } catch (e) { /* ignore */ }
+      });
+
+      return {
+        total: total,
+        pending: pending,
+        confirmed: confirmed,
+        processing: processing,
+        shipped: shipped,
+        delivered: delivered,
+        cancelled: cancelled,
+        revenue: revenue,
+        todayOrders: todayOrders
+      };
+    },
+
+    /* ---- bulk operations ---- */
+    bulkUpdateStatus: async function (ids, status) {
+      if (!ids.length) return { ok: true };
+
+      ids.forEach(function (id) {
+        var o = orders.find(function (x) { return x.id === id; });
+        if (o) o.status = status;
+      });
+
+      if (!configured) {
+        lsSet(LOCAL_ORDERS, orders);
+        return { ok: true };
+      }
+
+      var results = await Promise.all(
+        ids.map(function (id) {
+          return sb.from("orders").update({ status: status }).eq("id", id);
+        })
+      );
+
+      var anyError = results.some(function (r) { return r.error; });
+      return { ok: !anyError };
+    },
+
+    bulkDeleteOrders: async function (ids) {
+      if (!ids.length) return { ok: true };
+
+      orders = orders.filter(function (o) { return ids.indexOf(o.id) === -1; });
+
+      if (!configured) {
+        lsSet(LOCAL_ORDERS, orders);
+        return { ok: true };
+      }
+
+      var results = await Promise.all(
+        ids.map(function (id) {
+          return sb.from("orders").delete().eq("id", id);
+        })
+      );
+
+      var anyError = results.some(function (r) { return r.error; });
+      return { ok: !anyError };
     },
 
     /* ---- products ---- */
@@ -386,7 +537,6 @@
 
     /* ---- images ---- */
     uploadImage: async function (fileOrDataUrl) {
-      // Supabase-configured mode: upload bytes to Storage, return public URL.
       if (configured) {
         try {
           var ext = "webp";
@@ -406,7 +556,6 @@
           console.warn("Storage upload failed, saving as data URL:", e);
         }
       }
-      // Fallback: return the data URL as-is.
       return { url: fileOrDataUrl };
     },
 
