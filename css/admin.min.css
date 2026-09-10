@@ -669,3 +669,22 @@
   background: #25d366;
   color: #fff;
 }
+
+/* ---- Mobile fit hardening ---- */
+.admin-main,
+.admin-card,
+.admin-order-toolbar,
+.admin-bulk-actions,
+.admin-order-stats,
+.stat-card,
+.admin-item__info,
+.admin-item__name,
+.admin-item__meta { min-width: 0; overflow-wrap: anywhere; }
+
+.admin-order__check { flex-shrink: 0; }
+.admin-item { align-items: flex-start; }
+
+@media (max-width: 640px) {
+  .admin-item__actions .order-status-select { width: 100%; }
+  .admin-item__actions { align-items: stretch; }
+}

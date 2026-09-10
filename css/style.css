@@ -3601,3 +3601,41 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
 @media (max-width: 760px) {
   .hero h1, .section-title { overflow-wrap: break-word; }
 }
+
+/* WhatsApp float becomes a compact labeled pill on mobile */
+@media (max-width: 760px) {
+  .wa-float {
+    width: auto;
+    height: 56px;
+    border-radius: 999px;
+    padding: 0 1.15rem 0 0.55rem;
+    gap: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    right: 1rem;
+    bottom: 1.5rem;
+  }
+  .wa-float svg { width: 30px; height: 30px; }
+  .wa-float::after {
+    content: "Chat & Order";
+    position: static;
+    transform: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    padding: 0;
+  }
+  #cartBar.show ~ .wa-float { bottom: calc(4.4rem + env(safe-area-inset-bottom)); }
+  .checkout-page .wa-float {
+    width: 58px;
+    height: 58px;
+    padding: 0;
+    border-radius: 50%;
+  }
+  .checkout-page .wa-float::after { content: none; }
+}
