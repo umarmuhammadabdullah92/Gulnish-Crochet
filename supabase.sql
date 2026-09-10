@@ -58,27 +58,52 @@ values (
   jsonb_build_object(
     'categories', jsonb_build_array('Purses','Gajrays','Keychains','Bags','Jewellery','Headband'),
     'whatsapp', '03075729901',
-    'version', 2
+    'craftDays', 5,
+    'deliveryDays', 3,
+    'bankAccountTitle', '',
+    'bankAccountNo', '',
+    'bankIBAN', '',
+    'jazzcashNumber', '',
+    'easypaisaNumber', '',
+    'version', 3
   )
 )
 on conflict (id) do nothing;
 
 -- ---------- ORDERS ----------
 create table if not exists public.orders (
-  id            text primary key,
-  phone         text,
-  customer_name text,
-  email         text,
-  address       text,
-  city          text,
-  notes         text,
-  items         jsonb default '[]'::jsonb,
-  total         numeric default 0,
-  payment       text,
-  status        text default 'Pending',
-  placed_at     timestamptz,
-  created_at    timestamptz default now()
+  id              text primary key,
+  phone           text,
+  customer_name   text,
+  email           text,
+  address         text,
+  city            text,
+  notes           text,
+  items           jsonb default '[]'::jsonb,
+  total           numeric default 0,
+  payment         text,
+  status          text default 'Pending',
+  placed_at       timestamptz,
+  created_at      timestamptz default now()
 );
+
+-- Professional order system columns
+alter table public.orders add column if not exists status_history jsonb default '[]'::jsonb;
+alter table public.orders add column if not exists payment_method text;
+alter table public.orders add column if not exists payment_status text default 'Pending';
+alter table public.orders add column if not exists est_delivery timestamptz;
+alter table public.orders add column if not exists updated_at timestamptz;
+alter table public.orders add column if not exists craft_days int;
+alter table public.orders add column if not exists delivery_days int;
+
+update public.orders
+set payment_method = coalesce(payment_method, payment),
+    payment_status = coalesce(payment_status, 'Pending'),
+    status_history = case
+      when status_history = '[]'::jsonb then jsonb_build_array(jsonb_build_object('status', status, 'at', coalesce(placed_at, now())))
+      else status_history
+    end
+where payment is not null;
 
 create index if not exists orders_phone_idx on public.orders (phone);
 
