@@ -881,6 +881,7 @@
         swatch.classList.add("selected");
         swatch.setAttribute("aria-pressed", "true");
       }
+      updatePpWa();
       return;
     }
 
