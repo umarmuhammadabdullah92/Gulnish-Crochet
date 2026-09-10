@@ -577,7 +577,66 @@
     shopWhatsApp: function () {
       var num = GC.settings.whatsapp || "03075729901";
       return String(num).replace(/[^\d]/g, "").replace(/^0+/, "");
-    }
+    },
+
+    /* ---- order system constants & helpers ---- */
+    ORDER_STATUSES: ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"],
+
+    makeOrderId: function () {
+      var d = new Date();
+      var ymd = String(d.getFullYear()) +
+        String(d.getMonth() + 1).padStart(2, "0") +
+        String(d.getDate()).padStart(2, "0");
+      var rand = Math.random().toString(36).toUpperCase().slice(2, 8);
+      var code = (rand + "ABCD") .slice(0, 4);
+      return "GC-" + ymd + "-" + code;
+    },
+
+    // Estimated delivery date as ISO string.
+    // shipOnly=true counts only delivery days (used once an order is Shipped).
+    deliveryEstimate: function (fromISO, shipOnly) {
+      var s = GC.settings || {};
+      var craft = shipOnly ? 0 : (parseInt(s.craftDays, 10) || 5);
+      var delivery = parseInt(s.deliveryDays, 10) || 3;
+      try {
+        var d = fromISO ? new Date(fromISO) : new Date();
+        d.setDate(d.getDate() + craft + delivery);
+        return d.toISOString();
+      } catch (e) {
+        return new Date(Date.now() + (craft + delivery) * 86400000).toISOString();
+      }
+    },
+
+    // Records a timestamped status change on an order (idempotent).
+    applyStatus: function (order, status, note) {
+      if (!order) return;
+      var s = String(status || "").trim();
+      if (!s) return;
+      order.statusHistory = Array.isArray(order.statusHistory) ? order.statusHistory : [];
+      var last = order.statusHistory[order.statusHistory.length - 1];
+      if (last && last.status === s && !note) return;
+      order.statusHistory.push({
+        status: s,
+        at: new Date().toISOString(),
+        note: note || ""
+      });
+      if (s.toLowerCase() === "cancelled") {
+        order.estDelivery = null;
+      } else if (s.toLowerCase() === "shipped") {
+        order.estDelivery = GC.deliveryEstimate(new Date().toISOString(), true);
+      }
+      order.status = s;
+      order.updatedAt = new Date().toISOString();
+    },
+
+    /* ---- order lookup by order number ---- */
+    getOrderById: function (id) {
+      var norm = String(id || "").toUpperCase().replace(/[^A-Z0-9-]/g, "");
+      if (!norm) return null;
+      return orders.find(function (o) {
+        return String(o.id || "").toUpperCase() === norm;
+      }) || null;
+    },
   };
 
   /* ---------- row mappers ---------- */
