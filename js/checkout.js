@@ -205,7 +205,10 @@
   }
 
   if (payGroup) {
-    payGroup.addEventListener("change", renderPaymentInfo);
+    payGroup.addEventListener("change", function () {
+      renderPaymentInfo();
+      updateStrip();
+    });
   }
 
   /* ---------- order summary ---------- */
