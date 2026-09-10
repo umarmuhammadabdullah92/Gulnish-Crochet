@@ -3787,3 +3787,14 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   .checkout-page .fb { width: 54px; height: 54px; padding: 0; }
   .checkout-page .fb span { display: none; }
 }
+
+/* Cart contact pair — WhatsApp + Call side by side */
+.cart-contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 0.45rem;
+}
+.cart-contact .cart-wa { width: 100%; margin-top: 0; }
+.cart-contact .cart-call { width: 100%; box-shadow: none; }
+.cart-contact .btn { justify-content: center; }
