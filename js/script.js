@@ -623,6 +623,7 @@
         btn.dataset.pq === "plus" ? currentQty + 1 : currentQty - 1;
       currentQty = Math.min(99, Math.max(1, n));
       if (ppQtyVal) ppQtyVal.textContent = String(currentQty);
+      updatePpWa();
     });
   });
 
