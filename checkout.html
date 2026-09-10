@@ -152,49 +152,25 @@
             </fieldset>
             <div id="coPaymentInfo" class="co-payment-info" hidden></div>
 
-            <button class="btn co-place" type="button" id="coNextToReview">
-              <span>Review Order &rarr;</span>
-            </button>
-            <p class="cart-note">You can track your order anytime on the Orders page.</p>
-          </div>
-          </div>
-
-          <!-- Step 2: Review -->
-          <div id="step2" hidden>
-          <div class="checkout-review">
-            <div class="checkout-card reveal">
-              <h3>Order summary</h3>
-              <div id="coReviewItems" class="co-review-items"></div>
-              <div class="co-review-total">
-                <span>Total</span>
-                <span id="coReviewTotal">Rs. 0.00</span>
-              </div>
-              <div class="co-review-detail">
-                <span class="co-review-label">Delivery to</span>
-                <div id="coReviewCustomer"></div>
-              </div>
-              <div class="co-review-detail">
-                <span class="co-review-label">Payment</span>
-                <span id="coReviewPayment"></span>
-              </div>
-              <div class="co-review-detail">
-                <span class="co-review-label">Estimated delivery</span>
-                <span id="coReviewEta"></span>
-              </div>
+            <div class="co-strip" id="coStrip">
+              <p class="co-strip__row">
+                <span>Delivery to</span>
+                <strong id="coStripDelivery">&mdash;</strong>
+              </p>
+              <p class="co-strip__row">
+                <span>Payment</span>
+                <strong id="coStripPayment">Cash on delivery</strong>
+              </p>
+              <p class="co-strip__row">
+                <span>Estimated delivery</span>
+                <strong id="coStripEta">&mdash;</strong>
+              </p>
             </div>
-          </div>
-
-          <div class="checkout-summary reveal" data-delay="1">
-            <h3>Confirm order</h3>
-            <p class="cart-note">Please review your details before placing the order.</p>
             <button class="btn co-place" type="button" id="coPlace">
-              <span id="coBtnText">Place order</span>
+              <span id="coBtnText">Place Order &rarr;</span>
               <span id="coBtnLoading" hidden>Placing order...</span>
             </button>
-            <button class="btn btn--ghost co-place" type="button" id="coBackToDetails" style="margin-top:0.5rem">
-              <span>&larr; Back to details</span>
-            </button>
-            <p class="cart-note">Your order is saved and sent to us on WhatsApp for confirmation.</p>
+            <p class="cart-note co-trust">Free to place now &mdash; pay on delivery or as arranged on WhatsApp.</p>
           </div>
           </div>
 
