@@ -1069,7 +1069,7 @@
     document.querySelectorAll(".fb-wa").forEach(function (a) {
       if (waHref) a.href = waHref;
     });
-    document.querySelectorAll(".fb-call").forEach(function (a) {
+    document.querySelectorAll(".fb-call, .cart-call").forEach(function (a) {
       a.href = telHref;
     });
   }
