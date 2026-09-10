@@ -3470,3 +3470,97 @@ h1, h2, h3, .logo {
     height: 44px;
   }
 }
+
+/* ---------- Mobile checkout: sticky action bar ---------- */
+.co-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 195;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.8rem calc(0.6rem + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1px solid var(--line-strong);
+  box-shadow: 0 -6px 20px rgba(20, 26, 23, 0.14);
+  transform: translateY(110%);
+  transition: transform 0.25s ease;
+}
+.co-bar.show {
+  transform: translateY(0);
+}
+.co-bar__total {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.2;
+  min-width: 0;
+}
+.co-bar__label {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.co-bar__value {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--accent-dark);
+}
+.co-bar__btn {
+  flex: 1;
+  padding: 0.72rem 1rem;
+  font-size: 0.95rem;
+}
+.co-bar__back {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-soft);
+  color: var(--ink);
+  font-size: 1.25rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+.co-bar__back:hover {
+  background: var(--bg-warm);
+}
+
+@media (max-width: 760px) {
+  .checkout-page .cart-bar { display: none; }
+  .checkout-page .wa-float {
+    bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+  .checkout-page .wa-float::after { content: none; }
+  .checkout-page main { padding-bottom: calc(4.6rem + env(safe-area-inset-bottom)); }
+  .checkout-summary .co-place { display: none; }
+  .checkout-card input[type="text"],
+  .checkout-card input[type="tel"],
+  .checkout-card input[type="email"],
+  .checkout-card textarea,
+  .co-payment select {
+    font-size: 16px;
+    padding: 0.85rem 0.95rem;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .checkout-card {
+    padding: 1.35rem;
+  }
+  .checkout-success {
+    padding: 2.4rem 1.4rem;
+  }
+  .co-review-item__price {
+    min-width: 0;
+  }
+}
+@media (min-width: 761px) {
+  .co-bar { display: none !important; }
+}
