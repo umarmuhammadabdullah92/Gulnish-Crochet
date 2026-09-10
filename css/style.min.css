@@ -3737,3 +3737,53 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   .products-topbar { gap: 0.5rem; }
   .products-topbar .btn--small { min-height: 42px; }
 }
+
+/* ---------- Contact group: WhatsApp + Call ---------- */
+.fb-group {
+  position: fixed;
+  right: 1rem;
+  bottom: 1.4rem;
+  z-index: 185;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.7rem;
+}
+.fb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 24px rgba(20, 26, 23, 0.2);
+  transition: transform 0.2s ease;
+}
+.fb span { display: none; }
+.fb:hover { transform: scale(1.07); color: #fff; }
+.fb-wa { background: linear-gradient(180deg, #2fdc74, #1faa52); }
+.fb-call {
+  background: linear-gradient(180deg, var(--gold-light), var(--gold-deep));
+  color: #2a2418;
+}
+.fb-call:hover { color: #2a2418; }
+#cartBar.show ~ .fb-group { bottom: calc(4.4rem + env(safe-area-inset-bottom)); }
+
+@media (max-width: 768px) {
+  .fb {
+    width: auto;
+    height: auto;
+    min-height: 52px;
+    padding: 0 1.05rem 0 0.7rem;
+    gap: 0.5rem;
+  }
+  .fb span { display: inline-block; }
+  .checkout-page .fb-group { bottom: calc(5rem + env(safe-area-inset-bottom)); }
+  .checkout-page .fb { width: 54px; height: 54px; padding: 0; }
+  .checkout-page .fb span { display: none; }
+}
