@@ -714,6 +714,34 @@
   var cartBarCount = document.getElementById("cartBarCount");
   var cartBarTotal = document.getElementById("cartBarTotal");
   var cartBarBtn = document.getElementById("cartBarBtn");
+  var cartWa = document.getElementById("cartWa");
+
+  function waBase() {
+    var num = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
+    return num ? "https://wa.me/" + encodeURIComponent(num) : "";
+  }
+
+  function updateCartWa() {
+    if (!cartWa) return;
+    var base = waBase();
+    if (!base || !cart.length) {
+      cartWa.href = base || "#";
+      return;
+    }
+    var lines = ["Hi Gulnish Crochet, I'd like to place this order:", ""];
+    cart.forEach(function (item) {
+      lines.push(
+        "\u2022 " + (item.name || "Item") +
+        (item.qty > 1 ? " x" + item.qty : "") +
+        (item.color ? " (" + item.color + ")" : "") +
+        " \u2014 " + money(item.price * item.qty)
+      );
+    });
+    lines.push("");
+    lines.push("Total: *" + money(cartTotalPrice()) + "*");
+    lines.push("Please confirm availability and delivery.");
+    cartWa.href = base + "?text=" + encodeURIComponent(lines.join("\n"));
+  }
 
   function loadCart() {
     try {
