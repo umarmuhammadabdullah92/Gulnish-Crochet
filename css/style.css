@@ -2506,7 +2506,7 @@ h1, h2, h3, .logo {
   color: #2a2418;
   font-weight: 700;
   font-size: 1rem;
-  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  background: var(--gold);
   flex-shrink: 0;
 }
 
