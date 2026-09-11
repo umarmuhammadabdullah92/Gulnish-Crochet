@@ -2307,18 +2307,6 @@ h1, h2, h3, .logo {
   object-fit: cover;
 }
 
-.hero-media__dot {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--gold);
-  z-index: 1;
-}
-
-.hero-media__dot--tl { top: -6px; left: 18%; }
-.hero-media__dot--br { bottom: 12%; right: -6px; }
-
 /* ---------- Star rating ---------- */
 .rating-stars {
   display: inline-flex;
