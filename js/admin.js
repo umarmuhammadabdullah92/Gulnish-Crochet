@@ -1097,6 +1097,12 @@
     });
   }
 
+  // Demo (localStorage) mode has no Realtime; poll shared storage so
+  // orders placed in another tab of this browser still alert the admin.
+  if (GC && !GC.configured && GC.refreshLocalData) {
+    setInterval(function () { GC.refreshLocalData(); }, 20000);
+  }
+
   /* ---------- auth -------- */
   function enterAdmin() {
     adminWrap.hidden = false;
