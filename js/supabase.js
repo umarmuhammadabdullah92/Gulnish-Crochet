@@ -200,7 +200,15 @@
     return out;
   }
 
-  function defaultSettings() {
+  function normalizeProduct(p) {
+    var s = String((p && p.status) || "").trim().toLowerCase();
+    var status = "in stock";
+    if (s === "sold out" || s === "sold-out") status = "sold out";
+    else if (s === "made to order" || s === "made-to-order") status = "made to order";
+    return Object.assign({}, p, { status: status });
+  }
+
+  /* ---------- v<19>.sql also mirrors this catalog ---------- */
     var cats = [];
     for (var i = 0; i < DEFAULT_COUNT; i += 1) {
       cats.push(DEFAULT_NAMES[i] || EXTRA_CATEGORY_NAMES[i + 1] || "Category " + (i + 1));
