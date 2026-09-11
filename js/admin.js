@@ -235,6 +235,7 @@
       price: parseFloat(pPrice.value) || 0,
       category: pCategory.value,
       status: pStatus ? pStatus.value : "in stock",
+      stock: pStock && pStock.value !== "" ? Math.max(0, parseInt(pStock.value, 10) || 0) : null,
       image: img,
       keywords: pKeywords
         ? (pKeywords.value || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean)
