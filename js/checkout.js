@@ -234,64 +234,6 @@
 
     var sub = cartTotalPrice(items);
     if (subReview) subReview.textContent = money(sub);
-    var shipText = shippingNote(items).text;
-    if (shipReview) {
-      shipReview.textContent = shipText;
-      shipReview.hidden = !shipText;
-    }
-    if (totalReview) totalReview.textContent = shipText
-      ? money(sub + (parseFloat(shippingNote(items).amount) || 0))
-      : money(sub);
-
-    renderReviewAddress();
-    renderReviewPayment();
-
-    var notesCard = document.getElementById("coReviewNotesCard");
-    var notesEl = document.getElementById("coReviewNotes");
-    var notes = readNotes();
-    if (notesCard && notesEl) {
-      notesEl.textContent = notes;
-      notesCard.hidden = !notes;
-    }
-
-    var notify = !!(document.getElementById("coNotify") || {}).checked;
-    var notifyEl = document.getElementById("coReviewNotify");
-    if (notifyEl) {
-      notifyEl.hidden = !notify;
-    }
-  }
-
-  function renderReview() {
-    var items = loadCart();
-    var itemsReview = document.getElementById("coReviewItems");
-    var subReview = document.getElementById("coReviewSubtotal");
-    var shipReview = document.getElementById("coReviewShipping");
-    var totalReview = document.getElementById("coReviewTotal");
-
-    if (itemsReview) {
-      itemsReview.innerHTML = items
-        .map(function (item) {
-          return (
-            '<div class="co-item">' +
-            '<div class="co-item__img">' +
-            (item.image
-              ? '<img src="' + item.image + '" alt="" loading="lazy" decoding="async">'
-              : "<span class='cart-item__ph'>&#128722;</span>") +
-            "</div>" +
-            '<div class="co-item__info">' +
-            '<span class="co-item__name">' + (escapeHtml(item.name) || "Item") + "</span>" +
-            (item.color ? '<span class="co-item__color">' + escapeHtml(item.color) + "</span>" : "") +
-            '<span class="co-item__qty">Qty: ' + item.qty + "</span>" +
-            "</div>" +
-            '<div class="co-item__price">' + money(livePrice(item) * item.qty) + "</div>" +
-            "</div>"
-          );
-        })
-        .join("");
-    }
-
-    var sub = cartTotalPrice(items);
-    if (subReview) subReview.textContent = money(sub);
     var ship = shippingNote(items);
     if (shipReview) {
       shipReview.textContent = ship.text;
