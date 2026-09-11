@@ -59,7 +59,7 @@ function emailBody(order) {
     } catch (e) { /* ignore */ }
   }
   lines.push("");
-  lines.push("You can track this order at any time from the My Orders page on our site.");
+  lines.push("For updates on your order, message us on WhatsApp at +92 307 5729901.");
   lines.push("");
   lines.push("Questions? WhatsApp us at +92 307 5729901.");
 
