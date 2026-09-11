@@ -3669,7 +3669,6 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
 }
 .fb span { display: none; }
 .fb:hover { transform: scale(1.07); color: #fff; }
-.fb-wa { background: #1faa52; }
 .fb-call {
   background: var(--gold);
   color: #2a2418;
