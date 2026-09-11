@@ -257,6 +257,8 @@
     if (!items.length) {
       if (itemsEl) itemsEl.innerHTML = "";
       if (subtotalEl) subtotalEl.textContent = money(0);
+      var emptyShip = document.getElementById("coShipping");
+      if (emptyShip) emptyShip.hidden = true;
       if (emptyWrap) emptyWrap.hidden = false;
       if (formWrap) formWrap.hidden = true;
       updateBar();
