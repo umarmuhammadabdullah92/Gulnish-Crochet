@@ -2997,14 +2997,6 @@ h1, h2, h3, .logo {
 }
 
 @media (max-width: 480px) {
-  .hero-media__badge {
-    font-size: 0.72rem;
-    padding: 0.45rem 0.8rem;
-  }
-
-  .hero-media__badge--top { left: 0.7rem; }
-  .hero-media__badge--bottom { right: 0.7rem; }
-
   .cart-drawer { width: 100vw; }
   .promo__grid { gap: 1.6rem; }
 
