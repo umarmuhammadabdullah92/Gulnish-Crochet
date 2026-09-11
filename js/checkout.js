@@ -56,9 +56,24 @@
     localStorage.setItem(CART_KEY, JSON.stringify(items));
   }
 
+  function livePrice(item) {
+    var list = (GC && GC.products) || [];
+    var found = list.find(function (x) { return x.id === item.id; });
+    return found && parseFloat(found.price) > 0
+      ? parseFloat(found.price)
+      : (parseFloat(item.price) || 0);
+  }
+
+  function absImage(src) {
+    if (!src) return "";
+    return /^https?:\/\//i.test(src)
+      ? src
+      : (window.location.origin + "/" + String(src).replace(/^\/+/, ""));
+  }
+
   function cartTotalPrice(items) {
     return items.reduce(
-      function (sum, item) { return sum + (parseFloat(item.price) || 0) * item.qty; },
+      function (sum, item) { return sum + livePrice(item) * item.qty; },
       0
     );
   }
