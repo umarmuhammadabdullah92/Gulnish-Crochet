@@ -4305,6 +4305,125 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   font-weight: 600;
 }
 
+/* =========================================================
+   Low-stock urgency
+   ========================================================= */
+.work-card__badge--low {
+  color: #8a4b08;
+  background: #fdf3d9;
+  border: 1px solid #ecd29a;
+}
+.product-page__status.status-low {
+  color: #8a4b08;
+  background: #fdf3d9;
+  border: 1px solid #ecd29a;
+}
+
+/* =========================================================
+   Wishlist
+   ========================================================= */
+.wish-heart {
+  position: absolute;
+  top: 0.55rem;
+  left: 0.55rem;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--line);
+  color: #7c837f;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  -webkit-tap-highlight-color: transparent;
+}
+.wish-heart:hover {
+  color: var(--gold-deep);
+  transform: scale(1.08);
+}
+.wish-heart.wished {
+  color: var(--gold-deep);
+  background: #fdf6e4;
+  border-color: #e9d7a8;
+}
+.wish-heart.pp-wish {
+  position: static;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+.product-page__btn-row {
+  align-items: center;
+}
+
+/* Wishlist page */
+.section-sub {
+  color: var(--muted);
+  margin: 0.6rem 0 2rem;
+  max-width: 560px;
+}
+.wishlist-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--muted);
+}
+.wishlist-empty .cart-empty__ph {
+  font-size: 2.4rem;
+}
+
+/* =========================================================
+   Shipping visibility (cart + checkout)
+   ========================================================= */
+.cart-shipping {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--muted);
+  padding: 0.35rem 0;
+  border-top: 1px dashed var(--line);
+}
+.cart-shipping--free {
+  color: #2f6f50;
+  font-weight: 600;
+}
+.co-shipping {
+  font-size: 0.82rem;
+  color: var(--muted);
+  padding: 0.4rem 0 0.8rem;
+  border-bottom: 1px dashed var(--line);
+  margin-bottom: 0.8rem;
+}
+
+/* Checkout WhatsApp update opt-in */
+.co-optin {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-weight: 500 !important;
+  font-size: 0.86rem !important;
+  color: var(--ink) !important;
+  margin-top: 0.4rem;
+  cursor: pointer;
+}
+.co-optin input {
+  width: 18px;
+  height: 18px;
+  margin-top: 0.15rem;
+  accent-color: var(--gold-deep);
+  flex-shrink: 0;
+}
+
   opacity: 1;
   transform: translate(-50%, 0);
 }
