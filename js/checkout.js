@@ -1,5 +1,6 @@
 /* =========================================================
    Gulnish Crochet — checkout page logic (professional build)
+   Steps: 1. Shipping → 2. Payment → 3. Review → Confirm
    ========================================================= */
 
 (function () {
@@ -93,9 +94,7 @@
     return { text: "Delivery: charged on WhatsApp (actual courier rate)", amount: null, isFree: false };
   }
 
-  /* Best-effort email receipt. The /api endpoint returns cleanly when no
-     email provider is configured, so a missing function never blocks the
-     order — this is purely a nice-to-have for customers who give an email. */
+  /* Best-effort email receipt (never blocks placing the order). */
   function sendOrderEmail(order) {
     var to = order.customer && order.customer.email;
     if (!to) return;
@@ -105,12 +104,14 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ to: to, order: order })
       }).catch(function () {});
-    } catch (err) { /* keep the order flowing even if fetch fails */ }
+    } catch (err) { /* keep the order flowing */ }
   }
 
   /* ---------- elements ---------- */
   var itemsEl = document.getElementById("coItems");
+  var itemsEl2 = document.getElementById("coItems2");
   var subtotalEl = document.getElementById("coSubtotal");
+  var subtotalEl2 = document.getElementById("coSubtotal2");
   var emptyWrap = document.getElementById("coEmpty");
   var formWrap = document.getElementById("coForm");
   var form = document.getElementById("coFormEl");
@@ -135,30 +136,210 @@
 
   /* ---------- step elements ---------- */
   var step1 = document.getElementById("step1");
+  var step2 = document.getElementById("step2");
   var step3 = document.getElementById("step3");
   var progressFill = document.getElementById("checkoutProgressFill");
   var stepDots = document.querySelectorAll(".checkout-step-dot");
 
   var currentStep = 1;
 
+  function updateStrip() {
+    var stripDelivery = document.getElementById("coStripDelivery");
+    var stripDelivery2 = document.getElementById("coStripDelivery2");
+    var stripEta = document.getElementById("coStripEta");
+    var stripEta2 = document.getElementById("coStripEta2");
+
+    var name = (document.getElementById("coName") || {}).value || "";
+    var address = (document.getElementById("coAddress") || {}).value || "";
+    var city = (document.getElementById("coCity") || {}).value || "";
+    var text = name
+      ? name + (address ? " · " + address : "") + (city ? ", " + city : "")
+      : "Add your details above";
+
+    if (stripDelivery) stripDelivery.textContent = text;
+    if (stripDelivery2) stripDelivery2.textContent = text;
+
+    var eta = GC && GC.deliveryEstimate ? GC.deliveryEstimate(new Date().toISOString(), false) : "";
+    var etaText = eta ? friendlyDate(eta) : "";
+    if (stripEta) stripEta.textContent = etaText;
+    if (stripEta2) stripEta2.textContent = etaText;
+  }
+
+  function renderReviewPayment() {
+    var el = document.getElementById("coReviewPayment");
+    if (!el) return;
+    var method = currentPayment();
+    el.innerHTML = '<p class="co-review-row"><span>Method</span><strong>' + escapeHtml(method) + "</strong></p>";
+  }
+
+  function renderReviewAddress() {
+    var el = document.getElementById("coReviewAddress");
+    if (!el) return;
+    var get = function (id) { return (document.getElementById(id) || {}).value || ""; };
+
+    var name = get("coName");
+    var phone = get("coPhone");
+    var email = get("coEmail");
+    var address = get("coAddress");
+    var landmark = get("coLandmark");
+    var city = get("coCity");
+    var province = get("coProvince");
+
+    var rows = "";
+    if (name) rows += coReviewRow("Name", name);
+    if (phone) rows += coReviewRow("Phone", "+" + String(phone).replace(/[^\d]/g, "").replace(/^0+/, ""));
+    if (email) rows += coReviewRow("Email", email);
+    if (address) rows += coReviewRow("Address", address + (landmark ? " <span class=\"co-review-muted\">(near " + escapeHtml(landmark) + ")</span>" : ""));
+    if (city) rows += coReviewRow("City", city + (province ? ", " + province : ""));
+    if (!rows) rows = '<p class="co-review-empty">No shipping details yet.</p>';
+    el.innerHTML = rows;
+  }
+
+  function coReviewRow(label, value) {
+    return '<p class="co-review-row"><span>' + escapeHtml(label) + "</span><strong>" + value + "</strong></p>";
+  }
+
+  function readNotes() {
+    return (document.getElementById("coNotes") || {}).value || "";
+  }
+
+  function renderReview() {
+    var items = loadCart();
+    var itemsReview = document.getElementById("coReviewItems");
+    var subReview = document.getElementById("coReviewSubtotal");
+    var shipReview = document.getElementById("coReviewShipping");
+    var totalReview = document.getElementById("coReviewTotal");
+
+    if (itemsReview) {
+      itemsReview.innerHTML = items
+        .map(function (item) {
+          return (
+            '<div class="co-item">' +
+            '<div class="co-item__img">' +
+            (item.image
+              ? '<img src="' + item.image + '" alt="" loading="lazy" decoding="async">'
+              : "<span class='cart-item__ph'>&#128722;</span>") +
+            "</div>" +
+            '<div class="co-item__info">' +
+            '<span class="co-item__name">' + (escapeHtml(item.name) || "Item") + "</span>" +
+            (item.color ? '<span class="co-item__color">' + escapeHtml(item.color) + "</span>" : "") +
+            '<span class="co-item__qty">Qty: ' + item.qty + "</span>" +
+            "</div>" +
+            '<div class="co-item__price">' + money(livePrice(item) * item.qty) + "</div>" +
+            "</div>"
+          );
+        })
+        .join("");
+    }
+
+    var sub = cartTotalPrice(items);
+    if (subReview) subReview.textContent = money(sub);
+    var shipText = shippingNote(items).text;
+    if (shipReview) {
+      shipReview.textContent = shipText;
+      shipReview.hidden = !shipText;
+    }
+    if (totalReview) totalReview.textContent = shipText
+      ? money(sub + (parseFloat(shippingNote(items).amount) || 0))
+      : money(sub);
+
+    renderReviewAddress();
+    renderReviewPayment();
+
+    var notesCard = document.getElementById("coReviewNotesCard");
+    var notesEl = document.getElementById("coReviewNotes");
+    var notes = readNotes();
+    if (notesCard && notesEl) {
+      notesEl.textContent = notes;
+      notesCard.hidden = !notes;
+    }
+
+    var notify = !!(document.getElementById("coNotify") || {}).checked;
+    var notifyEl = document.getElementById("coReviewNotify");
+    if (notifyEl) {
+      notifyEl.hidden = !notify;
+    }
+  }
+
+  function renderReview() {
+    var items = loadCart();
+    var itemsReview = document.getElementById("coReviewItems");
+    var subReview = document.getElementById("coReviewSubtotal");
+    var shipReview = document.getElementById("coReviewShipping");
+    var totalReview = document.getElementById("coReviewTotal");
+
+    if (itemsReview) {
+      itemsReview.innerHTML = items
+        .map(function (item) {
+          return (
+            '<div class="co-item">' +
+            '<div class="co-item__img">' +
+            (item.image
+              ? '<img src="' + item.image + '" alt="" loading="lazy" decoding="async">'
+              : "<span class='cart-item__ph'>&#128722;</span>") +
+            "</div>" +
+            '<div class="co-item__info">' +
+            '<span class="co-item__name">' + (escapeHtml(item.name) || "Item") + "</span>" +
+            (item.color ? '<span class="co-item__color">' + escapeHtml(item.color) + "</span>" : "") +
+            '<span class="co-item__qty">Qty: ' + item.qty + "</span>" +
+            "</div>" +
+            '<div class="co-item__price">' + money(livePrice(item) * item.qty) + "</div>" +
+            "</div>"
+          );
+        })
+        .join("");
+    }
+
+    var sub = cartTotalPrice(items);
+    if (subReview) subReview.textContent = money(sub);
+    var ship = shippingNote(items);
+    if (shipReview) {
+      shipReview.textContent = ship.text;
+      shipReview.hidden = !ship.text;
+    }
+    if (totalReview) totalReview.textContent = money(sub + (parseFloat(ship.amount) || 0));
+
+    renderReviewAddress();
+    renderReviewPayment();
+
+    var notesCard = document.getElementById("coReviewNotesCard");
+    var notesEl = document.getElementById("coReviewNotes");
+    var notes = readNotes();
+    if (notesCard && notesEl) {
+      notesEl.textContent = notes;
+      notesCard.hidden = !notes;
+    }
+  }
+
+  /* ---------- step navigation ---------- */
   function setStep(step) {
     currentStep = step;
 
     if (step1) step1.hidden = step !== 1;
+    if (step2) step2.hidden = step !== 2;
     if (step3) step3.hidden = step !== 3;
 
-    var pct = step === 3 ? 100 : 50;
+    var pct = step === 1 ? 33 : step === 2 ? 66 : 100;
     if (progressFill) progressFill.style.width = pct + "%";
 
     stepDots.forEach(function (dot, i) {
       var s = i + 1;
-      dot.classList.toggle("active", s <= step);
+      dot.classList.toggle("active", s === step);
       dot.classList.toggle("completed", s < step);
     });
 
+    if (step === 3) renderReview();
     updateBar();
   }
 
+  function gotoStep(step) {
+    if (document.documentElement.scrollTop > 300) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    setTimeout(function () { setStep(step); }, step > currentStep ? 120 : 0);
+  }
+
+  /* ---------- mobile sticky action bar ---------- */
   function setBarVisible(on) {
     if (!coBar) return;
     if (on) {
@@ -176,39 +357,38 @@
     if (!coBar) return;
     var items = loadCart();
     if (!items.length || currentStep === 3) {
-      setBarVisible(false);
+      if (currentStep === 3 && coBarBack) coBarBack.hidden = false;
+      setBarVisible(items.length > 0);
       return;
     }
     if (coBarTotal) coBarTotal.textContent = money(cartTotalPrice(items));
-    if (coBarBtnText) coBarBtnText.textContent = "Place Order";
+    if (coBarBack) coBarBack.hidden = currentStep === 1;
+
+    var label = currentStep === 1 ? "Continue to Payment" : currentStep === 2 ? "Review Order" : "Place Order";
+    if (coBarBtnText) coBarBtnText.textContent = label;
     if (coBarBtnLoading) coBarBtnLoading.hidden = true;
-    if (coBarBack) coBarBack.hidden = true;
     setBarVisible(true);
   }
 
-  /* ---------- auto-fill from saved profile ---------- */
-  function autoFillProfile() {
-    var profile = GC && GC.getCustomerProfile ? GC.getCustomerProfile() : null;
-    if (!profile) return;
-    var fields = { coName: "name", coPhone: "phone", coEmail: "email", coAddress: "address", coCity: "city", coLandmark: "landmark", coProvince: "province" };
-    Object.keys(fields).forEach(function (fieldId) {
-      var el = document.getElementById(fieldId);
-      if (el && profile[fields[fieldId]]) el.value = profile[fields[fieldId]];
+  if (coBarBack) {
+    coBarBack.addEventListener("click", function () {
+      if (currentStep === 3) setStep(2);
+      else if (currentStep === 2) setStep(1);
     });
   }
 
-  /* ---------- save profile after order ---------- */
-  function saveProfile() {
-    var profile = {
-      name: (document.getElementById("coName") || {}).value || "",
-      phone: (document.getElementById("coPhone") || {}).value || "",
-      email: (document.getElementById("coEmail") || {}).value || "",
-      address: (document.getElementById("coAddress") || {}).value || "",
-      city: (document.getElementById("coCity") || {}).value || "",
-      landmark: (document.getElementById("coLandmark") || {}).value || "",
-      province: (document.getElementById("coProvince") || {}).value || ""
-    };
-    if (GC && GC.saveCustomerProfile) GC.saveCustomerProfile(profile);
+  if (coBarBtn) {
+    coBarBtn.addEventListener("click", function () {
+      if (currentStep === 1) {
+        if (!validateShipping()) return;
+        setStep(2);
+      } else if (currentStep === 2) {
+        setStep(3);
+      } else {
+        if (!validate()) return;
+        placeOrder();
+      }
+    });
   }
 
   /* ---------- payment method details ---------- */
@@ -248,26 +428,32 @@
   if (payGroup) {
     payGroup.addEventListener("change", function () {
       renderPaymentInfo();
-      updateStrip();
+      if (currentStep === 3) renderReviewPayment();
     });
   }
 
   /* ---------- order summary ---------- */
   function renderSummary(items) {
-    if (!itemsEl) return;
+    if (!itemsEl && !itemsEl2) return;
     if (!items.length) {
       if (itemsEl) itemsEl.innerHTML = "";
+      if (itemsEl2) itemsEl2.innerHTML = "";
       if (subtotalEl) subtotalEl.textContent = money(0);
+      if (subtotalEl2) subtotalEl2.textContent = money(0);
       var emptyShip = document.getElementById("coShipping");
       if (emptyShip) emptyShip.hidden = true;
+      var emptyShip2 = document.getElementById("coShipping2");
+      if (emptyShip2) emptyShip2.hidden = true;
       if (emptyWrap) emptyWrap.hidden = false;
       if (formWrap) formWrap.hidden = true;
+      if (step1) step1.hidden = true;
       updateBar();
       return;
     }
     if (emptyWrap) emptyWrap.hidden = true;
     if (formWrap) formWrap.hidden = false;
-    itemsEl.innerHTML = items
+
+    var html = items
       .map(function (item) {
         return (
           '<div class="co-item">' +
@@ -286,39 +472,25 @@
         );
       })
       .join("");
+
+    if (itemsEl) itemsEl.innerHTML = html;
+    if (itemsEl2) itemsEl2.innerHTML = html;
     if (subtotalEl) subtotalEl.textContent = money(cartTotalPrice(items));
+    if (subtotalEl2) subtotalEl2.textContent = money(cartTotalPrice(items));
+
     var shipEl = document.getElementById("coShipping");
     if (shipEl) {
       var ship = shippingNote(items);
       shipEl.textContent = ship.text;
       shipEl.hidden = !ship.text;
     }
+    var shipEl2 = document.getElementById("coShipping2");
+    if (shipEl2) {
+      var ship2 = shippingNote(items);
+      shipEl2.textContent = ship2.text;
+      shipEl2.hidden = !ship2.text;
+    }
     updateBar();
-  }
-
-  function updateStrip() {
-    var stripDelivery = document.getElementById("coStripDelivery");
-    var stripPayment = document.getElementById("coStripPayment");
-    var stripEta = document.getElementById("coStripEta");
-
-    if (stripDelivery) {
-      var name = (document.getElementById("coName") || {}).value || "";
-      var address = (document.getElementById("coAddress") || {}).value || "";
-      var city = (document.getElementById("coCity") || {}).value || "";
-      stripDelivery.textContent = name
-        ? name + (address ? " · " + address : "") + (city ? ", " + city : "")
-        : "Add your details above";
-    }
-
-    if (stripPayment) {
-      var method = currentPayment();
-      stripPayment.textContent = method === "Cash on delivery" ? "Cash on delivery" : method;
-    }
-
-    if (stripEta) {
-      var eta = GC && GC.deliveryEstimate ? GC.deliveryEstimate(new Date().toISOString(), false) : "";
-      stripEta.textContent = eta ? friendlyDate(eta) : "";
-    }
   }
 
   function setLoading(loading) {
@@ -341,10 +513,10 @@
     toast.textContent = message;
     toast.classList.add("show");
     clearTimeout(showMsg._t);
-    showMsg._t = setTimeout(function () { toast.classList.remove("show"); }, 2400);
+    showMsg._t = setTimeout(function () { toast.classList.remove("show"); }, 2600);
   }
 
-  function validate() {
+  function validateShipping() {
     var name = (document.getElementById("coName") || {}).value || "";
     var phone = (document.getElementById("coPhone") || {}).value || "";
     var address = (document.getElementById("coAddress") || {}).value || "";
@@ -357,8 +529,8 @@
       return false;
     }
     if (!phone.trim()) {
-      var el = document.getElementById("coPhone");
-      if (el) el.focus();
+      var el2 = document.getElementById("coPhone");
+      if (el2) el2.focus();
       showMsg("Please enter your phone number.");
       return false;
     }
@@ -376,8 +548,11 @@
     return true;
   }
 
-  function placeOrder() {
-    setLoading(true);
+  function validate() {
+    return validateShipping();
+  }
+
+  function buildOrder() {
     var items = loadCart();
     var name = (document.getElementById("coName") || {}).value || "";
     var phoneV = (document.getElementById("coPhone") || {}).value || "";
@@ -393,7 +568,7 @@
     var placedAt = new Date().toISOString();
     var paymentMethod = currentPayment();
 
-    var order = {
+    return {
       id: GC && GC.makeOrderId ? GC.makeOrderId() : "GC" + Date.now().toString(36).toUpperCase(),
       placedAt: placedAt,
       updatedAt: placedAt,
@@ -429,10 +604,15 @@
       deliveryDays: (GC && GC.settings && GC.settings.deliveryDays) || null,
       notifyUpdates: !!(document.getElementById("coNotify") || {}).checked
     };
+  }
 
-    // Build the WhatsApp order message synchronously so it can be opened
-    // within the user's click (popup blockers allow this), and reused on
-    // the success screen as the manual fallback button.
+  function placeOrder() {
+    setLoading(true);
+    var order = buildOrder();
+    var items = order.items;
+
+    // Build the WhatsApp message synchronously so it opens within the
+    // user's click (popup blockers allow this).
     var waNum = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
     var shipText = shippingNote(items).text;
     var waMsg =
@@ -448,22 +628,29 @@
       (shipText ? "\n" + shipText : "") +
       "\nPayment: " + order.payment.method +
       (order.estDelivery ? "\nEst. delivery: " + friendlyDate(order.estDelivery) : "") +
-      (phone ? "\nPhone: +" + phone : "") +
-      (email ? "\nEmail: " + email : "") +
+      (order.customer.phone ? "\nPhone: +" + order.customer.phone : "") +
+      (order.customer.email ? "\nEmail: " + order.customer.email : "") +
       (order.notifyUpdates ? "\nNotify me about new pieces on WhatsApp: Yes (please add me to your update list)" : "") +
-      (address ? "\nAddress: " + address + (landmark ? "\nLandmark: " + landmark : "") + "\nCity: " + city + (province ? ", " + province : "") : "") +
-      (notes ? "\nNotes: " + notes : "");
+      (order.customer.address
+        ? "\nAddress: " + order.customer.address +
+          (order.customer.landmark ? "\nLandmark: " + order.customer.landmark : "") +
+          "\nCity: " + order.customer.city +
+          (order.customer.province ? ", " + order.customer.province : "")
+        : "") +
+      (order.customer.notes ? "\nNotes: " + order.customer.notes : "");
     var orderWaLink = waNum ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent(waMsg) : "";
     if (orderWaLink) {
-      try { window.open(orderWaLink, "_blank", "noopener"); } catch (err) { /* popup blocked — the fallback button on the success screen is still shown */ }
+      try { window.open(orderWaLink, "_blank", "noopener"); } catch (err) { /* fallback button on success screen */ }
     }
 
     var done = function () {
       saveCart([]);
       saveProfile();
-      sendOrderEmail(order);
 
       setStep(3);
+      var pctFill = document.getElementById("checkoutProgressFill");
+      if (pctFill) pctFill.style.width = "100%";
+      stepDots.forEach(function (d) { d.classList.add("completed"); d.classList.remove("active"); });
 
       if (success) {
         if (successNo) successNo.textContent = order.id;
@@ -510,17 +697,51 @@
     }
   }
 
-  /* ---------- place order ---------- */
-  if (placeBtn) {
-    placeBtn.addEventListener("click", function () {
-      if (!validate()) return;
-      placeOrder();
+  /* ---------- auto-fill from saved profile ---------- */
+  function autoFillProfile() {
+    var profile = GC && GC.getCustomerProfile ? GC.getCustomerProfile() : null;
+    if (!profile) return;
+    var fields = { coName: "name", coPhone: "phone", coEmail: "email", coAddress: "address", coCity: "city", coLandmark: "landmark", coProvince: "province" };
+    Object.keys(fields).forEach(function (fieldId) {
+      var el = document.getElementById(fieldId);
+      if (el && profile[fields[fieldId]]) el.value = profile[fields[fieldId]];
     });
   }
 
-  /* ---------- mobile sticky action bar ---------- */
-  if (coBarBtn) {
-    coBarBtn.addEventListener("click", function () {
+  /* ---------- save profile after order ---------- */
+  function saveProfile() {
+    var profile = {
+      name: (document.getElementById("coName") || {}).value || "",
+      phone: (document.getElementById("coPhone") || {}).value || "",
+      email: (document.getElementById("coEmail") || {}).value || "",
+      address: (document.getElementById("coAddress") || {}).value || "",
+      city: (document.getElementById("coCity") || {}).value || "",
+      landmark: (document.getElementById("coLandmark") || {}).value || "",
+      province: (document.getElementById("coProvince") || {}).value || ""
+    };
+    if (GC && GC.saveCustomerProfile) GC.saveCustomerProfile(profile);
+  }
+
+  /* ---------- step navigation buttons ---------- */
+  var step1Next = document.getElementById("coStep1Next");
+  if (step1Next) {
+    step1Next.addEventListener("click", function () {
+      if (!validateShipping()) return;
+      setStep(2);
+    });
+  }
+
+  var step2Back = document.getElementById("coStep2Back");
+  if (step2Back) step2Back.addEventListener("click", function () { setStep(1); });
+
+  var step2Next = document.getElementById("coStep2Next");
+  if (step2Next) step2Next.addEventListener("click", function () { setStep(3); });
+
+  var step3Back = document.getElementById("coStep3Back");
+  if (step3Back) step3Back.addEventListener("click", function () { setStep(2); });
+
+  if (placeBtn) {
+    placeBtn.addEventListener("click", function () {
       if (!validate()) return;
       placeOrder();
     });
@@ -529,18 +750,20 @@
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (!validate()) return;
-      placeOrder();
+      if (currentStep === 1) {
+        if (!validateShipping()) return;
+        setStep(2);
+      }
     });
   }
 
-  /* ---------- enter key places order ---------- */
+  /* ---------- enter key ---------- */
   document.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && currentStep === 1 && !placeBtn.disabled) {
+      var tag = (e.target && e.target.tagName) || "";
+      if (tag === "TEXTAREA") return;
       e.preventDefault();
-      if (validate()) {
-        placeOrder();
-      }
+      if (validateShipping()) setStep(2);
     }
   });
 
