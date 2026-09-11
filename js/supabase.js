@@ -585,7 +585,8 @@
         category: product.category,
         image: product.image || "",
         keywords: product.keywords || [],
-        colors: product.colors || []
+        colors: product.colors || [],
+        status: product.status || "in stock"
       };
       var res = await sb.from("products").upsert(row, { onConflict: "id" });
       return { ok: !res.error, error: res.error };
