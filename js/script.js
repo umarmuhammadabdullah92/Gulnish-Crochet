@@ -209,11 +209,6 @@
     return "in stock";
   }
 
-  function stockLeft(p) {
-    var st = p && p.stock != null ? parseInt(p.stock, 10) : null;
-    return st !== null && st > 0 ? st : null;
-  }
-
   function stockBadgeHTML(p) {
     var s = stockStatus(p);
     if (s === "sold out") return '<div class="work-card__badge work-card__badge--out">Sold out</div>';
