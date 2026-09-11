@@ -2331,27 +2331,6 @@ h1, h2, h3, .logo {
 .hero-media__dot--tl { top: -6px; left: 18%; }
 .hero-media__dot--br { bottom: 12%; right: -6px; }
 
-.hero-media__badge {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background: #fff;
-  color: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.55rem 1.1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  box-shadow: var(--shadow-sm);
-  z-index: 2;
-}
-
-.hero-media__badge svg { color: var(--gold); flex-shrink: 0; }
-
-.hero-media__badge--top { top: 1.4rem; left: -1.4rem; }
-.hero-media__badge--bottom { bottom: 1.6rem; right: -1rem; }
-
 /* ---------- Star rating ---------- */
 .rating-stars {
   display: inline-flex;
