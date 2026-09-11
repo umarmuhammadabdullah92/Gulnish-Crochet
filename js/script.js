@@ -742,6 +742,7 @@
       ppWish.setAttribute("aria-pressed", added ? "true" : "false");
       ppWish.querySelector("svg").setAttribute("fill", added ? "var(--gold)" : "none");
       updateWishCount();
+      renderWishlistGrid();
     });
   }
 
