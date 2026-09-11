@@ -68,6 +68,12 @@
   function getProducts() {
     return (GC && GC.products) || [];
   }
+  function stockLabel(p) {
+    var s = stockStatusOf(p);
+    if (s === "sold out") return "Sold out";
+    if (s === "made to order") return "Made to order";
+    return "In stock";
+  }
   function getSettings() {
     return (GC && GC.settings) || {};
   }
