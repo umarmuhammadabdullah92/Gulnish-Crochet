@@ -284,6 +284,12 @@
       })
       .join("");
     if (subtotalEl) subtotalEl.textContent = money(cartTotalPrice(items));
+    var shipEl = document.getElementById("coShipping");
+    if (shipEl) {
+      var ship = shippingNote(items);
+      shipEl.textContent = ship.text;
+      shipEl.hidden = false;
+    }
     updateBar();
   }
 
