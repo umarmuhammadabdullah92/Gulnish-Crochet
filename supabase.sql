@@ -167,7 +167,7 @@ create policy "shop-images: admin delete"
 -- Adds one product per shop photo so the store is populated.
 -- Safe to re-run: it skips ids that already exist.
 -- =============================================================
-insert into public.products (id, name, price, category, image, keywords, colors) values
+insert into public.products (id, name, price, category, image, keywords, colors, status) values
   ('seed_gr1_1', 'Premium hand made Rose Purse 1 (price per single purse)', 5799, 'gr1', 'images/purses/purse-1.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_2', 'Premium hand made Rose Purse 2 (price per single purse)', 5799, 'gr1', 'images/purses/purse-10.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
   ('seed_gr1_3', 'Premium hand made Rose Purse 3 (price per single purse)', 5799, 'gr1', 'images/purses/purse-11.webp', '["handbag","purse","crochet bag","handmade","gift","woolen"]'::jsonb, '[]'::jsonb),
