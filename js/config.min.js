@@ -23,3 +23,11 @@ window.GC_CONFIG = {
   // This must match the bucket you create in Supabase Storage.
   storageBucket: "shop-images"
 };
+
+// Analytics — Google Analytics 4 (G-XXXXXXX) and Meta Pixel (numeric ID).
+// Leave both "" to keep the site untagged. Scripts load automatically
+// from js/analytics.js once an ID is set.
+window.GC_ANALYTICS = {
+  ga4: "",
+  meta: ""
+};
