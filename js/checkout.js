@@ -417,7 +417,8 @@
           order.items
             .map(function (i) {
               return "- " + i.name + (i.color ? " (" + i.color + ")" : "") +
-                " x " + i.qty + " = " + money(i.price * i.qty);
+                " x " + i.qty + " = " + money(livePrice(i) * i.qty) +
+                (i.image ? "\n  Photo: " + absImage(i.image) : "");
             })
             .join("\n") +
           "\n\nTotal: " + money(order.total) +
