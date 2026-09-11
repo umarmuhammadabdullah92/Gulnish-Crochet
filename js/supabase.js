@@ -274,8 +274,8 @@
     if (base.bankIBAN) s.bankIBAN = base.bankIBAN;
     if (base.jazzcashNumber) s.jazzcashNumber = base.jazzcashNumber;
     if (base.easypaisaNumber) s.easypaisaNumber = base.easypaisaNumber;
-    if (base.shippingFee != null && base.shippingFee !== "") s.shippingFee = parseFloat(base.shippingFee) || "";
-    if (base.freeDeliveryMin != null && base.freeDeliveryMin !== "") s.freeDeliveryMin = parseFloat(base.freeDeliveryMin) || 0;
+    if (base.shippingFee != null && base.shippingFee !== "") s.shippingFee = parseFloat(base.shippingFee);
+    if (base.freeDeliveryMin != null && base.freeDeliveryMin !== "") s.freeDeliveryMin = parseFloat(base.freeDeliveryMin);
     return s;
   }
 
