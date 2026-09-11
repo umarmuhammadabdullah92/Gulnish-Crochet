@@ -1,4 +1,4 @@
-var CACHE_NAME = "gulnish-cache-v3";
+var CACHE_NAME = "gulnish-cache-v4";
 var APP_SHELL = [
   "./",
   "index.html",
@@ -6,6 +6,8 @@ var APP_SHELL = [
   "about.html",
   "contact.html",
   "checkout.html",
+  "cart.html",
+  "track.html",
   "css/fonts.css",
   "css/style.css",
   "css/admin.css",
@@ -13,6 +15,8 @@ var APP_SHELL = [
   "js/config.js",
   "js/supabase.js",
   "js/script.js",
+  "js/cart.js",
+  "js/track.js",
   "images/logo.webp",
   "images/favicon.ico",
   "images/favicon.png",
