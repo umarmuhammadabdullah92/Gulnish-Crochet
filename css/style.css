@@ -2979,11 +2979,6 @@ h1, h2, h3, .logo {
     box-shadow: var(--glow-accent);
   }
 
-  .btn::after,
-  .add-btn::after {
-    content: none;
-  }
-
   .promo__grid:hover .promo__media img {
     transform: none;
   }
