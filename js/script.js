@@ -183,40 +183,6 @@
     return GC.settings || {};
   }
 
-  /* ---------- Wishlist ---------- */
-  var WISH_KEY = "gulnish-wishlist-v1";
-
-  function loadWish() {
-    try { return JSON.parse(localStorage.getItem(WISH_KEY)) || []; }
-    catch (e) { return []; }
-  }
-
-  function saveWish(arr) {
-    localStorage.setItem(WISH_KEY, JSON.stringify(arr));
-  }
-
-  function isWished(id) {
-    return loadWish().indexOf(id) !== -1;
-  }
-
-  function toggleWish(id) {
-    var arr = loadWish();
-    var i = arr.indexOf(id);
-    var out;
-    if (i === -1) { arr.push(id); out = true; showToast("Saved to wishlist"); }
-    else { arr.splice(i, 1); out = false; showToast("Removed from wishlist"); }
-    saveWish(arr);
-    return out;
-  }
-
-  function updateWishCount() {
-    var el = document.getElementById("wishlistCount");
-    if (!el) return;
-    var n = loadWish().length;
-    el.textContent = n;
-    el.classList.toggle("show", n > 0);
-  }
-
   function shippingInfo(subtotal) {
     var s = getSettings();
     var fee = s.shippingFee != null && s.shippingFee !== "" ? parseFloat(s.shippingFee) : null;
@@ -587,7 +553,6 @@
   var ppQtyVal = document.getElementById("ppQtyVal");
   var ppAdd = document.getElementById("ppAdd");
   var ppWa = document.getElementById("ppWa");
-  var ppWish = document.getElementById("ppWish");
   var ppThumbs = document.getElementById("ppThumbs");
   var currentProduct = null;
   var currentQty = 1;
