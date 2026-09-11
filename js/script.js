@@ -730,11 +730,20 @@
     }
     var lines = ["Hi Gulnish Crochet, I'd like to place this order:", ""];
     cart.forEach(function (item) {
+      var extra = "";
+      if (item.image) {
+        extra =
+          "\nPhoto: " +
+          (/^https?:\/\//i.test(item.image)
+            ? item.image
+            : window.location.origin + "/" + String(item.image).replace(/^\/+/, ""));
+      }
       lines.push(
         "\u2022 " + (item.name || "Item") +
         (item.qty > 1 ? " x" + item.qty : "") +
         (item.color ? " (" + item.color + ")" : "") +
-        " \u2014 " + money(item.price * item.qty)
+        " \u2014 " + money(cartUnitPrice(item) * item.qty) +
+        extra
       );
     });
     lines.push("");
