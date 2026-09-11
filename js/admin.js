@@ -148,6 +148,7 @@
   /* ---------- form refs ---------- */
   var pName = document.getElementById("pName");
   var pPrice = document.getElementById("pPrice");
+  var pStatus = document.getElementById("pStatus");
   var pKeywords = document.getElementById("pKeywords");
   var pImage = document.getElementById("pImage");
   var pImagePreview = document.getElementById("pImagePreview");
