@@ -3079,7 +3079,6 @@ h1, h2, h3, .logo {
   background: var(--gold);
   border-color: var(--gold);
   color: #fff;
-  box-shadow: 0 2px 8px rgba(185, 143, 62, 0.3);
 }
 
 .checkout-step-dot.completed .checkout-step-num {
@@ -3227,7 +3226,6 @@ h1, h2, h3, .logo {
   background: var(--gold);
   border-color: var(--gold);
   color: #fff;
-  box-shadow: 0 2px 10px rgba(185, 143, 62, 0.35);
   transform: scale(1.1);
 }
 
