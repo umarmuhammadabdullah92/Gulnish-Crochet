@@ -4280,6 +4280,31 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 .admin-alert.show {
+  /* =========================================================
+   Policy pages (privacy / refund / terms)
+   ========================================================= */
+.policy h2 {
+  font-family: var(--font-head);
+  font-size: 1.18rem;
+  color: var(--accent-dark);
+  margin: 1.9rem 0 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--line);
+}
+.policy h2:first-child {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+.policy p {
+  margin: 0.55rem 0;
+  color: var(--ink);
+}
+.policy strong {
+  color: var(--accent-darkest);
+  font-weight: 600;
+}
+
   opacity: 1;
   transform: translate(-50%, 0);
 }
