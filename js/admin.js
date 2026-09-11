@@ -176,6 +176,7 @@
     pName.value = "";
     pPrice.value = "";
     if (pStatus) pStatus.value = "in stock";
+    if (pStock) pStock.value = "";
     if (pKeywords) pKeywords.value = "";
     pImage.value = "";
     pImagePreview.hidden = true;
