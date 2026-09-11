@@ -376,6 +376,8 @@
     var address = (document.getElementById("coAddress") || {}).value || "";
     var city = (document.getElementById("coCity") || {}).value || "";
     var notes = (document.getElementById("coNotes") || {}).value || "";
+    var landmark = (document.getElementById("coLandmark") || {}).value || "";
+    var province = (document.getElementById("coProvince") || {}).value || "";
 
     var phone = String(phoneV).replace(/[^\d]/g, "").replace(/^0+/, "");
     var total = cartTotalPrice(items);
@@ -392,6 +394,8 @@
         email: email,
         address: address,
         city: city,
+        province: province,
+        landmark: landmark,
         notes: notes
       },
       items: items.map(function (i) {
