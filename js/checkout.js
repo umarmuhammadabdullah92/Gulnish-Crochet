@@ -449,6 +449,9 @@
 
     if (GC && GC.saveOrder) {
       GC.saveOrder(order).then(function () {
+        if (GC && GC.reserveProducts && order.items && order.items.length) {
+          GC.reserveProducts(order.items.slice()).catch(function () {});
+        }
         done();
       }).catch(function () {
         done();
