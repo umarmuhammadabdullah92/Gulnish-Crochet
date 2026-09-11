@@ -80,17 +80,17 @@
   var BASE_PRICE = { gr1: 850, gr2: 400, gr3: 350, gr4: 1400, gr5: 550, gr6: 450 };
 
   var REAL_PRODUCTS = {
-    "seed_gr4_1": { name: "Earbuds Bag", price: 1599 },
-    "seed_gr1_1": { name: "Premium hand made Rose Purse 1 (price per single purse)", price: 5799 },
-    "seed_gr1_2": { name: "Premium hand made Rose Purse 2 (price per single purse)", price: 5799 },
-    "seed_gr1_3": { name: "Premium hand made Rose Purse 3 (price per single purse)", price: 5799 },
-    "seed_gr1_10": { name: "Premium hand made Rose Purse 4 (price per single purse)", price: 5799 },
-    "seed_gr1_11": { name: "Premium hand made Rose Purse 5 (price per single purse)", price: 5799 },
-    "seed_gr1_12": { name: "Premium hand made Rose Purse 6 (price per single purse)", price: 5799 },
-    "seed_gr1_15": { name: "Premium hand made Rose Purse 7 (price per single purse)", price: 5799 },
-    "seed_gr1_16": { name: "Premium hand made Rose Purse 8 (price per single purse)", price: 5799 },
-    "seed_gr1_19": { name: "Premium hand made Rose Purse 9 (price per single purse)", price: 5799 },
-    "seed_gr1_20": { name: "Premium hand made Rose Purse 10 (price per single purse)", price: 5799 },
+    "seed_gr4_1": { name: "Bag 1", price: 1599 },
+    "seed_gr1_1": { name: "Purse 1", price: 5799 },
+    "seed_gr1_2": { name: "Purse 2", price: 5799 },
+    "seed_gr1_3": { name: "Purse 3", price: 5799 },
+    "seed_gr1_10": { name: "Purse 10", price: 5799 },
+    "seed_gr1_11": { name: "Purse 11", price: 5799 },
+    "seed_gr1_12": { name: "Purse 12", price: 5799 },
+    "seed_gr1_15": { name: "Purse 15", price: 5799 },
+    "seed_gr1_16": { name: "Purse 16", price: 5799 },
+    "seed_gr1_19": { name: "Purse 19", price: 5799 },
+    "seed_gr1_20": { name: "Purse 20", price: 5799 },
   };
   var PRODUCT_PRICES = {
     "seed_gr1_4": 4500,
