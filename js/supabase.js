@@ -238,7 +238,9 @@
       bankIBAN: "",
       jazzcashNumber: "",
       easypaisaNumber: "",
-      version: 3
+      shippingFee: "",
+      freeDeliveryMin: 2500,
+      version: 4
     };
   }
 
