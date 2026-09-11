@@ -1296,6 +1296,23 @@ var bottomNavCart = document.getElementById("bottomNavCart");
     });
   })();
 
+  /* ---------- Wishlist page ---------- */
+  function renderWishlistGrid() {
+    var grid = document.getElementById("wishlistGrid");
+    if (!grid) return;
+    var wished = loadWish();
+    var list = getProducts().filter(function (p) { return wished.indexOf(p.id) !== -1; });
+    if (!list.length) {
+      grid.innerHTML =
+        '<div class="cart-empty wishlist-empty"><span class="cart-empty__ph">&hearts;</span>' +
+        '<p>Your wishlist is empty.</p>' +
+        '<p class="muted">Tap the heart on any product to save it here.</p>' +
+        '<a class="btn" href="products.html">Browse products</a></div>';
+      return;
+    }
+    grid.innerHTML = list.map(function (p, i) { return cardHTML(p, i); }).join("");
+  }
+
   /* ---------- Render shop once shared data is loaded ---------- */
   function renderShop() {
     var settings = getSettings();
@@ -1304,6 +1321,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
     renderCategoryCards();
     renderFeatured();
     renderProducts(getProducts());
+    renderWishlistGrid();
     var urlCat = new URLSearchParams(location.search).get("cat");
     var urlQ = (new URLSearchParams(location.search).get("q") || "").trim();
     if (searchInput && urlQ) searchInput.value = urlQ;
