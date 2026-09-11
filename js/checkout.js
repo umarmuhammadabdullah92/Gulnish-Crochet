@@ -364,6 +364,13 @@
       showMsg("Please enter your delivery address and city.");
       return false;
     }
+    var prov = (document.getElementById("coProvince") || {}).value || "";
+    if (!prov.trim()) {
+      var pv = document.getElementById("coProvince");
+      if (pv) pv.focus();
+      showMsg("Please select your province.");
+      return false;
+    }
     return true;
   }
 
