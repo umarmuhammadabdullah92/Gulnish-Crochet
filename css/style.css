@@ -4138,7 +4138,11 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 .admin-alert.show {
-  /* =========================================================
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* =========================================================
    Policy pages (privacy / refund / terms)
    ========================================================= */
 .policy h2 {
