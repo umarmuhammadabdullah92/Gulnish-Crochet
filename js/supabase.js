@@ -961,6 +961,8 @@
         email: r.email || "",
         address: r.address || "",
         city: r.city || "",
+        province: r.province || "",
+        landmark: r.landmark || "",
         notes: r.notes || ""
       },
       items: r.items || [],
