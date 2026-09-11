@@ -414,7 +414,8 @@
       statusHistory: [{ status: "Pending", at: placedAt, note: "Order placed" }],
       estDelivery: GC && GC.deliveryEstimate ? GC.deliveryEstimate(placedAt, false) : null,
       craftDays: (GC && GC.settings && GC.settings.craftDays) || null,
-      deliveryDays: (GC && GC.settings && GC.settings.deliveryDays) || null
+      deliveryDays: (GC && GC.settings && GC.settings.deliveryDays) || null,
+      notifyUpdates: !!(document.getElementById("coNotify") || {}).checked
     };
 
     // Build the WhatsApp order message synchronously so it can be opened
