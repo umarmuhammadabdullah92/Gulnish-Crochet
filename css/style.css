@@ -1528,6 +1528,21 @@ h1, h2, h3, .logo {
 .cart-checkout {
   width: 100%;
   font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.cart-drawer__foot > .cart-call {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.45rem;
+  box-shadow: none;
+}
+
+.cart-drawer__foot > .cart-wa {
+  display: none;
 }
 
 .cart-delivery-progress {
