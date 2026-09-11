@@ -271,11 +271,6 @@ h1, h2, h3, .logo {
   contain: layout style;
 }
 
-@keyframes heroDrift {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to { transform: translate3d(0, 2%, 0) scale(1.05); }
-}
-
 .hero__badge {
   display: inline-flex;
   align-items: center;
