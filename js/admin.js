@@ -164,6 +164,7 @@
   var pImage = document.getElementById("pImage");
   var pImagePreview = document.getElementById("pImagePreview");
   var pImageClear = document.getElementById("pImageClear");
+  var pGallery = document.getElementById("pGallery");
   var saveProductBtn = document.getElementById("saveProduct");
   var cancelEditBtn = document.getElementById("cancelEdit");
   var deleteProductBtn = document.getElementById("deleteProduct");
