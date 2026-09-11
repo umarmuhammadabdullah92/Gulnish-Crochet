@@ -194,22 +194,28 @@ create policy "shop-images: public read"
   using (bucket_id = 'shop-images');
 
 drop policy if exists "shop-images: admin insert" on storage.objects;
-create policy "shop-images: admin insert"
+drop policy if exists "shop-images: admins insert" on storage.objects;
+create policy "shop-images: admins insert"
   on storage.objects for insert
   to authenticated
-  with check (bucket_id = 'shop-images');
+  with check (bucket_id = 'shop-images'
+    and exists (select 1 from public.shop_admins a where a.user_id = auth.uid()));
 
 drop policy if exists "shop-images: admin update" on storage.objects;
-create policy "shop-images: admin update"
+drop policy if exists "shop-images: admins update" on storage.objects;
+create policy "shop-images: admins update"
   on storage.objects for update
   to authenticated
-  using (bucket_id = 'shop-images');
+  using (bucket_id = 'shop-images'
+    and exists (select 1 from public.shop_admins a where a.user_id = auth.uid()));
 
 drop policy if exists "shop-images: admin delete" on storage.objects;
-create policy "shop-images: admin delete"
+drop policy if exists "shop-images: admins delete" on storage.objects;
+create policy "shop-images: admins delete"
   on storage.objects for delete
   to authenticated
-  using (bucket_id = 'shop-images');
+  using (bucket_id = 'shop-images'
+    and exists (select 1 from public.shop_admins a where a.user_id = auth.uid()));
 
 
 -- =============================================================
