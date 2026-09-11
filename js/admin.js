@@ -93,6 +93,8 @@
   /* ---------- category select ---------- */
   var pCategory = document.getElementById("pCategory");
   function stockStatusOf(p) {
+    var st = p && p.stock != null ? parseInt(p.stock, 10) : null;
+    if (st !== null && st <= 0) return "sold out";
     var s = String((p && p.status) || "").trim().toLowerCase();
     if (s === "sold out" || s === "sold-out") return "sold out";
     if (s === "made to order" || s === "made-to-order") return "made to order";
