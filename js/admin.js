@@ -222,6 +222,7 @@
       name: name,
       price: parseFloat(pPrice.value) || 0,
       category: pCategory.value,
+      status: pStatus ? pStatus.value : "in stock",
       image: img,
       keywords: pKeywords
         ? (pKeywords.value || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean)
