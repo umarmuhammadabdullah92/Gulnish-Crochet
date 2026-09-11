@@ -311,7 +311,7 @@
           '<div class="admin-item__meta">' +
           (money(p.price) || "No price") + " &middot; " + escapeHtml(catLabel(p.category)) +
           " &middot; " + (p.colors || []).length + " color(s)" +
-          "</div></div>" +
+          '</div><div class="admin-stock stock-' + stockStatusOf(p).replace(" ", "-") + '">' + stockLabel(p) + "</div></div>" +
           '<div class="admin-item__actions">' +
           '<button type="button" data-edit="' + p.id + '">Edit</button>' +
           '<button type="button" class="delete" data-del="' + p.id + '">Delete</button>' +
