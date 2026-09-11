@@ -3324,27 +3324,6 @@ h1, h2, h3, .logo {
   font-weight: 700;
 }
 
-/* WhatsApp quick button overlaid on product card image */
-.work-card__wa {
-  position: absolute;
-  top: 0.55rem;
-  right: 0.55rem;
-  z-index: 3;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #1faa52;
-  color: #fff;
-  display: grid;
-  place-items: center;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-.work-card__wa:hover {
-  background: #188c45;
-  transform: scale(1.08);
-  box-shadow: var(--shadow-sm);
-}
 .work-card__media {
   position: relative;
 }
@@ -3379,10 +3358,6 @@ h1, h2, h3, .logo {
   }
   #cartBar.show ~ .wa-float {
     bottom: calc(4.4rem + env(safe-area-inset-bottom));
-  }
-  .work-card__wa {
-    width: 44px;
-    height: 44px;
   }
 }
 
