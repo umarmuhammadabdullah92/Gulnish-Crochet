@@ -92,6 +92,24 @@
     "seed_gr1_19": { name: "Premium hand made Rose Purse 9 (price per single purse)", price: 5799 },
     "seed_gr1_20": { name: "Premium hand made Rose Purse 10 (price per single purse)", price: 5799 },
   };
+  var PRODUCT_PRICES = {
+    "seed_gr2_1": 1199,
+    "seed_gr2_2": 3999,
+    "seed_gr2_3": 2499,
+    "seed_gr2_4": 2499,
+    "seed_gr2_5": 3999,
+    "seed_gr2_6": 2499,
+    "seed_gr2_7": 2499,
+    "seed_gr2_8": 2499,
+    "seed_gr2_9": 2499,
+    "seed_gr2_10": 3999,
+    "seed_gr2_11": 2499,
+    "seed_gr2_12": 2499,
+    "seed_gr2_13": 2499,
+    "seed_gr2_14": 2499,
+    "seed_gr4_1": 5999,
+    "seed_gr4_2": 5999
+  };
   var CATEGORY_KEYWORDS = {
     gr1: ["handbag", "purse", "crochet bag", "handmade", "gift", "woolen"],
     gr2: ["wedding", "eid", "hair", "flowers", "party", "gift"],
