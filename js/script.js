@@ -1026,6 +1026,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       if (cartFoot) cartFoot.parentNode.insertBefore(shipEl, cartFoot);
     }
     if (shipEl) {
+      shipEl.hidden = false;
       var sub = cartTotalPrice();
       shipEl.textContent = shippingInfo(sub).text;
       shipEl.classList.toggle('cart-shipping--free', shippingInfo(sub).isFree);
