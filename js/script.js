@@ -187,7 +187,7 @@
     var s = getSettings();
     var fee = s.shippingFee != null && s.shippingFee !== "" ? parseFloat(s.shippingFee) : null;
     var freeMin = s.freeDeliveryMin || 0;
-    if (freeMin > 0 && subtotal >= freeMin) return { text: "Delivery: Free", amount: 0, isFree: true };
+    if (freeMin > 0 && subtotal >= freeMin) return { text: "", amount: 0, isFree: true };
     if (fee != null && !isNaN(fee)) return { text: "Delivery: " + money(fee), amount: fee, isFree: false };
     return { text: "Delivery: charged on WhatsApp (actual courier rate)", amount: null, isFree: false };
   }
