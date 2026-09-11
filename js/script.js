@@ -191,16 +191,25 @@
   }
 
   function stockStatus(p) {
+    var st = p && p.stock != null ? parseInt(p.stock, 10) : null;
+    if (st !== null && st <= 0) return "sold out";
     var s = String((p && p.status) || "").trim().toLowerCase();
     if (s === "sold out" || s === "sold-out") return "sold out";
     if (s === "made to order" || s === "made-to-order") return "made to order";
     return "in stock";
   }
 
+  function stockLeft(p) {
+    var st = p && p.stock != null ? parseInt(p.stock, 10) : null;
+    return st !== null && st > 0 ? st : null;
+  }
+
   function stockBadgeHTML(p) {
     var s = stockStatus(p);
     if (s === "sold out") return '<div class="work-card__badge work-card__badge--out">Sold out</div>';
     if (s === "made to order") return '<div class="work-card__badge work-card__badge--made">Made to order &middot; ~5 days</div>';
+    var left = stockLeft(p);
+    if (left != null && left <= 2) return '<div class="work-card__badge work-card__badge--low">Only ' + left + ' left</div>';
     return "";
   }
 
