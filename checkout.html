@@ -48,7 +48,7 @@
     <section class="section">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">Almost there</span>
+          <span class="section-eyebrow">Secure Checkout</span>
           <h1 class="section-title">Checkout</h1>
         </div>
 
@@ -58,147 +58,220 @@
           <a class="btn" href="products.html">Browse products</a>
         </div>
 
-        <!-- Checkout progress stepper -->
+        <!-- 3-step progress stepper -->
         <div class="checkout-stepper" id="checkoutStepper">
           <div class="checkout-progress-bar"><div class="checkout-progress-fill" id="checkoutProgressFill"></div></div>
           <div class="checkout-steps">
-            <span class="checkout-step-dot active"><span class="checkout-step-num">1</span><span class="checkout-step-text">Details</span></span>
-            <span class="checkout-step-dot"><span class="checkout-step-num">&#10003;</span><span class="checkout-step-text">Done</span></span>
+            <span class="checkout-step-dot active"><span class="checkout-step-num">1</span><span class="checkout-step-text">Shipping</span></span>
+            <span class="checkout-step-dot"><span class="checkout-step-num">2</span><span class="checkout-step-text">Payment</span></span>
+            <span class="checkout-step-dot"><span class="checkout-step-num">3</span><span class="checkout-step-text">Review</span></span>
           </div>
         </div>
 
         <div class="checkout-grid" id="coForm">
-          <!-- Step 1: Details -->
-          <div id="step1">
-          <form class="checkout-form" id="coFormEl" novalidate>
-            <div class="checkout-card reveal">
-              <h3>Your details</h3>
-              <label>
-                <span>Full name *</span>
-                <input type="text" id="coName" required placeholder="Your name" autocomplete="name">
-              </label>
-              <label>
-                <span>Phone / WhatsApp *</span>
-                <input type="tel" id="coPhone" required placeholder="03xx xxxxxxx" autocomplete="tel">
-              </label>
-              <label>
-                <span>Email (optional)</span>
-                <input type="email" id="coEmail" placeholder="you@example.com" autocomplete="email">
-              </label>
-              <div class="checkout-row">
+
+          <!-- STEP 1 — Shipping -->
+          <div id="step1" class="checkout-step-content">
+            <form class="checkout-form" id="coFormEl" novalidate>
+              <div class="checkout-card reveal">
+                <h3>Contact information</h3>
                 <label>
-                  <span>Address *</span>
-                  <input type="text" id="coAddress" required placeholder="House, street, area" autocomplete="street-address">
+                  <span>Full name *</span>
+                  <input type="text" id="coName" required placeholder="Your name" autocomplete="name">
+                </label>
+                <label>
+                  <span>Phone / WhatsApp *</span>
+                  <input type="tel" id="coPhone" required placeholder="03xx xxxxxxx" autocomplete="tel">
+                </label>
+                <label>
+                  <span>Email (optional)</span>
+                  <input type="email" id="coEmail" placeholder="you@example.com" autocomplete="email">
+                </label>
+              </div>
+
+              <div class="checkout-card reveal" data-delay="1">
+                <h3>Shipping address</h3>
+                <label>
+                  <span>Street address *</span>
+                  <input type="text" id="coAddress" required placeholder="House number, street, area" autocomplete="street-address">
                 </label>
                 <label>
                   <span>Landmark / Nearby</span>
                   <input type="text" id="coLandmark" placeholder="Near mosque, shop, etc." autocomplete="off">
                 </label>
+                <div class="checkout-row">
+                  <label>
+                    <span>City *</span>
+                    <input type="text" id="coCity" required placeholder="City" autocomplete="address-level2">
+                  </label>
+                  <label>
+                    <span>Province *</span>
+                    <select id="coProvince" required>
+                      <option value="">Select province</option>
+                      <option>Punjab</option>
+                      <option>Sindh</option>
+                      <option>Khyber Pakhtunkhwa</option>
+                      <option>Balochistan</option>
+                      <option>Islamabad Capital Territory</option>
+                      <option>Azad Kashmir</option>
+                      <option>Gilgit-Baltistan</option>
+                    </select>
+                  </label>
+                </div>
               </div>
-              <div class="checkout-row">
+
+              <div class="checkout-card reveal" data-delay="2">
+                <h3>Order notes (optional)</h3>
                 <label>
-                  <span>City *</span>
-                  <input type="text" id="coCity" required placeholder="City" autocomplete="address-level2">
+                  <span>Colour preference, design changes, delivery instructions</span>
+                  <textarea id="coNotes" rows="3" placeholder="Write a note..."></textarea>
                 </label>
-                <label>
-                  <span>Province *</span>
-                  <select id="coProvince" required>
-                    <option value="">Select</option>
-                    <option>Punjab</option>
-                    <option>Sindh</option>
-                    <option>Khyber Pakhtunkhwa</option>
-                    <option>Balochistan</option>
-                    <option>Islamabad Capital Territory</option>
-                    <option>Azad Kashmir</option>
-                    <option>Gilgit-Baltistan</option>
-                  </select>
+                <label class="co-optin">
+                  <input type="checkbox" id="coNotify">
+                  <span>Get notified about new pieces on WhatsApp — one message per new collection, no spam.</span>
                 </label>
               </div>
-              <label class="co-optin">
-                <input type="checkbox" id="coNotify">
-                <span>Get notified about new pieces on WhatsApp — we'll add you to our update list (one message per new collection, no spam).</span>
-              </label>
-            </div>
+            </form>
 
-            <div class="checkout-card reveal" data-delay="1">
-              <h3>Order notes (optional)</h3>
-              <label>
-                <span>Anything we should know? Colour or design changes, delivery notes.</span>
-                <textarea id="coNotes" rows="3" placeholder="Write a note..."></textarea>
-              </label>
+            <div class="checkout-summary reveal" data-delay="1">
+              <h3>Order summary</h3>
+              <div id="coItems" class="co-items"></div>
+              <div class="co-total">
+                <span>Subtotal</span>
+                <span id="coSubtotal">Rs. 0.00</span>
+              </div>
+              <div class="co-shipping" id="coShipping"></div>
+              <div class="co-strip" id="coStrip">
+                <p class="co-strip__row">
+                  <span>Delivery to</span>
+                  <strong id="coStripDelivery">&mdash;</strong>
+                </p>
+                <p class="co-strip__row">
+                  <span>Estimated delivery</span>
+                  <strong id="coStripEta">&mdash;</strong>
+                </p>
+              </div>
+              <button class="btn co-next" type="button" id="coStep1Next">Continue to Payment &rarr;</button>
+              <p class="cart-note co-trust">Free to place now &mdash; pay on delivery or as arranged on WhatsApp.</p>
             </div>
-          </form>
-
-          <div class="checkout-summary reveal" data-delay="1">
-            <h3>Your order</h3>
-            <div id="coItems" class="co-items"></div>
-            <div class="co-total">
-              <span>Total</span>
-              <span id="coSubtotal">Rs. 0.00</span>
-            </div>
-            <div class="co-shipping" id="coShipping"></div>
-
-            <fieldset class="co-pay-group" id="coPaymentGroup" data-delay="1">
-              <legend>How would you like to pay?</legend>
-              <label class="co-pay-card">
-                <input type="radio" name="coPayment" value="Cash on delivery" checked>
-                <span class="co-pay-card__icon">&#128179;</span>
-                <span class="co-pay-card__body">
-                  <span class="co-pay-card__title">Cash on delivery</span>
-                  <span class="co-pay-card__sub">Pay when you receive your order</span>
-                </span>
-              </label>
-              <label class="co-pay-card">
-                <input type="radio" name="coPayment" value="Bank transfer">
-                <span class="co-pay-card__icon">&#127974;</span>
-                <span class="co-pay-card__body">
-                  <span class="co-pay-card__title">Bank transfer</span>
-                  <span class="co-pay-card__sub">Pay directly to our account</span>
-                </span>
-              </label>
-              <label class="co-pay-card">
-                <input type="radio" name="coPayment" value="JazzCash / EasyPaisa">
-                <span class="co-pay-card__icon">&#128241;</span>
-                <span class="co-pay-card__body">
-                  <span class="co-pay-card__title">JazzCash / EasyPaisa</span>
-                  <span class="co-pay-card__sub">Pay from a mobile wallet</span>
-                </span>
-              </label>
-              <label class="co-pay-card">
-                <input type="radio" name="coPayment" value="WhatsApp to arrange">
-                <span class="co-pay-card__icon">&#128172;</span>
-                <span class="co-pay-card__body">
-                  <span class="co-pay-card__title">Arrange on WhatsApp</span>
-                  <span class="co-pay-card__sub">We'll text you with options</span>
-                </span>
-              </label>
-            </fieldset>
-            <div id="coPaymentInfo" class="co-payment-info" hidden></div>
-
-            <div class="co-strip" id="coStrip">
-              <p class="co-strip__row">
-                <span>Delivery to</span>
-                <strong id="coStripDelivery">&mdash;</strong>
-              </p>
-              <p class="co-strip__row">
-                <span>Payment</span>
-                <strong id="coStripPayment">Cash on delivery</strong>
-              </p>
-              <p class="co-strip__row">
-                <span>Estimated delivery</span>
-                <strong id="coStripEta">&mdash;</strong>
-              </p>
-            </div>
-            <button class="btn co-place" type="button" id="coPlace">
-              <span id="coBtnText">Place Order &rarr;</span>
-              <span id="coBtnLoading" hidden>Placing order...</span>
-            </button>
-            <p class="cart-note co-trust">Free to place now &mdash; pay on delivery or as arranged on WhatsApp.</p>
-          </div>
           </div>
 
-          <!-- Step 3 (hidden, handled by JS) -->
-          <div id="step3" hidden></div>
+          <!-- STEP 2 — Payment -->
+          <div id="step2" class="checkout-step-content" hidden>
+            <div class="checkout-form">
+              <div class="checkout-card">
+                <h3>Payment method</h3>
+                <fieldset class="co-pay-group" id="coPaymentGroup">
+                  <label class="co-pay-card">
+                    <input type="radio" name="coPayment" value="Cash on delivery" checked>
+                    <span class="co-pay-card__icon">&#128179;</span>
+                    <span class="co-pay-card__body">
+                      <span class="co-pay-card__title">Cash on delivery</span>
+                      <span class="co-pay-card__sub">Pay when you receive your order</span>
+                    </span>
+                  </label>
+                  <label class="co-pay-card">
+                    <input type="radio" name="coPayment" value="Bank transfer">
+                    <span class="co-pay-card__icon">&#127974;</span>
+                    <span class="co-pay-card__body">
+                      <span class="co-pay-card__title">Bank transfer</span>
+                      <span class="co-pay-card__sub">Pay directly to our account</span>
+                    </span>
+                  </label>
+                  <label class="co-pay-card">
+                    <input type="radio" name="coPayment" value="JazzCash / EasyPaisa">
+                    <span class="co-pay-card__icon">&#128241;</span>
+                    <span class="co-pay-card__body">
+                      <span class="co-pay-card__title">JazzCash / EasyPaisa</span>
+                      <span class="co-pay-card__sub">Pay from a mobile wallet</span>
+                    </span>
+                  </label>
+                  <label class="co-pay-card">
+                    <input type="radio" name="coPayment" value="WhatsApp to arrange">
+                    <span class="co-pay-card__icon">&#128172;</span>
+                    <span class="co-pay-card__body">
+                      <span class="co-pay-card__title">Arrange on WhatsApp</span>
+                      <span class="co-pay-card__sub">We'll text you with options</span>
+                    </span>
+                  </label>
+                </fieldset>
+                <div id="coPaymentInfo" class="co-payment-info" hidden></div>
+              </div>
+              <div class="co-step-nav">
+                <button class="btn btn--ghost" type="button" id="coStep2Back">&larr; Back to Shipping</button>
+                <button class="btn co-next" type="button" id="coStep2Next">Review Order &rarr;</button>
+              </div>
+            </div>
+
+            <div class="checkout-summary">
+              <h3>Order summary</h3>
+              <div id="coItems2" class="co-items"></div>
+              <div class="co-total">
+                <span>Subtotal</span>
+                <span id="coSubtotal2">Rs. 0.00</span>
+              </div>
+              <div class="co-shipping" id="coShipping2"></div>
+              <div class="co-strip">
+                <p class="co-strip__row">
+                  <span>Delivery to</span>
+                  <strong id="coStripDelivery2">&mdash;</strong>
+                </p>
+                <p class="co-strip__row">
+                  <span>Estimated delivery</span>
+                  <strong id="coStripEta2">&mdash;</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3 — Review -->
+          <div id="step3" class="checkout-step-content" hidden>
+            <div class="checkout-form">
+              <div class="checkout-card">
+                <h3>Your items</h3>
+                <div id="coReviewItems" class="co-items"></div>
+                <div class="co-total">
+                  <span>Subtotal</span>
+                  <span id="coReviewSubtotal">Rs. 0.00</span>
+                </div>
+                <div class="co-shipping" id="coReviewShipping"></div>
+              </div>
+
+              <div class="checkout-card">
+                <h3>Shipping to</h3>
+                <div id="coReviewAddress" class="co-review-detail"></div>
+              </div>
+
+              <div class="checkout-card">
+                <h3>Payment method</h3>
+                <div id="coReviewPayment" class="co-review-detail"></div>
+              </div>
+
+              <div class="checkout-card" id="coReviewNotesCard" hidden>
+                <h3>Order notes</h3>
+                <p id="coReviewNotes" class="co-review-notes"></p>
+              </div>
+
+              <div class="co-step-nav">
+                <button class="btn btn--ghost" type="button" id="coStep3Back">&larr; Back to Payment</button>
+                <button class="btn co-place" type="button" id="coPlace">
+                  <span id="coBtnText">Place Order &rarr;</span>
+                  <span id="coBtnLoading" hidden>Placing order...</span>
+                </button>
+              </div>
+              <p class="cart-note co-trust">Free to place now &mdash; pay on delivery or as arranged on WhatsApp.</p>
+            </div>
+
+            <div class="checkout-summary">
+              <h3>Total</h3>
+              <div class="co-total co-total--review">
+                <span>Total</span>
+                <span id="coReviewTotal">Rs. 0.00</span>
+              </div>
+              <p class="cart-note co-trust">You'll receive a WhatsApp confirmation shortly after placing your order.</p>
+            </div>
+          </div>
+
         </div>
 
         <!-- Confirmation -->
@@ -209,14 +282,14 @@
             <span class="checkout-success__no-label">Order number</span>
             <strong id="coSuccessNo"></strong>
           </div>
-          <p class="checkout-success__copy" id="coSuccessCopy">We've received your order and will confirm it with you on WhatsApp shortly.</p>
+          <p class="checkout-success__copy" id="coSuccessCopy"></p>
           <p class="checkout-success__eta" id="coSuccessEta" hidden>
             Estimated delivery by <strong id="coSuccessEtaDate"></strong>
           </p>
           <div class="checkout-success__actions">
             <a class="btn" id="coWaLink" href="#" target="_blank" rel="noopener" hidden>Send order on WhatsApp</a>
-            <p class="cart-note" id="coWaMissing" hidden>The owner hasn't set a WhatsApp number yet. Your order is saved in the shop.</p>
-            <a class="btn btn--ghost" id="coCallLink" href="tel:+923075729901">Call us</a>
+            <p class="cart-note" id="coWaMissing" hidden>The owner hasn't set a WhatsApp number yet. Your order is saved.</p>
+            <a class="btn btn--ghost" href="products.html">Continue Shopping</a>
           </div>
         </div>
 
