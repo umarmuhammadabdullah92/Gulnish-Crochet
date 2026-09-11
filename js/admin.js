@@ -276,6 +276,7 @@
     if (pStatus) pStatus.value = stockStatusOf(product);
     if (pStock) pStock.value = product.stock != null ? product.stock : "";
     if (pKeywords) pKeywords.value = (product.keywords || []).join(", ");
+    if (pGallery) pGallery.value = (product.gallery || []).join("\n");
     pImage.value = "";
     clearColorRows();
     (product.colors && product.colors.length
