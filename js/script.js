@@ -1034,20 +1034,6 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       return;
     }
 
-    var wishBtn = e.target.closest("[data-wish]");
-    if (wishBtn) {
-      var id = wishBtn.dataset.wish;
-      if (id) {
-        var added = toggleWish(id);
-        wishBtn.classList.toggle("wished", added);
-        wishBtn.setAttribute("aria-pressed", added ? "true" : "false");
-        wishBtn.querySelector("svg").setAttribute("fill", added ? "var(--gold)" : "none");
-        updateWishCount();
-        renderWishlistGrid();
-      }
-      return;
-    }
-
     var thumbBtn = e.target.closest("[data-pp-thumb]");
     if (thumbBtn && ppImage) {
       var mainImg = ppImage.querySelector("img");
@@ -1122,7 +1108,6 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   });
 
   renderCart();
-  updateWishCount();
 
   /* ---------- Lightbox ---------- */
   var lightbox = document.querySelector(".lightbox");
