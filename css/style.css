@@ -972,10 +972,9 @@ h1, h2, h3, .logo {
 }
 
 .filter-btn.active {
-  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  background: var(--gold);
   color: #2a2418;
   border-color: var(--gold);
-  box-shadow: var(--glow-accent);
 }
 
 .work-card.is-hidden {
