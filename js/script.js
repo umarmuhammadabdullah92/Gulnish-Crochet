@@ -218,8 +218,6 @@
     var s = stockStatus(p);
     if (s === "sold out") return '<div class="work-card__badge work-card__badge--out">Sold out</div>';
     if (s === "made to order") return '<div class="work-card__badge work-card__badge--made">Made to order &middot; ~5 days</div>';
-    var left = stockLeft(p);
-    if (left != null && left <= 2) return '<div class="work-card__badge work-card__badge--low">Only ' + left + ' left</div>';
     return "";
   }
 
