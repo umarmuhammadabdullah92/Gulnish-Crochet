@@ -4130,16 +4130,15 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
 .add-btn--sold {
   cursor: not-allowed;
   color: #fff;
-  background: linear-gradient(180deg, #b9b3a6, #9d968a);
+  background: #b9b3a6;
   box-shadow: none;
   opacity: 0.85;
 }
 .add-btn--sold:hover {
-  background: linear-gradient(180deg, #b9b3a6, #9d968a);
+  background: #b9b3a6;
   transform: none;
   box-shadow: none;
 }
-.add-btn--sold::after { display: none; }
 
 .work-card__badge {
   display: inline-flex;
