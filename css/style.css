@@ -2583,6 +2583,22 @@ h1, h2, h3, .logo {
 /* ---------- Hero copy + rating ---------- */
 .hero-copy { position: relative; z-index: 1; }
 .hero-media { z-index: 1; }
+.hero__trust {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.83rem;
+  letter-spacing: 0.02em;
+}
+.hero__trust::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
 .hero__rating {
   display: flex;
   align-items: center;
