@@ -285,17 +285,22 @@
   function boot() {
     try {
       if (configured) {
+        var sessionPromise = sb.auth.getSession().then(function (s) {
+          return !!(s.data && s.data.session);
+        }).catch(function () {
+          return false;
+        });
+
         return Promise.all([
           sb.from("products").select("*").order("created_at", { ascending: true }),
           sb.from("settings").select("data").eq("id", SETTINGS_ID).maybeSingle(),
-          sb.from("orders").select("*").order("created_at", { ascending: false })
+          sessionPromise
         ]).then(function (results) {
           var prodRes = results[0];
           var setRes = results[1];
-          var ordRes = results[2];
+          var isAdminUser = results[2];
           if (prodRes.error) throw prodRes.error;
           if (setRes.error) throw setRes.error;
-          if (ordRes.error) throw ordRes.error;
 
           products.length = 0;
           (prodRes.data || []).forEach(function (p) { products.push(normalizeProduct(p)); });
@@ -304,12 +309,28 @@
             ? normalizeSettings(setRes.data.data)
             : defaultSettings();
 
-          orders.length = 0;
-          (ordRes.data || []).forEach(function (o) {
-            orders.push(orderFromRow(o));
-          });
+          GC.isAdmin = isAdminUser;
 
-          _setupRealtimeSubscriptions();
+          // Only signed-in admins load order data. Anonymous visitors never
+          // receive the order list (RLS + this gate), so no customer data
+          // leaves the database through the pages.
+          if (!isAdminUser) {
+            orders.length = 0;
+            return Promise.resolve();
+          }
+          return sb.from("orders").select("*").order("created_at", { ascending: false })
+            .then(function (ordRes) {
+              if (ordRes.error) throw ordRes.error;
+              orders.length = 0;
+              (ordRes.data || []).forEach(function (o) {
+                orders.push(orderFromRow(o));
+              });
+              _setupRealtimeSubscriptions();
+            })
+            .catch(function (e) {
+              console.warn("Could not load orders:", e);
+              orders.length = 0;
+            });
         }).catch(function (e) {
           console.warn("Could not load shared data:", e);
         });
