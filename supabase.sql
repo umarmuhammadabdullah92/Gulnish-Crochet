@@ -72,10 +72,12 @@ create policy "settings: public read"
   using (true);
 
 drop policy if exists "settings: admin write" on public.settings;
-create policy "settings: admin write"
+drop policy if exists "settings: admins write" on public.settings;
+create policy "settings: admins write"
   on public.settings for all
   to authenticated
-  using (true) with check (true);
+  using (exists (select 1 from public.shop_admins a where a.user_id = auth.uid()))
+  with check (exists (select 1 from public.shop_admins a where a.user_id = auth.uid()));
 
 -- Bootstraps the settings row so the shop has defaults on first load.
 insert into public.settings (id, data)
