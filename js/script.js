@@ -638,12 +638,6 @@
       ppAdd.textContent = soldOut ? "Sold out" : "Add to Cart";
       ppAdd.classList.toggle("is-disabled", soldOut);
     }
-    if (ppWish) {
-      var wished = isWished(p.id);
-      ppWish.classList.toggle("wished", wished);
-      ppWish.setAttribute("aria-pressed", wished ? "true" : "false");
-      ppWish.querySelector("svg").setAttribute("fill", wished ? "var(--gold)" : "none");
-    }
     if (ppColors) {
       ppColors.setAttribute(
         "data-colors",
