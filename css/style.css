@@ -3742,9 +3742,9 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
 }
 .fb span { display: none; }
 .fb:hover { transform: scale(1.07); color: #fff; }
-.fb-wa { background: linear-gradient(180deg, #2fdc74, #1faa52); }
+.fb-wa { background: #1faa52; }
 .fb-call {
-  background: linear-gradient(180deg, var(--gold-light), var(--gold-deep));
+  background: var(--gold);
   color: #2a2418;
 }
 .fb-call:hover { color: #2a2418; }
