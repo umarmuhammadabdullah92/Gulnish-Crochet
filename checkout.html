@@ -91,8 +91,27 @@
                   <input type="text" id="coAddress" required placeholder="House, street, area" autocomplete="street-address">
                 </label>
                 <label>
+                  <span>Landmark / Nearby</span>
+                  <input type="text" id="coLandmark" placeholder="Near mosque, shop, etc." autocomplete="off">
+                </label>
+              </div>
+              <div class="checkout-row">
+                <label>
                   <span>City *</span>
                   <input type="text" id="coCity" required placeholder="City" autocomplete="address-level2">
+                </label>
+                <label>
+                  <span>Province *</span>
+                  <select id="coProvince" required>
+                    <option value="">Select</option>
+                    <option>Punjab</option>
+                    <option>Sindh</option>
+                    <option>Khyber Pakhtunkhwa</option>
+                    <option>Balochistan</option>
+                    <option>Islamabad Capital Territory</option>
+                    <option>Azad Kashmir</option>
+                    <option>Gilgit-Baltistan</option>
+                  </select>
                 </label>
               </div>
               <label class="co-optin">
