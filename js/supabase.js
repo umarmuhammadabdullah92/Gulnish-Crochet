@@ -481,6 +481,33 @@
       });
     },
 
+    /* ---- customer order lookup (tracking page) ----
+       Server-side when Supabase is configured: returns only the orders
+       matching the given order id or phone number via an RPC function,
+       so visitors can never pull the full order list. */
+    lookupOrders: async function (query) {
+      var value = String(query || "").trim();
+      if (!value) return [];
+      if (!configured) {
+        var upper = value.toUpperCase();
+        var phoneNorm = value.replace(/[^\d]/g, "").replace(/^0+/, "");
+        var byId = orders.find(function (o) {
+          return String(o.id || "").toUpperCase() === upper;
+        });
+        if (byId) return [byId];
+        return orders.filter(function (o) {
+          return String(o.customer && o.customer.phone || "").replace(/[^\d]/g, "").replace(/^0+/, "") === phoneNorm;
+        });
+      }
+      try {
+        var res = await sb.rpc("get_customer_orders", { search: value, max_results: 50 });
+        if (res.error) return [];
+        return (res.data || []).map(orderFromRow);
+      } catch (e) {
+        return [];
+      }
+    },
+
     /* ---- order search (admin) ---- */
     searchOrders: function (query, statusFilter) {
       var q = String(query || "").toLowerCase().trim();
