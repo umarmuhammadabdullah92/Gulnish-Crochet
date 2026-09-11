@@ -14,6 +14,7 @@ create table if not exists public.products (
   keywords   jsonb default '[]'::jsonb,
   colors     jsonb default '[]'::jsonb,
   status     text default 'in stock',
+  stock      int,
   created_at timestamptz default now()
 );
 
