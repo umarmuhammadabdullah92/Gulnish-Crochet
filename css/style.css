@@ -4329,6 +4329,28 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   display: block;
 }
 
-  opacity: 1;
-  transform: translate(-50%, 0);
+/* =========================================================
+   Page transitions (View Transitions API — progressive
+   enhancement; browsers without support reload normally)
+   ========================================================= */
+@view-transition {
+  navigation: auto;
+}
+@keyframes gc-exit {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes gc-enter {
+  from { opacity: 0; transform: translateY(6px); }
+}
+::view-transition-old(root) {
+  animation: gc-exit 0.16s ease both;
+}
+::view-transition-new(root) {
+  animation: gc-enter 0.24s ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+  }
 }
