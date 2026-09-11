@@ -542,6 +542,7 @@
   var ppName = document.getElementById("ppName");
   var ppPrice = document.getElementById("ppPrice");
   var ppCategory = document.getElementById("ppCategory");
+  var ppStatus = document.getElementById("ppStatus");
   var ppColors = document.getElementById("ppColors");
   var ppQtyVal = document.getElementById("ppQtyVal");
   var ppAdd = document.getElementById("ppAdd");
