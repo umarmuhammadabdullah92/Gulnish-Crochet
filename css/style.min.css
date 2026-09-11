@@ -4062,3 +4062,90 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   .order-card__hmeta { align-items: flex-start; }
   .order-card__id { font-size: 1.1rem; }
 }
+
+/* =========================================================
+   Mobile app-style bottom navigation
+   ========================================================= */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 170;
+  display: none;
+  grid-template-columns: repeat(5, 1fr);
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -6px 20px rgba(20, 26, 23, 0.08);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.bottom-nav__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 58px;
+  padding: 5px 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.02em;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease;
+}
+.bottom-nav__item svg { width: 22px; height: 22px; }
+.bottom-nav__item.active { color: var(--gold-deep); }
+.bottom-nav__item:active { opacity: 0.7; }
+.bottom-nav__badge {
+  position: absolute;
+  top: 5px;
+  right: calc(50% - 26px);
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--gold-deep);
+  color: #fff;
+  font-size: 0.6rem;
+  line-height: 17px;
+  text-align: center;
+  display: none;
+  box-shadow: 0 2px 6px rgba(168, 126, 44, 0.45);
+}
+.bottom-nav__badge.show { display: block; }
+
+@media (min-width: 901px) {
+  .bottom-nav { display: none !important; }
+}
+
+@media (max-width: 900px) {
+  .bottom-nav { display: grid; }
+
+  body:has(.bottom-nav) {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+
+  body.has-cart .bottom-nav { bottom: 3.3rem; }
+
+  /* floating WhatsApp/Call buttons sit above the bottom nav */
+  .fb-group { bottom: calc(5.6rem + env(safe-area-inset-bottom)); }
+  body.has-cart .fb-group,
+  #cartBar.show ~ .fb-group { bottom: calc(8.9rem + env(safe-area-inset-bottom)); }
+
+  .checkout-page .bottom-nav { display: none !important; }
+}
+
+@media (max-width: 480px) {
+  .back-to-top {
+    bottom: calc(4.8rem + env(safe-area-inset-bottom));
+  }
+}
