@@ -2658,7 +2658,6 @@ h1, h2, h3, .logo {
   .main-nav ul { padding: 0.2rem 0 0.5rem; }
   .main-nav a { width: 100%; padding: 0.7rem 0; font-size: 1.02rem; }
 
-  .hero::before { animation: none; }
   .scroll-progress { height: 2px; }
 
   .fly-clone { display: none !important; }
@@ -2968,7 +2967,6 @@ h1, h2, h3, .logo {
   .skeleton::after { animation: none; }
   .navIn,
   .main-nav.open { animation: none; }
-  .hero::before { animation: none; }
   .reveal {
     opacity: 1;
     transform: none;
