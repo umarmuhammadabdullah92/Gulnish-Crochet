@@ -603,6 +603,43 @@
       return { ok: !res.error, error: res.error };
     },
 
+    // Marks ordered in-stock products as "sold out" so nobody else can
+    // order a piece that has just been booked. Made-to-order items are
+    // intentionally left untouched (they are crafted on demand).
+    reserveProducts: async function (items) {
+      var touched = [];
+      (items || []).forEach(function (it) {
+        var idx = products.findIndex(function (p) { return p.id === it.id; });
+        if (idx === -1) return;
+        var s = String(products[idx].status || "").trim().toLowerCase();
+        if (s === "made to order" || s === "made-to-order" || s === "sold out" || s === "sold-out") return;
+        products[idx] = Object.assign({}, products[idx], { status: "sold out" });
+        touched.push(products[idx]);
+      });
+      if (!touched.length) return { ok: true };
+      if (!configured) {
+        lsSet(LOCAL_PRODUCTS, products);
+        return { ok: true };
+      }
+      var anyError = false;
+      for (var i = 0; i < touched.length; i += 1) {
+        var t = touched[i];
+        var row = {
+          id: t.id,
+          name: t.name,
+          price: t.price,
+          category: t.category,
+          image: t.image || "",
+          keywords: t.keywords || [],
+          colors: t.colors || [],
+          status: t.status
+        };
+        var res = await sb.from("products").upsert(row, { onConflict: "id" });
+        if (res.error) anyError = true;
+      }
+      return { ok: !anyError };
+    },
+
     /* ---- settings ---- */
     saveSettings: async function (next) {
       settings = normalizeSettings(next);
