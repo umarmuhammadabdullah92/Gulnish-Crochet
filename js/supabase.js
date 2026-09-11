@@ -218,7 +218,10 @@
     if (s === "sold out" || s === "sold-out") status = "sold out";
     else if (s === "made to order" || s === "made-to-order") status = "made to order";
     var st = p && p.stock != null && p.stock !== "" ? Math.max(0, parseInt(p.stock, 10) || 0) : null;
-    return Object.assign({}, p, { status: status, stock: st });
+    var gal = Array.isArray(p && p.gallery)
+      ? p.gallery.filter(function (x) { return typeof x === "string" && x.trim(); })
+      : [];
+    return Object.assign({}, p, { status: status, stock: st, gallery: gal });
   }
 
   /* ---------- v<19>.sql also mirrors this catalog ---------- */
