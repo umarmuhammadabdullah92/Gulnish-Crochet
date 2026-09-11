@@ -1047,7 +1047,7 @@ h1, h2, h3, .logo {
 
 .footer-inner {
   display: grid;
-  grid-template-columns: 1.25fr 1fr 1fr;
+  grid-template-columns: 1.25fr 1fr;
   gap: 2.4rem;
   align-items: start;
   text-align: left;
