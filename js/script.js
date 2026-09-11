@@ -606,7 +606,6 @@
     }
     if (ppStatus) {
       var s = stockStatus(p);
-      var left = stockLeft(p);
       if (s === "sold out") {
         ppStatus.hidden = false;
         ppStatus.className = "product-page__status status-out";
