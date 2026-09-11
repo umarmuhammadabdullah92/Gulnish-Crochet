@@ -193,19 +193,31 @@
           image: img,
           keywords: (CATEGORY_KEYWORDS[key] || [label.toLowerCase()]).slice(),
           colors: [],
-          status: "in stock"
+          status: "in stock",
+          stock: LOW_STOCK_DEMO[id] != null ? LOW_STOCK_DEMO[id] : null
         });
       });
     });
     return out;
   }
 
+  /* Placeholder low-stock examples so the urgency badge is visible until the
+     shop owner sets real counts in the admin (Stock count). Edit or clear them
+     in admin.html — the field is per-product. */
+  var LOW_STOCK_DEMO = {
+    "seed_gr1_1": 1,
+    "seed_gr1_2": 2,
+    "seed_gr2_1": 1,
+    "seed_gr3_1": 2
+  };
+
   function normalizeProduct(p) {
     var s = String((p && p.status) || "").trim().toLowerCase();
     var status = "in stock";
     if (s === "sold out" || s === "sold-out") status = "sold out";
     else if (s === "made to order" || s === "made-to-order") status = "made to order";
-    return Object.assign({}, p, { status: status });
+    var st = p && p.stock != null && p.stock !== "" ? Math.max(0, parseInt(p.stock, 10) || 0) : null;
+    return Object.assign({}, p, { status: status, stock: st });
   }
 
   /* ---------- v<19>.sql also mirrors this catalog ---------- */
