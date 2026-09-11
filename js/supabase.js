@@ -17,7 +17,7 @@
 
   /* Bump LOCAL_PRODUCTS version whenever the seed catalog changes so
      returning visitors' browsers re-sync products (offline/localStorage mode). */
-  var LOCAL_PRODUCTS = "gulnish-products-v22";
+  var LOCAL_PRODUCTS = "gulnish-products-v23";
   var LOCAL_SETTINGS = "gulnish-settings-v2";
   var LOCAL_ORDERS = "gulnish-orders";
   var LOCAL_ADMIN_SESSION = "gulnish-admin-session";
@@ -76,7 +76,7 @@
     gr6: ["images/headbands/headband-1.webp", "images/headbands/headband-2.webp", "images/headbands/headband-3.webp"]
   };
 
-  var ITEM_NAME = { gr1: "Purse", gr2: "Gajray", gr3: "Keychain", gr4: "Bag", gr5: "Jewellery Set", gr6: "Headband" };
+  var ITEM_NAME = { gr1: "Purse", gr2: "Gajray", gr3: "Keychain", gr4: "Bag", gr5: "Jewellery", gr6: "Headband" };
   var BASE_PRICE = { gr1: 850, gr2: 400, gr3: 350, gr4: 1400, gr5: 550, gr6: 450 };
 
   var REAL_PRODUCTS = {
@@ -187,7 +187,7 @@
         var real = REAL_PRODUCTS[id];
         out.push({
           id: id,
-          name: real ? real.name : "Handmade Crochet " + name + " " + (i + 1),
+          name: real ? real.name : name + " " + (i + 1),
           price: PRODUCT_PRICES[id] || (real ? real.price : (BASE_PRICE[key] || 500) + (i % 4) * 50),
           category: key,
           image: img,
