@@ -3387,8 +3387,9 @@ h1, h2, h3, .logo {
   transition: transform 0.2s ease, background 0.2s ease;
 }
 .work-card__wa:hover {
+  background: #188c45;
   transform: scale(1.08);
-  box-shadow: 0 10px 20px rgba(31, 170, 82, 0.4);
+  box-shadow: var(--shadow-sm);
 }
 .work-card__media {
   position: relative;
