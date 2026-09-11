@@ -448,6 +448,7 @@
     var done = function () {
       saveCart([]);
       saveProfile();
+      sendOrderEmail(order);
 
       setStep(3);
 
