@@ -73,7 +73,7 @@ function emailBody(order) {
     "\n  </table>\n" +
     "  <p><strong>Total: " + money(order.total || 0) + "</strong><br>" +
     "Payment: " + escapeHtml((order.payment && order.payment.method) || "Cash on delivery") + "</p>\n" +
-    "  <p style=\"color:#68706b;font-size:13px\">Track it from the My Orders page on our site, or WhatsApp us at +92 307 5729901.</p>";
+    "  <p style=\"color:#68706b;font-size:13px\">For updates on your order, message us on WhatsApp at +92 307 5729901.</p>";
 
   return {
     subject: "Order received " + order.id + " — Gulnish Crochet",
