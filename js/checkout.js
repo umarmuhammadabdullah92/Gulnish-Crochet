@@ -432,10 +432,12 @@
         })
         .join("\n") +
       "\n\nTotal: " + money(order.total) +
+      "\n" + shippingNote(items).text +
       "\nPayment: " + order.payment.method +
       (order.estDelivery ? "\nEst. delivery: " + friendlyDate(order.estDelivery) : "") +
       (phone ? "\nPhone: +" + phone : "") +
       (email ? "\nEmail: " + email : "") +
+      (order.notifyUpdates ? "\nNotify me about new pieces on WhatsApp: Yes (please add me to your update list)" : "") +
       (address ? "\nAddress: " + address + (city ? ", " + city : "") : "") +
       (notes ? "\nNotes: " + notes : "");
     var orderWaLink = waNum ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent(waMsg) : "";
