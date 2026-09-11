@@ -820,6 +820,11 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   function renderCart() {
     var n = cartTotalQty();
     var total = cartTotalPrice();
+    document.body.classList.toggle("has-cart", n > 0);
+    if (bottomNavCount) {
+      bottomNavCount.textContent = n;
+      bottomNavCount.classList.toggle("show", n > 0);
+    }
     updateCartWa();
     if (cartCountEl) {
       cartCountEl.textContent = n;
