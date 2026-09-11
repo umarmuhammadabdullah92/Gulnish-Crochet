@@ -649,6 +649,15 @@
         ? '<img src="' + displayImage(p.image) + '" alt="' + escapeHtml(p.name) + '">'
         : "";
     }
+    if (ppThumbs) {
+      var all = [p.image].concat((p.gallery || []).filter(Boolean).filter(function (s) { return s !== p.image; }));
+      ppThumbs.innerHTML = all.map(function (src, i) {
+        return '<button type="button" class="pp-thumb' + (i === 0 ? " active" : "") +
+          '" data-pp-thumb="' + escapeHtml(src) + '" aria-label="' + escapeHtml(p.name) + " image " + (i + 1) + '">' +
+          '<img src="' + displayImage(src) + '" alt="" loading="lazy" decoding="async"></button>';
+      }).join("");
+      ppThumbs.hidden = all.length <= 1;
+    }
     if (ppName) ppName.textContent = p.name || "";
     if (ppPrice) {
       ppPrice.textContent =
