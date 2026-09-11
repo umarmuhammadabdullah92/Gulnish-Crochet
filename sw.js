@@ -56,6 +56,28 @@ self.addEventListener("fetch", function (event) {
     return;
   }
 
+  // Pages are network-first so visitors always get the latest version;
+  // the cache is only used when the network is unavailable (offline).
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request).then(function (response) {
+        if (response && response.status === 200 && response.type === "basic") {
+          var copy = response.clone();
+          caches.open(CACHE_NAME).then(function (cache) {
+            cache.put(request, copy);
+          });
+        }
+        return response;
+      }).catch(function () {
+        return caches.match(request).then(function (c) {
+          return c || caches.match("./index.html");
+        });
+      })
+    );
+    return;
+  }
+
+  // Static assets are cache-first, falling back to the network.
   event.respondWith(
     caches.match(request).then(function (cached) {
       if (cached) return cached;
