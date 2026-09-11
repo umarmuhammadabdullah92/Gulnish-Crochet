@@ -1121,6 +1121,16 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       return;
     }
 
+    var thumbBtn = e.target.closest("[data-pp-thumb]");
+    if (thumbBtn && ppImage) {
+      var mainImg = ppImage.querySelector("img");
+      if (mainImg) mainImg.src = displayImage(thumbBtn.dataset.ppThumb);
+      document.querySelectorAll("[data-pp-thumb]").forEach(function (b) {
+        b.classList.toggle("active", b === thumbBtn);
+      });
+      return;
+    }
+
     var addBtn = e.target.closest(".add-btn");
     if (addBtn) {
       var card = addBtn.closest(".work-card");
