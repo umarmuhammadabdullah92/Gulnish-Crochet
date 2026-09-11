@@ -190,7 +190,7 @@
   function autoFillProfile() {
     var profile = GC && GC.getCustomerProfile ? GC.getCustomerProfile() : null;
     if (!profile) return;
-    var fields = { coName: "name", coPhone: "phone", coEmail: "email", coAddress: "address", coCity: "city" };
+    var fields = { coName: "name", coPhone: "phone", coEmail: "email", coAddress: "address", coCity: "city", coLandmark: "landmark", coProvince: "province" };
     Object.keys(fields).forEach(function (fieldId) {
       var el = document.getElementById(fieldId);
       if (el && profile[fields[fieldId]]) el.value = profile[fields[fieldId]];
@@ -204,7 +204,9 @@
       phone: (document.getElementById("coPhone") || {}).value || "",
       email: (document.getElementById("coEmail") || {}).value || "",
       address: (document.getElementById("coAddress") || {}).value || "",
-      city: (document.getElementById("coCity") || {}).value || ""
+      city: (document.getElementById("coCity") || {}).value || "",
+      landmark: (document.getElementById("coLandmark") || {}).value || "",
+      province: (document.getElementById("coProvince") || {}).value || ""
     };
     if (GC && GC.saveCustomerProfile) GC.saveCustomerProfile(profile);
   }
