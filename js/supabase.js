@@ -161,7 +161,10 @@
     "seed_gr5_6": 1499,
     "seed_gr5_7": 1599,
     "seed_gr5_8": 1499,
-    "seed_gr5_9": 1499
+    "seed_gr5_9": 1499,
+    "seed_gr6_1": 1299,
+    "seed_gr6_2": 1299,
+    "seed_gr6_3": 1299
   };
   var CATEGORY_KEYWORDS = {
     gr1: ["handbag", "purse", "crochet bag", "handmade", "gift", "woolen"],
