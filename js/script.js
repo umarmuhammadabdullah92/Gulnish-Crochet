@@ -658,6 +658,7 @@
     }
     if (ppStatus) {
       var s = stockStatus(p);
+      var left = stockLeft(p);
       if (s === "sold out") {
         ppStatus.hidden = false;
         ppStatus.className = "product-page__status status-out";
@@ -666,6 +667,10 @@
         ppStatus.hidden = false;
         ppStatus.className = "product-page__status status-made";
         ppStatus.textContent = "Made to order \u2014 takes about 5 days";
+      } else if (left != null && left <= 2) {
+        ppStatus.hidden = false;
+        ppStatus.className = "product-page__status status-low";
+        ppStatus.textContent = "Only " + left + " left \u2014 order soon";
       } else {
         ppStatus.hidden = false;
         ppStatus.className = "product-page__status status-in";
