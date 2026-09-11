@@ -778,6 +778,8 @@
     var orders = getFilteredOrders();
     var allOrders = getOrders();
 
+    trackNewOrders();
+
     if (orderCount) orderCount.textContent = allOrders.length ? "(" + allOrders.length + ")" : "";
 
     renderOrderStats();
