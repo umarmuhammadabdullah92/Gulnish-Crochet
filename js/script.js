@@ -1242,11 +1242,28 @@ var bottomNavCart = document.getElementById("bottomNavCart");
                 (prodName ? prodName.textContent : "") || ""
             };
           });
+
+          if (slot.classList.contains("product-page__media") && currentProduct) {
+            var all = [currentProduct.image]
+              .concat((currentProduct.gallery || []).filter(Boolean))
+              .filter(Boolean);
+            currentImages = all.map(function (src) {
+              return {
+                src: src,
+                alt: (ppName ? ppName.textContent : "") + " photo",
+                name: ppName ? ppName.textContent : ""
+              };
+            });
+          }
           images = currentImages;
 
           var img = slot.querySelector("img");
           if (!img || !img.src) return;
-          open(images.findIndex(function (i) { return i.src === (img.currentSrc || img.src); }));
+          var shown = img.currentSrc || img.src;
+          var idx = images.findIndex(function (i) {
+            return i.src === shown || displayImage(i.src) === shown;
+          });
+          open(idx === -1 ? 0 : idx);
         });
       });
 
