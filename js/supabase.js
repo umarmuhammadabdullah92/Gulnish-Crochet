@@ -686,7 +686,9 @@
 
     // Marks ordered in-stock products as "sold out" so nobody else can
     // order a piece that has just been booked. Made-to-order items are
-    // intentionally left untouched (they are crafted on demand).
+    // intentionally left untouched (they are crafted on demand). When a
+    // numeric stock count exists it is decremented instead; reaching zero
+    // flips the product to "sold out".
     reserveProducts: async function (items) {
       var touched = [];
       (items || []).forEach(function (it) {
@@ -694,7 +696,16 @@
         if (idx === -1) return;
         var s = String(products[idx].status || "").trim().toLowerCase();
         if (s === "made to order" || s === "made-to-order" || s === "sold out" || s === "sold-out") return;
-        products[idx] = Object.assign({}, products[idx], { status: "sold out" });
+        var stockNum = products[idx].stock;
+        var next = Object.assign({}, products[idx]);
+        if (stockNum != null && stockNum !== "") {
+          var remaining = stockNum - (it.qty || 1);
+          next.stock = Math.max(0, remaining);
+          if (remaining <= 0) next.status = "sold out";
+        } else {
+          next.status = "sold out";
+        }
+        products[idx] = next;
         touched.push(products[idx]);
       });
       if (!touched.length) return { ok: true };
@@ -713,7 +724,8 @@
           image: t.image || "",
           keywords: t.keywords || [],
           colors: t.colors || [],
-          status: t.status
+          status: t.status,
+          stock: t.stock != null ? t.stock : null
         };
         var res = await sb.from("products").upsert(row, { onConflict: "id" });
         if (res.error) anyError = true;
