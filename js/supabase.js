@@ -928,6 +928,8 @@
       email: c.email || "",
       address: c.address || "",
       city: c.city || "",
+      province: c.province || "",
+      landmark: c.landmark || "",
       notes: c.notes || "",
       items: o.items || [],
       total: o.total || 0,
