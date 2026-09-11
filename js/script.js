@@ -1094,6 +1094,29 @@ var bottomNavCart = document.getElementById("bottomNavCart");
     });
   }
 
+  /* ---------- Mobile bottom navigation ---------- */
+  if (bottomNavCart) {
+    bottomNavCart.addEventListener("click", function () {
+      if (cartDrawer && cartToggle) {
+        if (!cartDrawer.classList.contains("open")) openCart();
+      }
+    });
+  }
+  (function highlightBottomNav() {
+    if (!document.querySelector(".bottom-nav")) return;
+    var page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    var key = {
+      "index.html": "home",
+      "products.html": "products",
+      "orders.html": "orders",
+      "about.html": "about",
+      "contact.html": "contact"
+    }[page] || "";
+    document.querySelectorAll(".bottom-nav__item[data-nav]").forEach(function (el) {
+      if (el.dataset.nav === key) el.classList.add("active");
+    });
+  })();
+
   /* ---------- Render shop once shared data is loaded ---------- */
   function renderShop() {
     var settings = getSettings();
