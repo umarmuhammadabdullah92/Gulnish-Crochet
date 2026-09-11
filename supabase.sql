@@ -22,16 +22,40 @@ alter table public.products add column if not exists status text default 'in sto
 
 alter table public.products enable row level security;
 
+-- =============================================================
+-- ADMINS — ONLY these Supabase user ids can manage the shop.
+-- After creating your account, run the commented insert below with
+-- your real user id (Supabase Dashboard -> Authentication -> Users).
+-- =============================================================
+create table if not exists public.shop_admins (
+  user_id uuid primary key,
+  created_at timestamptz default now()
+);
+
+alter table public.shop_admins enable row level security;
+
+drop policy if exists "shop_admins: members read" on public.shop_admins;
+create policy "shop_admins: members read"
+  on public.shop_admins for select
+  using (exists (select 1 from public.shop_admins a where a.user_id = auth.uid()));
+
+grant select on public.shop_admins to anon, authenticated;
+
+-- IMPORTANT: replace with your own Supabase auth user id.
+-- insert into public.shop_admins (user_id) values ('REPLACE-WITH-YOUR-USER-UUID');
+
 drop policy if exists "products: public read" on public.products;
 create policy "products: public read"
   on public.products for select
   using (true);
 
 drop policy if exists "products: admin write" on public.products;
-create policy "products: admin write"
+drop policy if exists "products: admins write" on public.products;
+create policy "products: admins write"
   on public.products for all
   to authenticated
-  using (true) with check (true);
+  using (exists (select 1 from public.shop_admins a where a.user_id = auth.uid()))
+  with check (exists (select 1 from public.shop_admins a where a.user_id = auth.uid()));
 
 -- ---------- SETTINGS (single row, id = 'app') ----------
 create table if not exists public.settings (
