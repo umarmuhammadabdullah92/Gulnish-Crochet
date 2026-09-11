@@ -421,6 +421,7 @@
     // within the user's click (popup blockers allow this), and reused on
     // the success screen as the manual fallback button.
     var waNum = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
+    var shipText = shippingNote(items).text;
     var waMsg =
       "New order *" + order.id + "* from " + (order.customer.name || "Customer") + "\n\n" +
       order.items
@@ -431,7 +432,7 @@
         })
         .join("\n") +
       "\n\nTotal: " + money(order.total) +
-      "\n" + shippingNote(items).text +
+      (shipText ? "\n" + shipText : "") +
       "\nPayment: " + order.payment.method +
       (order.estDelivery ? "\nEst. delivery: " + friendlyDate(order.estDelivery) : "") +
       (phone ? "\nPhone: +" + phone : "") +
