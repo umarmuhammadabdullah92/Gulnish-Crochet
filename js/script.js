@@ -801,7 +801,8 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       );
     });
     lines.push("");
-    lines.push(shippingInfo(cartTotalPrice()).text);
+    var shipText = shippingInfo(cartTotalPrice()).text;
+    if (shipText) lines.push(shipText);
     lines.push("Total: *" + money(cartTotalPrice()) + "*");
     var profile =
       GC && GC.getCustomerProfile ? GC.getCustomerProfile() : null;
@@ -951,10 +952,11 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       if (cartFoot) cartFoot.parentNode.insertBefore(shipEl, cartFoot);
     }
     if (shipEl) {
-      shipEl.hidden = false;
       var sub = cartTotalPrice();
-      shipEl.textContent = shippingInfo(sub).text;
-      shipEl.classList.toggle('cart-shipping--free', shippingInfo(sub).isFree);
+      var shipInfo = shippingInfo(sub);
+      shipEl.hidden = !shipInfo.text;
+      shipEl.textContent = shipInfo.text;
+      shipEl.classList.toggle('cart-shipping--free', shipInfo.isFree);
     }
 
     /* Free-delivery progress */
@@ -976,7 +978,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
         var progMsg = progWrap.querySelector('.cart-delivery-msg');
         if (progFill) progFill.style.width = pct + '%';
         if (progMsg) {
-          if (pct >= 100) progMsg.innerHTML = '&#10003; Free delivery unlocked!';
+          if (pct >= 100) { progWrap.hidden = true; }
           else progMsg.textContent = 'Add ' + money(freeMin - sub2) + ' more for free delivery';
         }
         progWrap.classList.toggle('done', pct >= 100);

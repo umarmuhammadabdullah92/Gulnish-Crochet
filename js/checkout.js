@@ -289,7 +289,7 @@
     if (shipEl) {
       var ship = shippingNote(items);
       shipEl.textContent = ship.text;
-      shipEl.hidden = false;
+      shipEl.hidden = !ship.text;
     }
     updateBar();
   }
