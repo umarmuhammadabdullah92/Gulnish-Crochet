@@ -795,6 +795,61 @@
     adminOrders.innerHTML = orders.map(orderCardHTML).join("");
   }
 
+  /* ---------- new order alerts ---------- */
+  var knownOrderIds = null;
+  var alertEl = null;
+
+  function showOrderAlert(msg) {
+    if (!alertEl) {
+      alertEl = document.createElement("div");
+      alertEl.className = "admin-alert";
+      document.body.appendChild(alertEl);
+    }
+    alertEl.textContent = msg;
+    alertEl.classList.add("show");
+    clearTimeout(alertEl._timer);
+    alertEl._timer = setTimeout(function () {
+      alertEl.classList.remove("show");
+    }, 6000);
+  }
+
+  function notifyNewOrder(order) {
+    if (!order || !order.id) return;
+    var title = "New order " + order.id;
+    var parts = [];
+    if (order.customer && order.customer.name) parts.push(order.customer.name);
+    if (order.total) parts.push(money(order.total));
+    var itemNames = (order.items || []).slice(0, 2).map(function (i) { return i.name; }).join(", ");
+    if (itemNames) parts.push(itemNames);
+    showOrderAlert("\ud83d\udd14 " + title + " \u2014 " + parts.join(" \u00b7 "));
+    if ("Notification" in window) {
+      if (Notification.permission === "granted") {
+        try { new Notification(title, { body: parts.join("\n") }); } catch (err) { /* ignore */ }
+      } else if (Notification.permission === "default") {
+        Notification.requestPermission().then(function (p) {
+          if (p === "granted") {
+            try { new Notification(title, { body: parts.join("\n") }); } catch (err) { /* ignore */ }
+          }
+        });
+      }
+    }
+  }
+
+  function trackNewOrders() {
+    var orders = getOrders();
+    var ids = orders.map(function (o) { return o.id; });
+    if (knownOrderIds === null) {
+      knownOrderIds = new Set(ids);
+      return;
+    }
+    ids.forEach(function (id) {
+      if (knownOrderIds.has(id)) return;
+      knownOrderIds.add(id);
+      var o = orders.find(function (x) { return x.id === id; });
+      if (o) notifyNewOrder(o);
+    });
+  }
+
   function updateBulkUI() {
     if (bulkActionsEl) bulkActionsEl.classList.toggle("show", _selectedOrders.size > 0);
     if (bulkActionsEl) {
