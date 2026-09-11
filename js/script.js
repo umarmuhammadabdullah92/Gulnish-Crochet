@@ -718,7 +718,7 @@
       return;
     }
     var viewBtn = e.target.closest(".js-product-view");
-    if (viewBtn && !e.target.closest(".wish-heart")) {
+    if (viewBtn) {
       if (productView) {
         showProduct(viewBtn.dataset.view);
       } else {
