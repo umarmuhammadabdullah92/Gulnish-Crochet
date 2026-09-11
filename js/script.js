@@ -16,6 +16,7 @@
     window.matchMedia("(max-width: 760px)").matches;
   function displayImage(src) {
     if (!src || !LOW_RES) return src;
+    if (src.lastIndexOf("data:", 0) === 0) return src;
     var parts = src.split("/");
     if (parts.length >= 2 && parts[parts.length - 2] !== "sm") {
       parts.splice(parts.length - 1, 0, "sm");
