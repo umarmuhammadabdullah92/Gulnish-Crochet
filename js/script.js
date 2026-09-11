@@ -683,18 +683,6 @@
     });
   }
 
-  if (ppWish) {
-    ppWish.addEventListener("click", function () {
-      if (!currentProduct) return;
-      var added = toggleWish(currentProduct.id);
-      ppWish.classList.toggle("wished", added);
-      ppWish.setAttribute("aria-pressed", added ? "true" : "false");
-      ppWish.querySelector("svg").setAttribute("fill", added ? "var(--gold)" : "none");
-      updateWishCount();
-      renderWishlistGrid();
-    });
-  }
-
   document.querySelectorAll("[data-pq]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       if (!currentProduct) return;
