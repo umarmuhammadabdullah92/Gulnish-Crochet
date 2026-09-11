@@ -84,6 +84,12 @@
 
   /* ---------- category select ---------- */
   var pCategory = document.getElementById("pCategory");
+  function stockStatusOf(p) {
+    var s = String((p && p.status) || "").trim().toLowerCase();
+    if (s === "sold out" || s === "sold-out") return "sold out";
+    if (s === "made to order" || s === "made-to-order") return "made to order";
+    return "in stock";
+  }
   function fillCategorySelect(settings, selected) {
     pCategory.innerHTML = "";
     (settings.categories || []).forEach(function (label, i) {
