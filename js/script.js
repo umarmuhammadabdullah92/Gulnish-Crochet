@@ -1073,12 +1073,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
         showToast("Your cart is empty.");
         return;
       }
-      var href = cartWa ? cartWa.href : "";
-      if (href && href.indexOf("wa.me") !== -1) {
-        window.open(href, "_blank", "noopener");
-      } else {
-        showToast("WhatsApp number not set yet.");
-      }
+      window.location.href = "checkout.html";
       return;
     }
   });
@@ -1086,7 +1081,16 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   if (cartToggle) cartToggle.addEventListener("click", openCart);
   if (cartClose) cartClose.addEventListener("click", closeCart);
   if (cartOverlay) cartOverlay.addEventListener("click", closeCart);
-  if (cartBarBtn) cartBarBtn.addEventListener("click", openCart);
+  if (cartBarBtn) {
+    cartBarBtn.addEventListener("click", function () {
+      window.location.href = "cart.html";
+    });
+  }
+  /* Cross-file sync: other pages (e.g. cart.html) push cart changes here */
+  window.addEventListener("gulnish:cart", function () {
+    cart = loadCart();
+    renderCart();
+  });
   document.addEventListener("keydown", function (e) {
     if (
       e.key === "Escape" &&
