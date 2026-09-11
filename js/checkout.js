@@ -436,25 +436,8 @@
       if (subtotalEl) subtotalEl.textContent = money(0);
 
       var wa = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
-      if (wa && waLinkEl) {
-        var msg =
-          "New order *" + order.id + "* from " + order.customer.name + "\n\n" +
-          order.items
-            .map(function (i) {
-              return "- " + i.name + (i.color ? " (" + i.color + ")" : "") +
-                (i.image ? " \u2014 Photo: " + absImage(i.image) : "") +
-                " x " + i.qty + " = " + money(livePrice(i) * i.qty);
-            })
-            .join("\n") +
-          "\n\nTotal: " + money(order.total) +
-          "\nPayment: " + order.payment.method +
-          (order.estDelivery ? "\nEst. delivery: " + friendlyDate(order.estDelivery) : "") +
-          (phone ? "\nPhone: +" + phone : "") +
-          (email ? "\nEmail: " + email : "") +
-          (address ? "\nAddress: " + address + (city ? ", " + city : "") : "") +
-          (notes ? "\nNotes: " + notes : "");
-        waLinkEl.href =
-          "https://wa.me/" + wa + "?text=" + encodeURIComponent(msg);
+      if (orderWaLink && waLinkEl) {
+        waLinkEl.href = orderWaLink;
         waLinkEl.hidden = false;
         if (waMissingEl) waMissingEl.hidden = true;
       } else if (waMissingEl) {
