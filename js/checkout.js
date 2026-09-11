@@ -449,7 +449,7 @@
       (phone ? "\nPhone: +" + phone : "") +
       (email ? "\nEmail: " + email : "") +
       (order.notifyUpdates ? "\nNotify me about new pieces on WhatsApp: Yes (please add me to your update list)" : "") +
-      (address ? "\nAddress: " + address + (city ? ", " + city : "") : "") +
+      (address ? "\nAddress: " + address + (landmark ? "\nLandmark: " + landmark : "") + "\nCity: " + city + (province ? ", " + province : "") : "") +
       (notes ? "\nNotes: " + notes : "");
     var orderWaLink = waNum ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent(waMsg) : "";
     if (orderWaLink) {
