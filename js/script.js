@@ -257,16 +257,25 @@
       '<div class="work-card__body">' +
       '<h3 class="work-card__name">' + escapeHtml(p.name) + "</h3>" +
       price +
+      stockBadgeHTML(p) +
       colors +
-      '<button class="add-btn" type="button" data-id="' + p.id + '" data-name="' + escapeHtml(p.name) + '" data-price="' + (p.price || 0) + '">' +
+      buildCardAddBtn(p) +
+      "</div></article>"
+    );
+  }
+
+  function buildCardAddBtn(p) {
+    var common = ' type="button" data-id="' + p.id + '" data-name="' + escapeHtml(p.name) + '" data-price="' + (p.price || 0) + '"';
+    if (stockStatus(p) === "sold out") {
+      return '<button class="add-btn add-btn--sold" disabled' + common + '>Sold out</button>';
+    }
+    return '<button class="add-btn"' + common + '>' +
       '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
       '<circle cx="9" cy="21" r="1"></circle>' +
       '<circle cx="20" cy="21" r="1"></circle>' +
       '<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>' +
       "</svg>" +
-      "Add to Cart</button>" +
-      "</div></article>"
-    );
+      "Add to Cart</button>";
   }
 
   function buildFilters(settings) {
