@@ -4071,7 +4071,7 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 220;
+  z-index: 170;
   display: none;
   grid-template-columns: repeat(5, 1fr);
   background: rgba(255, 255, 255, 0.94);
