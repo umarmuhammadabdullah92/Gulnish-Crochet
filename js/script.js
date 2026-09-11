@@ -608,6 +608,7 @@
   var ppAdd = document.getElementById("ppAdd");
   var ppWa = document.getElementById("ppWa");
   var ppWish = document.getElementById("ppWish");
+  var ppThumbs = document.getElementById("ppThumbs");
   var currentProduct = null;
   var currentQty = 1;
 
