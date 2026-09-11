@@ -730,7 +730,8 @@
           keywords: t.keywords || [],
           colors: t.colors || [],
           status: t.status,
-          stock: t.stock != null ? t.stock : null
+          stock: t.stock != null ? t.stock : null,
+          gallery: t.gallery || []
         };
         var res = await sb.from("products").upsert(row, { onConflict: "id" });
         if (res.error) anyError = true;
