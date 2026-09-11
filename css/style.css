@@ -3371,17 +3371,14 @@ h1, h2, h3, .logo {
 
 /* ---------- WhatsApp quick-order (mobile-fast) ---------- */
 .btn--wa {
-  background: linear-gradient(180deg, #2fdc74, #1faa52);
+  background: #1faa52;
   color: #fff;
-  box-shadow: 0 8px 22px rgba(31, 170, 82, 0.32);
+  box-shadow: none;
 }
 .btn--wa:hover {
-  background: linear-gradient(180deg, #35e87c, #1faa52);
+  background: #188c45;
   color: #fff;
-  box-shadow: 0 12px 26px rgba(31, 170, 82, 0.4);
-}
-.btn--wa::after {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  box-shadow: none;
 }
 .cart-wa {
   width: 100%;
