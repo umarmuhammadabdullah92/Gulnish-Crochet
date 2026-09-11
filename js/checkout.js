@@ -120,7 +120,6 @@
   var successEta = document.getElementById("coSuccessEta");
   var successEtaDate = document.getElementById("coSuccessEtaDate");
   var successCopy = document.getElementById("coSuccessCopy");
-  var trackLink = document.getElementById("coTrackLink");
   var waLinkEl = document.getElementById("coWaLink");
   var waMissingEl = document.getElementById("coWaMissing");
   var btnText = document.getElementById("coBtnText");
@@ -461,7 +460,6 @@
           successEta.hidden = !order.estDelivery;
           if (successEtaDate && order.estDelivery) successEtaDate.textContent = friendlyDate(order.estDelivery);
         }
-        if (trackLink && order.id) trackLink.href = "orders.html?id=" + encodeURIComponent(order.id);
         if (waLinkEl) {
           waLinkEl.href = "";
           waLinkEl.hidden = true;

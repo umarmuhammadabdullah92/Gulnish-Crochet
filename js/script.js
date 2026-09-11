@@ -1303,7 +1303,6 @@ var bottomNavCart = document.getElementById("bottomNavCart");
     var key = {
       "index.html": "home",
       "products.html": "products",
-      "orders.html": "orders",
       "about.html": "about",
       "contact.html": "contact"
     }[page] || "";
