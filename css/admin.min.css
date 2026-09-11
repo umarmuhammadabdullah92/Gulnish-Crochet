@@ -80,7 +80,8 @@
 .admin-card input[type="text"],
 .admin-card input[type="number"],
 .admin-card input[type="password"],
-.admin-card select {
+.admin-card select,
+.admin-card textarea {
   padding: 0.6rem 0.8rem;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -89,9 +90,15 @@
   background: #fff;
   color: var(--ink);
 }
+.admin-card textarea {
+  width: 100%;
+  min-height: 3.4rem;
+  resize: vertical;
+}
 
 .admin-card input:focus,
-.admin-card select:focus {
+.admin-card select:focus,
+.admin-card textarea:focus {
   outline: none;
   border-color: var(--gold);
 }
