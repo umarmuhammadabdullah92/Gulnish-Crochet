@@ -779,7 +779,7 @@
       return;
     }
     var viewBtn = e.target.closest(".js-product-view");
-    if (viewBtn && !e.target.closest(".work-card__wa") && !e.target.closest(".wish-heart")) {
+    if (viewBtn && !e.target.closest(".wish-heart")) {
       if (productView) {
         showProduct(viewBtn.dataset.view);
       } else {
