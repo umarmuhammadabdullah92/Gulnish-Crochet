@@ -1749,6 +1749,7 @@ h1, h2, h3, .logo {
 .checkout-card input[type="tel"],
 .checkout-card input[type="email"],
 .checkout-card textarea,
+.checkout-card select,
 .co-payment select {
   width: 100%;
   padding: 0.7rem 0.85rem;
@@ -1767,6 +1768,7 @@ h1, h2, h3, .logo {
 
 .checkout-card input:focus,
 .checkout-card textarea:focus,
+.checkout-card select:focus,
 .co-payment select:focus {
   outline: none;
   border-color: var(--gold);
