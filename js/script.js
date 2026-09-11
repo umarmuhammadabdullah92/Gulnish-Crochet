@@ -870,6 +870,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       );
     });
     lines.push("");
+    lines.push(shippingInfo(cartTotalPrice()).text);
     lines.push("Total: *" + money(cartTotalPrice()) + "*");
     var profile =
       GC && GC.getCustomerProfile ? GC.getCustomerProfile() : null;
