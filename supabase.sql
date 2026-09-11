@@ -19,6 +19,7 @@ create table if not exists public.products (
 
 alter table public.products add column if not exists keywords jsonb default '[]'::jsonb;
 alter table public.products add column if not exists status text default 'in stock';
+alter table public.products add column if not exists stock int;
 
 alter table public.products enable row level security;
 
