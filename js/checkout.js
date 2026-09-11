@@ -83,6 +83,31 @@
     return checked ? checked.value : PAYMENT_METHODS[0];
   }
 
+  function shippingNote(items) {
+    var s = (GC && GC.settings) || {};
+    var sub = cartTotalPrice(items);
+    var fee = s.shippingFee != null && s.shippingFee !== "" ? parseFloat(s.shippingFee) : null;
+    var freeMin = s.freeDeliveryMin || 0;
+    if (freeMin > 0 && sub >= freeMin) return { text: "Delivery: Free", amount: 0, isFree: true };
+    if (fee != null && !isNaN(fee)) return { text: "Delivery: " + money(fee), amount: fee, isFree: false };
+    return { text: "Delivery: charged on WhatsApp (actual courier rate)", amount: null, isFree: false };
+  }
+
+  /* Best-effort email receipt. The /api endpoint returns cleanly when no
+     email provider is configured, so a missing function never blocks the
+     order — this is purely a nice-to-have for customers who give an email. */
+  function sendOrderEmail(order) {
+    var to = order.customer && order.customer.email;
+    if (!to) return;
+    try {
+      fetch("/api/send-order-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ to: to, order: order })
+      }).catch(function () {});
+    } catch (err) { /* keep the order flowing even if fetch fails */ }
+  }
+
   /* ---------- elements ---------- */
   var itemsEl = document.getElementById("coItems");
   var subtotalEl = document.getElementById("coSubtotal");
