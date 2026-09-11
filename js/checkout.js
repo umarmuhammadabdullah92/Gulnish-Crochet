@@ -366,7 +366,7 @@
         return {
           id: i.id,
           name: i.name,
-          price: parseFloat(i.price) || 0,
+          price: livePrice(i),
           color: i.color,
           image: i.image,
           qty: i.qty
