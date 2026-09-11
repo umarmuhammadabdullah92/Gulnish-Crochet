@@ -164,6 +164,7 @@
     pendingImageFile = null;
     pName.value = "";
     pPrice.value = "";
+    if (pStatus) pStatus.value = "in stock";
     if (pKeywords) pKeywords.value = "";
     pImage.value = "";
     pImagePreview.hidden = true;
