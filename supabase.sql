@@ -137,21 +137,45 @@ create index if not exists orders_phone_idx on public.orders (phone);
 
 alter table public.orders enable row level security;
 
-drop policy if exists "orders: public read" on public.orders;
-create policy "orders: public read"
-  on public.orders for select
-  using (true);
+-- Customers may only INSERT (place) an order. They can read their own
+-- orders ONLY through the get_customer_orders() function below, which
+-- filters by order id / phone on the server — never a full table scan.
 
-drop policy if exists "orders: insert" on public.orders;
-create policy "orders: insert"
+drop policy if exists "orders: public read" on public.orders;
+drop policy if exists "orders: anon insert" on public.orders;
+create policy "orders: anon insert"
   on public.orders for insert
+  to anon
   with check (true);
 
+drop policy if exists "orders: insert" on public.orders;
 drop policy if exists "orders: admin write" on public.orders;
-create policy "orders: admin write"
+drop policy if exists "orders: admins all" on public.orders;
+create policy "orders: admins all"
   on public.orders for all
   to authenticated
-  using (true) with check (true);
+  using (exists (select 1 from public.shop_admins a where a.user_id = auth.uid()))
+  with check (exists (select 1 from public.shop_admins a where a.user_id = auth.uid()));
+
+-- Scoped server-side order lookup for the customer tracking page.
+-- Returns ONLY orders matching the supplied order id or phone number
+-- (bound to max_results, never the whole table), so the anon key can
+-- never dump the customer list.
+create or replace function public.get_customer_orders(search text, max_results int default 50)
+returns setof public.orders
+language sql
+security definer
+set search_path = public
+as $$
+  select *
+  from public.orders
+  where id = search
+     or phone = regexp_replace(coalesce(search, ''), '[^0-9]', '', 'g')
+  order by placed_at desc nulls last, created_at desc
+  limit greatest(1, least(coalesce(max_results, 50), 100));
+$$;
+
+grant execute on function public.get_customer_orders(text, int) to anon, authenticated;
 
 -- =============================================================
 -- STORAGE — shop-images bucket
