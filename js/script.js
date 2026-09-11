@@ -986,7 +986,13 @@ var bottomNavCart = document.getElementById("bottomNavCart");
         showToast("Your cart is empty.");
         return;
       }
-      location.href = "checkout.html";
+      var href = cartWa ? cartWa.href : "";
+      if (href && href.indexOf("wa.me") !== -1) {
+        window.open(href, "_blank", "noopener");
+      } else {
+        showToast("WhatsApp number not set yet.");
+      }
+      return;
     }
   });
 
