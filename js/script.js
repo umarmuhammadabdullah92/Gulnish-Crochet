@@ -1102,6 +1102,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
         wishBtn.setAttribute("aria-pressed", added ? "true" : "false");
         wishBtn.querySelector("svg").setAttribute("fill", added ? "var(--gold)" : "none");
         updateWishCount();
+        renderWishlistGrid();
       }
       return;
     }
