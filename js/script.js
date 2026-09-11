@@ -1093,6 +1093,19 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       return;
     }
 
+    var wishBtn = e.target.closest("[data-wish]");
+    if (wishBtn) {
+      var id = wishBtn.dataset.wish;
+      if (id) {
+        var added = toggleWish(id);
+        wishBtn.classList.toggle("wished", added);
+        wishBtn.setAttribute("aria-pressed", added ? "true" : "false");
+        wishBtn.querySelector("svg").setAttribute("fill", added ? "var(--gold)" : "none");
+        updateWishCount();
+      }
+      return;
+    }
+
     var addBtn = e.target.closest(".add-btn");
     if (addBtn) {
       var card = addBtn.closest(".work-card");
