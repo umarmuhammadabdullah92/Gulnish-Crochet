@@ -671,7 +671,8 @@
         keywords: product.keywords || [],
         colors: product.colors || [],
         status: product.status || "in stock",
-        stock: product.stock != null ? product.stock : null
+        stock: product.stock != null ? product.stock : null,
+        gallery: product.gallery || []
       };
       var res = await sb.from("products").upsert(row, { onConflict: "id" });
       return { ok: !res.error, error: res.error };
