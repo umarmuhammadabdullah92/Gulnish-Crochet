@@ -312,4 +312,10 @@ insert into public.products (id, name, price, category, image, keywords, colors,
   ('seed_gr6_3', 'Handmade Crochet Headband 3', 1299, 'gr6', 'images/headbands/headband-3.webp', '["hairband","hair accessory","girl","handmade","gift"]'::jsonb, '[]'::jsonb, 'in stock')
 on conflict (id) do nothing;
 
+-- Placeholder low-stock examples (edit or clear in admin once real counts are set)
+update public.products set stock = 1 where id = 'seed_gr1_1' and stock is null;
+update public.products set stock = 2 where id = 'seed_gr1_2' and stock is null;
+update public.products set stock = 1 where id = 'seed_gr2_1' and stock is null;
+update public.products set stock = 2 where id = 'seed_gr3_1' and stock is null;
+
 -- 81 products
