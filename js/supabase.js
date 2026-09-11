@@ -298,7 +298,7 @@
           if (ordRes.error) throw ordRes.error;
 
           products.length = 0;
-          (prodRes.data || []).forEach(function (p) { products.push(p); });
+          (prodRes.data || []).forEach(function (p) { products.push(normalizeProduct(p)); });
 
           settings = setRes.data && setRes.data.data
             ? normalizeSettings(setRes.data.data)
