@@ -595,6 +595,28 @@
     if (ppCategory) {
       ppCategory.textContent = categoryLabelOf(p.category);
     }
+    if (ppStatus) {
+      var s = stockStatus(p);
+      if (s === "sold out") {
+        ppStatus.hidden = false;
+        ppStatus.className = "product-page__status status-out";
+        ppStatus.textContent = "Sold out";
+      } else if (s === "made to order") {
+        ppStatus.hidden = false;
+        ppStatus.className = "product-page__status status-made";
+        ppStatus.textContent = "Made to order \u2014 takes about 5 days";
+      } else {
+        ppStatus.hidden = false;
+        ppStatus.className = "product-page__status status-in";
+        ppStatus.textContent = "In stock \u2014 ready to ship";
+      }
+    }
+    if (ppAdd) {
+      var soldOut = stockStatus(p) === "sold out";
+      ppAdd.disabled = soldOut;
+      ppAdd.textContent = soldOut ? "Sold out" : "Add to Cart";
+      ppAdd.classList.toggle("is-disabled", soldOut);
+    }
     if (ppColors) {
       ppColors.setAttribute(
         "data-colors",
