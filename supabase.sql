@@ -95,7 +95,9 @@ values (
     'bankIBAN', '',
     'jazzcashNumber', '',
     'easypaisaNumber', '',
-    'version', 3
+    'shippingFee', '',
+    'freeDeliveryMin', 2500,
+    'version', 4
   )
 )
 on conflict (id) do nothing;
@@ -125,6 +127,7 @@ alter table public.orders add column if not exists est_delivery timestamptz;
 alter table public.orders add column if not exists updated_at timestamptz;
 alter table public.orders add column if not exists craft_days int;
 alter table public.orders add column if not exists delivery_days int;
+alter table public.orders add column if not exists notify_updates boolean default false;
 
 update public.orders
 set payment_method = coalesce(payment_method, payment),
