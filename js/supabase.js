@@ -317,7 +317,7 @@
 
       products.length = 0;
       var fallbackProducts = lsGet(LOCAL_PRODUCTS, defaultProducts());
-      (fallbackProducts || []).forEach(function (p) { products.push(p); });
+      (fallbackProducts || []).forEach(function (p) { products.push(normalizeProduct(p)); });
       if (!localStorage.getItem(LOCAL_PRODUCTS)) lsSet(LOCAL_PRODUCTS, products);
       settings = normalizeSettings(lsGet(LOCAL_SETTINGS, null));
       orders.length = 0;
