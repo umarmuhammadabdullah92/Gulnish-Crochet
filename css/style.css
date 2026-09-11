@@ -2576,8 +2576,6 @@ h1, h2, h3, .logo {
 
 @media (max-width: 520px) {
   .hero--split .hero h1 { font-size: 2.1rem; }
-  .hero--split .hero-media__badge--top { left: 0.8rem; }
-  .hero--split .hero-media__badge--bottom { right: 0.8rem; }
 }
 
 /* ---------- Hero copy + rating ---------- */
