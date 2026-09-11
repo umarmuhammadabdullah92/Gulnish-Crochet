@@ -72,6 +72,8 @@
     var s = stockStatusOf(p);
     if (s === "sold out") return "Sold out";
     if (s === "made to order") return "Made to order";
+    var st = p && p.stock != null ? parseInt(p.stock, 10) : null;
+    if (st != null && st <= 2) return "Only " + st + " left";
     return "In stock";
   }
   function getSettings() {
