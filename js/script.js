@@ -762,9 +762,16 @@
     return cart.reduce(function (sum, item) { return sum + item.qty; }, 0);
   }
 
+  function cartUnitPrice(item) {
+    var found = (getProducts() || []).find(function (x) { return x.id === item.id; });
+    return found && parseFloat(found.price) > 0
+      ? parseFloat(found.price)
+      : (parseFloat(item.price) || 0);
+  }
+
   function cartTotalPrice() {
     return cart.reduce(
-      function (sum, item) { return sum + (parseFloat(item.price) || 0) * item.qty; }, 0
+      function (sum, item) { return sum + cartUnitPrice(item) * item.qty; }, 0
     );
   }
 
