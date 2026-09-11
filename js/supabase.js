@@ -192,7 +192,8 @@
           category: key,
           image: img,
           keywords: (CATEGORY_KEYWORDS[key] || [label.toLowerCase()]).slice(),
-          colors: []
+          colors: [],
+          status: "in stock"
         });
       });
     });
