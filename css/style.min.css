@@ -1219,6 +1219,14 @@ h1, h2, h3, .logo {
   color: #8b948f;
 }
 
+.footer-qb {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  color: #8b948f;
+  margin-left: 0.15rem;
+}
+
 .footer-note {
   font-size: 0.82rem;
   color: #8b948f;
@@ -2582,6 +2590,23 @@ h1, h2, h3, .logo {
 /* ---------- Hero copy + rating ---------- */
 .hero-copy { position: relative; z-index: 1; }
 .hero-media { z-index: 1; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold-deep);
+  margin-bottom: 1.1rem;
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+  margin-right: 0.6rem;
+}
 .hero__trust {
   margin-top: 1rem;
   display: flex;
