@@ -179,6 +179,7 @@
     if (pStatus) pStatus.value = "in stock";
     if (pStock) pStock.value = "";
     if (pKeywords) pKeywords.value = "";
+    if (pGallery) pGallery.value = "";
     pImage.value = "";
     pImagePreview.hidden = true;
     pImagePreview.removeAttribute("src");
