@@ -242,7 +242,10 @@
       keywords: pKeywords
         ? (pKeywords.value || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean)
         : [],
-      colors: collectColors().filter(function (c) { return c.name; })
+      colors: collectColors().filter(function (c) { return c.name; }),
+      gallery: pGallery
+        ? pGallery.value.split(/[\n,]+/).map(function (s) { return s.trim(); }).filter(Boolean)
+        : []
     };
 
     if (GC.saveProduct) await GC.saveProduct(product);
