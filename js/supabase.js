@@ -426,6 +426,22 @@
       _onOrdersChanged = callback;
     },
 
+    // Re-read localStorage (unconfigured mode) so shared browser tabs pick
+    // up new orders. No-op when Supabase is configured (realtime handles it).
+    refreshLocalData: function () {
+      if (configured) return Promise.resolve();
+      try {
+        products.length = 0;
+        (lsGet(LOCAL_PRODUCTS, defaultProducts()) || []).forEach(function (p) { products.push(normalizeProduct(p)); });
+        orders.length = 0;
+        (lsGet(LOCAL_ORDERS, []) || []).forEach(function (o) { orders.push(o); });
+      } catch (e) { /* ignore */ }
+      if (_onOrdersChanged) {
+        try { _onOrdersChanged(orders); } catch (e) { /* ignore */ }
+      }
+      return Promise.resolve();
+    },
+
     /* ---- customer profile (auto-fill) ---- */
     saveCustomerProfile: function (profile) {
       try { lsSet(LOCAL_CUSTOMER, profile); } catch (e) { /* ignore */ }
