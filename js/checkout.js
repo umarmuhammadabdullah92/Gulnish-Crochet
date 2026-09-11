@@ -384,6 +384,31 @@
       deliveryDays: (GC && GC.settings && GC.settings.deliveryDays) || null
     };
 
+    // Build the WhatsApp order message synchronously so it can be opened
+    // within the user's click (popup blockers allow this), and reused on
+    // the success screen as the manual fallback button.
+    var waNum = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
+    var waMsg =
+      "New order *" + order.id + "* from " + (order.customer.name || "Customer") + "\n\n" +
+      order.items
+        .map(function (i) {
+          return "- " + i.name + (i.color ? " (" + i.color + ")" : "") +
+            (i.image ? " \u2014 Photo: " + absImage(i.image) : "") +
+            " x " + i.qty + " = " + money(livePrice(i) * i.qty);
+        })
+        .join("\n") +
+      "\n\nTotal: " + money(order.total) +
+      "\nPayment: " + order.payment.method +
+      (order.estDelivery ? "\nEst. delivery: " + friendlyDate(order.estDelivery) : "") +
+      (phone ? "\nPhone: +" + phone : "") +
+      (email ? "\nEmail: " + email : "") +
+      (address ? "\nAddress: " + address + (city ? ", " + city : "") : "") +
+      (notes ? "\nNotes: " + notes : "");
+    var orderWaLink = waNum ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent(waMsg) : "";
+    if (orderWaLink) {
+      try { window.open(orderWaLink, "_blank", "noopener"); } catch (err) { /* popup blocked — the fallback button on the success screen is still shown */ }
+    }
+
     var done = function () {
       saveCart([]);
       saveProfile();
