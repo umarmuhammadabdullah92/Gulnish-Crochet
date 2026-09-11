@@ -1092,6 +1092,7 @@
   /* ---------- real-time order updates ---------- */
   if (GC && GC.onOrdersChanged) {
     GC.onOrdersChanged(function () {
+      trackNewOrders();
       renderOrders();
     });
   }
