@@ -15,12 +15,14 @@ create table if not exists public.products (
   colors     jsonb default '[]'::jsonb,
   status     text default 'in stock',
   stock      int,
+  gallery    jsonb default '[]'::jsonb,
   created_at timestamptz default now()
 );
 
 alter table public.products add column if not exists keywords jsonb default '[]'::jsonb;
 alter table public.products add column if not exists status text default 'in stock';
 alter table public.products add column if not exists stock int;
+alter table public.products add column if not exists gallery jsonb default '[]'::jsonb;
 
 alter table public.products enable row level security;
 
