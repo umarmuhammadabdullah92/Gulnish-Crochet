@@ -746,38 +746,23 @@ h1, h2, h3, .logo {
   font-weight: 600;
   font-size: 0.92rem;
   color: #2a2418;
-  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  background: var(--gold);
   padding: 0.65rem 1rem;
   border-radius: 999px;
   margin-top: auto;
-  box-shadow: var(--glow-accent);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
   will-change: transform;
   transform: translateZ(0);
 }
 
 .add-btn:hover {
-  background: linear-gradient(180deg, var(--gold-light), var(--gold-deep));
+  background: var(--gold-deep);
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(185, 143, 62, 0.34);
 }
 
 .add-btn svg {
   width: 15px;
   height: 15px;
-}
-
-.add-btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -70%;
-  width: 45%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
-  transform: skewX(-22deg);
-  transition: left 0.55s ease;
-  pointer-events: none;
 }
 
 .add-btn:hover::after {
