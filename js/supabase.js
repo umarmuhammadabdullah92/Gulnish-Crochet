@@ -132,7 +132,7 @@
         out.push({
           id: id,
           name: real ? real.name : "Handmade Crochet " + name + " " + (i + 1),
-          price: real ? real.price : (BASE_PRICE[key] || 500) + (i % 4) * 50,
+          price: PRODUCT_PRICES[id] || (real ? real.price : (BASE_PRICE[key] || 500) + (i % 4) * 50),
           category: key,
           image: img,
           keywords: (CATEGORY_KEYWORDS[key] || [label.toLowerCase()]).slice(),
