@@ -3359,10 +3359,6 @@ h1, h2, h3, .logo {
   #cartBar.show ~ .wa-float {
     bottom: calc(4.4rem + env(safe-area-inset-bottom));
   }
-  .work-card__wa {
-    width: 44px;
-    height: 44px;
-  }
 }
 
 /* ---------- Mobile checkout: sticky action bar ---------- */
