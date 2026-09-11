@@ -852,7 +852,7 @@
           "</div>" +
           '<div class="cart-item__info">' +
           '<span class="cart-item__name">' + (item.name || "Item") + "</span>" +
-          '<span class="cart-item__price">' + money(item.price) + "</span>" +
+          '<span class="cart-item__price">' + money(cartUnitPrice(item)) + "</span>" +
           (item.color ? '<span class="cart-item__color">' + item.color + "</span>" : "") +
           '<div class="qty">' +
           '<button class="qty__btn" data-action="minus" data-key="' + item.key + '" aria-label="Decrease">&#8722;</button>' +
