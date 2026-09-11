@@ -4167,20 +4167,6 @@ img, video, canvas, iframe { max-width: 100%; height: auto; }
   font-weight: 600;
 }
 
-/* =========================================================
-   Low-stock urgency
-   ========================================================= */
-.work-card__badge--low {
-  color: #8a4b08;
-  background: #fdf3d9;
-  border: 1px solid #ecd29a;
-}
-.product-page__status.status-low {
-  color: #8a4b08;
-  background: #fdf3d9;
-  border: 1px solid #ecd29a;
-}
-
 .product-page__btn-row {
   align-items: center;
 }
