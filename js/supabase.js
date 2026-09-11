@@ -194,7 +194,8 @@
           keywords: (CATEGORY_KEYWORDS[key] || [label.toLowerCase()]).slice(),
           colors: [],
           status: "in stock",
-          stock: LOW_STOCK_DEMO[id] != null ? LOW_STOCK_DEMO[id] : null
+          stock: LOW_STOCK_DEMO[id] != null ? LOW_STOCK_DEMO[id] : null,
+          gallery: []
         });
       });
     });
