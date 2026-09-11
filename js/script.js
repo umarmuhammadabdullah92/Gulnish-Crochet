@@ -1170,6 +1170,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   });
 
   renderCart();
+  updateWishCount();
 
   /* ---------- Lightbox ---------- */
   var lightbox = document.querySelector(".lightbox");
