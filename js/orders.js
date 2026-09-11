@@ -265,6 +265,13 @@
     }
   }
 
+  function runLookup(value) {
+    if (GC && GC.lookupOrders) {
+      return Promise.resolve(GC.lookupOrders(value)).then(function (found) { return found || []; });
+    }
+    return Promise.resolve(findOrders(value));
+  }
+
   function lookup() {
     var value = queryInput ? queryInput.value.trim() : "";
     if (!value) {
@@ -276,18 +283,19 @@
     if (lookupWrap) lookupWrap.classList.remove("has-error");
 
     _lastQuery = value;
-    var found = findOrders(value);
-    if (emptyMsg) {
-      emptyMsg.textContent = found.length
-        ? ""
-        : "No orders found. Check the order number or phone number and try again.";
-    }
-    render(found);
+    runLookup(value).then(function (found) {
+      if (emptyMsg) {
+        emptyMsg.textContent = found.length
+          ? ""
+          : "No orders found. Check the order number or phone number and try again.";
+      }
+      render(found);
+    });
 
     if (!_autoRefreshTimer) {
       _autoRefreshTimer = setInterval(function () {
         if (_lastQuery) {
-          render(findOrders(_lastQuery));
+          runLookup(_lastQuery).then(function (found) { render(found); });
           showRefreshPulse();
         }
       }, 30000);
