@@ -244,9 +244,9 @@ insert into public.products (id, name, price, category, image, keywords, colors)
   ('seed_gr5_7', 'Handmade Crochet Jewellery Set 7', 1599, 'gr5', 'images/jewellery/jewellery-7.webp', '["necklace","earrings","bridal","wedding","gift","accessory"]'::jsonb, '[]'::jsonb),
   ('seed_gr5_8', 'Handmade Crochet Jewellery Set 8', 1499, 'gr5', 'images/jewellery/jewellery-8.webp', '["necklace","earrings","bridal","wedding","gift","accessory"]'::jsonb, '[]'::jsonb),
   ('seed_gr5_9', 'Handmade Crochet Jewellery Set 9', 1499, 'gr5', 'images/jewellery/jewellery-9.webp', '["necklace","earrings","bridal","wedding","gift","accessory"]'::jsonb, '[]'::jsonb),
-  ('seed_gr6_1', 'Handmade Crochet Headband 1', 450, 'gr6', 'images/headbands/headband-1.webp', '["hairband","hair accessory","girl","handmade","gift"]'::jsonb, '[]'::jsonb),
-  ('seed_gr6_2', 'Handmade Crochet Headband 2', 500, 'gr6', 'images/headbands/headband-2.webp', '["hairband","hair accessory","girl","handmade","gift"]'::jsonb, '[]'::jsonb),
-  ('seed_gr6_3', 'Handmade Crochet Headband 3', 550, 'gr6', 'images/headbands/headband-3.webp', '["hairband","hair accessory","girl","handmade","gift"]'::jsonb, '[]'::jsonb)
+  ('seed_gr6_1', 'Handmade Crochet Headband 1', 1299, 'gr6', 'images/headbands/headband-1.webp', '["hairband","hair accessory","girl","handmade","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr6_2', 'Handmade Crochet Headband 2', 1299, 'gr6', 'images/headbands/headband-2.webp', '["hairband","hair accessory","girl","handmade","gift"]'::jsonb, '[]'::jsonb),
+  ('seed_gr6_3', 'Handmade Crochet Headband 3', 1299, 'gr6', 'images/headbands/headband-3.webp', '["hairband","hair accessory","girl","handmade","gift"]'::jsonb, '[]'::jsonb)
 on conflict (id) do nothing;
 
 -- 81 products
