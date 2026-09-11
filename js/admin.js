@@ -159,6 +159,7 @@
   var pName = document.getElementById("pName");
   var pPrice = document.getElementById("pPrice");
   var pStatus = document.getElementById("pStatus");
+  var pStock = document.getElementById("pStock");
   var pKeywords = document.getElementById("pKeywords");
   var pImage = document.getElementById("pImage");
   var pImagePreview = document.getElementById("pImagePreview");
