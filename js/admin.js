@@ -255,6 +255,7 @@
     pendingImageFile = null;
     pName.value = product.name || "";
     pPrice.value = product.price || "";
+    if (pStatus) pStatus.value = stockStatusOf(product);
     if (pKeywords) pKeywords.value = (product.keywords || []).join(", ");
     pImage.value = "";
     clearColorRows();
