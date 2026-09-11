@@ -5,7 +5,6 @@ var APP_SHELL = [
   "products.html",
   "about.html",
   "contact.html",
-  "orders.html",
   "checkout.html",
   "css/fonts.min.css",
   "css/style.min.css",
