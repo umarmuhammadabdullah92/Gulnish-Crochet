@@ -986,6 +986,8 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       if (cartSubtotalEl) cartSubtotalEl.textContent = money(0);
       var emptyProg = cartDrawer ? cartDrawer.querySelector('.cart-delivery-progress') : null;
       if (emptyProg) emptyProg.hidden = true;
+      var emptyShip = cartDrawer ? cartDrawer.querySelector('.cart-shipping') : null;
+      if (emptyShip) emptyShip.hidden = true;
       return;
     }
 
