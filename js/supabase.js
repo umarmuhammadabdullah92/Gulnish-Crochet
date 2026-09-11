@@ -93,9 +93,14 @@
     "seed_gr1_20": { name: "Premium hand made Rose Purse 10 (price per single purse)", price: 5799 },
   };
   var PRODUCT_PRICES = {
+    "seed_gr1_4": 4500,
+    "seed_gr1_5": 4500,
     "seed_gr1_6": 5500,
+    "seed_gr1_7": 4500,
     "seed_gr1_8": 5500,
     "seed_gr1_9": 5500,
+    "seed_gr1_13": 4500,
+    "seed_gr1_14": 4500,
     "seed_gr1_18": 5500,
     "seed_gr1_21": 2500,
     "seed_gr1_22": 5500,
