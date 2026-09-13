@@ -3009,6 +3009,31 @@ body:has(.co-bar) .cart-bar {
     scroll-margin-top: 118px;
   }
 
+  .site-header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transform: none;
+    background: rgba(251, 247, 241, 0.97);
+  }
+
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    background: rgba(32, 26, 21, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  .nav-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
   .nav-toggle {
     display: inline-flex;
     align-items: center;
