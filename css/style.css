@@ -3425,6 +3425,17 @@ body:has(.co-bar) .cart-bar {
 
   .product-page__btn-row {
     flex-direction: column;
+    position: sticky;
+    bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    z-index: 30;
+    margin: 1.1rem -1rem -1rem;
+    padding: 0.85rem 1rem calc(0.85rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(251, 247, 241, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line-strong);
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
   }
 
   .product-page__add,
