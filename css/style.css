@@ -3101,7 +3101,7 @@ body:has(.co-bar) .cart-bar {
     left: 0;
     right: 0;
     z-index: 115;
-    display: flex;
+    display: none;
     align-items: center;
     gap: 0.8rem;
     background: var(--ink);
@@ -3109,8 +3109,12 @@ body:has(.co-bar) .cart-bar {
     padding: 0.7rem 1.2rem calc(0.7rem + env(safe-area-inset-bottom, 0px));
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     transform: translateY(0);
-    transition: transform 0.3s var(--ease);
+    transition: transform 0.3s var(--ease), display 0s;
     box-shadow: 0 -8px 24px rgba(40, 28, 18, 0.22);
+  }
+
+  .cart-bar.show {
+    display: flex;
   }
 
   .cart-bar__label {
