@@ -3330,6 +3330,10 @@ body:has(.co-bar) .cart-bar {
     bottom: calc(66px + env(safe-area-inset-bottom, 0px));
   }
 
+  .fb-group {
+    display: none !important;
+  }
+
   .fb {
     padding: 0.5rem;
     width: 46px;
