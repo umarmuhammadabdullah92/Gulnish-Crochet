@@ -3168,6 +3168,7 @@ body:has(.co-bar) .cart-bar {
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-top: 1px solid var(--line);
+    box-shadow: 0 -2px 14px rgba(44, 36, 29, 0.05);
   }
 
   .bottom-nav ul {
