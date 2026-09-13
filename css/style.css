@@ -3334,6 +3334,33 @@ body:has(.co-bar) .cart-bar {
   .footer-brand-tag {
     max-width: none;
   }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  .qty__btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .color-swatch {
+    width: 28px;
+    height: 28px;
+  }
+
+  .cart-bar__btn,
+  .co-bar__btn {
+    min-height: 48px;
+    justify-content: center;
+  }
+
+  .admin-order-search input,
+  .track-search input {
+    height: 48px;
+  }
 }
 
 @media (max-width: 480px) {
