@@ -1408,6 +1408,13 @@ body:has(.co-bar) .cart-bar {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+.fb-group.fb-away {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
 }
 
 .fb {
