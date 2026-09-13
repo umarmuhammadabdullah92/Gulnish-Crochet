@@ -3388,24 +3388,12 @@ body:has(.co-bar) .cart-bar {
 
   .fb-group {
     right: auto;
-    left: 0.85rem;
-    bottom: calc(66px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .fb-group {
-    display: none !important;
+    left: 16px;
+    bottom: calc(64px + env(safe-area-inset-bottom, 0px));
   }
 
   .fb {
-    padding: 0.5rem;
-    width: 46px;
-    height: 46px;
-    justify-content: center;
-    border-radius: 50%;
-  }
-
-  .fb span {
-    display: none;
+    padding: 0.55rem 1.1rem;
   }
 
   .back-to-top {
