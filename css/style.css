@@ -1250,6 +1250,12 @@ em {
   padding: 3.4rem 0 2rem;
 }
 
+@media (max-width: 760px) {
+  .site-footer {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 .footer-inner {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
