@@ -1327,6 +1327,10 @@ em {
   display: none;
 }
 
+body:has(.co-bar) .cart-bar {
+  display: none !important;
+}
+
 .cart-bar {
   display: none;
 }
