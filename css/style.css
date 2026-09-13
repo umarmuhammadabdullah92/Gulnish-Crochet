@@ -2938,7 +2938,7 @@ body:has(.co-bar) .cart-bar {
   animation: fly-ghost 0.62s var(--ease) forwards;
 }/* ============ RESPONSIVE ============ */
 @media (max-width: 1024px) {
-  .hero-inner {
+  .hero--split .hero-inner {
     grid-template-columns: 1fr;
     gap: 2.6rem;
     text-align: center;
