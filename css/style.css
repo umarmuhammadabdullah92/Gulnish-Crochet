@@ -3111,6 +3111,7 @@ body:has(.co-bar) .cart-bar {
     position: fixed;
     top: 0;
     right: 0;
+    height: 100vh;
     height: 100dvh;
     width: min(330px, 86vw);
     background: var(--bg);
