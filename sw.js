@@ -1,13 +1,16 @@
-var CACHE_NAME = "gulnish-cache-v13";
+var CACHE_NAME = "gulnish-cache-v14";
 var APP_SHELL = [
   "./",
-  "index.html",
-  "products.html",
-  "about.html",
-  "contact.html",
-  "checkout.html",
-  "cart.html",
-  "track.html",
+  "index",
+  "products",
+  "about",
+  "contact",
+  "checkout",
+  "cart",
+  "track",
+  "privacy",
+  "refund",
+  "terms",
   "css/fonts.css",
   "css/style.css",
   "css/admin.css",
@@ -17,7 +20,7 @@ var APP_SHELL = [
   "js/script.js",
   "js/cart.js",
   "js/track.js",
-  "images/logo.webp",
+  "images/logo/logo-badge.png",
   "images/favicon.ico",
   "images/favicon.png",
   "images/purses/purse-1.webp",
@@ -74,7 +77,7 @@ self.addEventListener("fetch", function (event) {
         return response;
       }).catch(function () {
         return caches.match(request).then(function (c) {
-          return c || caches.match("./index.html");
+          return c || caches.match("./");
         });
       })
     );
@@ -94,7 +97,7 @@ self.addEventListener("fetch", function (event) {
         }
         return response;
       }).catch(function () {
-        return caches.match("./index.html");
+        return caches.match("./");
       });
     })
   );
