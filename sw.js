@@ -84,7 +84,31 @@ self.addEventListener("fetch", function (event) {
     return;
   }
 
-  // Static assets are cache-first, falling back to the network.
+  // Code and fonts are network-first so every visitor always sees the latest design.
+  if (request.destination === "style" ||
+      request.destination === "script" ||
+      request.destination === "font" ||
+      request.destination === "manifest") {
+    event.respondWith(
+      fetch(request).then(function (response) {
+        if (response && response.status === 200 && response.type === "basic") {
+          var copy = response.clone();
+          caches.open(CACHE_NAME).then(function (cache) {
+            cache.put(request, copy);
+          });
+        }
+        return response;
+      }).catch(function () {
+        return caches.match(request).then(function (c) {
+          return c || caches.match("./");
+        });
+      })
+    );
+    return;
+  }
+
+  // Images and other static assets are cache-first for speed,
+  // falling back to the network.
   event.respondWith(
     caches.match(request).then(function (cached) {
       if (cached) return cached;
