@@ -3877,4 +3877,293 @@ p.about-text {
   border: none;
   border-top: 1px solid var(--line);
   margin: 0.9rem 0;
+}/* =========================================================
+   SUPPLEMENT: track card / checkout extras / admin items
+   ========================================================= */
+
+/* ---- Track card (matches track.js markup) ---- */
+.track-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.2rem 1.4rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.track-card__status {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.32rem 0.85rem;
+  border-radius: var(--radius-pill);
+}
+
+.track-card__status--pending,
+.track-card__status--confirmed,
+.track-card__status--processing {
+  background: var(--gold-light);
+  color: var(--gold-deep);
+}
+
+.track-card__status--shipped {
+  background: #dcebff;
+  color: #29538f;
+}
+
+.track-card__status--delivered {
+  background: var(--sage-light);
+  color: #54713f;
+}
+
+.track-card__status--cancelled {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.track-card__time {
+  padding: 0.75rem 1.4rem 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.track-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  padding: 1.4rem;
+}
+
+.track-card__items {
+  border-top: 1px dashed var(--line-strong);
+  padding-top: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 1.4rem;
+}
+
+.track-card__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.92rem;
+}
+
+.track-card__item-name {
+  font-weight: 600;
+}
+
+.track-card__item-price {
+  font-weight: 700;
+  color: var(--primary-deep);
+  white-space: nowrap;
+}
+
+.track-card__foot {
+  padding: 1.2rem 1.4rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.track-card__detail {
+  display: flex;
+  gap: 1.6rem;
+  font-size: 0.9rem;
+}
+
+.track-card__detail span:last-child {
+  font-weight: 700;
+  color: var(--primary-deep);
+}
+
+.track-timeline ol,
+.track-timeline {
+  list-style: none;
+}
+
+/* ---- Checkout review extras ---- */
+.co-item__qty {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.co-payment-info__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.co-payment-info__title {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.co-review-empty {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.92rem;
+}
+
+.co-review-muted {
+  color: var(--muted);
+}
+
+/* ---- Admin product list items ---- */
+.admin-orders + p {
+  font-size: 0.85rem;
+}
+
+.admin-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 0.9rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-item__img {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  flex: none;
+  background: var(--bg-soft);
+}
+
+.admin-item__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-item__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.admin-item__name {
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+.admin-item__meta {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.admin-stock {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0.24rem 0.7rem;
+  border-radius: var(--radius-pill);
+  display: inline-block;
+  width: max-content;
+  margin-top: 0.35rem;
+}
+
+.admin-stock.stock-in-stock {
+  background: var(--sage-light);
+  color: #54713f;
+}
+
+.admin-stock.stock-made-to-order,
+.admin-stock.stock-made-to-order- {
+  background: var(--gold-light);
+  color: var(--gold-deep);
+}
+
+.admin-stock.stock-sold-out,
+.admin-stock.stock-sold-out- {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.admin-item__actions {
+  display: flex;
+  gap: 0.4rem;
+  flex: none;
+}
+
+.admin-item__actions button {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-deep);
+  background: var(--primary-light);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.admin-item__actions button:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.admin-item__actions button.delete {
+  color: var(--danger);
+  background: var(--danger-light);
+}
+
+.admin-item__actions button.delete:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* ---- Admin alert banner ---- */
+.admin-alert {
+  background: var(--gold-light);
+  border: 1px solid var(--gold);
+  color: var(--gold-deep);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.admin-alert.show {
+  display: block;
+}
+
+/* ---- Admin order main ---- */
+.admin-order__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-order__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .track-card__items {
+    margin: 0 1.4rem;
+  }
 }
