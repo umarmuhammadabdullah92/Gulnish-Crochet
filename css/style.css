@@ -442,9 +442,13 @@ em {
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--ink);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
+}
+
+.mobile-search {
+  display: none;
 }
 
 /* ============ HERO ============ */
