@@ -350,8 +350,8 @@ em {
 }
 
 .logo-img {
-  width: 42px;
-  height: 42px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 4px 10px rgba(120, 70, 40, 0.18);
@@ -1275,6 +1275,8 @@ em {
 }
 
 .footer-brand .logo-img {
+  width: 48px;
+  height: 48px;
   border: 2px solid rgba(194, 154, 91, 0.5);
 }
 
