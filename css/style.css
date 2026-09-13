@@ -1448,7 +1448,8 @@ body:has(.co-bar) .cart-bar {
   transition: opacity 0.3s ease;
 }
 
-.cart-overlay.show {
+.cart-overlay.show,
+.cart-overlay.open {
   opacity: 1;
   pointer-events: auto;
 }
