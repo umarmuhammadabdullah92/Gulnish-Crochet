@@ -2998,11 +2998,11 @@ body:has(.co-bar) .cart-bar {
 
 @media (max-width: 760px) {
   html {
-    scroll-padding-top: 76px;
+    scroll-padding-top: 118px;
   }
 
   section {
-    scroll-margin-top: 76px;
+    scroll-margin-top: 118px;
   }
 
   .nav-toggle {
