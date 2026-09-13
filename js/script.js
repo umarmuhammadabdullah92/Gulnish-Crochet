@@ -50,6 +50,22 @@
   var backToTop = document.getElementById("backToTop");
   var fbGroup = document.querySelector(".fb-group");
   var pageHero = document.querySelector(".hero");
+  var headerInner = document.querySelector(".header-inner");
+  if (headerInner && !document.body.classList.contains("admin-page")) {
+    var searchWrap = document.createElement("form");
+    searchWrap.className = "mobile-search";
+    searchWrap.setAttribute("role", "search");
+    searchWrap.innerHTML =
+      '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>' +
+      '<input type="search" aria-label="Search products" placeholder="Search purses, jewellery, gajrays..." autocomplete="off">' +
+      '<button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>';
+    searchWrap.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var term = searchWrap.querySelector("input").value.trim();
+      window.location.href = "products.html?q=" + encodeURIComponent(term);
+    });
+    headerInner.insertAdjacentElement("afterend", searchWrap);
+  }
   var scrollTicking = false;
   var onScroll = function () {
     if (!scrollTicking) {
