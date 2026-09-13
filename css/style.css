@@ -2956,7 +2956,7 @@ body:has(.co-bar) .cart-bar {
   }
 
   .hero-media {
-    max-width: 440px;
+    max-width: min(78%, 360px);
     margin: 0 auto;
   }
 
