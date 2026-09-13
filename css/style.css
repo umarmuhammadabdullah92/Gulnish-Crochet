@@ -3562,6 +3562,21 @@ body:has(.co-bar) .cart-bar {
   }
 }
 
+@media (max-width: 480px) and (max-height: 700px) {
+  .hero-copy h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero__sub {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .hero__trust {
+    margin-top: 0.7rem;
+  }
+}
+
 @media print {
   .site-header,
   .site-footer,
