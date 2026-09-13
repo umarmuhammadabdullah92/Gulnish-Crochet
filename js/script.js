@@ -27,16 +27,39 @@
   /* ---------- Mobile nav toggle ---------- */
   var navToggle = document.getElementById("navToggle");
   var mainNav = document.getElementById("mainNav");
+  var navOverlay = document.createElement("div");
+  navOverlay.className = "nav-overlay";
+  navOverlay.setAttribute("aria-hidden", "true");
+  var navHeader = document.querySelector(".site-header");
+  if (navHeader) navHeader.appendChild(navOverlay);
+
+  function closeMobileNav() {
+    if (!mainNav) return;
+    mainNav.classList.remove("open");
+    navOverlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  function openMobileNav() {
+    mainNav.classList.add("open");
+    navOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
 
   if (navToggle && mainNav) {
     navToggle.addEventListener("click", function () {
-      mainNav.classList.toggle("open");
+      if (mainNav.classList.contains("open")) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
     });
-
+    navOverlay.addEventListener("click", closeMobileNav);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMobileNav();
+    });
     mainNav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        mainNav.classList.remove("open");
-      });
+      link.addEventListener("click", closeMobileNav);
     });
   }
 
