@@ -1411,7 +1411,7 @@ body:has(.co-bar) .cart-bar {
 .fb-group {
   position: fixed;
   right: 1.2rem;
-  bottom: 4.2rem;
+  bottom: 1.4rem;
   z-index: 60;
   display: flex;
   flex-direction: column;
