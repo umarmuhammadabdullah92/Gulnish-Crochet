@@ -672,9 +672,7 @@
         ppStatus.className = "product-page__status status-made";
         ppStatus.textContent = "Made to order \u2014 takes about 5 days";
       } else {
-        ppStatus.hidden = false;
-        ppStatus.className = "product-page__status status-in";
-        ppStatus.textContent = "In stock \u2014 ready to ship";
+        ppStatus.hidden = true;
       }
     }
     if (ppAdd) {
