@@ -3036,9 +3036,12 @@ body:has(.co-bar) .cart-bar {
   }
 
   .nav-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: none !important;
+  }
+
+  .main-nav,
+  .nav-overlay {
+    display: none !important;
   }
 
   .header-inner {
