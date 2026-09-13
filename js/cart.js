@@ -141,7 +141,7 @@
       .map(function (item) {
         return (
           '<div class="cp-item">' +
-          '<a class="cp-item__img" href="products.html">' +
+          '<a class="cp-item__img" href="products">' +
           (item.image
             ? '<img src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.name || "Item") + '" loading="lazy">'
             : '<span class="cp-item__ph">&#128722;</span>') +
@@ -225,7 +225,7 @@
         if (toast) toast.classList.add("show");
         return;
       }
-      window.location.href = "checkout.html";
+      window.location.href = "checkout";
     });
   }
 

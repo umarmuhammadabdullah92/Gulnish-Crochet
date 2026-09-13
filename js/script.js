@@ -98,7 +98,7 @@
     searchWrap.addEventListener("submit", function (e) {
       e.preventDefault();
       var term = searchWrap.querySelector("input").value.trim();
-      window.location.href = "products.html?q=" + encodeURIComponent(term);
+      window.location.href = "products?q=" + encodeURIComponent(term);
     });
     headerInner.insertAdjacentElement("afterend", searchWrap);
   }
@@ -746,7 +746,7 @@
         showProducts(catBtn.dataset.cat);
       } else {
         location.href =
-          "products.html?cat=" + encodeURIComponent(catBtn.dataset.cat);
+          "products?cat=" + encodeURIComponent(catBtn.dataset.cat);
       }
       return;
     }
@@ -754,11 +754,11 @@
     if (backBtn) {
       if (backBtn.dataset.backCategories === "all") {
         if (productsView) showProducts("all");
-        else location.href = "products.html";
+        else location.href = "products";
       } else if (categoryView) {
         showCategories();
       } else {
-        location.href = "index.html";
+        location.href = "index";
       }
       return;
     }
@@ -767,7 +767,7 @@
       if (productView) {
         showProduct(viewBtn.dataset.view);
       } else {
-        location.href = "products.html";
+        location.href = "products";
       }
       return;
     }
@@ -1130,7 +1130,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
         showToast("Your cart is empty.");
         return;
       }
-      window.location.href = "checkout.html";
+      window.location.href = "checkout";
       return;
     }
   });
@@ -1140,10 +1140,10 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   if (cartOverlay) cartOverlay.addEventListener("click", closeCart);
   if (cartBarBtn) {
     cartBarBtn.addEventListener("click", function () {
-      window.location.href = "cart.html";
+      window.location.href = "cart";
     });
   }
-  /* Cross-file sync: other pages (e.g. cart.html) push cart changes here */
+  /* Cross-file sync: other pages (e.g. cart) push cart changes here */
   window.addEventListener("gulnish:cart", function () {
     cart = loadCart();
     renderCart();
@@ -1282,12 +1282,12 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   }
   (function highlightBottomNav() {
     if (!document.querySelector(".bottom-nav")) return;
-    var page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    var page = (location.pathname.split("/").pop() || "index").toLowerCase();
     var key = {
-      "index.html": "home",
-      "products.html": "products",
-      "about.html": "about",
-      "contact.html": "contact"
+      "index": "home",
+      "products": "products",
+      "about": "about",
+      "contact": "contact"
     }[page] || "";
     document.querySelectorAll(".bottom-nav__item[data-nav]").forEach(function (el) {
       if (el.dataset.nav === key) el.classList.add("active");

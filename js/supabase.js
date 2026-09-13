@@ -204,7 +204,7 @@
 
   /* Placeholder low-stock examples so the urgency badge is visible until the
      shop owner sets real counts in the admin (Stock count). Edit or clear them
-     in admin.html — the field is per-product. */
+     in admin — the field is per-product. */
   var LOW_STOCK_DEMO = {
     "seed_gr1_1": 1,
     "seed_gr1_2": 2,
