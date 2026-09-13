@@ -3427,6 +3427,13 @@ body:has(.co-bar) .cart-bar {
     flex-direction: column;
   }
 
+  .product-page__add,
+  .product-page__wa {
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: 52px;
+  }
+
   .cp-item {
     flex-wrap: wrap;
   }
