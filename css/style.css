@@ -3013,6 +3013,7 @@ body:has(.co-bar) .cart-bar {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     transform: none;
+    will-change: auto;
     background: rgba(251, 247, 241, 0.97);
   }
 
