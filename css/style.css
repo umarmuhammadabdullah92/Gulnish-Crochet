@@ -3231,7 +3231,7 @@ body:has(.co-bar) .cart-bar {
     position: absolute;
     top: 2px;
     left: 50%;
-    transform: translateX(50%);
+    transform: translateX(-50%);
     min-width: 18px;
     height: 18px;
     padding: 0 4px;
