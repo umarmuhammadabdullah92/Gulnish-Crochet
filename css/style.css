@@ -4444,3 +4444,81 @@ p.about-text {
     margin: 0 1.4rem;
   }
 }
+
+/* =========================================================
+   MOBILE POLISH — compact header, tap targets, rhythm
+   ========================================================= */
+@media (max-width: 760px) {
+
+  /* Slimmer sticky header */
+  .header-inner {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .logo {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .mobile-search {
+    margin-bottom: 0.45rem;
+    padding-left: 0.85rem;
+  }
+
+  .mobile-search input {
+    padding: 0.5rem 0;
+  }
+
+  /* Section rhythm */
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section-head {
+    margin-bottom: 1.9rem;
+  }
+
+  /* Tap targets >= 44px */
+  .btn--small {
+    min-height: 46px;
+    padding: 0.55rem 1.1rem;
+  }
+
+  .add-btn {
+    min-height: 46px;
+  }
+
+  .select {
+    min-height: 48px;
+  }
+
+  .shop-bar .select {
+    flex: 1;
+  }
+
+  .search-box {
+    min-height: 48px;
+    padding: 0.42rem 1.1rem;
+  }
+
+  .search-box input {
+    min-height: 40px;
+  }
+
+  .filter-btn {
+    min-height: 42px;
+    padding: 0.42rem 1rem;
+  }
+
+  .cart-drawer__close {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-links a {
+    padding: 0.45rem 0.2rem;
+    line-height: 1.4;
+  }
+}
