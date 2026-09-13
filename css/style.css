@@ -1407,7 +1407,7 @@ body:has(.co-bar) .cart-bar {
   border-radius: 50%;
   border: none;
   background: var(--ink);
-  color: var(--gold-light);
+  color: #fff;
   font-size: 1.15rem;
   cursor: pointer;
   opacity: 0;
