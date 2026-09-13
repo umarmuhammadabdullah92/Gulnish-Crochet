@@ -2940,7 +2940,7 @@ body:has(.co-bar) .cart-bar {
 @media (max-width: 1024px) {
   .hero--split .hero-inner {
     grid-template-columns: 1fr;
-    gap: 2.6rem;
+    gap: 2rem;
     text-align: center;
   }
 
