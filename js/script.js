@@ -48,6 +48,8 @@
   var header = document.querySelector(".site-header");
   var progressBar = document.getElementById("scrollProgress");
   var backToTop = document.getElementById("backToTop");
+  var fbGroup = document.querySelector(".fb-group");
+  var pageHero = document.querySelector(".hero");
   var scrollTicking = false;
   var onScroll = function () {
     if (!scrollTicking) {
@@ -58,6 +60,9 @@
           progressBar.style.transform = "scaleX(" + (h > 0 ? window.scrollY / h : 0) + ")";
         }
         if (backToTop) backToTop.classList.toggle("show", window.scrollY > 560);
+        if (fbGroup) {
+          fbGroup.classList.toggle("fb-away", pageHero && pageHero.getBoundingClientRect().bottom > 0);
+        }
         scrollTicking = false;
       });
       scrollTicking = true;
