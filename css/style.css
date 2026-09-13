@@ -43,6 +43,7 @@
 html {
   scroll-padding-top: 92px;
   overscroll-behavior-y: contain;
+  overflow-x: clip;
 }
 
 section {
