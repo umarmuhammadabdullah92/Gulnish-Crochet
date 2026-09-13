@@ -3225,8 +3225,8 @@ body:has(.co-bar) .cart-bar {
 
   .fb-group {
     right: auto;
-    left: 1rem;
-    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+    left: 0.85rem;
+    bottom: calc(66px + env(safe-area-inset-bottom, 0px));
   }
 
   .fb {
