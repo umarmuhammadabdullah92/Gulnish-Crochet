@@ -67,7 +67,7 @@ body {
   background-image: radial-gradient(1100px 480px at 50% -160px, rgba(188, 106, 69, 0.10), rgba(255, 255, 255, 0) 70%);
   line-height: 1.7;
   letter-spacing: 0.005em;
-  overflow-x: hidden;
+  overflow-x: clip;
   overscroll-behavior-x: none;
   overflow-anchor: auto;
   -webkit-font-smoothing: antialiased;
