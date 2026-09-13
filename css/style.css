@@ -3392,10 +3392,6 @@ body:has(.co-bar) .cart-bar {
     bottom: calc(64px + env(safe-area-inset-bottom, 0px));
   }
 
-  .fb {
-    padding: 0.55rem 1.1rem;
-  }
-
   .back-to-top {
     right: 1rem;
     bottom: calc(70px + env(safe-area-inset-bottom, 0px));
