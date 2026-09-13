@@ -447,6 +447,10 @@ em {
   box-shadow: var(--shadow-sm);
 }
 
+.nav-overlay {
+  display: none;
+}
+
 .mobile-search {
   display: none;
 }
