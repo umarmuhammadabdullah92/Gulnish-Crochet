@@ -601,6 +601,14 @@ em {
   opacity: 1;
 }
 
+.slideshow .slideshow-layer {
+  transition: opacity 0.8s ease;
+}
+
+.category-card {
+  color: var(--ink);
+}
+
 .category-card__body {
   display: flex;
   align-items: baseline;
