@@ -2983,6 +2983,10 @@ body:has(.co-bar) .cart-bar {
     position: static;
   }
 
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
   .footer-inner {
     grid-template-columns: 1fr 1fr;
   }
