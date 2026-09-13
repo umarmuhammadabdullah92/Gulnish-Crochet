@@ -1,4 +1,4 @@
-var CACHE_NAME = "gulnish-cache-v15";
+var CACHE_NAME = "gulnish-cache-v16";
 var APP_SHELL = [
   "./",
   "index",
