@@ -63,6 +63,19 @@
     });
   }
 
+/* ---------- Bottom nav: add Call action (mobile app style) ---------- */
+  var bottomNav = document.querySelector(".bottom-nav");
+  if (bottomNav) {
+    var callItem = document.createElement("a");
+    callItem.className = "bottom-nav__item bottom-nav__call";
+    callItem.href = "tel:+923075729901";
+    callItem.setAttribute("aria-label", "Call us to order");
+    callItem.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>' +
+      '<span>Call</span>';
+    bottomNav.insertBefore(callItem, bottomNav.querySelector('[data-nav="contact"]'));
+  }
+
   /* ---------- Footer year ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
