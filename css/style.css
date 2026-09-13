@@ -1430,9 +1430,9 @@ body:has(.co-bar) .cart-bar {
 /* ============ FLOATING BUTTONS ============ */
 .fb-group {
   position: fixed;
-  left: 1.2rem;
-  bottom: 1.4rem;
-  z-index: 60;
+  left: 20px;
+  bottom: 20px;
+  z-index: 130;
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
