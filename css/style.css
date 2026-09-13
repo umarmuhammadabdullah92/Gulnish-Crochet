@@ -2433,7 +2433,8 @@ em {
   margin-top: 0.15rem;
 }
 
-.track-timeline__detail {
+.track-timeline__detail,
+.track-timeline__note {
   font-size: 0.86rem;
   color: var(--muted);
   margin-top: 0.3rem;
