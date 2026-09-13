@@ -1296,19 +1296,33 @@ em {
 .socials a {
   display: inline-flex;
   align-items: center;
+  gap: 0.45rem;
   font-size: 0.84rem;
   font-weight: 700;
-  color: #F8EAD8;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 0.4rem 1rem;
+  color: #fff;
+  padding: 0.4rem 0.95rem;
   border-radius: var(--radius-pill);
-  transition: background 0.2s ease, transform 0.2s var(--ease);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.socials a svg {
+  flex: none;
+}
+
+.socials a.social-wa {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+}
+
+.socials a.social-ig {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 
 .socials a:hover {
-  background: rgba(194, 154, 91, 0.28);
   transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.26);
 }
 
 .footer-col h4 {
