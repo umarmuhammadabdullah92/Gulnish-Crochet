@@ -416,7 +416,7 @@
   }
 
   function renderProducts(products) {
-    var withImages = (products || []).filter(function (p) { return p.image; });
+    var withImages = (products || []).slice();
     if (productGrid) productGrid.innerHTML = withImages.map(cardHTML).join("");
     if (noProducts) noProducts.hidden = withImages.length > 0;
     if (productCountLabel) {
