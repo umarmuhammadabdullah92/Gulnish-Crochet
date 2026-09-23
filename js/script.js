@@ -537,7 +537,7 @@
     var grid = document.getElementById("categoryGrid");
     if (!grid) return;
     var settings = getSettings();
-    var products = getProducts().filter(function (p) { return p.category && p.image; });
+    var products = getProducts().filter(function (p) { return p.category; });
     var cats = settings.categories || [];
     var out = [];
     cats.forEach(function (label, i) {
