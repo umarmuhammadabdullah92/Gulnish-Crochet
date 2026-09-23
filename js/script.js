@@ -449,7 +449,7 @@
 
   if (sortSelect) {
     sortSelect.addEventListener("change", function () {
-      var withImages = sortProducts(getProducts(), sortSelect.value).filter(function (p) { return p.image; });
+      var withImages = sortProducts(getProducts(), sortSelect.value);
       if (productGrid) productGrid.innerHTML = withImages.map(cardHTML).join("");
       buildColorSwatches();
       refreshCards();
