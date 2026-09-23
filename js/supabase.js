@@ -166,6 +166,9 @@
     "seed_gr6_2": 1299,
     "seed_gr6_3": 1299
   };
+  var PRODUCT_KEYWORDS = {
+    "seed_gr1_3": ["3d rose purse", "rose purse", "3d rose", "rose handbag", "crochet rose"]
+  };
   var CATEGORY_KEYWORDS = {
     gr1: ["handbag", "purse", "crochet bag", "handmade", "gift", "woolen"],
     gr2: ["wedding", "eid", "hair", "flowers", "party", "gift"],
