@@ -194,23 +194,13 @@
           keywords: (CATEGORY_KEYWORDS[key] || [label.toLowerCase()]).slice(),
           colors: [],
           status: "in stock",
-          stock: LOW_STOCK_DEMO[id] != null ? LOW_STOCK_DEMO[id] : null,
+          stock: null,
           gallery: []
         });
       });
     });
     return out;
   }
-
-  /* Placeholder low-stock examples so the urgency badge is visible until the
-     shop owner sets real counts in the admin (Stock count). Edit or clear them
-     in admin — the field is per-product. */
-  var LOW_STOCK_DEMO = {
-    "seed_gr1_1": 1,
-    "seed_gr1_2": 2,
-    "seed_gr2_1": 1,
-    "seed_gr3_1": 2
-  };
 
   function normalizeProduct(p) {
     var s = String((p && p.status) || "").trim().toLowerCase();
