@@ -339,7 +339,7 @@
       return btn;
     };
     filterWrap.appendChild(makeBtn("all", "All", true));
-    var products = getProducts().filter(function (p) { return p.image; });
+    var products = getProducts();
     (settings.categories || []).forEach(function (label, i) {
       var key = "gr" + (i + 1);
       if (!products.some(function (p) { return p.category === key; })) return;
