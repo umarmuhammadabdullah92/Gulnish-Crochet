@@ -549,7 +549,6 @@
           ? settings.categoryImages[key]
           : "";
       var imagesRaw = (Array.isArray(catImg) ? catImg : catImg ? [catImg] : []).filter(Boolean);
-      if (!imagesRaw.length) return;
       out.push(
         categoryCardHTML(
           label || "Category " + (i + 1),
