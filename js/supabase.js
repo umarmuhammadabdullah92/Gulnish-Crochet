@@ -188,13 +188,15 @@
       RAW_IMAGES[key].forEach(function (img, i) {
         var id = "seed_" + key + "_" + (i + 1);
         var real = REAL_PRODUCTS[id];
+        var kw = (CATEGORY_KEYWORDS[key] || [label.toLowerCase()]).slice();
+        if (PRODUCT_KEYWORDS[id]) kw = kw.concat(PRODUCT_KEYWORDS[id]);
         out.push({
           id: id,
           name: real ? real.name : name + " " + (i + 1),
           price: PRODUCT_PRICES[id] || (real ? real.price : (BASE_PRICE[key] || 500) + (i % 4) * 50),
           category: key,
           image: img,
-          keywords: (CATEGORY_KEYWORDS[key] || [label.toLowerCase()]).slice(),
+          keywords: kw,
           colors: [],
           status: "in stock",
           stock: null,
