@@ -318,9 +318,6 @@
 
   function buildCardAddBtn(p) {
     var common = ' type="button" data-id="' + p.id + '" data-name="' + escapeHtml(p.name) + '" data-price="' + (p.price || 0) + '"';
-    if (stockStatus(p) === "sold out") {
-      return '<button class="add-btn add-btn--sold" disabled' + common + '>Sold out</button>';
-    }
     return '<button class="add-btn"' + common + '>' +
       '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
       '<circle cx="9" cy="21" r="1"></circle>' +
