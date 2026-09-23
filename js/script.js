@@ -697,7 +697,7 @@
 
   if (ppAdd) {
     ppAdd.addEventListener("click", function () {
-      if (!currentProduct || stockStatus(currentProduct) === "sold out") return;
+      if (!currentProduct) return;
       var swatch = ppColors
         ? ppColors.querySelector(".color-swatch.selected")
         : null;
