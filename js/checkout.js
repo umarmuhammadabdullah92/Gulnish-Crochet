@@ -301,10 +301,7 @@
     var name = field("coName").trim();
     var phoneV = field("coPhone");
     var address = field("coAddress").trim();
-    var city = field("coCity").trim() || cityFromAddress(address);
-    var email = field("coEmail").trim();
     var notes = field("coNotes").trim();
-    var province = field("coProvince");
 
     var phone = phoneV.replace(/[^\d]/g, "").replace(/^0+/, "");
     var total = cartTotalPrice(items);
@@ -317,10 +314,10 @@
       customer: {
         name: name,
         phone: phone,
-        email: email,
+        email: "",
         address: address,
-        city: city,
-        province: province,
+        city: cityFromAddress(address),
+        province: "",
         landmark: "",
         notes: notes
       },
