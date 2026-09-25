@@ -1011,7 +1011,7 @@
       "<h2>Billed to</h2>" +
       "<div class='meta'>" +
       "<p><strong>" + escapeHtml(cust.name || "—") + "</strong></p>" +
-      (cust.phone ? "<p>+" + escapeHtml(cust.phone) + "</p>" : "") +
+      (cust.phone ? "<p>" + escapeHtml(GC && GC.formatPhone ? GC.formatPhone(cust.phone) : "+" + cust.phone) + "</p>" : "") +
       (cust.email ? "<p>" + escapeHtml(cust.email) + "</p>" : "") +
       "<p>" + escapeHtml(cust.address || "") + (cust.city ? ", " + escapeHtml(cust.city) : "") + "</p>" +
       (cust.notes ? "<p><em>Notes: " + escapeHtml(cust.notes) + "</em></p>" : "") +

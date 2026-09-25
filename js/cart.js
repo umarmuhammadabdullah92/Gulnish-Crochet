@@ -94,7 +94,7 @@
     if (profile && (profile.name || profile.phone || profile.city)) {
       lines.push("");
       lines.push("Name: " + (profile.name || "-"));
-      if (profile.phone) lines.push("Phone: +" + String(profile.phone).replace(/^0+/, ""));
+      if (profile.phone) lines.push("Phone: " + (GC && GC.formatPhone ? GC.formatPhone(profile.phone) : "+" + String(profile.phone).replace(/^0+/, "")));
       if (profile.city) lines.push("City: " + profile.city);
       if (profile.address) lines.push("Address: " + profile.address);
     } else {
