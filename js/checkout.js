@@ -27,19 +27,6 @@
       .replace(/"/g, "&quot;");
   }
 
-  function friendlyDate(iso) {
-    try {
-      return new Date(iso).toLocaleDateString(undefined, {
-        weekday: "short",
-        day: "numeric",
-        month: "short",
-        year: "numeric"
-      });
-    } catch (e) {
-      return "";
-    }
-  }
-
   function field(id) {
     var el = document.getElementById(id);
     return (el && el.value) || "";
