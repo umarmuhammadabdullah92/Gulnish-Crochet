@@ -106,7 +106,7 @@
       lines.push("My delivery name, phone and city:");
     }
     lines.push("");
-    lines.push("Please confirm availability and delivery.");
+    lines.push("Please confirm availability, and the delivery charge and date.");
     return base + "?text=" + encodeURIComponent(lines.join("\n"));
   }
 
