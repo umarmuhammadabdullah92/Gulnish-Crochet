@@ -1211,11 +1211,19 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   /* ---------- Contact buttons: WhatsApp + Call (from settings) ---------- */
   function updateContactButtons() {
     var waNum = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
-    var telHref = waNum ? "tel:+" + waNum : "tel:+923075729901";
-    document.querySelectorAll(".fb-call, .cart-call").forEach(function (a) {
-      a.href = telHref;
+    var intl = waNum || "92307529901";
+
+    /* Floating pill opens a WhatsApp chat. */
+    document.querySelectorAll(".fb-wa").forEach(function (a) {
+      a.href = "https://wa.me/" + intl;
+    });
+
+    /* The cart drawer keeps a direct-call option. */
+    document.querySelectorAll(".cart-call").forEach(function (a) {
+      a.href = "tel:+" + intl;
     });
   }
+
 
   /* ---------- Mobile bottom navigation ---------- */
   if (bottomNavCart) {
