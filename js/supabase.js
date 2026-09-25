@@ -232,6 +232,7 @@
       categories: cats,
       categoryImages: CATEGORY_IMAGE_SETS,
       whatsapp: "03075729901",
+      whatsappCountry: "92",
       craftDays: 5,
       deliveryDays: 3,
       bankAccountTitle: "",
