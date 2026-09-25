@@ -355,7 +355,9 @@
         .join("\n") +
       "\n\nItems total: " + money(order.total) +
       "\nPayment: " + order.payment.method +
-      (order.customer.phone ? "\nPhone: +" + order.customer.phone : "") +
+      (order.customer.phone
+        ? "\nPhone: " + (GC && GC.formatPhone ? GC.formatPhone(order.customer.phone) : "+" + order.customer.phone)
+        : "") +
       (order.notifyUpdates ? "\nNotify me about new pieces on WhatsApp: Yes (please add me to your update list)" : "") +
       (order.customer.address
         ? "\nAddress: " + order.customer.address +
