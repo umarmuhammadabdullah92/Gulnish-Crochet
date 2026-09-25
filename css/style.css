@@ -4137,7 +4137,7 @@ p.about-text {
   margin-top: 1.1rem;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 360px) {
   .co-pay-chips {
     grid-template-columns: minmax(0, 1fr);
   }
