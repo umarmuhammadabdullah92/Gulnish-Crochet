@@ -1267,7 +1267,9 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   }
   (function highlightBottomNav() {
     if (!document.querySelector(".bottom-nav")) return;
-    var page = (location.pathname.split("/").pop() || "index").toLowerCase();
+    var page = (location.pathname.split("/").pop() || "index")
+      .toLowerCase()
+      .replace(/\.html$/, "");
     var key = {
       "index": "home",
       "products": "products",
