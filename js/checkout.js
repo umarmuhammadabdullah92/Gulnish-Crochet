@@ -330,7 +330,6 @@
     /* Build the WhatsApp message synchronously so it opens within the
        user's click (popup blockers allow this). */
     var waNum = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
-    var shipText = shippingNote(items).text;
     var waMsg =
       "New order *" + order.id + "* from " + (order.customer.name || "Customer") + "\n\n" +
       order.items
@@ -340,17 +339,16 @@
             " x " + i.qty + " = " + money(livePrice(i) * i.qty);
         })
         .join("\n") +
-      "\n\nTotal: " + money(order.total) +
-      (shipText ? "\n" + shipText : "") +
+      "\n\nItems total: " + money(order.total) +
       "\nPayment: " + order.payment.method +
-      (order.estDelivery ? "\nEst. delivery: " + friendlyDate(order.estDelivery) : "") +
       (order.customer.phone ? "\nPhone: +" + order.customer.phone : "") +
       (order.notifyUpdates ? "\nNotify me about new pieces on WhatsApp: Yes (please add me to your update list)" : "") +
       (order.customer.address
         ? "\nAddress: " + order.customer.address +
           (order.customer.city ? " (" + order.customer.city + ")" : "")
         : "") +
-      (order.customer.notes ? "\nNotes: " + order.customer.notes : "");
+      (order.customer.notes ? "\nNotes: " + order.customer.notes : "") +
+      "\n\nPlease confirm the delivery charge and delivery date with me.";
     var orderWaLink = waNum ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent(waMsg) : "";
     if (orderWaLink) {
       try { window.open(orderWaLink, "_blank", "noopener"); } catch (err) { /* fallback button on success screen */ }
