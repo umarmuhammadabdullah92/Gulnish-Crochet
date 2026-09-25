@@ -357,23 +357,45 @@
         : "") +
       (order.customer.notes ? "\nNotes: " + order.customer.notes : "") +
       "\n\nPlease confirm the delivery charge and delivery date with me.";
-    var orderWaLink = waNum ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent(waMsg) : "";
+    var orderWaLink = waSendLink(waNum, waMsg);
+    var orderWaShortLink = waNum ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent(waMsg) : "";
+
+    /* Persist everything locally BEFORE any navigation, so returning to the
+       site can never resurrect the cart and re-place a duplicate order. */
+    saveCart([]);
+    saveProfile();
+    if (GC && GC.saveOrderKeepalive) GC.saveOrderKeepalive(order);
+    if (GC && GC.reserveProducts && order.items && order.items.length) {
+      GC.reserveProducts(order.items.slice()).catch(function () {});
+    }
+
+    /* Hand off to WhatsApp immediately — this runs synchronously inside the
+       click handler, which is what keeps popup blockers happy and the
+       perceived wait at zero. No network call is awaited first. */
+    var handedOff = false;
     if (orderWaLink) {
-      try { window.open(orderWaLink, "_blank", "noopener"); } catch (err) { /* fallback button on success screen */ }
+      try {
+        if (isMobileBrowser()) {
+          window.location.href = orderWaLink;
+          handedOff = true;
+        } else {
+          var tab = window.open(orderWaLink, "_blank", "noopener");
+          handedOff = !!tab;
+        }
+      } catch (err) { /* fall through to the success-screen button */ }
     }
 
     var done = function () {
-      saveCart([]);
-      saveProfile();
-
       if (success) {
         if (successNo) successNo.textContent = order.id;
         if (successCopy) successCopy.textContent = order.payment.method === "Cash on delivery"
           ? "We've received your order and will message you on WhatsApp shortly to confirm the delivery charge and date."
           : "We've received your order and will contact you on WhatsApp to confirm payment, delivery charge and date.";
         if (waLinkEl) {
-          waLinkEl.href = "";
-          waLinkEl.hidden = true;
+          waLinkEl.href = orderWaLink || orderWaShortLink;
+          waLinkEl.hidden = !orderWaLink;
+        } else if (waMissingEl) {
+          waMissingEl.hidden = true;
         }
         success.hidden = false;
       }
@@ -381,29 +403,16 @@
       setBarVisible(false);
       if (itemsEl) itemsEl.innerHTML = "";
       if (subtotalEl) subtotalEl.textContent = money(0);
-
-      if (orderWaLink && waLinkEl) {
-        waLinkEl.href = orderWaLink;
-        waLinkEl.hidden = false;
-        if (waMissingEl) waMissingEl.hidden = true;
-      } else if (waMissingEl) {
-        waMissingEl.hidden = false;
-      }
-
       setLoading(false);
     };
 
-    if (GC && GC.saveOrder) {
-      GC.saveOrder(order).then(function () {
-        if (GC && GC.reserveProducts && order.items && order.items.length) {
-          GC.reserveProducts(order.items.slice()).catch(function () {});
-        }
-        done();
-      }).catch(function () {
-        done();
-      });
-    } else {
+    /* On mobile we have already navigated away, so there is no success screen
+       to render. On desktop we land here immediately. */
+    if (!handedOff) {
       done();
+      if (!orderWaLink && waMissingEl) waMissingEl.hidden = false;
+    } else if (isMobileBrowser()) {
+      setLoading(false);
     }
   }
 
