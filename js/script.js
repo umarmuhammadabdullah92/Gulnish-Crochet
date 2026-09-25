@@ -834,9 +834,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       );
     });
     lines.push("");
-    var shipText = shippingInfo(cartTotalPrice()).text;
-    if (shipText) lines.push(shipText);
-    lines.push("Total: *" + money(cartTotalPrice()) + "*");
+    lines.push("Items total: *" + money(cartTotalPrice()) + "*");
     var profile =
       GC && GC.getCustomerProfile ? GC.getCustomerProfile() : null;
     if (profile && (profile.name || profile.phone || profile.city)) {
