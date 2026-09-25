@@ -107,8 +107,6 @@
   var placeBtn = document.getElementById("coPlace");
   var success = document.getElementById("coSuccess");
   var successNo = document.getElementById("coSuccessNo");
-  var successEta = document.getElementById("coSuccessEta");
-  var successEtaDate = document.getElementById("coSuccessEtaDate");
   var successCopy = document.getElementById("coSuccessCopy");
   var waLinkEl = document.getElementById("coWaLink");
   var waMissingEl = document.getElementById("coWaMissing");
