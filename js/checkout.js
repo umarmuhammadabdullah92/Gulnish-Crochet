@@ -437,26 +437,12 @@
     var fields = {
       coName: "name",
       coPhone: "phone",
-      coEmail: "email",
-      coAddress: "address",
-      coCity: "city",
-      coProvince: "province"
+      coAddress: "address"
     };
-    var filled = false;
     Object.keys(fields).forEach(function (fieldId) {
       var el = document.getElementById(fieldId);
-      if (el && profile[fields[fieldId]]) {
-        el.value = profile[fields[fieldId]];
-        if (fieldId === "coName") filled = true;
-      }
+      if (el && profile[fields[fieldId]]) el.value = profile[fields[fieldId]];
     });
-    if (filled && moreWrap) {
-      moreWrap.hidden = false;
-      if (moreToggle) {
-        moreToggle.setAttribute("aria-expanded", "true");
-        moreToggle.classList.add("is-open");
-      }
-    }
   }
 
   /* ---------- save profile after order ---------- */
@@ -464,11 +450,10 @@
     var profile = {
       name: field("coName").trim(),
       phone: field("coPhone").replace(/[^\d]/g, "").replace(/^0+/, ""),
-      email: field("coEmail").trim(),
       address: field("coAddress").trim(),
-      city: field("coCity").trim() || cityFromAddress(field("coAddress")),
+      city: cityFromAddress(field("coAddress")),
       landmark: "",
-      province: field("coProvince")
+      province: ""
     };
     if (GC && GC.saveCustomerProfile) GC.saveCustomerProfile(profile);
   }
