@@ -1281,22 +1281,33 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       });
     }
 
-    /* class/hidden changes fire before layout settles, so re-check on the
-       next frame as well as via the observer. */
+    /* Show/hide flips class or hidden, and the bar also changes height once
+       the item count and total are written into it — watch both, and re-check
+       on the next frame because attribute changes fire before layout settles. */
     if (typeof MutationObserver === "function") {
       var mo = new MutationObserver(schedule);
       FB_BARS.forEach(function (sel) {
         var el = document.querySelector(sel);
-        if (el) mo.observe(el, { attributes: true, attributeFilter: ["class", "hidden"] });
+        if (el) {
+          mo.observe(el, {
+            attributes: true,
+            attributeFilter: ["class", "hidden"],
+            childList: true,
+            subtree: true,
+            characterData: true
+          });
+        }
       });
     }
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", schedule);
     }
+    window.addEventListener("load", schedule);
     schedule();
-    setTimeout(schedule, 400);
-    setTimeout(schedule, 1200);
+    setTimeout(schedule, 350);
+    setTimeout(schedule, 900);
+    setTimeout(schedule, 2000);
   })();
 
 
