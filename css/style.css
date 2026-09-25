@@ -4059,6 +4059,90 @@ p.about-text {
   animation: gc-fade-up 0.4s var(--ease);
 }
 
+/* Checkout — optional extras toggle */
+.co-more-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  width: 100%;
+  background: var(--bg-soft);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.95rem;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary-deep);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.co-more-toggle:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.co-more-toggle__caret {
+  transition: transform 0.25s var(--ease);
+  color: var(--muted);
+}
+
+.co-more-toggle.is-open .co-more-toggle__caret {
+  transform: rotate(180deg);
+}
+
+.co-more {
+  margin-top: 1.1rem;
+  padding-top: 0.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.co-more .checkout-card label:last-child,
+.co-more > label:last-child {
+  margin-bottom: 0;
+}
+
+/* Checkout — compact payment chips */
+.co-pay-chips {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.co-pay-chips .co-pay-card {
+  padding: 0.8rem 0.9rem;
+  gap: 0.6rem !important;
+}
+
+.co-pay-chips .co-pay-card__icon {
+  font-size: 1.2rem;
+}
+
+.co-pay-chips .co-pay-card__title {
+  font-size: 0.88rem;
+  line-height: 1.3;
+}
+
+.co-pay-chips .co-pay-card__sub {
+  font-size: 0.75rem;
+}
+
+.co-invalid {
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 3px rgba(197, 75, 60, 0.14) !important;
+}
+
+.co-place {
+  width: 100%;
+  margin-top: 1.1rem;
+}
+
+@media (max-width: 420px) {
+  .co-pay-chips {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @keyframes gc-fade-up {
   from {
     opacity: 0;
