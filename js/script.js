@@ -973,50 +973,6 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       .join("");
 
     if (cartSubtotalEl) cartSubtotalEl.textContent = money(cartTotalPrice());
-
-    /* Shipping line */
-    var shipEl = cartDrawer ? cartDrawer.querySelector('.cart-shipping') : null;
-    if (!shipEl && cartDrawer) {
-      shipEl = document.createElement('div');
-      shipEl.className = 'cart-shipping';
-      var cartFoot = cartDrawer.querySelector('.cart-drawer__foot');
-      if (cartFoot) cartFoot.parentNode.insertBefore(shipEl, cartFoot);
-    }
-    if (shipEl) {
-      var sub = cartTotalPrice();
-      var shipInfo = shippingInfo(sub);
-      shipEl.hidden = !shipInfo.text;
-      shipEl.textContent = shipInfo.text;
-      shipEl.classList.toggle('cart-shipping--free', shipInfo.isFree);
-    }
-
-    /* Free-delivery progress */
-    var freeMin = (getSettings() && getSettings().freeDeliveryMin) || 0;
-    var progWrap = cartDrawer ? cartDrawer.querySelector('.cart-delivery-progress') : null;
-    if (freeMin > 0) {
-      if (progWrap) progWrap.hidden = false;
-      if (!progWrap && cartDrawer) {
-        progWrap = document.createElement('div');
-        progWrap.className = 'cart-delivery-progress';
-        progWrap.innerHTML = '<div class="cart-delivery-bar"><div class="cart-delivery-fill"></div></div><p class="cart-delivery-msg"></p>';
-        var cartFoot2 = cartDrawer.querySelector('.cart-drawer__foot');
-        if (cartFoot2) cartFoot2.parentNode.insertBefore(progWrap, cartFoot2);
-      }
-      if (progWrap) {
-        var sub2 = cartTotalPrice();
-        var pct = Math.min(100, (sub2 / freeMin) * 100);
-        var progFill = progWrap.querySelector('.cart-delivery-fill');
-        var progMsg = progWrap.querySelector('.cart-delivery-msg');
-        if (progFill) progFill.style.width = pct + '%';
-        if (progMsg) {
-          if (pct >= 100) { progWrap.hidden = true; }
-          else progMsg.textContent = 'Add ' + money(freeMin - sub2) + ' more for free delivery';
-        }
-        progWrap.classList.toggle('done', pct >= 100);
-      }
-    } else if (progWrap) {
-      progWrap.hidden = true;
-    }
   }
 
   function openCart() {
