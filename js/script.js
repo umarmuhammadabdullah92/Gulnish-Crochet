@@ -486,7 +486,7 @@
       : "";
     return (
       '<button class="category-card" type="button" data-cat="' + catKey + '">' +
-      '<span class="category-card__img"><span class="image-slot">' + (img || '<span class="category-card__ph">&#128722;</span>') + "</span></span>" +
+      '<span class="category-card__img"><span class="image-slot">' + (img || photoPendingHTML()) + "</span></span>" +
       '<span class="category-card__body">' +
       '<span class="category-card__name">' + escapeHtml(label) + "</span>" +
       '<span class="category-card__count">' + count + " item" + (count === 1 ? "" : "s") + "</span>" +
