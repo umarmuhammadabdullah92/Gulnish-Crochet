@@ -180,14 +180,14 @@
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
           coBar.classList.add("show");
-          if (typeof positionFloatingActions === "function") positionFloatingActions();
+          if (GC && GC.positionFloatingActions) GC.positionFloatingActions();
         });
       });
     } else {
       coBar.classList.remove("show");
       setTimeout(function () {
         coBar.hidden = true;
-        if (typeof positionFloatingActions === "function") positionFloatingActions();
+        if (GC && GC.positionFloatingActions) GC.positionFloatingActions();
       }, 260);
     }
   }
