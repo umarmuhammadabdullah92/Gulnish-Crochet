@@ -84,15 +84,7 @@
     return checked ? checked.value : DEFAULT_PAYMENT;
   }
 
-  function shippingNote(items) {
-    var s = (GC && GC.settings) || {};
-    var sub = cartTotalPrice(items);
-    var fee = s.shippingFee != null && s.shippingFee !== "" ? parseFloat(s.shippingFee) : null;
-    var freeMin = s.freeDeliveryMin || 0;
-    if (freeMin > 0 && sub >= freeMin) return { text: "Free delivery", amount: 0, isFree: true };
-    if (fee != null && !isNaN(fee)) return { text: "Delivery: " + money(fee), amount: fee, isFree: false };
-    return { text: "Delivery: charged on WhatsApp (actual courier rate)", amount: null, isFree: false };
-  }
+  /* Delivery charge and date are confirmed on WhatsApp, never quoted here. */
 
   /* The single free-text address usually ends with the city,
      so keep the admin panel's City column populated for free. */
