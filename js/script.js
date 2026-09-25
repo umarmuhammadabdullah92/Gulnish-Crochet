@@ -1345,4 +1345,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   } else {
     renderShop();
   }
+
+  /* Lets checkout.js re-measure after it toggles the place-order bar. */
+  if (GC) GC.positionFloatingActions = positionFloatingActions;
 })();
