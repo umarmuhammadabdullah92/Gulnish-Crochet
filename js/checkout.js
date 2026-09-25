@@ -94,19 +94,6 @@
     return { text: "Delivery: charged on WhatsApp (actual courier rate)", amount: null, isFree: false };
   }
 
-  /* Best-effort email receipt (never blocks placing the order). */
-  function sendOrderEmail(order) {
-    var to = order.customer && order.customer.email;
-    if (!to) return;
-    try {
-      fetch("/api/send-order-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ to: to, order: order })
-      }).catch(function () {});
-    } catch (err) { /* keep the order flowing */ }
-  }
-
   /* The single free-text address usually ends with the city,
      so keep the admin panel's City column populated for free. */
   function cityFromAddress(address) {
