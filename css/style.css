@@ -1500,7 +1500,9 @@ body:has(.co-bar) .cart-bar {
 .fb-group {
   position: fixed;
   left: 20px;
-  bottom: 20px;
+  /* Overridden at runtime with the measured height of the bars below it,
+     so the pill never covers the "View Cart" bar on phones. */
+  bottom: var(--fb-bottom, 20px);
   z-index: 130;
   display: flex;
   flex-direction: column;
