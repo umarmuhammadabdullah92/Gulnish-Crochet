@@ -159,20 +159,7 @@
 
     var sub = cartTotalPrice(items);
     if (subtotalEl) subtotalEl.textContent = money(sub);
-    if (coBarTotal) coBarTotal.textContent = money(sub + (parseFloat(shippingNote(items).amount) || 0));
-
-    var shipEl = document.getElementById("coShipping");
-    if (shipEl) {
-      var ship = shippingNote(items);
-      shipEl.textContent = ship.text;
-      shipEl.hidden = !ship.text;
-    }
-
-    var stripEta = document.getElementById("coStripEta");
-    if (stripEta) {
-      var eta = GC && GC.deliveryEstimate ? GC.deliveryEstimate(new Date().toISOString(), false) : "";
-      stripEta.textContent = eta ? friendlyDate(eta) : "On confirmation";
-    }
+    if (coBarTotal) coBarTotal.textContent = money(sub);
 
     setBarVisible(true);
   }
