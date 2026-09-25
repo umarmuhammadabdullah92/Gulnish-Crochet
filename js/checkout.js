@@ -361,12 +361,8 @@
       if (success) {
         if (successNo) successNo.textContent = order.id;
         if (successCopy) successCopy.textContent = order.payment.method === "Cash on delivery"
-          ? "We've received your order and will confirm it with you on WhatsApp shortly. Please keep " + money(order.total) + " ready to pay on delivery."
-          : "We've received your order and will contact you to confirm your payment and delivery.";
-        if (successEta) {
-          successEta.hidden = !order.estDelivery;
-          if (successEtaDate && order.estDelivery) successEtaDate.textContent = friendlyDate(order.estDelivery);
-        }
+          ? "We've received your order and will message you on WhatsApp shortly to confirm the delivery charge and date."
+          : "We've received your order and will contact you on WhatsApp to confirm payment, delivery charge and date.";
         if (waLinkEl) {
           waLinkEl.href = "";
           waLinkEl.hidden = true;
