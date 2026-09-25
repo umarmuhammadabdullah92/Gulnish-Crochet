@@ -370,12 +370,10 @@
       "\nPayment: " + order.payment.method +
       (order.estDelivery ? "\nEst. delivery: " + friendlyDate(order.estDelivery) : "") +
       (order.customer.phone ? "\nPhone: +" + order.customer.phone : "") +
-      (order.customer.email ? "\nEmail: " + order.customer.email : "") +
       (order.notifyUpdates ? "\nNotify me about new pieces on WhatsApp: Yes (please add me to your update list)" : "") +
       (order.customer.address
         ? "\nAddress: " + order.customer.address +
-          (order.customer.city ? " (" + order.customer.city + ")" : "") +
-          (order.customer.province ? ", " + order.customer.province : "")
+          (order.customer.city ? " (" + order.customer.city + ")" : "")
         : "") +
       (order.customer.notes ? "\nNotes: " + order.customer.notes : "");
     var orderWaLink = waNum ? "https://wa.me/" + waNum + "?text=" + encodeURIComponent(waMsg) : "";
@@ -386,7 +384,6 @@
     var done = function () {
       saveCart([]);
       saveProfile();
-      sendOrderEmail(order);
 
       if (success) {
         if (successNo) successNo.textContent = order.id;
