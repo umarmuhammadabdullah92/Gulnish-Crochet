@@ -3397,7 +3397,22 @@ body:has(.co-bar) .cart-bar {
   .fb-group {
     right: auto;
     left: 16px;
-    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    /* Pre-JS fallback clears the 60px nav bar; script.js measures the
+       nav + view-cart / place-order bars and keeps the pill above all of them. */
+    bottom: var(--fb-bottom, calc(72px + env(safe-area-inset-bottom, 0px)));
+  }
+
+  /* Bigger, easier-to-tap pill on phones. */
+  .fb-group .fb {
+    gap: 0.6rem;
+    padding: 0.75rem 1.35rem;
+    font-size: 0.92rem;
+    box-shadow: 0 12px 26px rgba(37, 211, 102, 0.45);
+  }
+
+  .fb-group .fb svg {
+    width: 22px;
+    height: 22px;
   }
 
   .back-to-top {
