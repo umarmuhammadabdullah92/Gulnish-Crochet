@@ -335,8 +335,8 @@
     var order = buildOrder();
     var items = order.items;
 
-    /* Build the WhatsApp message synchronously so it opens within the
-       user's click (popup blockers allow this). */
+    /* Built synchronously so the hand-off happens inside the user's click,
+       which is what keeps popup blockers happy. */
     var waNum = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
     var waMsg =
       "New order *" + order.id + "* from " + (order.customer.name || "Customer") + "\n\n" +
