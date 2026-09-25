@@ -1236,8 +1236,6 @@ var bottomNavCart = document.getElementById("bottomNavCart");
      a fixed offset ends up sitting on top of one of them and hides the
      "View Cart" call to action. Rather than hard-code bar heights, measure
      whichever bars are actually on screen and sit just above the tallest. */
-  var FB_BARS = [".co-bar", ".cart-bar", ".bottom-nav"];
-
   function positionFloatingActions() {
     var group = document.querySelector(".fb-group");
     if (!group) return;
