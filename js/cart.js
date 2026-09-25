@@ -9,10 +9,6 @@
   var itemsEl = document.getElementById("cpItems");
   var countLabel = document.getElementById("cpCountLabel");
   var subtotalEl = document.getElementById("cpSubtotal");
-  var shippingEl = document.getElementById("cpShipping");
-  var progressEl = document.getElementById("cpProgress");
-  var progressFill = document.getElementById("cpProgressFill");
-  var progressMsg = document.getElementById("cpProgressMsg");
   var waLink = document.getElementById("cpWa");
 
   function getProducts() { return GC ? GC.products || [] : []; }
