@@ -726,13 +726,43 @@
       order.updatedAt = order.placedAt || new Date().toISOString();
       orders.unshift(order);
 
-      if (!configured) {
-        lsSet(LOCAL_ORDERS, orders);
-        return { ok: true };
-      }
+      /* Local mirror is written synchronously, so the order is never
+         lost even if the browser navigates away mid-request. */
+      lsSet(LOCAL_ORDERS, orders);
+
+      if (!configured) return { ok: true };
       var row = orderToRow(order);
       var res = await sb.from("orders").upsert(row, { onConflict: "id" });
       return { ok: !res.error, error: res.error };
+    },
+
+    /* Fire-and-forget order push that survives the page navigating away.
+       Uses fetch keepalive so the request is not cancelled on unload, which
+       is what lets us jump straight to WhatsApp with zero perceived delay. */
+    saveOrderKeepalive: function (order) {
+      try {
+        /* localStorage mirror first — instant and offline-safe */
+        this.saveOrder(order);
+      } catch (e) { /* fall through to the network push */ }
+
+      if (!configured || !cfg.supabaseUrl || !cfg.supabaseAnonKey) return;
+      try {
+        var row = orderToRow(order);
+        fetch(cfg.supabaseUrl.replace(/\/+$/, "") + "/rest/v1/orders?onConflict=id", {
+          method: "POST",
+          keepalive: true,
+          mode: "cors",
+          credentials: "omit",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "apikey": cfg.supabaseAnonKey,
+            "Authorization": "Bearer " + cfg.supabaseAnonKey,
+            "Prefer": "resolution=merge-duplicates,return=minimal"
+          },
+          body: JSON.stringify(row)
+        }).catch(function () {});
+      } catch (e) { /* non-fatal: the local mirror already has the order */ }
     },
 
     updateOrderStatus: async function (id, status, note) {
