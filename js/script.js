@@ -307,11 +307,10 @@
       parseFloat(p.price) > 0
         ? '<div class="work-card__price">' + money(p.price) + "</div>"
         : "";
-    var media = p.image
-      ? '<div class="work-card__media js-product-view" data-view="' + p.id + '">' +
-        image +
-        "</div>"
-      : '<div class="work-card__media js-product-view" data-view="' + p.id + '"></div>';
+    var media =
+      '<div class="work-card__media js-product-view" data-view="' + p.id + '">' +
+      (p.image ? image : photoPendingHTML()) +
+      "</div>";
     return (
       '<article class="work-card" data-category="' + p.category + '">' +
       media +
@@ -643,7 +642,7 @@
     if (ppImage) {
       ppImage.innerHTML = p.image
         ? '<img src="' + displayImage(p.image) + '" alt="' + escapeHtml(p.name) + '">'
-        : "";
+        : photoPendingHTML("photo-pending--lg");
     }
     if (ppThumbs) {
       var all = [p.image].concat((p.gallery || []).filter(Boolean).filter(function (s) { return s !== p.image; }));
