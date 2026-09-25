@@ -93,9 +93,7 @@
       );
     });
     lines.push("");
-    var shipText = shippingInfo(subtotal).text;
-    if (shipText) lines.push(shipText);
-    lines.push("Total: " + money(subtotal));
+    lines.push("Items total: " + money(subtotal));
     var profile = GC && GC.getCustomerProfile ? GC.getCustomerProfile() : null;
     if (profile && (profile.name || profile.phone || profile.city)) {
       lines.push("");
