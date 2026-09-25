@@ -1224,6 +1224,77 @@ var bottomNavCart = document.getElementById("bottomNavCart");
     });
   }
 
+  /* ---------- keep the floating pill clear of the mobile bottom bars ----------
+     On phones the bottom of the screen stacks up: the nav bar, then the
+     view-cart bar, then (at checkout) the place-order bar. A pill pinned to
+     a fixed offset ends up sitting on top of one of them and hides the
+     "View Cart" call to action. Rather than hard-code bar heights, measure
+     whichever bars are actually on screen and sit just above the tallest. */
+  var FB_BARS = [".co-bar", ".cart-bar", ".bottom-nav"];
+
+  function positionFloatingActions() {
+    var group = document.querySelector(".fb-group");
+    if (!group) return;
+
+    var stack = 0;
+    FB_BARS.forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (!el || el.hidden) return;
+      if (window.getComputedStyle(el).display === "none") return;
+      var r = el.getBoundingClientRect();
+      if (!r.height) return;
+      /* distance from the viewport bottom up to the top of this bar */
+      stack = Math.max(stack, window.innerHeight - r.top);
+    });
+
+    group.style.setProperty(
+      "--fb-bottom",
+      stack ? Math.round(stack + 14) + "px" : ""
+    );
+  }
+
+  /* Re-measure whenever a bar appears/disappears or the viewport changes. */
+  (function watchFloatingActions() {
+    var pending = false;
+    var schedule = function () {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () {
+        pending = false;
+        positionFloatingActions();
+      });
+    };
+
+    window.addEventListener("resize", schedule);
+    window.addEventListener("orientationchange", schedule);
+    document.addEventListener("visibilitychange", schedule);
+
+    if (typeof ResizeObserver === "function") {
+      var ro = new ResizeObserver(schedule);
+      FB_BARS.forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (el) ro.observe(el);
+      });
+    }
+
+    /* class/hidden changes fire before layout settles, so re-check on the
+       next frame as well as via the observer. */
+    if (typeof MutationObserver === "function") {
+      var mo = new MutationObserver(schedule);
+      FB_BARS.forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (el) mo.observe(el, { attributes: true, attributeFilter: ["class", "hidden"] });
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", schedule);
+    }
+    schedule();
+    setTimeout(schedule, 400);
+    setTimeout(schedule, 1200);
+  })();
+
 
   /* ---------- Mobile bottom navigation ---------- */
   if (bottomNavCart) {
