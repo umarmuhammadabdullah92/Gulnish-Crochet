@@ -4155,25 +4155,6 @@ p.about-text {
 }
 
 /* Co-bar extras */
-.co-bar__back {
-  width: 40px;
-  height: 40px;
-  flex: none;
-  border-radius: 50%;
-  border: 1px solid var(--line-strong);
-  background: var(--surface);
-  color: var(--ink);
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.co-bar__back:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-}
-
 .co-bar__label {
   font-size: 0.76rem;
   color: var(--muted);
