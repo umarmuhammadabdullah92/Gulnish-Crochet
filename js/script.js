@@ -24,6 +24,24 @@
     return parts.join("/");
   }
 
+  /* Shown anywhere a product has no photo yet, so the grid reads as
+     intentional instead of leaving an empty grey box. */
+  function photoPendingHTML(modifier) {
+    return (
+      '<div class="photo-pending ' + (modifier || "") + '">' +
+      '<span class="photo-pending__mark" aria-hidden="true">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
+      'stroke-linecap="round" stroke-linejoin="round">' +
+      '<rect x="3" y="4" width="18" height="16" rx="3"/>' +
+      '<circle cx="8.5" cy="9.5" r="1.5"/>' +
+      '<path d="M21 15.5l-4.8-4.8L6.5 20.5"/>' +
+      "</svg></span>" +
+      '<p class="photo-pending__text">The picture will be uploaded soon. ' +
+      "However, you can customize your design directly on WhatsApp.</p>" +
+      "</div>"
+    );
+  }
+
   /* ---------- Mobile nav toggle ---------- */
   var navToggle = document.getElementById("navToggle");
   var mainNav = document.getElementById("mainNav");
