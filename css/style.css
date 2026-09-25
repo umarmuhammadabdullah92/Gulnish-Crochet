@@ -732,7 +732,8 @@ em {
   max-width: 24ch;
   font-size: 0.72rem;
   line-height: 1.55;
-  color: var(--muted);
+  /* deeper than --muted so the small text clears WCAG AA (4.9:1) on this tint */
+  color: #6e5b4a;
   text-wrap: pretty;
 }
 
