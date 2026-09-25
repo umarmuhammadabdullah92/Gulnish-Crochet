@@ -848,13 +848,6 @@
       return cc + raw.replace(/^0+/, "");
     },
 
-    /* Fast, non-blocking order hand-off.
-       Persists locally straight away, then pushes to Supabase with
-       keepalive:true so the write survives the page navigating to WhatsApp. */
-    saveOrderInstant: function (order) {
-      return this.saveOrder(order).then(function (res) { return res; }, function (err) { return { ok: false, error: err }; });
-    },
-
     /* ---- order system constants & helpers ---- */
     ORDER_STATUSES: ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"],
 

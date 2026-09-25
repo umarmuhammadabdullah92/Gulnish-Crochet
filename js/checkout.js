@@ -54,9 +54,30 @@
 
   function absImage(src) {
     if (!src) return "";
-    return /^https?:\/\//i.test(src)
+    /* Never inline huge data URIs into the WhatsApp link — an oversized
+       query string is the single biggest cause of a slow hand-off. */
+    if (/^data:/i.test(src)) return "";
+    var url = /^https?:\/\//i.test(src)
       ? src
       : (window.location.origin + "/" + String(src).replace(/^\/+/, ""));
+    return url.length > 300 ? "" : url;
+  }
+
+  /* Mobile browsers need a same-tab navigation to hand off to the native
+     WhatsApp app; a new tab gets backgrounded on iOS and the customer is
+     left staring at the checkout page. */
+  function isMobileBrowser() {
+    return /Android|iPhone|iPad|iPod|IEMobile|BlackBerry|Opera Mini|Silk|Kindle/i.test(navigator.userAgent) ||
+      (navigator.maxTouchPoints > 1 && /Mac/i.test(navigator.platform));
+  }
+
+  /* api.whatsapp.com/send is the real destination behind wa.me — linking it
+     directly drops one redirect hop, which is worth several hundred ms. */
+  function waSendLink(num, text) {
+    var digits = String(num || "").replace(/[^\d]/g, "");
+    if (!digits) return "";
+    return "https://api.whatsapp.com/send?phone=" + digits +
+      (text ? "&text=" + encodeURIComponent(text) : "");
   }
 
   function cartTotalPrice(items) {
