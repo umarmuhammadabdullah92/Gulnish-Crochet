@@ -806,9 +806,23 @@
     },
 
     /* ---- shop whatsapp ---- */
+    /* Returns the FULL international number (e.g. 923001234567) with no
+       leading zero, which is what wa.me and api.whatsapp.com require.
+       Without the country code the link silently fails to open a chat. */
     shopWhatsApp: function () {
-      var num = GC.settings.whatsapp || "03075729901";
-      return String(num).replace(/[^\d]/g, "").replace(/^0+/, "");
+      var raw = String(GC.settings.whatsapp || "03075729901").replace(/[^\d]/g, "");
+      var cc = String(GC.settings.whatsappCountry || "92").replace(/[^\d]/g, "") || "92";
+      if (!raw) return "";
+      /* already stored in international form */
+      if (raw.length > cc.length && raw.slice(0, cc.length) === cc) return raw;
+      return cc + raw.replace(/^0+/, "");
+    },
+
+    /* Fast, non-blocking order hand-off.
+       Persists locally straight away, then pushes to Supabase with
+       keepalive:true so the write survives the page navigating to WhatsApp. */
+    saveOrderInstant: function (order) {
+      return this.saveOrder(order).then(function (res) { return res; }, function (err) { return { ok: false, error: err }; });
     },
 
     /* ---- order system constants & helpers ---- */
