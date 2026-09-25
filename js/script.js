@@ -466,7 +466,9 @@
 
   function renderFeatured() {
     if (!featuredGrid) return;
-    var items = getProducts().filter(function (p) { return p.image; }).slice(0, 8);
+    /* No image filter here: pieces without a photo render the
+       photoPending placeholder, so nothing silently disappears. */
+    var items = getProducts().slice(0, 8);
     featuredGrid.innerHTML = items.map(cardHTML).join("");
     var featuredSection = featuredGrid.closest(".section") || featuredGrid.closest("section");
     if (featuredSection) featuredSection.hidden = !items.length;
