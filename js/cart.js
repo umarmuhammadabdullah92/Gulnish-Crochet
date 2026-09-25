@@ -156,29 +156,8 @@
       .join("");
 
     if (subtotalEl) subtotalEl.textContent = money(subtotal);
-
-    var ship = shippingInfo(subtotal);
-    if (shippingEl) {
-      shippingEl.hidden = !ship.text;
-      shippingEl.textContent = ship.text;
-      shippingEl.classList.toggle("cart-shipping--free", ship.isFree);
-    }
-
-    if (progressEl) {
-      var freeMin = ship.freeMin;
-      if (freeMin > 0 && subtotal < freeMin) {
-        progressEl.hidden = false;
-        var pct = Math.min(100, Math.round(subtotal / freeMin * 100));
-        if (progressFill) progressFill.style.width = pct + "%";
-        if (progressMsg) {
-          progressMsg.textContent = n === 1
-            ? "Add " + money(freeMin - subtotal) + " more for free delivery"
-            : "Add " + money(freeMin - subtotal) + " more for free delivery";
-        }
-      } else {
-        progressEl.hidden = true;
-      }
-    }
+    if (shippingEl) shippingEl.hidden = true;
+    if (progressEl) progressEl.hidden = true;
 
     if (waLink) waLink.href = buildWaHref(cart, subtotal);
   }
