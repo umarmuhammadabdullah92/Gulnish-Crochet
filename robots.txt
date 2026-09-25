@@ -2,7 +2,8 @@ User-agent: *
 Allow: /
 
 # Private / transactional pages — keep out of search results
-Disallow: /admin.html
-Disallow: /checkout.html
+# These are prefix matches, so they also cover the .html variants
+Disallow: /admin
+Disallow: /checkout
 
 Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
