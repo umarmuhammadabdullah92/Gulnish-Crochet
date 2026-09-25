@@ -7,6 +7,11 @@
 
   var GC = window.GC;
 
+  /* Bottom bars the floating pill must sit above on phones.
+     Declared up top: renderCart() runs early in this IIFE and triggers a
+     re-measure. */
+  var FB_BARS = [".co-bar", ".cart-bar", ".bottom-nav"];
+
   /* ---------- Weak-network / mobile image tier ---------- */
   var LOW_RES =
     (navigator.connection && typeof navigator.connection.effectiveType === "string" &&
