@@ -268,6 +268,7 @@
       s.categoryImages = ci;
     }
     if (base.whatsapp) s.whatsapp = base.whatsapp;
+    if (base.whatsappCountry) s.whatsappCountry = base.whatsappCountry;
     if (base.adminPasswordHash) s.adminPasswordHash = base.adminPasswordHash;
     if (base.craftDays) s.craftDays = parseInt(base.craftDays, 10) || 5;
     if (base.deliveryDays) s.deliveryDays = parseInt(base.deliveryDays, 10) || 3;
