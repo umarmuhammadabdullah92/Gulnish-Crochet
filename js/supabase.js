@@ -848,6 +848,21 @@
       return cc + raw.replace(/^0+/, "");
     },
 
+    /* Customer phone numbers are stored without the local trunk 0 (that's the
+       form used to match repeat customers), so printing them with a bare "+"
+       would hand out a broken number like "+3001234567". Put the country code
+       back for display. Numbers already saved in international form are
+       returned untouched. */
+    formatPhone: function (raw) {
+      var d = String(raw || "").replace(/[^\d]/g, "");
+      if (!d) return "";
+      var cc = String(GC.settings.whatsappCountry || "92").replace(/[^\d]/g, "") || "92";
+      var bare = d.replace(/^0+/, "");
+      if (!bare) return "";
+      if (bare.length > cc.length && bare.slice(0, cc.length) === cc) return "+" + bare;
+      return "+" + cc + bare;
+    },
+
     /* ---- order system constants & helpers ---- */
     ORDER_STATUSES: ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"],
 
