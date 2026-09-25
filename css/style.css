@@ -1676,30 +1676,6 @@ body:has(.co-bar) .cart-bar {
   border: 1px dashed var(--line-strong);
 }
 
-.cart-delivery-progress {
-  margin: 0.4rem 0;
-}
-
-.cart-delivery-bar {
-  height: 8px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-soft);
-  overflow: hidden;
-}
-
-.cart-delivery-fill {
-  height: 100%;
-  width: 0;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, var(--gold), var(--primary));
-  transition: width 0.5s var(--ease);
-}
-
-.cart-delivery-msg {
-  margin-top: 0.45rem;
-  font-size: 0.8rem;
-  color: var(--muted);
-}/* ============ CART PAGE ============ */
 .cart-page {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
