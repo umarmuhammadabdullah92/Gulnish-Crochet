@@ -953,6 +953,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
     if (cartBar) cartBar.classList.toggle("show", n > 0);
     if (cartBarCount) cartBarCount.textContent = n;
     if (cartBarTotal) cartBarTotal.textContent = money(total);
+    positionFloatingActions();
     if (!cartItemsEl) return;
 
     if (!cart.length) {

@@ -178,11 +178,17 @@
     if (on) {
       coBar.hidden = false;
       requestAnimationFrame(function () {
-        requestAnimationFrame(function () { coBar.classList.add("show"); });
+        requestAnimationFrame(function () {
+          coBar.classList.add("show");
+          if (typeof positionFloatingActions === "function") positionFloatingActions();
+        });
       });
     } else {
       coBar.classList.remove("show");
-      setTimeout(function () { coBar.hidden = true; }, 260);
+      setTimeout(function () {
+        coBar.hidden = true;
+        if (typeof positionFloatingActions === "function") positionFloatingActions();
+      }, 260);
     }
   }
 
