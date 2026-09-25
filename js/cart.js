@@ -152,8 +152,6 @@
       .join("");
 
     if (subtotalEl) subtotalEl.textContent = money(subtotal);
-    if (shippingEl) shippingEl.hidden = true;
-    if (progressEl) progressEl.hidden = true;
 
     if (waLink) waLink.href = buildWaHref(cart, subtotal);
   }
