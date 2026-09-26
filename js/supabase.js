@@ -84,7 +84,7 @@
   var REAL_PRODUCTS = {
     "seed_gr4_1": { name: "Bag 1", price: 1599 },
     "seed_gr1_1": { name: "Crochet Rose Purse", price: 4999 },
-    "seed_gr1_2": { name: "Purse 2", price: 4999 },
+    "seed_gr1_2": { name: "Crochet Rose Purse", price: 4999 },
     "seed_gr1_3": { name: "3D Rose Purse", price: 4999 },
     "seed_gr1_10": { name: "Purse 10", price: 5799 },
     "seed_gr1_11": { name: "Purse 11", price: 5799 },
