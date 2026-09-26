@@ -126,6 +126,8 @@
     "seed_gr7_1": { name: "Crochet Bridal Bouquet", price: 5500 },
     "seed_gr7_2": { name: "Handmade Crochet Rose Flower Gift Bouquet", price: 3999 },
     "seed_gr7_3": { name: "Handmade Crochet Flower Bouquet with Heart Accent", price: 3999 },
+    "seed_gr7_4": { name: "Handmade Crochet Wedding Bridal Bouquet", price: 3999 },
+    "seed_gr7_5": { name: "Handmade Crochet Jasmine Wedding Bridal Bouquet", price: 4999 },
     "seed_gr1_1": { name: "Crochet Rose Purse", price: 4999 },
     "seed_gr1_2": { name: "Crochet Rose Purse", price: 4999 },
     "seed_gr1_3": { name: "3D Rose Purse", price: 4999 },
