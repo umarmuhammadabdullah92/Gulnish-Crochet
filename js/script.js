@@ -962,14 +962,13 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   }
 
   function closeCart() {
+    var wasOpen = cartDrawer.classList.contains("open");
     cartDrawer.classList.remove("open");
     cartDrawer.setAttribute("aria-hidden", "true");
-    if (cartToggle) {
-      cartToggle.setAttribute("aria-expanded", "false");
-      cartToggle.focus();
-    }
+    if (cartToggle) cartToggle.setAttribute("aria-expanded", "false");
     cartOverlay.classList.remove("open");
     document.body.style.overflow = "";
+    if (wasOpen && cartToggle) cartToggle.focus();
   }
 
   function bumpBadge() {
