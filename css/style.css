@@ -2849,8 +2849,11 @@ body:has(.co-bar) .cart-bar {
   align-items: center;
   justify-content: center;
   opacity: 0;
+  /* visibility (not just opacity) keeps the closed lightbox out of the tab
+     order and the accessibility tree, which aria-hidden alone does not do */
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.28s ease;
+  transition: opacity 0.28s ease, visibility 0s linear 0.28s;
 }
 
 .lightbox.open {
