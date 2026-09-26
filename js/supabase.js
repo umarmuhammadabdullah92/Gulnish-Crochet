@@ -86,7 +86,7 @@
     "seed_gr1_1": { name: "Crochet Rose Purse", price: 4999 },
     "seed_gr1_2": { name: "Crochet Rose Purse", price: 4999 },
     "seed_gr1_3": { name: "3D Rose Purse", price: 4999 },
-    "seed_gr1_5": { name: "Monochromatic 3D Rose Blossom Crochet Hobo Purse", price: 4500 },
+    "seed_gr1_5": { name: "Monochromatic 3D Rose Blossom Crochet Hobo Purse", price: 5000 },
     "seed_gr1_10": { name: "Purse 10", price: 5799 },
     "seed_gr1_11": { name: "Purse 11", price: 5799 },
     "seed_gr1_12": { name: "Purse 12", price: 5799 },
