@@ -38,7 +38,12 @@
     if (!src || src.lastIndexOf("data:", 0) === 0) return "";
     if (src.indexOf("images/") !== 0) return "";
     var parts = src.split("/");
-    if (parts.length < 2 || parts[parts.length - 2] === "sm") return "";
+    if (parts.length < 3 || parts[parts.length - 2] === "sm") return "";
+    /* Only the catalogue directories ship an sm/ twin. Without this guard a
+       stray images/og-cover-v2.webp would get a srcset pointing at the
+       non-existent images/sm/og-cover-v2.webp, which is a 404 on every card. */
+    var photoDirs = "bags gajrays headbands jewellery keychains purses";
+    if ((" " + photoDirs + " ").indexOf(" " + parts[parts.length - 2] + " ") < 0) return "";
     var small = parts.slice(0, parts.length - 1);
     small.push("sm", parts[parts.length - 1]);
     return (
