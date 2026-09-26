@@ -12,7 +12,16 @@
   <link rel="dns-prefetch" href="https://www.instagram.com">
   <link rel="dns-prefetch" href="https://www.facebook.com">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>
+  document.documentElement.classList.add("js");
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      if (window.__gcRevealReady) return;
+      var els = document.querySelectorAll(".reveal");
+      for (var i = 0; i < els.length; i++) els[i].classList.add("revealed");
+    }, 1500);
+  });
+  </script>
   <title>Track Your Order | Gulnish Crochet</title>
   <meta name="description" content="Track your Gulnish Crochet order by order number or phone number.">
     

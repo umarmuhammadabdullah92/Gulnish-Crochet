@@ -12,7 +12,16 @@
   <link rel="dns-prefetch" href="https://www.instagram.com">
   <link rel="dns-prefetch" href="https://www.facebook.com">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>
+  document.documentElement.classList.add("js");
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      if (window.__gcRevealReady) return;
+      var els = document.querySelectorAll(".reveal");
+      for (var i = 0; i < els.length; i++) els[i].classList.add("revealed");
+    }, 1500);
+  });
+  </script>
   <title>Refund &amp; Exchange Policy | Gulnish Crochet</title>
   <meta name="description" content="Our refund and exchange policy for handmade, made-to-order crochet pieces — including damaged items, faults and the changes we will make.">
   <meta name="keywords" content="refund policy Gulnish Crochet, exchange policy, return policy handmade crochet, damaged item replacement">

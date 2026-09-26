@@ -12,7 +12,16 @@
   <link rel="dns-prefetch" href="https://www.instagram.com">
   <link rel="dns-prefetch" href="https://www.facebook.com">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>
+  document.documentElement.classList.add("js");
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      if (window.__gcRevealReady) return;
+      var els = document.querySelectorAll(".reveal");
+      for (var i = 0; i < els.length; i++) els[i].classList.add("revealed");
+    }, 1500);
+  });
+  </script>
   <title>Gulnish Crochet | Premium Handmade Crochet Bags &amp; Gifts in Pakistan</title>
   <meta name="description" content="Handmade crochet bags, purses, jewellery, keychains &amp; gajrays in Pakistan. Custom designs made to order for every occasion.">
   <meta name="keywords" content="handmade crochet, crochet bags, crochet jewellery, crochet keychains, custom crochet, handmade gifts, crochet to order, Gulnish Crochet">

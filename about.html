@@ -12,7 +12,16 @@
   <link rel="dns-prefetch" href="https://www.instagram.com">
   <link rel="dns-prefetch" href="https://www.facebook.com">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>
+  document.documentElement.classList.add("js");
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      if (window.__gcRevealReady) return;
+      var els = document.querySelectorAll(".reveal");
+      for (var i = 0; i < els.length; i++) els[i].classList.add("revealed");
+    }, 1500);
+  });
+  </script>
   <title>Our Story | About Handmade Crochet | Gulnish Crochet</title>
   <meta name="description" content="Discover the story behind Gulnish Crochet — a passion for handmade crochet bags, jewellery and custom gifts, created stitch by stitch with love.">
   <meta name="keywords" content="about Gulnish Crochet, handmade crochet story, custom crochet design, handmade gifts">
