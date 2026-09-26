@@ -345,10 +345,10 @@
             .join(",") +
           '"></div>'
         : "";
-    var price =
-      parseFloat(p.price) > 0
-        ? '<div class="work-card__price">' + money(p.price) + "</div>"
-        : "";
+      var price =
+        parseFloat(p.price) > 0
+          ? '<div class="work-card__price">' + displayPrice(p) + "</div>"
+          : "";
     var media =
       '<div class="work-card__media js-product-view" data-view="' + p.id + '">' +
       (p.image ? image : photoPendingHTML()) +
