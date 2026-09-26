@@ -8,6 +8,11 @@
   "use strict";
   var cfg = (window.GC_ANALYTICS) || {};
 
+  /* Opening the site straight from disk (file:///.../index.html) is a local
+     preview. Reporting those hits would mix development traffic into the real
+     GA4 / Meta numbers and skew them, so never tag a local file. */
+  if (location.protocol === "file:") return;
+
   if (cfg.ga4 && !window.gtag) {
     var g = document.createElement("script");
     g.async = true;
