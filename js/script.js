@@ -698,10 +698,9 @@
       ppThumbs.hidden = all.length <= 1;
     }
     if (ppName) ppName.textContent = p.name || "";
-    if (ppPrice) {
-      ppPrice.textContent =
-        parseFloat(p.price) > 0 ? money(p.price) : "";
-    }
+      if (ppPrice) {
+        ppPrice.textContent = displayPrice(p);
+      }
     if (ppCategory) {
       ppCategory.textContent = categoryLabelOf(p.category);
     }
