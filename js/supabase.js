@@ -121,7 +121,7 @@
   };
 
   var ITEM_NAME = { gr1: "Purse", gr2: "Gajray", gr3: "Keychain", gr4: "Bag", gr5: "Jewellery", gr6: "Headband", gr7: "Bouquet" };
-  var BASE_PRICE = { gr1: 850, gr2: 400, gr3: 350, gr4: 1400, gr5: 550, gr6: 450, gr7: 1200 };
+  var BASE_PRICE = { gr1: 850, gr2: 400, gr3: 350, gr4: 1400, gr5: 550, gr6: 450, gr7: 1999 };
 
   var REAL_PRODUCTS = {
     "seed_gr4_1": { name: "Bag 1", price: 1599 },
