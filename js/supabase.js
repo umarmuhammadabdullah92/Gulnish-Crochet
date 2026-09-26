@@ -66,7 +66,16 @@
     gr6: ["images/headbands/headband-1.webp", "images/headbands/headband-2.webp"]
   };
 
-  var HIDE_PRODUCT_IMAGES = { gr2: true };
+  /* Keys may be a whole category (gr2) or a single product id. A product with
+     no image still lists and still orders - the grid, category card and
+     product page all fall back to photoPendingHTML(), which shows
+     "The picture will be uploaded soon. However, you can customize your
+     design directly on WhatsApp." */
+  var HIDE_PRODUCT_IMAGES = {
+    gr2: true,
+    "seed_gr1_6": true,
+    "seed_gr1_7": true
+  };
 
   /* ---------- placeholder product catalog ---------- */
   var RAW_IMAGES = {
