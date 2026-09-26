@@ -216,7 +216,8 @@
     gr3: ["keyring", "small gift", "cute", "handmade", "gift", "wholesale"],
     gr4: ["handbag", "tote", "shopper bag", "handmade", "gift"],
     gr5: ["necklace", "earrings", "bridal", "wedding", "gift", "accessory"],
-    gr6: ["hairband", "hair accessory", "girl", "handmade", "gift"]
+    gr6: ["hairband", "hair accessory", "girl", "handmade", "gift"],
+    gr7: ["bouquet", "flowers", "rose", "bride", "gift", "handmade"]
   };
 
   function defaultProducts() {
