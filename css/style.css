@@ -2858,7 +2858,9 @@ body:has(.co-bar) .cart-bar {
 
 .lightbox.open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
+  transition: opacity 0.28s ease, visibility 0s;
 }
 
 .lightbox__img {
