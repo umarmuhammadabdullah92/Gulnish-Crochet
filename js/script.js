@@ -299,6 +299,15 @@
     return "Rs. " + parts.join(".");
   }
 
+  /* A product with no photo is one the customer commissions through WhatsApp,
+     so its price is not published - it shows as "..." instead. Cart and
+     checkout still use the real p.price (carried in data-price) so the order
+     total still adds up. */
+  function displayPrice(p) {
+    if (!p || !p.image) return "...";
+    return parseFloat(p.price) > 0 ? money(p.price) : "";
+  }
+
   function stockStatus(p) {
     var s = String((p && p.status) || "").trim().toLowerCase();
     if (s === "made to order" || s === "made-to-order") return "made to order";
