@@ -2918,14 +2918,21 @@ body:has(.co-bar) .cart-bar {
 }
 
 /* ============ REVEAL ANIMATION ============ */
+/* Content is visible by default and only starts hidden when scripting is
+   available (html.js is set by an inline script in <head>). If JS is blocked,
+   fails to load, or errors, the page still renders instead of going blank. */
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
-  will-change: opacity, transform;
 }
 
-.reveal.revealed {
+html.js .reveal.revealed {
   opacity: 1;
   transform: translateY(0);
 }
