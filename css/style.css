@@ -1571,12 +1571,17 @@ body:has(.co-bar) .cart-bar {
   display: flex;
   flex-direction: column;
   transform: translateX(102%);
-  transition: transform 0.38s var(--ease);
+  /* the closed drawer sits off-canvas; visibility also removes it from the tab
+     order and the accessibility tree so its buttons cannot be tabbed to */
+  visibility: hidden;
+  transition: transform 0.38s var(--ease), visibility 0s linear 0.38s;
   box-shadow: -20px 0 50px rgba(40, 28, 18, 0.2);
 }
 
 .cart-drawer.open {
   transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.38s var(--ease), visibility 0s;
 }
 
 .cart-drawer__head {
