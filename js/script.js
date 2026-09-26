@@ -304,7 +304,7 @@
      checkout still use the real p.price (carried in data-price) so the order
      total still adds up. */
   function displayPrice(p) {
-    if (!p || !p.image) return "...";
+    if (!p || !p.image) return "Rs. ...";
     return parseFloat(p.price) > 0 ? money(p.price) : "";
   }
 
