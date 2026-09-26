@@ -291,15 +291,18 @@
     var s = defaultSettings();
 
     var cats = Array.isArray(base.categories) ? base.categories : null;
-    if (cats && cats.length >= DEFAULT_COUNT) {
-      s.categories = cats.slice(0, DEFAULT_COUNT);
+    if (cats && cats.length) {
+      /* A save made before a category existed holds fewer names than
+         DEFAULT_COUNT. Keep those names and pad the rest with the defaults,
+         otherwise raising DEFAULT_COUNT would throw the saved names away. */
+      var saved = cats
+        .map(function (c) { return typeof c === "string" ? c.trim() : ""; })
+        .slice(0, DEFAULT_COUNT);
+      s.categories = s.categories.map(function (fallback, i) { return saved[i] || fallback; });
     }
     if (base.categoryImages && typeof base.categoryImages === "object") {
       var ci = {};
-      (base.categories && base.categories.length >= DEFAULT_COUNT
-        ? base.categories
-        : s.categories
-      ).forEach(function (_, i) {
+      s.categories.forEach(function (_, i) {
         var k = "gr" + (i + 1);
         ci[k] = Array.isArray(base.categoryImages[k])
           ? base.categoryImages[k].slice(0, 5)
