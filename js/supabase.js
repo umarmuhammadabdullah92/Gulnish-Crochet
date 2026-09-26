@@ -25,23 +25,52 @@
   var SETTINGS_ID = "app";
 
   var cfg = window.GC_CONFIG || {};
-  var configured = Boolean(
-    cfg.supabaseUrl &&
-    cfg.supabaseAnonKey &&
-    typeof window.supabase !== "undefined"
-  );
+  var SUPABASE_CDN =
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/dist/umd/supabase.min.js";
 
+  /* The SDK is only needed when keys are actually configured. Loading it from
+     a <script> tag on every page cost ~120 KB (dead weight in localStorage
+     mode) and, because the tag was deferred while this file was not, it had
+     not even executed yet when this file ran - so the Supabase path could
+     never start. It is now fetched on demand, off the critical path, and only
+     when js/config.js has keys. */
+  var wantsClient = Boolean(cfg.supabaseUrl && cfg.supabaseAnonKey);
   var sb = null;
-  if (configured) {
+  var configured = false;
+  var sdkPromise = null;
+
+  function loadSdk() {
+    if (!wantsClient || typeof window.supabase !== "undefined") {
+      return Promise.resolve();
+    }
+    if (!sdkPromise) {
+      sdkPromise = new Promise(function (resolve) {
+        var el = document.createElement("script");
+        el.src = SUPABASE_CDN;
+        el.async = true;
+        el.onload = resolve;
+        el.onerror = function () {
+          console.warn("Supabase SDK failed to load - using localStorage.");
+          resolve();
+        };
+        document.head.appendChild(el);
+      });
+    }
+    return sdkPromise;
+  }
+
+  function connect() {
+    if (configured || !wantsClient) return;
+    if (typeof window.supabase === "undefined") return;
     try {
       sb = window.supabase.createClient(
         cfg.supabaseUrl,
         cfg.supabaseAnonKey
       );
+      configured = true;
     } catch (e) {
       console.error("Supabase init failed, using localStorage:", e);
       sb = null;
-      configured = false;
     }
   }
 
