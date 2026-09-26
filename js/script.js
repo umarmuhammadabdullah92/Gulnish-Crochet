@@ -58,6 +58,7 @@
 
   function closeMobileNav() {
     if (!mainNav) return;
+    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
     mainNav.classList.remove("open");
     navOverlay.classList.remove("open");
     document.body.style.overflow = "";
@@ -66,6 +67,7 @@
   function openMobileNav() {
     mainNav.classList.add("open");
     navOverlay.classList.add("open");
+    if (navToggle) navToggle.setAttribute("aria-expanded", "true");
     document.body.style.overflow = "hidden";
   }
 
@@ -951,12 +953,21 @@ var bottomNavCart = document.getElementById("bottomNavCart");
 
   function openCart() {
     cartDrawer.classList.add("open");
+    cartDrawer.setAttribute("aria-hidden", "false");
+    if (cartToggle) cartToggle.setAttribute("aria-expanded", "true");
     cartOverlay.classList.add("open");
     document.body.style.overflow = "hidden";
+    var closeBtn = document.getElementById("cartClose");
+    if (closeBtn) closeBtn.focus();
   }
 
   function closeCart() {
     cartDrawer.classList.remove("open");
+    cartDrawer.setAttribute("aria-hidden", "true");
+    if (cartToggle) {
+      cartToggle.setAttribute("aria-expanded", "false");
+      cartToggle.focus();
+    }
     cartOverlay.classList.remove("open");
     document.body.style.overflow = "";
   }
