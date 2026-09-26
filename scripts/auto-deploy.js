@@ -55,6 +55,43 @@ function aheadCount() {
   }
 }
 
+/* vercel.json serves /css and /js as `max-age=31536000, immutable`, so the
+   only thing that makes a new build reach an already-visited browser is the
+   ?v= query on the asset URL. Bump it whenever a css/js file changed -
+   otherwise a style fix could sit invisible in browsers for a year.
+   Rewriting the HTML re-triggers the watcher, but the second pass sees no
+   css/js change and stops, so this cannot loop. */
+function bumpAssetVersion() {
+  let changed;
+  try {
+    changed = run("git diff --name-only HEAD -- css js");
+  } catch (err) {
+    return 0;
+  }
+  if (!changed.trim()) return 0;
+
+  const files = fs
+    .readdirSync(ROOT)
+    .filter((f) => f.endsWith(".html"));
+  let bumped = 0;
+  for (const file of files) {
+    const p = path.join(ROOT, file);
+    const src = fs.readFileSync(p, "utf8");
+    /* Matches every ?v=<n> on css/ and js/ URLs only - a version query on a
+       third-party embed (YouTube, etc.) must not be touched. */
+    const next = src.replace(
+      /((?:css|js)\/[^"']*\?v=)(\d+)/g,
+      (m, prefix, n) => prefix + (parseInt(n, 10) + 1)
+    );
+    if (next !== src) {
+      fs.writeFileSync(p, next);
+      bumped++;
+    }
+  }
+  if (bumped) console.log(`[auto-deploy] css/js changed - bumped ?v= in ${bumped} page(s)`);
+  return bumped;
+}
+
 /* A push can be rejected as non-fast-forward (e.g. a manual push raced this
    watcher). Rebase onto the remote and try once more so the change is not
    stranded on the local branch. */
@@ -87,6 +124,7 @@ function autopush() {
 
   try {
     clearStaleLock();
+    bumpAssetVersion();
     const status = run("git status --porcelain");
     let didCommit = false;
 
