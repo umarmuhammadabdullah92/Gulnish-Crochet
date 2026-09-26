@@ -19,6 +19,8 @@ const WATCH_DIRS = [
 let timer = null;
 let pending = false;
 let verifying = false;
+let retries = 0;
+const MAX_RETRIES = 4;
 
 function run(cmd) {
   return execSync(cmd, { cwd: ROOT, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim();
@@ -98,12 +100,14 @@ function autopush() {
        may have failed, leaving commits stranded locally. Always flush them. */
     const ahead = aheadCount();
     if (!didCommit && ahead === 0) {
+      retries = 0;
       console.log("[auto-deploy] nothing to commit");
       return;
     }
 
     const pushed = pushWithRecovery();
     if (pushed) {
+      retries = 0;
       console.log(
         didCommit
           ? "[auto-deploy] committed & pushed to main -> Vercel deploying"
@@ -113,6 +117,16 @@ function autopush() {
     }
   } catch (err) {
     console.error("[auto-deploy] error:", (err.stderr || err.message).trim());
+    /* A git failure (most often index.lock held by another git process) means
+       this cycle changed nothing. Nothing would re-trigger the watcher, so the
+       edit would sit uncommitted until the next unrelated save - retry. */
+    if (retries < MAX_RETRIES) {
+      retries += 1;
+      console.log(`[auto-deploy] retrying in 3s (attempt ${retries}/${MAX_RETRIES})`);
+      setTimeout(autopush, 3000);
+    } else {
+      console.error("[auto-deploy] giving up after repeated failures - run: git add -A && git commit && git push");
+    }
   } finally {
     pending = false;
   }
@@ -134,14 +148,16 @@ function verifyDeploy() {
   }
   if (!expected) return;
 
-  const deadline = Date.now() + 180000;
+  const deadline = Date.now() + Number(process.env.VERIFY_TIMEOUT_MS || 180000);
+  const interval = Number(process.env.VERIFY_INTERVAL_MS || 15000);
   const poll = async () => {
     if (verifying) return;
     verifying = true;
+    let served = null;
     try {
       while (Date.now() < deadline) {
-        await new Promise((r) => setTimeout(r, 15000));
-        let served = null;
+        await new Promise((r) => setTimeout(r, interval));
+        served = null;
         try {
           const res = await fetch(live, { cache: "no-store" });
           const html = await res.text();
