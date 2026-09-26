@@ -456,7 +456,9 @@
   /* ============================================================= */
 
   var GC = {
-    configured: configured,
+    /* A live getter, not a snapshot: `configured` is only decided once the
+       SDK has loaded, which is after this object is built. */
+    get configured() { return configured; },
     isAdmin: false,
     get products() { return products; },
     get settings() { return settings; },
