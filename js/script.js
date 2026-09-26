@@ -29,6 +29,24 @@
     return parts.join("/");
   }
 
+  /* Builds a srcset so the browser itself can choose the 480px tier.
+     displayImage() above only helps browsers that expose
+     navigator.connection (Chrome/Android); Safari and Firefox never get the
+     small files, so a phone on wifi still downloads every 800px original.
+     Local images/ paths only - Supabase URLs have no sm/ twin. */
+  function imgSrcset(src, sizes) {
+    if (!src || src.lastIndexOf("data:", 0) === 0) return "";
+    if (src.indexOf("images/") !== 0) return "";
+    var parts = src.split("/");
+    if (parts.length < 2 || parts[parts.length - 2] === "sm") return "";
+    var small = parts.slice(0, parts.length - 1);
+    small.push("sm", parts[parts.length - 1]);
+    return (
+      ' srcset="' + small.join("/") + ' 480w, ' + src + ' 800w"' +
+      ' sizes="' + (sizes || "(max-width: 760px) 44vw, 250px") + '"'
+    );
+  }
+
   /* Shown anywhere a product has no photo yet, so the grid reads as
      intentional instead of leaving an empty grey box. */
   function photoPendingHTML(modifier) {
@@ -302,7 +320,7 @@
     var imgSrc = displayImage(p.image);
     var isFirst = typeof index === "number" && index === 0;
     var image = imgSrc
-      ? '<img src="' + imgSrc + '" alt="' + escapeHtml(p.name) + '"' +
+      ? '<img src="' + imgSrc + '"' + imgSrcset(p.image) + ' alt="' + escapeHtml(p.name) + '"' +
         (isFirst ? ' fetchpriority="high" decoding="async"' : ' loading="lazy" decoding="async"') + ">"
       : "";
     var colors =
@@ -491,7 +509,7 @@
   function categoryCardHTML(label, count, images, catKey) {
     var slides = (images || []).filter(Boolean).map(function (s) { return displayImage(s); });
     var img = slides.length
-      ? '<img src="' + slides[0] + '" alt="' + escapeHtml(label) + '" loading="lazy" decoding="async" data-slides="' +
+      ? '<img src="' + slides[0] + '"' + imgSrcset((images || []).filter(Boolean)[0], "(max-width: 760px) 44vw, 260px") + ' alt="' + escapeHtml(label) + '" loading="lazy" decoding="async" data-slides="' +
         slides.join("|").replace(/"/g, "&quot;") + '">'
       : "";
     return (
@@ -653,7 +671,7 @@
 
     if (ppImage) {
       ppImage.innerHTML = p.image
-        ? '<img src="' + displayImage(p.image) + '" alt="' + escapeHtml(p.name) + '">'
+        ? '<img src="' + displayImage(p.image) + '"' + imgSrcset(p.image, "(max-width: 900px) 92vw, 520px") + ' alt="' + escapeHtml(p.name) + '">'
         : photoPendingHTML("photo-pending--lg");
     }
     if (ppThumbs) {
@@ -661,7 +679,7 @@
       ppThumbs.innerHTML = all.map(function (src, i) {
         return '<button type="button" class="pp-thumb' + (i === 0 ? " active" : "") +
           '" data-pp-thumb="' + escapeHtml(src) + '" aria-label="' + escapeHtml(p.name) + " image " + (i + 1) + '">' +
-          '<img src="' + displayImage(src) + '" alt="" loading="lazy" decoding="async"></button>';
+          '<img src="' + displayImage(src) + '"' + imgSrcset(src, "96px") + ' alt="" loading="lazy" decoding="async"></button>';
       }).join("");
       ppThumbs.hidden = all.length <= 1;
     }
@@ -933,7 +951,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
           '<div class="cart-item">' +
           '<div class="cart-item__img">' +
           (item.image
-            ? '<img src="' + item.image + '" alt="' + (item.name || "").replace(/"/g, "&quot;") + '">'
+            ? '<img src="' + item.image + '"' + imgSrcset(item.image, "72px") + ' alt="' + (item.name || "").replace(/"/g, "&quot;") + '">'
             : '<span class="cart-item__ph">&#128722;</span>') +
           "</div>" +
           '<div class="cart-item__info">' +
