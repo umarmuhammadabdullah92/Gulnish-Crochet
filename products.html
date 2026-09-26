@@ -12,16 +12,7 @@
   <link rel="dns-prefetch" href="https://www.instagram.com">
   <link rel="dns-prefetch" href="https://www.facebook.com">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-  document.documentElement.classList.add("js");
-  window.addEventListener("load", function () {
-    setTimeout(function () {
-      if (window.__gcRevealReady) return;
-      var els = document.querySelectorAll(".reveal");
-      for (var i = 0; i < els.length; i++) els[i].classList.add("revealed");
-    }, 1500);
-  });
-  </script>
+  <script src="js/head.js?v=31"></script>
   <title>Shop Handmade Crochet Products | Gulnish Crochet</title>
   <meta name="description" content="Browse handmade crochet purses, gajrays, keychains, bags, jewellery and headbands by Gulnish Crochet. Custom designs and made-to-order gifts available.">
   <meta name="keywords" content="handmade crochet, crochet purses, crochet bags, crochet keychains, crochet jewellery, crochet headbands, custom crochet, made to order">
@@ -333,12 +324,6 @@
   <script src="js/analytics.js?v=30"></script>
   <script src="js/supabase.js?v=30"></script>
   <script src="js/script.js?v=30"></script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js').catch(function () {});
-    });
-  }
-  </script>
+<script src="js/sw-register.js?v=31" defer></script>
 </body>
 </html>

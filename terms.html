@@ -12,16 +12,7 @@
   <link rel="dns-prefetch" href="https://www.instagram.com">
   <link rel="dns-prefetch" href="https://www.facebook.com">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-  document.documentElement.classList.add("js");
-  window.addEventListener("load", function () {
-    setTimeout(function () {
-      if (window.__gcRevealReady) return;
-      var els = document.querySelectorAll(".reveal");
-      for (var i = 0; i < els.length; i++) els[i].classList.add("revealed");
-    }, 1500);
-  });
-  </script>
+  <script src="js/head.js?v=31"></script>
   <title>Terms of Service | Gulnish Crochet</title>
   <meta name="description" content="The terms that apply when you order from Gulnish Crochet — placing an order, made-to-order timelines, payment, delivery and liability.">
   <meta name="keywords" content="terms and conditions Gulnish Crochet, ordering terms, made to order policy, payment terms, delivery terms">
@@ -257,12 +248,6 @@
   <script src="js/analytics.js?v=30"></script>
   <script src="js/supabase.js?v=30"></script>
   <script src="js/script.js?v=30"></script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js').catch(function () {});
-    });
-  }
-  </script>
+<script src="js/sw-register.js?v=31" defer></script>
 </body>
 </html>
