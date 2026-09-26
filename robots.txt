@@ -5,5 +5,6 @@ Allow: /
 # These are prefix matches, so they also cover the .html variants
 Disallow: /admin
 Disallow: /checkout
+Disallow: /cart
 
-Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
+Sitemap: https://gulnish-crochet.vercel.app/sitemap.xml
