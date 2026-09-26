@@ -826,55 +826,9 @@
   var cartBarCount = document.getElementById("cartBarCount");
   var cartBarTotal = document.getElementById("cartBarTotal");
 var cartBarBtn = document.getElementById("cartBarBtn");
-var cartWa = document.getElementById("cartWa");
 var bottomNavCount = document.getElementById("bottomNavCount");
 var bottomNavCart = document.getElementById("bottomNavCart");
 
-  function waBase() {
-    var num = GC && GC.shopWhatsApp ? GC.shopWhatsApp() : "";
-    return num ? "https://wa.me/" + encodeURIComponent(num) : "";
-  }
-
-  function updateCartWa() {
-    if (!cartWa) return;
-    var base = waBase();
-    if (!base || !cart.length) {
-      cartWa.href = base || "#";
-      return;
-    }
-    var lines = ["Hi Gulnish Crochet, I'd like to place this order:", ""];
-    cart.forEach(function (item) {
-      var imageUrl = item.image
-        ? (/^https?:\/\//i.test(item.image)
-            ? item.image
-            : window.location.origin + "/" + String(item.image).replace(/^\/+/, ""))
-        : "";
-      lines.push(
-        "\u2022 " + (item.name || "Item") +
-        (imageUrl ? " \u2014 Photo: " + imageUrl : "") +
-        (item.qty > 1 ? " x" + item.qty : "") +
-        (item.color ? " (" + item.color + ")" : "") +
-        " \u2014 " + money(cartUnitPrice(item) * item.qty)
-      );
-    });
-    lines.push("");
-    lines.push("Items total: *" + money(cartTotalPrice()) + "*");
-    var profile =
-      GC && GC.getCustomerProfile ? GC.getCustomerProfile() : null;
-    if (profile && (profile.name || profile.phone || profile.city)) {
-      lines.push("");
-      lines.push("Name: " + (profile.name || "-"));
-      if (profile.phone) lines.push("Phone: " + (GC && GC.formatPhone ? GC.formatPhone(profile.phone) : "+" + String(profile.phone).replace(/^0+/, "")));
-      if (profile.city) lines.push("City: " + profile.city);
-      if (profile.address) lines.push("Address: " + profile.address);
-    } else {
-      lines.push("");
-      lines.push("My delivery name, phone and city:");
-    }
-    lines.push("");
-    lines.push("Please confirm availability and delivery.");
-    cartWa.href = base + "?text=" + encodeURIComponent(lines.join("\n"));
-  }
 
   function loadCart() {
     try {
@@ -950,7 +904,6 @@ var bottomNavCart = document.getElementById("bottomNavCart");
       bottomNavCount.textContent = n;
       bottomNavCount.classList.toggle("show", n > 0);
     }
-    updateCartWa();
     if (cartCountEl) {
       cartCountEl.textContent = n;
       cartCountEl.classList.toggle("show", n > 0);
