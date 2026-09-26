@@ -146,7 +146,7 @@
     searchWrap.addEventListener("submit", function (e) {
       e.preventDefault();
       var term = searchWrap.querySelector("input").value.trim();
-      window.location.href = "products.html?q=" + encodeURIComponent(term);
+      window.location.href = "/products?q=" + encodeURIComponent(term);
     });
     headerInner.insertAdjacentElement("afterend", searchWrap);
   }
@@ -788,7 +788,7 @@
         showProducts(catBtn.dataset.cat);
       } else {
         location.href =
-          "products.html?cat=" + encodeURIComponent(catBtn.dataset.cat);
+          "/products?cat=" + encodeURIComponent(catBtn.dataset.cat);
       }
       return;
     }
@@ -796,11 +796,11 @@
     if (backBtn) {
       if (backBtn.dataset.backCategories === "all") {
         if (productsView) showProducts("all");
-        else location.href = "products.html";
+        else location.href = "/products";
       } else if (categoryView) {
         showCategories();
       } else {
-        location.href = "index.html";
+        location.href = "/";
       }
       return;
     }
@@ -809,7 +809,7 @@
       if (productView) {
         showProduct(viewBtn.dataset.view);
       } else {
-        location.href = "products.html";
+        location.href = "/products";
       }
       return;
     }
@@ -1084,7 +1084,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
         showToast("Your cart is empty.");
         return;
       }
-      window.location.href = "checkout.html";
+      window.location.href = "/checkout";
       return;
     }
   });
@@ -1094,7 +1094,7 @@ var bottomNavCart = document.getElementById("bottomNavCart");
   if (cartOverlay) cartOverlay.addEventListener("click", closeCart);
   if (cartBarBtn) {
     cartBarBtn.addEventListener("click", function () {
-      window.location.href = "cart.html";
+      window.location.href = "/cart";
     });
   }
   /* Cross-file sync: other pages (e.g. cart) push cart changes here */
