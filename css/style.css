@@ -3182,13 +3182,16 @@ html.js .reveal.revealed {
     padding: 5rem 1.6rem 1.6rem;
     box-shadow: -20px 0 50px rgba(40, 28, 18, 0.18);
     transform: translateX(102%);
-    transition: transform 0.36s var(--ease);
+    visibility: hidden;
+    transition: transform 0.36s var(--ease), visibility 0s linear 0.36s;
     overflow-y: auto;
     border-left: 1px solid var(--line);
   }
 
   .main-nav.open {
     transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.36s var(--ease), visibility 0s;
   }
 
   .main-nav ul {
