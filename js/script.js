@@ -659,7 +659,12 @@
     var lines = ["Hi Gulnish Crochet, I'd like to order:"];
     lines.push("*" + (currentProduct.name || "this item") + "*");
     var extra = [];
-    if (parseFloat(currentProduct.price) > 0) extra.push("Rs. " + money(currentProduct.price));
+      if (parseFloat(currentProduct.price) > 0) {
+        /* No photo means the price is agreed on WhatsApp, so it is left out
+           of the pre-filled message rather than quoted. */
+        var quote = currentProduct.image ? "Rs. " + money(currentProduct.price) : "...";
+        extra.push(quote);
+      }
     if (color) extra.push("Colour: " + color);
     if (currentQty > 1) extra.push("Qty: " + currentQty);
     if (extra.length) lines.push(extra.join(" \u2022 "));
