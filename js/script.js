@@ -196,6 +196,9 @@
   } else {
     revealEls.forEach(function (el) { el.classList.add("revealed"); });
   }
+  /* tells the <head> safety net that reveal is wired up, so it does not
+     force-reveal everything and cancel the scroll animation */
+  window.__gcRevealReady = true;
 
   /* ---------- Toast helper ---------- */
   function showToast(message) {
