@@ -5,7 +5,16 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const DEBOUNCE_MS = 1500;
 
-const WATCH_DIRS = [ROOT, path.join(ROOT, "css"), path.join(ROOT, "js"), path.join(ROOT, "images")];
+/* api/ holds the Vercel serverless functions. It has to be watched too:
+   without it a change to a function sits uncommitted in the working tree and
+   the deployed endpoint keeps serving the old code with no warning. */
+const WATCH_DIRS = [
+  ROOT,
+  path.join(ROOT, "api"),
+  path.join(ROOT, "css"),
+  path.join(ROOT, "js"),
+  path.join(ROOT, "images")
+];
 
 let timer = null;
 let pending = false;
