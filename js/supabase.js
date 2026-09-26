@@ -82,9 +82,9 @@
   var _onOrdersChanged = null;
 
   /* ---------- default settings (mirrors original) ---------- */
-  var DEFAULT_COUNT = 6;
+  var DEFAULT_COUNT = 7;
   var DEFAULT_NAMES = ["Purses", "Gajrays", "Keychains"];
-  var EXTRA_CATEGORY_NAMES = { 4: "Bags", 5: "Jewellery", 6: "Headband" };
+  var EXTRA_CATEGORY_NAMES = { 4: "Bags", 5: "Jewellery", 6: "Headband", 7: "Bouquet" };
 
   var CATEGORY_IMAGE_SETS = {
     gr1: ["images/purses/purse-1.webp", "images/purses/purse-2.webp", "images/purses/purse-23.webp", "images/purses/purse-24.webp"],
