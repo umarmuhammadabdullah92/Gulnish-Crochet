@@ -1026,5 +1026,10 @@
 
   window.GC = GC;
 
-  var bootPromise = boot();
+  /* The SDK (when configured) has to be in place before boot() decides
+     between Supabase and localStorage, so gate the first read on it. */
+  var bootPromise = loadSdk().then(function () {
+    connect();
+    return boot();
+  });
 })();
