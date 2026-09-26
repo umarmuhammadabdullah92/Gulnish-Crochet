@@ -97,7 +97,6 @@
   };
   var PRODUCT_PRICES = {
     "seed_gr1_4": 4500,
-    "seed_gr1_5": 4500,
     "seed_gr1_6": 5500,
     "seed_gr1_7": 4500,
     "seed_gr1_8": 5500,
