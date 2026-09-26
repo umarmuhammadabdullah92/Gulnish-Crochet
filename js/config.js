@@ -28,6 +28,6 @@ window.GC_CONFIG = {
 // Leave both "" to keep the site untagged. Scripts load automatically
 // from js/analytics.js once an ID is set.
 window.GC_ANALYTICS = {
-  ga4: "G-TEST12345",
-  meta: "1234567890"
+  ga4: "",
+  meta: ""
 };
