@@ -92,7 +92,8 @@
     gr3: ["images/keychains/keychain-1.webp", "images/keychains/keychain-2.webp"],
     gr4: ["images/bags/bag-1.webp", "images/bags/bag-2.webp"],
     gr5: ["images/jewellery/jewellery-1.webp", "images/jewellery/jewellery-2.webp", "images/jewellery/jewellery-3.webp", "images/jewellery/jewellery-4.webp", "images/jewellery/jewellery-5.webp", "images/jewellery/jewellery-6.webp", "images/jewellery/jewellery-7.webp", "images/jewellery/jewellery-8.webp", "images/jewellery/jewellery-9.webp"],
-    gr6: ["images/headbands/headband-1.webp", "images/headbands/headband-2.webp"]
+    gr6: ["images/headbands/headband-1.webp", "images/headbands/headband-2.webp"],
+    gr7: []
   };
 
   /* Keys may be a whole category (gr2) or a single product id. A product with
@@ -116,8 +117,8 @@
     gr6: ["images/headbands/headband-1.webp", "images/headbands/headband-2.webp", "images/headbands/headband-3.webp"]
   };
 
-  var ITEM_NAME = { gr1: "Purse", gr2: "Gajray", gr3: "Keychain", gr4: "Bag", gr5: "Jewellery", gr6: "Headband" };
-  var BASE_PRICE = { gr1: 850, gr2: 400, gr3: 350, gr4: 1400, gr5: 550, gr6: 450 };
+  var ITEM_NAME = { gr1: "Purse", gr2: "Gajray", gr3: "Keychain", gr4: "Bag", gr5: "Jewellery", gr6: "Headband", gr7: "Bouquet" };
+  var BASE_PRICE = { gr1: 850, gr2: 400, gr3: 350, gr4: 1400, gr5: 550, gr6: 450, gr7: 1200 };
 
   var REAL_PRODUCTS = {
     "seed_gr4_1": { name: "Bag 1", price: 1599 },
