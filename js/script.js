@@ -663,7 +663,7 @@
         /* No photo means the price is agreed on WhatsApp, so it is left out
            of the pre-filled message rather than quoted. money() already
            includes the "Rs." prefix. */
-        var quote = currentProduct.image ? money(currentProduct.price) : "...";
+        var quote = currentProduct.image ? money(currentProduct.price) : "Rs. ...";
         extra.push(quote);
       }
     if (color) extra.push("Colour: " + color);
